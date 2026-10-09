@@ -1,0 +1,37 @@
+{
+  "ci": {
+    "collect": {
+      "startServerCommand": "SITE_BASE=/stats-pre1/ PORT=4322 node scripts/serve-dist.mjs",
+      "startServerReadyPattern": "serving dist",
+      "url": [
+        "http://localhost:4322/stats-pre1/topics/",
+        "http://localhost:4322/stats-pre1/topics/linear-regression/",
+        "http://localhost:4322/stats-pre1/practice/?topic=linear-regression"
+      ],
+      "numberOfRuns": 1,
+      "settings": {
+        "preset": "perf"
+      }
+    },
+    "assert": {
+      "assertions": {
+        "largest-contentful-paint": [
+          "error",
+          {
+            "maxNumericValue": 3000
+          }
+        ],
+        "cumulative-layout-shift": [
+          "warn",
+          {
+            "maxNumericValue": 0.1
+          }
+        ]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci"
+    }
+  }
+}

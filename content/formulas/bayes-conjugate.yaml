@@ -1,0 +1,30 @@
+- id: bayes-theorem-posterior
+  topic: bayes-conjugate
+  title: 事後分布（ベイズの定理）
+  body: '\pi(\theta\mid x)\ \propto\ f(x\mid\theta)\,\pi(\theta)'
+  description: 事後分布 ∝ 尤度 × 事前分布。正規化定数は分布族を特定してから決める。
+  tags: [ベイズ, 事後分布]
+- id: beta-binomial-update
+  topic: bayes-conjugate
+  title: ベータ・二項モデルの事後分布
+  body: 'p\sim\mathrm{Be}(\alpha,\beta),\ x\mid p\sim B(n,p)\ \Rightarrow\ p\mid x\sim\mathrm{Be}(\alpha+x,\ \beta+n-x)'
+  derivation: '事後平均は $\frac{\alpha+x}{\alpha+\beta+n}$。これは次の1回が成功する予測確率にも等しい。'
+  tags: [ベイズ, 共役事前分布, ベータ分布, 二項分布]
+- id: gamma-poisson-update
+  topic: bayes-conjugate
+  title: ガンマ・ポアソンモデルの事後分布
+  body: '\theta\sim\mathrm{Ga}(\alpha,\lambda_0),\ x_i\mid\theta\sim\mathrm{Po}(\theta)\ \Rightarrow\ \theta\mid\boldsymbol x\sim\mathrm{Ga}\!\left(\alpha+\textstyle\sum_i x_i,\ \lambda_0+n\right)'
+  pitfalls: '$\lambda_0$ は比率母数（平均 $\alpha/\lambda_0$）。尺度母数で表す場合は逆数になる。'
+  tags: [ベイズ, 共役事前分布, ガンマ分布, ポアソン分布]
+- id: normal-normal-update
+  topic: bayes-conjugate
+  title: 正規・正規モデルの事後分布（分散既知）
+  body: '\frac{1}{\tau_n^2}=\frac{1}{\tau_0^2}+\frac{n}{\sigma^2},\qquad \mu_n=\tau_n^2\left(\frac{\mu_0}{\tau_0^2}+\frac{n\bar x}{\sigma^2}\right)'
+  description: 事後の精度は事前の精度とデータの精度の和。事後平均は精度で重み付けた加重平均。
+  tags: [ベイズ, 共役事前分布, 正規分布]
+- id: bayes-estimator-loss
+  topic: bayes-conjugate
+  title: 損失関数とベイズ推定量
+  body: 'L=(\theta-a)^2\Rightarrow E[\theta\mid x],\qquad L=|\theta-a|\Rightarrow \text{事後中央値}'
+  description: '0-1 損失（の極限）では事後分布の最頻値（MAP 推定量）。'
+  tags: [ベイズ, 推定量, 損失関数]

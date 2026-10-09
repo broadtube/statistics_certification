@@ -1,0 +1,34 @@
+---
+import type { FormulaSource } from '../../build/content/types';
+import { getSite } from '../site';
+
+interface Props {
+  formula: FormulaSource;
+  /** 詳細へのリンクを表示するか */
+  link?: boolean;
+  topicTitle?: string;
+}
+const { formula: f, link = true, topicTitle } = Astro.props;
+const site = getSite();
+const searchText = [f.title, f.description ?? '', f.tags.join(' ')].join(' ').toLowerCase();
+---
+<article class="card formula-card" data-formula-id={f.id} data-topic={f.topic} data-tags={f.tags.join('|')} data-search={searchText}>
+  <header class="formula-head">
+    <h3 class="formula-title">{link ? <a href={site.href.formula(f.id)}>{f.title}</a> : f.title}</h3>
+    {topicTitle && <span class="badge">{topicTitle}</span>}
+  </header>
+  <div class="formula-body" set:html={site.renderer.renderTex(f.body, true)} />
+  {f.description && <div class="small prose" set:html={site.renderer.render(f.description, 'static')} />}
+  {f.tags.length > 0 && <p class="row small tags">{f.tags.map((t) => <span class="badge">#{t}</span>)}</p>}
+</article>
+
+<style>
+  .formula-card { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .formula-head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .formula-title { margin: 0; font-size: 1rem; }
+  .formula-title a { text-decoration: none; }
+  .formula-body { min-width: 0; }
+  .formula-body :global(.katex-display) { margin: 0.3em 0; }
+  .formula-body :global(.katex) { font-size: 0.98em; }
+  .tags { margin: 0; }
+</style>

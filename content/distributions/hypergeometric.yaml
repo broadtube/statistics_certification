@@ -1,0 +1,29 @@
+title: 超幾何分布
+kind: discrete
+interactive: true
+order: 6
+pmfOrPdf: |-
+  P(X=k)=\frac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}
+mean: |-
+  n\frac{K}{N}
+variance: |-
+  n\frac{K}{N}\left(1-\frac{K}{N}\right)\frac{N-n}{N-1}
+mgf: |-
+  \text{（閉じた形は省略）}
+notes: |-
+  分散の $\frac{N-n}{N-1}$ は有限母集団修正。フィッシャーの正確検定で用いられる。
+paramsDoc:
+  - symbol: 'N'
+    meaning: '母集団の大きさ'
+    range: '$N = 1, 2, \dots$'
+  - symbol: 'K'
+    meaning: '母集団中の当たりの数'
+    range: '$0 \le K \le N$'
+  - symbol: 'n'
+    meaning: '非復元抽出の個数'
+    range: '$0 \le n \le N$'
+relations:
+  - to: binomial
+    kind: limit
+    label: 'N→∞, K/N→p'
+diagramPosition: { x: 0, y: 0 }

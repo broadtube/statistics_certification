@@ -1,0 +1,19 @@
+topics: [bayes-conjugate]
+formulas: [gamma-poisson-update]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  1日あたりの問い合わせ件数がポアソン分布 $\mathrm{Po}(\theta)$ に従うとし、$\theta$ の事前分布を形状母数 {{a}}・比率母数 {{l0}} のガンマ分布（平均 $\alpha/\lambda_0$）とする。{{n}} 日間の問い合わせ件数の合計が {{s}} 件であったとき、$\theta$ の事後平均を求めよ（小数第3位まで）。
+explanation: |
+  事後分布は $\mathrm{Ga}\left(\alpha+\sum x_i,\ \lambda_0+n\right)=\mathrm{Ga}({{a}}+{{s}},\ {{l0}}+{{n}})$。事後平均は
+  $$
+  \frac{\alpha+\sum x_i}{\lambda_0+n}=\frac{ {{a}}+{{s}} }{ {{l0}}+{{n}} }={{answer}}
+  $$
+params:
+  a: { min: 1, max: 10, step: 1 }
+  l0: { min: 0.5, max: 4, step: 0.5 }
+  n: { min: 5, max: 30, step: 1 }
+  s: { min: 10, max: 150, step: 1 }
+answer: (a + s) / (l0 + n)
+display: { digits: 3 }

@@ -1,0 +1,58 @@
+- id: binom-mean-var
+  topic: discrete-distributions
+  title: 二項分布の期待値と分散
+  description: ベルヌーイ確率変数の和に分解して導く。
+  body: 'X\sim B(n,p)\ \Rightarrow\ E[X]=np,\quad V[X]=np(1-p)'
+  variables:
+    - { symbol: 'n', meaning: 試行回数 }
+    - { symbol: 'p', meaning: 1回の試行の成功確率 }
+  conditions: 各試行が独立で、成功確率が一定であること。
+  derivation: '$X=\sum_{i=1}^n Y_i$（$Y_i\sim\mathrm{Bin}(1,p)$ 独立）として $E[Y_i]=p$、$V[Y_i]=p(1-p)$ を足し合わせる。'
+  tags: [二項分布, 期待値, 分散]
+- id: poisson-mean-var
+  topic: discrete-distributions
+  title: ポアソン分布の期待値と分散
+  description: 期待値と分散がともに $\lambda$ に等しい。
+  body: 'X\sim \mathrm{Po}(\lambda)\ \Rightarrow\ E[X]=V[X]=\lambda'
+  derivation: 'キュムラント母関数 $K(t)=\log M(t)=\lambda(e^t-1)$ を微分すると $K''(0)=K''''(0)=\lambda$。'
+  pitfalls: 実データで分散が平均を大きく上回る（過分散）場合はポアソン分布の仮定を疑う。
+  tags: [ポアソン分布, 期待値, 分散]
+- id: poisson-approx
+  topic: discrete-distributions
+  title: 二項分布のポアソン近似
+  description: $n$ が大きく $p$ が小さいとき、二項分布を $\lambda=np$ のポアソン分布で近似する。
+  body: '\binom{n}{k}p^k(1-p)^{n-k}\approx e^{-np}\frac{(np)^k}{k!}'
+  conditions: '$n$ が大きく $p$ が小さい（目安: $n\ge50$、$np\le5$ など）。'
+  tags: [二項分布, ポアソン分布, 近似]
+- id: poisson-additivity
+  topic: discrete-distributions
+  title: ポアソン分布の再生性と条件付き分布
+  description: 和の分布と、和を与えたときの条件付き分布。
+  body: 'X+Y\sim\mathrm{Po}(\lambda_1+\lambda_2),\quad X\mid (X+Y=n)\sim B\!\left(n,\ \frac{\lambda_1}{\lambda_1+\lambda_2}\right)'
+  conditions: '$X\sim\mathrm{Po}(\lambda_1)$ と $Y\sim\mathrm{Po}(\lambda_2)$ が独立。'
+  derivation: '$P(X=k\mid X+Y=n)=\frac{P(X=k)P(Y=n-k)}{P(X+Y=n)}$ を計算すると二項分布の確率関数になる。'
+  tags: [ポアソン分布, 再生性, 条件付き分布]
+- id: geometric-mean
+  topic: discrete-distributions
+  title: 幾何分布の期待値（失敗回数）
+  body: 'P(X=k)=p(1-p)^k\ \Rightarrow\ E[X]=\frac{1-p}{p},\quad V[X]=\frac{1-p}{p^2}'
+  pitfalls: '「初めて成功するまでの試行回数」で定義した場合は期待値が $1/p$ になる。'
+  tags: [幾何分布, 期待値]
+- id: hypergeometric-var
+  topic: discrete-distributions
+  title: 超幾何分布の期待値と分散
+  description: 非復元抽出では、二項分布の分散に有限母集団修正がかかる。
+  body: 'E[X]=n\frac{K}{N},\quad V[X]=n\frac{K}{N}\left(1-\frac{K}{N}\right)\frac{N-n}{N-1}'
+  variables:
+    - { symbol: 'N', meaning: 母集団の大きさ }
+    - { symbol: 'K', meaning: 母集団中の当たりの数 }
+    - { symbol: 'n', meaning: 抽出する個数 }
+  tags: [超幾何分布, 分散, 有限母集団修正]
+- id: mgf-moments
+  topic: discrete-distributions
+  title: 積率母関数と積率
+  description: 積率母関数の $r$ 階微分の $t=0$ での値が $r$ 次の積率になる。
+  body: 'M_X(t)=E\left[e^{tX}\right],\quad E[X^r]=M_X^{(r)}(0)'
+  conditions: '$M_X(t)$ が $t=0$ を含む開区間で存在すること。'
+  derivation: '分散は $V[X]=M''''(0)-M''(0)^2$。対数をとった $K(t)=\log M_X(t)$ を使うと $K''(0)=E[X]$、$K''''(0)=V[X]$ と直接求まる。'
+  tags: [積率母関数, 期待値, 分散]

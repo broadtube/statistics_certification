@@ -1,0 +1,5 @@
+- id: binom-mean
+  topic: discrete
+  
+  body: E[X] = np
+  tags: [期待値]

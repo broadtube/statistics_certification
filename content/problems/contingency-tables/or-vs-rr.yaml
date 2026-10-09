@@ -1,0 +1,26 @@
+topics: [contingency-tables]
+formulas: [odds-ratio, relative-risk]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  症例対照研究（ある疾患の患者群と、疾患のない対照群を別々に集め、過去の曝露の有無を調べる研究）のデータから推定できる指標として最も適切なものを選べ。
+choices:
+  - id: a
+    text: 'オッズ比'
+    correct: true
+  - id: b
+    text: '相対リスク'
+    correct: false
+  - id: c
+    text: '曝露群の疾患発生率'
+    correct: false
+  - id: d
+    text: '寄与危険度（リスク差）'
+    correct: false
+  - id: e
+    text: '集団全体の有病率'
+    correct: false
+explanation: |
+  症例対照研究では、疾患あり・なしの人数（列和）を研究者が決めるため、曝露群・非曝露群それぞれの発生率は推定できず、発生率を使う相対リスクやリスク差も推定できない。
+  一方、オッズ比は行と列を入れ替えても $\frac{ad}{bc}$ で変わらないので、症例対照研究からも推定できる。疾患がまれなら、オッズ比は相対リスクの近似になる。

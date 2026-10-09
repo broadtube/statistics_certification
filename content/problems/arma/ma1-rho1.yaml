@@ -1,0 +1,18 @@
+topics: [arma]
+formulas: [ma1-acf]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  MA(1) モデル $X_t=\varepsilon_t+({{theta}})\varepsilon_{t-1}$（$\varepsilon_t$ はホワイトノイズ）のラグ1の自己相関係数 $\rho_1$ を求めよ（小数第4位まで）。
+explanation: |
+  $\gamma_0=(1+\theta^2)\sigma^2$、$\gamma_1=\theta\sigma^2$ より
+  $$
+  \rho_1=\frac{\theta}{1+\theta^2}=\frac{ {{theta}} }{1+({{theta}})^2}={{answer}}
+  $$
+  なお、ラグ2以降の自己相関は $0$ になる。
+params:
+  theta: { min: -0.9, max: 0.9, step: 0.1 }
+constraints: ['theta != 0']
+answer: theta / (1 + theta^2)
+display: { digits: 4 }

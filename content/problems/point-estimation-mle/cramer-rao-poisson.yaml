@@ -1,0 +1,15 @@
+topics: [point-estimation-mle]
+formulas: [fisher-information, cramer-rao]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ポアソン分布 $\mathrm{Po}(\lambda)$ からの大きさ $n={{n}}$ の無作為標本に基づく $\lambda$ の不偏推定量について、$\lambda={{lambda}}$ のときのクラメール・ラオの下限を求めよ（小数第4位まで）。
+explanation: |
+  $\log f(x;\lambda)=x\log\lambda-\lambda-\log x!$ より $\frac{\partial^2}{\partial\lambda^2}\log f=-\frac{x}{\lambda^2}$。よって $I(\lambda)=E[X]/\lambda^2=1/\lambda$。
+  下限は $\frac{1}{nI(\lambda)}=\frac{\lambda}{n}=\frac{ {{lambda}} }{ {{n}} }={{answer}}$。$\bar X$ の分散 $\lambda/n$ はこれに一致するので、$\bar X$ は有効推定量。
+params:
+  n: { min: 10, max: 50, step: 5 }
+  lambda: { min: 1, max: 10, step: 0.5 }
+answer: lambda / n
+display: { digits: 4 }

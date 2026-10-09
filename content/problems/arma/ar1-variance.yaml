@@ -1,0 +1,18 @@
+topics: [arma]
+formulas: [ar1-moments]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  定常な AR(1) モデル $X_t={{phi}}X_{t-1}+\varepsilon_t$（$\varepsilon_t$ は平均 $0$・分散 {{s2}} のホワイトノイズ）について、$X_t$ の分散を求めよ（小数第3位まで）。
+explanation: |
+  定常性より $V[X_t]=V[X_{t-1}]=\gamma_0$。$\gamma_0=\phi^2\gamma_0+\sigma^2$ を解いて
+  $$
+  \gamma_0=\frac{\sigma^2}{1-\phi^2}=\frac{ {{s2}} }{1-({{phi}})^2}={{answer}}
+  $$
+params:
+  phi: { min: -0.9, max: 0.9, step: 0.1 }
+  s2: { min: 1, max: 4, step: 0.5 }
+constraints: ['phi != 0']
+answer: s2 / (1 - phi^2)
+display: { digits: 3 }

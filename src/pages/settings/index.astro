@@ -1,0 +1,8 @@
+---
+import Settings from '../../islands/Settings.tsx';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="学習記録の管理" description="学習記録のエクスポート・インポート・消去">
+  <h1>学習記録の管理</h1>
+  <Settings client:load />
+</BaseLayout>

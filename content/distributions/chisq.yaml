@@ -1,0 +1,26 @@
+title: カイ二乗分布
+kind: continuous
+interactive: true
+order: 15
+pmfOrPdf: |-
+  f(x)=\frac{x^{k/2-1}e^{-x/2}}{2^{k/2}\Gamma(k/2)},\quad x>0
+mean: |-
+  k
+variance: |-
+  2k
+mgf: |-
+  (1-2t)^{-k/2}\quad (t<1/2)
+notes: |-
+  独立な標準正規確率変数 $Z_1,\dots,Z_k$ の二乗和 $\sum Z_i^2$ の分布。
+paramsDoc:
+  - symbol: 'k'
+    meaning: '自由度'
+    range: '$k > 0$'
+relations:
+  - to: f
+    kind: transform
+    label: '(V₁/d₁)/(V₂/d₂)'
+  - to: t
+    kind: transform
+    label: 'Z/√(V/ν)'
+diagramPosition: { x: 3, y: 2 }

@@ -1,0 +1,27 @@
+topics: [contingency-tables]
+formulas: [chisq-2x2, chisq-independence]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  次の2×2分割表について、独立性の検定のカイ二乗統計量（連続修正なし）の値を求めよ（小数第3位まで）。
+
+  | | 合格 | 不合格 |
+  | --- | --- | --- |
+  | 講座受講 | {{a}} | {{b}} |
+  | 受講なし | {{c}} | {{d}} |
+explanation: |
+  総数 $n={{n}}$。簡便式を使うと
+  $$
+  \chi^2=\frac{n(ad-bc)^2}{(a+b)(c+d)(a+c)(b+d)}={{answer}}
+  $$
+  自由度1のカイ二乗分布の上側5%点は $3.841$ なので、これより大きければ有意水準5%で独立性が棄却される。
+params:
+  a: { min: 20, max: 50, step: 2 }
+  b: { min: 10, max: 40, step: 2 }
+  c: { min: 10, max: 40, step: 2 }
+  d: { min: 20, max: 50, step: 2 }
+derived:
+  n: a + b + c + d
+answer: (a + b + c + d) * (a * d - b * c)^2 / ((a + b) * (c + d) * (a + c) * (b + d))
+display: { digits: 3 }

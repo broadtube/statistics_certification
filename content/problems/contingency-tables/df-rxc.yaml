@@ -1,0 +1,17 @@
+topics: [contingency-tables]
+formulas: [chisq-independence]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  {{r}} 行 {{c}} 列の分割表について独立性のカイ二乗検定を行う。検定統計量が近似的に従うカイ二乗分布の自由度を求めよ。
+explanation: |
+  自由度は $(r-1)(c-1)=({{r}}-1)({{c}}-1)={{answer}}$。
+  セルの数 $rc$ から、総数の制約 $1$ と推定した周辺確率の数 $(r-1)+(c-1)$ を引いたものに等しい。
+params:
+  r: { min: 2, max: 5, step: 1 }
+  c: { min: 2, max: 6, step: 1 }
+constraints: ['r * c > 4']
+answer: (r - 1) * (c - 1)
+display: { digits: 0 }
+tolerance: { type: absolute, value: 0.01 }

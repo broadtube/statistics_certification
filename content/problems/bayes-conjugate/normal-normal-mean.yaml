@@ -1,0 +1,22 @@
+topics: [bayes-conjugate]
+formulas: [normal-normal-update]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  分散 $\sigma^2={{s2}}$ が既知の正規分布 $N(\mu,\sigma^2)$ から大きさ $n={{n}}$ の標本を得て、標本平均は $\bar x={{xbar}}$ であった。$\mu$ の事前分布を $N({{mu0}},\ {{t2}})$ とするとき、$\mu$ の事後平均を求めよ（小数第3位まで）。
+explanation: |
+  事後の精度は $\frac{1}{\tau_0^2}+\frac{n}{\sigma^2}=\frac{1}{ {{t2}} }+\frac{ {{n}} }{ {{s2}} }$、事後分散は $\tau_n^2={{post_var}}$。事後平均は精度で重み付けた加重平均で
+  $$
+  \mu_n=\tau_n^2\left(\frac{\mu_0}{\tau_0^2}+\frac{n\bar x}{\sigma^2}\right)={{answer}}
+  $$
+params:
+  s2: { min: 4, max: 25, step: 1 }
+  n: { min: 5, max: 30, step: 5 }
+  xbar: { min: 45, max: 60, step: 0.5 }
+  mu0: { min: 40, max: 60, step: 5 }
+  t2: { min: 1, max: 16, step: 1 }
+derived:
+  post_var: 1 / (1 / t2 + n / s2)
+answer: (mu0 / t2 + n * xbar / s2) / (1 / t2 + n / s2)
+display: { digits: 3 }

@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../lib/url';
+---
+<BaseLayout title="ページが見つかりません">
+  <h1>ページが見つかりません</h1>
+  <p>お探しのページは移動または削除された可能性があります。</p>
+  <p class="row">
+    <a class="btn primary" href={url('topics/')}>分野マップへ</a>
+    <a class="btn" href={url('')}>ダッシュボードへ</a>
+  </p>
+</BaseLayout>

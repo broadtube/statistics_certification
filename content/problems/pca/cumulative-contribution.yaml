@@ -1,0 +1,19 @@
+topics: [pca]
+formulas: [pca-contribution, trace-eigenvalues]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  4 つの変数の相関行列に基づく主成分分析で、固有値が大きい順に $\lambda_1={{l1}}$、$\lambda_2={{l2}}$、$\lambda_3={{l3}}$ であった（$\lambda_4$ は省略）。第2主成分までの累積寄与率を求めよ（小数第3位まで）。
+explanation: |
+  相関行列に基づく場合、固有値の和は変数の数に等しく $\sum_j\lambda_j=4$（したがって $\lambda_4={{l4}}$）。
+  累積寄与率は $\frac{\lambda_1+\lambda_2}{4}=\frac{ {{l1}}+{{l2}} }{4}={{answer}}$。
+params:
+  l1: { min: 1.8, max: 2.8, step: 0.1 }
+  l2: { min: 0.6, max: 1.0, step: 0.1 }
+  l3: { min: 0.2, max: 0.5, step: 0.1 }
+derived:
+  l4: 4 - l1 - l2 - l3
+constraints: ['l4 > 0', 'l4 < l3', 'l2 < l1', 'l3 < l2']
+answer: (l1 + l2) / 4
+display: { digits: 3 }

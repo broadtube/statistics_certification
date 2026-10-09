@@ -1,0 +1,12 @@
+---
+import Practice from '../../islands/Practice.tsx';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { practiceProps } from '../../lib/server/practice-props';
+
+const props = practiceProps();
+---
+<BaseLayout title="演習" description="分野別・ランダムに問題を解いて、正誤と解説をすぐに確認できます">
+  <h1>演習</h1>
+  <Practice client:load mode="practice" {...props} />
+  <noscript><p class="alert warn">演習には JavaScript が必要です。</p></noscript>
+</BaseLayout>

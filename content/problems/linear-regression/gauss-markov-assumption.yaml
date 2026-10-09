@@ -1,0 +1,26 @@
+topics: [linear-regression]
+formulas: [gauss-markov, ols-matrix]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  線形回帰モデル $\boldsymbol y=X\boldsymbol\beta+\boldsymbol\varepsilon$ の最小二乗推定量 $\hat{\boldsymbol\beta}$ が、線形不偏推定量のなかで分散が最小（BLUE）であることを保証するガウス・マルコフの定理において、**必要でない** 仮定を選べ。
+choices:
+  - id: a
+    text: '誤差 $\varepsilon_i$ が正規分布に従う'
+    correct: true
+  - id: b
+    text: '誤差の期待値が $0$ である'
+    correct: false
+  - id: c
+    text: '誤差の分散が観測によらず一定である'
+    correct: false
+  - id: d
+    text: '異なる観測の誤差どうしが無相関である'
+    correct: false
+  - id: e
+    text: '$X^\top X$ が正則である'
+    correct: false
+explanation: |
+  ガウス・マルコフの定理は、誤差の期待値 $0$・等分散・無相関（と $X$ のフルランク）だけで成り立ち、**正規性は不要**。
+  正規性は、$t$ 検定・$F$ 検定の統計量が正確に $t$ 分布・$F$ 分布に従うことを示すときに必要になる。

@@ -1,0 +1,25 @@
+title: 指数分布
+kind: continuous
+interactive: true
+order: 12
+pmfOrPdf: |-
+  f(x)=\lambda e^{-\lambda x},\quad x\ge0
+cdf: |-
+  F(x)=1-e^{-\lambda x}
+mean: |-
+  \frac{1}{\lambda}
+variance: |-
+  \frac{1}{\lambda^2}
+mgf: |-
+  \frac{\lambda}{\lambda-t}\quad (t<\lambda)
+notes: |-
+  無記憶性 $P(X>s+t\mid X>s)=P(X>t)$ をもつ唯一の連続分布。ポアソン過程の到着間隔の分布。
+paramsDoc:
+  - symbol: '\lambda'
+    meaning: '比率（単位時間あたりの発生率）'
+    range: '$\lambda > 0$'
+relations:
+  - to: gamma
+    kind: sum
+    label: 'n 個の和'
+diagramPosition: { x: 1, y: 3 }

@@ -1,0 +1,29 @@
+title: 正規分布
+kind: continuous
+interactive: true
+order: 11
+pmfOrPdf: |-
+  f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left\{-\frac{(x-\mu)^2}{2\sigma^2}\right\}
+mean: |-
+  \mu
+variance: |-
+  \sigma^2
+mgf: |-
+  \exp\left(\mu t+\frac{\sigma^2t^2}{2}\right)
+notes: |-
+  独立な正規確率変数の線形結合は正規分布に従う。標本平均 $\bar X$ と不偏分散 $S^2$ は独立で、$(n-1)S^2/\sigma^2\sim\chi^2_{n-1}$。
+paramsDoc:
+  - symbol: '\mu'
+    meaning: '平均'
+    range: '実数'
+  - symbol: '\sigma'
+    meaning: '標準偏差'
+    range: '$\sigma > 0$'
+relations:
+  - to: chisq
+    kind: transform
+    label: 'Z₁²+…+Z_k²'
+  - to: lognormal
+    kind: transform
+    label: 'exp(X)'
+diagramPosition: { x: 3, y: 1 }

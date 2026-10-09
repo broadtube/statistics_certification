@@ -1,0 +1,13 @@
+topics: [discrete-distributions]
+formulas: [poisson-mean-var]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  あるコールセンターに1分間にかかってくる電話の本数は、平均 {{lambda}} のポアソン分布に従うとする。ある1分間にかかってくる電話が **1本以下** である確率を求めよ（小数第4位まで）。
+explanation: |
+  $P(X\le1)=P(X=0)+P(X=1)=e^{-\lambda}(1+\lambda)$。$\lambda={{lambda}}$ を代入すると $e^{-{{lambda}}}(1+{{lambda}})={{answer}}$。
+params:
+  lambda: { min: 0.5, max: 5, step: 0.5 }
+answer: exp(-lambda) * (1 + lambda)
+display: { digits: 4 }

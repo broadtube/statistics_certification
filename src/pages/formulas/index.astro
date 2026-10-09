@@ -1,0 +1,36 @@
+---
+import FormulaCard from '../../components/FormulaCard.astro';
+import FormulaFilter from '../../islands/FormulaFilter.tsx';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formulasOfTopic, topicsByCategory } from '../../../build/site/queries';
+import { getSite } from '../../site';
+
+const site = getSite();
+const { content } = site;
+const groups = topicsByCategory(content)
+  .flatMap((g) => g.topics)
+  .map((t) => ({ topic: t, formulas: formulasOfTopic(content, t.id) }))
+  .filter((g) => g.formulas.length > 0);
+const items = content.formulas.map((f) => ({ id: f.id, topic: f.topic, tags: f.tags, text: [f.title, f.description ?? ''].join(' ') }));
+const tags = [...new Set(content.formulas.flatMap((f) => f.tags))].sort((a, b) => a.localeCompare(b, 'ja'));
+---
+<BaseLayout title="公式チートシート" description="準1級の公式を分野横断で検索・絞り込みできます">
+  <h1>公式チートシート</h1>
+  <p class="row">
+    <span class="muted">全 {content.formulas.length} 件の公式カードを分野ごとに一覧しています。</span>
+    <a class="btn small" href={site.href.page('flashcards/')}>暗記カードで練習する</a>
+  </p>
+  <FormulaFilter client:load items={items} topics={groups.map((g) => ({ id: g.topic.id, title: g.topic.title }))} tags={tags} />
+  {groups.map(({ topic, formulas }) => (
+    <section data-formula-group aria-labelledby={`f-${topic.id}`}>
+      <h2 id={`f-${topic.id}`}><a href={site.href.topic(topic.id)}>{topic.title}</a></h2>
+      <div class="grid formula-grid">{formulas.map((f) => <FormulaCard formula={f} />)}</div>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  .formula-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  @media (max-width: 400px) { .formula-grid { grid-template-columns: 1fr; } }
+  h2 a { color: inherit; text-decoration: none; }
+</style>

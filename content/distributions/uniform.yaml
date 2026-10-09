@@ -1,0 +1,28 @@
+title: 一様分布
+kind: continuous
+interactive: true
+order: 10
+pmfOrPdf: |-
+  f(x)=\frac{1}{b-a},\quad a\le x\le b
+cdf: |-
+  F(x)=\frac{x-a}{b-a},\quad a\le x\le b
+mean: |-
+  \frac{a+b}{2}
+variance: |-
+  \frac{(b-a)^2}{12}
+mgf: |-
+  \frac{e^{tb}-e^{ta}}{t(b-a)}\quad (t\ne0)
+notes: |-
+  任意の連続分布の累積分布関数 $F$ について $F(X)\sim U(0,1)$（確率積分変換）。逆に $F^{-1}(U)$ で乱数を生成できる。
+paramsDoc:
+  - symbol: 'a'
+    meaning: '下端'
+    range: '実数'
+  - symbol: 'b'
+    meaning: '上端'
+    range: '$b > a$'
+relations:
+  - to: exponential
+    kind: transform
+    label: '−log U / λ'
+diagramPosition: { x: 0, y: 3 }

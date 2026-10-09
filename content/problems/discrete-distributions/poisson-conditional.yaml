@@ -1,0 +1,29 @@
+topics: [discrete-distributions]
+formulas: [poisson-additivity]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  $X\sim\mathrm{Po}(2)$、$Y\sim\mathrm{Po}(3)$ は独立とする。$X+Y=5$ が与えられたときの $X$ の条件付き分布として正しいものを選べ。
+choices:
+  - id: a
+    text: '二項分布 $B(5,\ 0.4)$'
+    correct: true
+  - id: b
+    text: 'ポアソン分布 $\mathrm{Po}(2)$'
+    correct: false
+  - id: c
+    text: '二項分布 $B(5,\ 2/3)$'
+    correct: false
+  - id: d
+    text: 'ポアソン分布 $\mathrm{Po}(5\times0.4)$'
+    correct: false
+  - id: e
+    text: '超幾何分布'
+    correct: false
+explanation: |
+  $X+Y\sim\mathrm{Po}(5)$ より
+  $$
+  P(X=k\mid X+Y=5)=\frac{\frac{e^{-2}2^k}{k!}\cdot\frac{e^{-3}3^{5-k}}{(5-k)!}}{\frac{e^{-5}5^5}{5!}}=\binom5k\left(\frac25\right)^k\left(\frac35\right)^{5-k}
+  $$
+  となり、$B(5,\ 2/(2+3))=B(5,\ 0.4)$。条件を付けると上限が $5$ に固定されるので、ポアソン分布にはならない。

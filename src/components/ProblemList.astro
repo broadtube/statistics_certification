@@ -1,0 +1,39 @@
+---
+import type { ProblemSource } from '../../build/content/types';
+import { url } from '../lib/url';
+import { getSite } from '../site';
+
+interface Props {
+  problems: ProblemSource[];
+}
+const { problems } = Astro.props;
+const site = getSite();
+const stars = (d: number) => '★'.repeat(d) + '☆'.repeat(3 - d);
+const sourceLabel = (p: ProblemSource) => (p.source.kind === 'original' ? 'オリジナル' : `${p.source.exam} ${p.source.question} 類題`);
+---
+{problems.length === 0 ? (
+  <p class="muted">この分野の問題は準備中です。</p>
+) : (
+  <ol class="problem-list">
+    {problems.map((p) => (
+      <li class="card problem-item">
+        <p class="row small problem-meta">
+          <span class="badge">{p.type === 'choice' ? '選択式' : '数値入力'}</span>
+          <span class="badge" aria-label={`難易度 ${p.difficulty}`}>{stars(p.difficulty)}</span>
+          {p.params && <span class="badge">類題あり</span>}
+          <span class="muted">{sourceLabel(p)}</span>
+        </p>
+        <div class="prose problem-preview" set:html={site.previewHtml(p.id)} />
+        <p><a class="btn small primary" href={url(`practice/?problem=${p.id}`)}>この問題を解く</a></p>
+      </li>
+    ))}
+  </ol>
+)}
+
+<style>
+  .problem-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .problem-meta { margin: 0 0 6px; }
+  .problem-preview { max-height: 9.5em; overflow: hidden; position: relative; }
+  .problem-preview::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2em; background: linear-gradient(transparent, var(--surface)); }
+  .problem-item p:last-child { margin: 8px 0 0; }
+</style>

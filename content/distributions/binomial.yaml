@@ -1,0 +1,29 @@
+title: 二項分布
+kind: discrete
+interactive: true
+order: 2
+pmfOrPdf: |-
+  P(X=k)=\binom{n}{k}p^k(1-p)^{n-k},\quad k=0,1,\dots,n
+mean: |-
+  np
+variance: |-
+  np(1-p)
+mgf: |-
+  (1-p+pe^t)^n
+notes: |-
+  $B(n_1,p)$ と $B(n_2,p)$ に従う独立な確率変数の和は $B(n_1+n_2,p)$ に従う（再生性）。
+paramsDoc:
+  - symbol: 'n'
+    meaning: '試行回数'
+    range: '$n = 0, 1, 2, \dots$'
+  - symbol: 'p'
+    meaning: '成功確率'
+    range: '$0 \le p \le 1$'
+relations:
+  - to: poisson
+    kind: limit
+    label: 'n→∞, np=λ 一定'
+  - to: normal
+    kind: limit
+    label: 'n→∞（ド・モアブル=ラプラス）'
+diagramPosition: { x: 1, y: 1 }

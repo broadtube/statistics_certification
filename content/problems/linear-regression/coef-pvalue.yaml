@@ -1,0 +1,19 @@
+topics: [linear-regression]
+formulas: [coef-t-test]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  標本サイズ $n={{n}}$、切片を除く説明変数 3 個の重回帰で、ある説明変数の係数の推定値が $\hat\beta_j={{b}}$、その標準誤差が $\widehat{\mathrm{SE}}={{se}}$ であった。$H_0:\beta_j=0$、$H_1:\beta_j\ne0$ の両側検定の $p$ 値を求めよ（小数第4位まで）。
+explanation: |
+  検定統計量は $t=\frac{ {{b}} }{ {{se}} }={{t}}$ で、$H_0$ のもと自由度 $n-p-1={{n}}-3-1={{df}}$ の t 分布に従う。
+  両側 $p$ 値は $2\{1-F_{t_{ {{df}} }}(|t|)\}={{answer}}$（メニューの「計算機」で確認できる）。
+params:
+  n: { min: 20, max: 60, step: 5 }
+  b: { min: 0.2, max: 2, step: 0.1 }
+  se: { min: 0.2, max: 0.8, step: 0.05 }
+derived:
+  df: n - 4
+  t: b / se
+answer: 2 * (1 - pt(abs(b / se), n - 4))
+display: { digits: 4 }

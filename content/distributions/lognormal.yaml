@@ -1,0 +1,21 @@
+title: 対数正規分布
+kind: continuous
+interactive: true
+order: 18
+pmfOrPdf: |-
+  f(x)=\frac{1}{\sqrt{2\pi}\sigma x}\exp\left\{-\frac{(\log x-\mu)^2}{2\sigma^2}\right\},\quad x>0
+mean: |-
+  e^{\mu+\sigma^2/2}
+variance: |-
+  (e^{\sigma^2}-1)e^{2\mu+\sigma^2}
+notes: |-
+  すべての次数の積率は存在するが、積率母関数は存在しない。
+paramsDoc:
+  - symbol: '\mu'
+    meaning: '$\log X$ の平均'
+    range: '実数'
+  - symbol: '\sigma'
+    meaning: '$\log X$ の標準偏差'
+    range: '$\sigma > 0$'
+relations: []
+diagramPosition: { x: 4, y: 1 }

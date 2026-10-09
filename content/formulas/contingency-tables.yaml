@@ -1,0 +1,30 @@
+- id: chisq-independence
+  topic: contingency-tables
+  title: 独立性のカイ二乗検定
+  body: '\chi^2=\sum_{i=1}^r\sum_{j=1}^c\frac{(O_{ij}-E_{ij})^2}{E_{ij}},\quad E_{ij}=\frac{n_{i\cdot}\,n_{\cdot j}}{n},\quad \text{自由度}\ (r-1)(c-1)'
+  conditions: 期待度数が十分大きいこと（目安として 5 以上）。
+  tags: [分割表, カイ二乗検定, 独立性, 適合度]
+- id: chisq-2x2
+  topic: contingency-tables
+  title: 2×2 分割表のカイ二乗統計量
+  body: '\chi^2=\frac{n(ad-bc)^2}{(a+b)(c+d)(a+c)(b+d)}'
+  description: '自由度1のカイ二乗分布で評価する。$ad-bc$ の符号が関連の向きを表す。'
+  tags: [分割表, カイ二乗検定]
+- id: odds-ratio
+  topic: contingency-tables
+  title: オッズ比とその信頼区間
+  body: '\widehat{\mathrm{OR}}=\frac{ad}{bc},\qquad \mathrm{SE}\left(\log\widehat{\mathrm{OR}}\right)=\sqrt{\frac1a+\frac1b+\frac1c+\frac1d}'
+  pitfalls: 結果がまれなときに限り相対リスクの近似になる。
+  tags: [分割表, オッズ比, 信頼区間]
+- id: relative-risk
+  topic: contingency-tables
+  title: 相対リスク
+  body: '\mathrm{RR}=\frac{a/(a+b)}{c/(c+d)}'
+  pitfalls: 症例対照研究では行和が研究者によって決まるため推定できない。
+  tags: [分割表, リスク比]
+- id: mcnemar
+  topic: contingency-tables
+  title: マクネマー検定
+  body: '\chi^2=\frac{(b-c)^2}{b+c}\ \sim\ \chi^2_1'
+  description: 対応のある2×2表で、不一致のセル $b,c$ だけを使う。
+  tags: [分割表, 検定, 対応のあるデータ]

@@ -1,0 +1,51 @@
+---
+import type { GetStaticPaths } from 'astro';
+import ProblemList from '../../components/ProblemList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { problemsOfFormula } from '../../../build/site/queries';
+import { url } from '../../lib/url';
+import { getSite } from '../../site';
+
+export const getStaticPaths: GetStaticPaths = () => getSite().content.formulas.map((f) => ({ params: { id: f.id } }));
+
+const site = getSite();
+const f = site.content.formulas.find((x) => x.id === Astro.params.id)!;
+const topic = site.content.topics.find((t) => t.id === f.topic);
+const problems = problemsOfFormula(site.content, f.id);
+const md = (s: string | undefined) => (s ? site.renderer.render(s, 'static') : '');
+---
+<BaseLayout title={f.title} description={`${f.title}（${topic?.title ?? ''}）`}>
+  <nav class="small muted" aria-label="パンくず"><a href={url('formulas/')}>公式チートシート</a> / <a href={site.href.topic(f.topic)}>{topic?.title}</a></nav>
+  <h1>{f.title}</h1>
+  <div class="card formula-main" set:html={site.renderer.renderTex(f.body, true)} />
+  {f.description && <div class="prose" set:html={md(f.description)} />}
+  {f.tags.length > 0 && <p class="row small">{f.tags.map((t) => <span class="badge">#{t}</span>)}</p>}
+
+  {f.variables && f.variables.length > 0 && (
+    <section>
+      <h2>変数の意味</h2>
+      <div class="table-scroll">
+        <table>
+          <tbody>
+            {f.variables.map((v) => (
+              <tr><th scope="row" set:html={site.renderer.renderTex(v.symbol, false)} /><td set:html={md(v.meaning)} /></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )}
+  {f.conditions && (<section><h2>適用条件</h2><div class="prose" set:html={md(f.conditions)} /></section>)}
+  {f.derivation && (<section><h2>導出の要点</h2><div class="prose" set:html={md(f.derivation)} /></section>)}
+  {f.pitfalls && (<section><h2>注意点</h2><div class="prose" set:html={md(f.pitfalls)} /></section>)}
+
+  <section>
+    <h2>この公式を使う問題 <span class="muted small">（{problems.length}問）</span></h2>
+    <ProblemList problems={problems} />
+  </section>
+</BaseLayout>
+
+<style>
+  .formula-main { font-size: 1.1rem; overflow-x: auto; }
+  th { width: 7em; }
+</style>

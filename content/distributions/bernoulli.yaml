@@ -1,0 +1,21 @@
+title: ベルヌーイ分布
+kind: discrete
+interactive: true
+order: 1
+pmfOrPdf: |-
+  P(X=x)=p^x(1-p)^{1-x},\quad x\in\{0,1\}
+mean: |-
+  p
+variance: |-
+  p(1-p)
+mgf: |-
+  1-p+pe^t
+paramsDoc:
+  - symbol: 'p'
+    meaning: '成功確率'
+    range: '$0 \le p \le 1$'
+relations:
+  - to: binomial
+    kind: sum
+    label: 'n 個の和'
+diagramPosition: { x: 0, y: 1 }

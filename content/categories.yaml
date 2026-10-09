@@ -1,0 +1,36 @@
+# 大分類（order: 表示順 / mockWeight: 模試での出題比率の重み）
+- id: probability
+  title: 確率と分布
+  order: 1
+  mockWeight: 3
+  description: 確率の計算、確率変数と期待値、主要な確率分布、多変量分布と変数変換、極限定理
+- id: inference
+  title: 統計的推測
+  order: 2
+  mockWeight: 3
+  description: 点推定・区間推定・仮説検定と、その漸近理論・ノンパラメトリック法
+- id: regression
+  title: 回帰と線形モデル
+  order: 3
+  mockWeight: 2
+  description: 線形回帰、回帰診断、モデル選択、分散分析と実験計画、一般化線形モデル
+- id: multivariate
+  title: 多変量解析
+  order: 4
+  mockWeight: 1
+  description: 主成分分析、因子分析、判別分析、クラスター分析、多次元尺度法
+- id: timeseries
+  title: 時系列解析
+  order: 5
+  mockWeight: 1
+  description: 定常過程、自己相関、ARMA モデル、単位根、状態空間モデル
+- id: bayes
+  title: ベイズ統計と計算統計
+  order: 6
+  mockWeight: 1
+  description: ベイズ推定、共役事前分布、MCMC、ブートストラップ、EM アルゴリズム
+- id: other-methods
+  title: その他の手法
+  order: 7
+  mockWeight: 1
+  description: 分割表、生存時間解析、欠測データ、標本調査、機械学習の基礎、因果推論の基礎

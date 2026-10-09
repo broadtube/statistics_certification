@@ -1,0 +1,23 @@
+title: ポアソン分布
+kind: discrete
+interactive: true
+order: 3
+pmfOrPdf: |-
+  P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!},\quad k=0,1,2,\dots
+mean: |-
+  \lambda
+variance: |-
+  \lambda
+mgf: |-
+  \exp\{\lambda(e^t-1)\}
+notes: |-
+  期待値と分散が等しい。独立なポアソン分布の和もポアソン分布（再生性）。ガンマ分布はポアソン分布の母数 $\lambda$ の共役事前分布。
+paramsDoc:
+  - symbol: '\lambda'
+    meaning: '平均（強度）'
+    range: '$\lambda > 0$'
+relations:
+  - to: normal
+    kind: limit
+    label: 'λ→∞'
+diagramPosition: { x: 2, y: 0 }

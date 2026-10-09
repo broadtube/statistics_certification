@@ -1,0 +1,84 @@
+---
+import type { GetStaticPaths } from 'astro';
+import DistributionExplorer from '../../islands/DistributionExplorer.tsx';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { url } from '../../lib/url';
+import { getSite } from '../../site';
+
+export const getStaticPaths: GetStaticPaths = () => getSite().content.distributions.map((d) => ({ params: { id: d.id } }));
+
+const site = getSite();
+const d = site.content.distributions.find((x) => x.id === Astro.params.id)!;
+const tex = (s: string) => site.renderer.renderTex(`\\displaystyle ${s}`, false);
+/** 段落で包まずにインラインの Markdown として描画する */
+const inline = (md: string) => site.renderer.render(md, 'static').replace(/^<p>([\s\S]*)<\/p>$/, '$1');
+const texBlock = (s: string) => site.renderer.renderTex(s, true);
+const titleOf = (id: string) => site.content.distributions.find((x) => x.id === id)?.title ?? id;
+const incoming = site.content.distributions.flatMap((x) => x.relations.filter((r) => r.to === d.id).map((r) => ({ from: x.id, label: r.label })));
+const relKind: Record<string, string> = { 'special-case': '特殊ケース', limit: '極限', transform: '変数変換', sum: '和', conjugate: '共役' };
+const topics = site.content.topics.filter((t) => t.distributions?.includes(d.id));
+---
+<BaseLayout title={d.title} description={`${d.title}の性質（期待値・分散・積率母関数）とグラフ`}>
+  <nav class="small muted" aria-label="パンくず"><a href={url('distributions/')}>確率分布</a> / {d.kind === 'discrete' ? '離散分布' : '連続分布'}</nav>
+  <h1>{d.title}</h1>
+
+  <section aria-labelledby="props">
+    <h2 id="props">性質</h2>
+    <div class="table-scroll">
+      <table class="props">
+        <tbody>
+          <tr><th scope="row">{d.kind === 'discrete' ? '確率関数' : '確率密度関数'}</th><td set:html={texBlock(d.pmfOrPdf)} /></tr>
+          {d.cdf && <tr><th scope="row">累積分布関数</th><td set:html={texBlock(d.cdf)} /></tr>}
+          <tr><th scope="row">期待値</th><td set:html={tex(d.mean)} /></tr>
+          <tr><th scope="row">分散</th><td set:html={tex(d.variance)} /></tr>
+          <tr><th scope="row">積率母関数</th><td>{d.mgf ? <Fragment set:html={tex(d.mgf)} /> : <span class="muted">存在しない</span>}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>パラメータ</h3>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>記号</th><th>意味</th><th>範囲</th></tr></thead>
+        <tbody>
+          {d.paramsDoc.map((p) => (
+            <tr><td set:html={tex(p.symbol)} /><td>{p.meaning}</td><td set:html={inline(p.range)} /></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    {d.notes && <div class="prose" set:html={site.renderer.render(d.notes, 'static')} />}
+  </section>
+
+  {d.interactive && (
+    <section aria-labelledby="explore">
+      <h2 id="explore">グラフ</h2>
+      <DistributionExplorer client:visible id={d.id} title={d.title} />
+    </section>
+  )}
+
+  {(d.relations.length > 0 || incoming.length > 0) && (
+    <section aria-labelledby="rels">
+      <h2 id="rels">他の分布との関係</h2>
+      <ul>
+        {d.relations.map((r) => (
+          <li><span class="badge">{relKind[r.kind]}</span> → <a href={site.href.dist(r.to)}>{titleOf(r.to)}</a>：{r.label}</li>
+        ))}
+        {incoming.map((r) => (
+          <li><a href={site.href.dist(r.from)}>{titleOf(r.from)}</a> → この分布：{r.label}</li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {topics.length > 0 && (
+    <section>
+      <h2>関連する分野</h2>
+      <p class="row">{topics.map((t) => <a class="badge" href={site.href.topic(t.id)}>{t.title}</a>)}</p>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .props th { width: 9em; white-space: nowrap; }
+  .props td { min-width: 0; }
+</style>

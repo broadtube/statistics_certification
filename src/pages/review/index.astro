@@ -1,0 +1,12 @@
+---
+import Practice from '../../islands/Practice.tsx';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { practiceProps } from '../../lib/server/practice-props';
+
+const props = practiceProps();
+---
+<BaseLayout title="復習" description="誤答した問題を間隔を空けて再出題します">
+  <h1>復習</h1>
+  <Practice client:load mode="review" {...props} />
+  <noscript><p class="alert warn">復習には JavaScript が必要です。</p></noscript>
+</BaseLayout>

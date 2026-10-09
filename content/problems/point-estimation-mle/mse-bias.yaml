@@ -1,0 +1,15 @@
+topics: [point-estimation-mle]
+formulas: [mse-decomposition]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある推定量 $T$ の分散が {{v}}、バイアス $E[T]-\theta$ が {{b}} であるとき、$T$ の平均二乗誤差を求めよ（小数第3位まで）。
+explanation: |
+  $\mathrm{MSE}(T)=V[T]+(\text{バイアス})^2={{v}}+({{b}})^2={{answer}}$。
+params:
+  v: { min: 0.1, max: 2, step: 0.1 }
+  b: { min: -1, max: 1, step: 0.1 }
+constraints: ['b != 0']
+answer: v + b^2
+display: { digits: 3 }

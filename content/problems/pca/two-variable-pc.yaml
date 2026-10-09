@@ -1,0 +1,14 @@
+topics: [pca]
+formulas: [pca-2x2-correlation, pca-contribution]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2 つの変数 $x_1,x_2$ の相関係数が $r={{r}}$ であるとき、相関行列に基づく主成分分析の第1主成分の寄与率を求めよ（小数第3位まで）。
+explanation: |
+  相関行列 $\begin{pmatrix}1&r\\r&1\end{pmatrix}$ の固有値は $1\pm r$。$r>0$ なので最大固有値は $1+r$ で、固有値の和は $2$。
+  寄与率は $\frac{1+r}{2}=\frac{1+{{r}}}{2}={{answer}}$。第1主成分は $z_1=(x_1+x_2)/\sqrt2$（標準化した変数の和）となる。
+params:
+  r: { min: 0.1, max: 0.95, step: 0.05 }
+answer: (1 + r) / 2
+display: { digits: 3 }

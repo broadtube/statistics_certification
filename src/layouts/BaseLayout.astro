@@ -1,0 +1,64 @@
+---
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+import { NAV_ITEMS, isCurrent } from '../lib/nav';
+import { url } from '../lib/url';
+import StorageBanner from '../islands/StorageBanner.tsx';
+
+interface Props {
+  title: string;
+  description?: string;
+  wide?: boolean;
+}
+
+const { title, description = '統計検定準1級の要点・公式・演習・復習をまとめた非公式の学習アプリ', wide = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+const fullTitle = title === '' ? '準1級ラボ' : `${title} | 準1級ラボ`;
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <a class="sr-only" href="#main">本文へ移動</a>
+    <header class="site-header">
+      <div class="container bar">
+        <a class="brand" href={url('')}>準1級ラボ<small>統計検定 準1級 学習</small></a>
+        <nav class="nav-desktop" aria-label="メイン">
+          <ul class="nav-list">
+            {NAV_ITEMS.map((n) => (
+              <li><a href={url(n.href)} aria-current={isCurrent(base, pathname, n.href) ? 'page' : undefined}>{n.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <details class="nav-mobile">
+          <summary aria-label="メニューを開く">メニュー</summary>
+          <nav aria-label="メイン（モバイル）">
+            <ul class="nav-list">
+              {NAV_ITEMS.map((n) => (
+                <li><a href={url(n.href)} aria-current={isCurrent(base, pathname, n.href) ? 'page' : undefined}>{n.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </details>
+      </div>
+      <StorageBanner client:idle />
+    </header>
+    <main id="main" class="container" style={wide ? '--maxw: 1280px' : undefined}>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <p>本サイトは個人が作成した<strong>非公式</strong>の学習用アプリであり、統計検定の主催団体（一般財団法人 統計質保証推進協会・日本統計学会）とは一切関係ありません。過去問題の転載は行っていません。</p>
+        <p class="row"><a href={url('about/')}>このサイトについて・ライセンス</a><span aria-hidden="true">·</span><a href={url('flashcards/')}>暗記カード</a><span aria-hidden="true">·</span><a href={url('mock/')}>模試</a><span aria-hidden="true">·</span><a href={url('settings/')}>学習記録の管理</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

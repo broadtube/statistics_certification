@@ -1,0 +1,48 @@
+- id: ols-simple
+  topic: linear-regression
+  title: 単回帰の最小二乗推定量
+  body: '\hat\beta_1=\frac{S_{xy}}{S_{xx}},\qquad \hat\beta_0=\bar y-\hat\beta_1\bar x'
+  variables:
+    - { symbol: 'S_{xy}', meaning: '偏差積和 $\sum(x_i-\bar x)(y_i-\bar y)$' }
+    - { symbol: 'S_{xx}', meaning: '偏差平方和 $\sum(x_i-\bar x)^2$' }
+  derivation: 正規方程式 $\partial\mathrm{RSS}/\partial\beta_0=\partial\mathrm{RSS}/\partial\beta_1=0$ を解く。回帰直線は必ず $(\bar x,\bar y)$ を通る。
+  tags: [回帰, 最小二乗法, 推定量]
+- id: ols-matrix
+  topic: linear-regression
+  title: 最小二乗推定量（行列形）とその分散
+  body: '\hat{\boldsymbol\beta}=(X^\top X)^{-1}X^\top\boldsymbol y,\qquad V[\hat{\boldsymbol\beta}]=\sigma^2(X^\top X)^{-1}'
+  conditions: '$X^\top X$ が正則（説明変数が完全な多重共線性をもたない）。分散の式は誤差が無相関・等分散のとき。'
+  tags: [回帰, 最小二乗法, 推定量, 分散]
+- id: sigma2-unbiased
+  topic: linear-regression
+  title: 誤差分散の不偏推定量
+  body: '\hat\sigma^2=\frac{\mathrm{RSS}}{n-p-1},\qquad \frac{\mathrm{RSS}}{\sigma^2}\sim\chi^2_{n-p-1}'
+  variables:
+    - { symbol: 'p', meaning: 切片を除く説明変数の数 }
+  pitfalls: 分母は「標本サイズ − 推定したパラメータ数（切片を含む）」。
+  tags: [回帰, 分散, 不偏推定量]
+- id: r-squared
+  topic: linear-regression
+  title: 決定係数と自由度調整済み決定係数
+  body: 'R^2=1-\frac{\mathrm{RSS}}{\mathrm{TSS}},\qquad \bar R^2=1-\frac{\mathrm{RSS}/(n-p-1)}{\mathrm{TSS}/(n-1)}'
+  pitfalls: '$R^2$ は説明変数を追加すると減らない。$\bar R^2$ は負になることもある。'
+  tags: [回帰, 決定係数, モデル選択]
+- id: coef-t-test
+  topic: linear-regression
+  title: 回帰係数の t 検定
+  body: 't=\frac{\hat\beta_j}{\widehat{\mathrm{SE}}(\hat\beta_j)}\ \sim\ t_{n-p-1}\quad(H_0:\beta_j=0)'
+  conditions: 誤差が独立に $N(0,\sigma^2)$ に従うこと。
+  tags: [回帰, 検定, t分布]
+- id: regression-f-test
+  topic: linear-regression
+  title: 回帰モデル全体の F 検定
+  body: 'F=\frac{\mathrm{ESS}/p}{\mathrm{RSS}/(n-p-1)}=\frac{R^2/p}{(1-R^2)/(n-p-1)}\ \sim\ F(p,\ n-p-1)'
+  conditions: '$H_0:\beta_1=\cdots=\beta_p=0$ のもと、誤差が独立に正規分布に従うこと。'
+  tags: [回帰, 検定, F分布, 分散分析]
+- id: gauss-markov
+  topic: linear-regression
+  title: ガウス・マルコフの定理
+  description: 線形不偏推定量のなかで最小二乗推定量の分散が最小（BLUE）。
+  body: 'V[\tilde{\boldsymbol\beta}]-V[\hat{\boldsymbol\beta}]\ \succeq\ O\quad(\tilde{\boldsymbol\beta}\ \text{は任意の線形不偏推定量})'
+  conditions: 誤差の期待値が $0$、等分散、無相関。正規性は不要。
+  tags: [回帰, 最小二乗法, BLUE]

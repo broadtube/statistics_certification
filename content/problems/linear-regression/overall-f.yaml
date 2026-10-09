@@ -1,0 +1,20 @@
+topics: [linear-regression]
+formulas: [regression-f-test]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  $n={{n}}$ 個のデータに切片と説明変数 $p={{p}}$ 個の重回帰モデルを当てはめたところ、決定係数は $R^2={{r2}}$ であった。$H_0:\beta_1=\cdots=\beta_p=0$ を検定する F 統計量の値を求めよ（小数第2位まで）。
+explanation: |
+  $$
+  F=\frac{R^2/p}{(1-R^2)/(n-p-1)}=\frac{ {{r2}}/{{p}} }{(1-{{r2}})/({{n}}-{{p}}-1)}={{answer}}
+  $$
+  $H_0$ のもとで $F\sim F({{p}},\ {{df2}})$ に従う。
+params:
+  n: { min: 20, max: 50, step: 5 }
+  p: { min: 2, max: 5, step: 1 }
+  r2: { min: 0.2, max: 0.8, step: 0.05 }
+derived:
+  df2: n - p - 1
+answer: (r2 / p) / ((1 - r2) / (n - p - 1))
+display: { digits: 2 }

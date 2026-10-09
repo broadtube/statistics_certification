@@ -1,0 +1,26 @@
+topics: [bayes-conjugate]
+formulas: [bayes-estimator-loss]
+difficulty: 1
+type: choice
+source: { kind: original }
+statement: |
+  母数 $\theta$ の事後分布が得られているとき、絶対損失 $L(\theta,a)=|\theta-a|$ のもとでのベイズ推定量（事後期待損失を最小にする $a$）として正しいものを選べ。
+choices:
+  - id: a
+    text: '事後分布の中央値'
+    correct: true
+  - id: b
+    text: '事後分布の平均'
+    correct: false
+  - id: c
+    text: '事後分布の最頻値'
+    correct: false
+  - id: d
+    text: '事前分布の平均'
+    correct: false
+  - id: e
+    text: '最尤推定値'
+    correct: false
+explanation: |
+  $E[|\theta-a|\mid x]$ を $a$ で微分すると $P(\theta<a\mid x)-P(\theta>a\mid x)$ となり、これが $0$ になるのは $a$ が事後中央値のとき。
+  二乗損失なら事後平均、0-1 損失（の極限）なら事後最頻値（MAP 推定値）がベイズ推定量になる。

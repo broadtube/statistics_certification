@@ -1,0 +1,22 @@
+topics: [linear-regression]
+formulas: [r-squared]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  標本サイズ $n={{n}}$、切片を除く説明変数 $p={{p}}$ 個の重回帰モデルを当てはめたところ、全平方和 $\mathrm{TSS}={{tss}}$、残差平方和 $\mathrm{RSS}={{rss}}$ であった。自由度調整済み決定係数 $\bar R^2$ を求めよ（小数第3位まで）。
+explanation: |
+  $R^2=1-\frac{ {{rss}} }{ {{tss}} }={{r2}}$。自由度調整済み決定係数は
+  $$
+  \bar R^2=1-\frac{\mathrm{RSS}/(n-p-1)}{\mathrm{TSS}/(n-1)}=1-\frac{ {{rss}}/({{n}}-{{p}}-1)}{ {{tss}}/({{n}}-1)}={{answer}}
+  $$
+  説明変数の数に応じたペナルティにより $\bar R^2<R^2$ となる。
+params:
+  n: { min: 15, max: 40, step: 5 }
+  p: { min: 2, max: 5, step: 1 }
+  tss: { min: 100, max: 200, step: 10 }
+  rss: { min: 20, max: 80, step: 5 }
+derived:
+  r2: 1 - rss / tss
+answer: 1 - (rss / (n - p - 1)) / (tss / (n - 1))
+display: { digits: 3 }

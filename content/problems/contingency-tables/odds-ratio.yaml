@@ -1,0 +1,26 @@
+topics: [contingency-tables]
+formulas: [odds-ratio]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある疾患と喫煙の関係を調べた次の2×2分割表について、オッズ比 $\frac{ad}{bc}$ を求めよ（小数第3位まで）。
+
+  | | 疾患あり | 疾患なし |
+  | --- | --- | --- |
+  | 喫煙あり | {{a}} | {{b}} |
+  | 喫煙なし | {{c}} | {{d}} |
+explanation: |
+  $$
+  \widehat{\mathrm{OR}}=\frac{ad}{bc}=\frac{ {{a}}\times{{d}} }{ {{b}}\times{{c}} }={{answer}}
+  $$
+  $\log\widehat{\mathrm{OR}}$ の標準誤差は $\sqrt{1/a+1/b+1/c+1/d}={{se}}$。
+params:
+  a: { min: 10, max: 60, step: 5 }
+  b: { min: 40, max: 120, step: 10 }
+  c: { min: 5, max: 40, step: 5 }
+  d: { min: 60, max: 160, step: 10 }
+derived:
+  se: sqrt(1 / a + 1 / b + 1 / c + 1 / d)
+answer: a * d / (b * c)
+display: { digits: 3 }

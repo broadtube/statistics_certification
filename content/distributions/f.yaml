@@ -1,0 +1,21 @@
+title: F 分布
+kind: continuous
+interactive: true
+order: 17
+pmfOrPdf: |-
+  f(x)=\frac{1}{B\left(\frac{d_1}{2},\frac{d_2}{2}\right)}\left(\frac{d_1}{d_2}\right)^{\frac{d_1}{2}}x^{\frac{d_1}{2}-1}\left(1+\frac{d_1}{d_2}x\right)^{-\frac{d_1+d_2}{2}}
+mean: |-
+  \frac{d_2}{d_2-2}\quad(d_2>2)
+variance: |-
+  \frac{2d_2^2(d_1+d_2-2)}{d_1(d_2-2)^2(d_2-4)}\quad(d_2>4)
+notes: |-
+  $F\sim F(d_1,d_2)$ なら $1/F\sim F(d_2,d_1)$。したがって下側 $\alpha$ 点は $F_{1-\alpha}(d_1,d_2)=1/F_\alpha(d_2,d_1)$。
+paramsDoc:
+  - symbol: 'd_1'
+    meaning: '分子の自由度'
+    range: '$d_1 > 0$'
+  - symbol: 'd_2'
+    meaning: '分母の自由度'
+    range: '$d_2 > 0$'
+relations: []
+diagramPosition: { x: 3, y: 3 }

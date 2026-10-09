@@ -1,0 +1,18 @@
+topics: [point-estimation-mle]
+formulas: [mle-invariance]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  成功確率 $p$ の独立なベルヌーイ試行を {{n}} 回行ったところ、成功は {{x}} 回であった。オッズ $\frac{p}{1-p}$ の最尤推定値を求めよ（小数第3位まで）。
+explanation: |
+  $p$ の最尤推定値は $\hat p=\frac{ {{x}} }{ {{n}} }$。最尤推定量の不変性より、オッズの最尤推定値は
+  $$
+  \frac{\hat p}{1-\hat p}=\frac{x}{n-x}=\frac{ {{x}} }{ {{n}}-{{x}} }={{answer}}
+  $$
+params:
+  n: { min: 20, max: 60, step: 5 }
+  x: { min: 3, max: 30, step: 1 }
+constraints: ['x < n']
+answer: x / (n - x)
+display: { digits: 3 }

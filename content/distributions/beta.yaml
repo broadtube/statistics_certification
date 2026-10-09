@@ -1,0 +1,26 @@
+title: ベータ分布
+kind: continuous
+interactive: true
+order: 14
+pmfOrPdf: |-
+  f(x)=\frac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)},\quad 0<x<1
+mean: |-
+  \frac{\alpha}{\alpha+\beta}
+variance: |-
+  \frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}
+mgf: |-
+  \text{（閉じた形なし）}
+notes: |-
+  二項分布の成功確率 $p$ の共役事前分布。事前分布 $\mathrm{Be}(\alpha,\beta)$ に対し、$n$ 回中 $x$ 回成功を観測すると事後分布は $\mathrm{Be}(\alpha+x,\beta+n-x)$。
+paramsDoc:
+  - symbol: '\alpha'
+    meaning: '形状母数'
+    range: '$\alpha > 0$'
+  - symbol: '\beta'
+    meaning: '形状母数'
+    range: '$\beta > 0$'
+relations:
+  - to: uniform
+    kind: special-case
+    label: 'α=β=1'
+diagramPosition: { x: 0, y: 4 }

@@ -1,0 +1,23 @@
+title: 幾何分布
+kind: discrete
+interactive: true
+order: 4
+pmfOrPdf: |-
+  P(X=k)=p(1-p)^k,\quad k=0,1,2,\dots
+mean: |-
+  \frac{1-p}{p}
+variance: |-
+  \frac{1-p}{p^2}
+mgf: |-
+  \frac{p}{1-(1-p)e^t}\quad (t<-\log(1-p))
+notes: |-
+  ここでは「初めて成功するまでの**失敗回数**」（0 始まり）として定義する。「初めて成功するまでの試行回数」（1 始まり）で定義すると期待値は $1/p$ になる。無記憶性 $P(X\ge s+t\mid X\ge s)=P(X\ge t)$ をもつ唯一の離散分布。
+paramsDoc:
+  - symbol: 'p'
+    meaning: '成功確率'
+    range: '$0 < p \le 1$'
+relations:
+  - to: negative-binomial
+    kind: sum
+    label: 'r 個の和'
+diagramPosition: { x: 0, y: 2 }

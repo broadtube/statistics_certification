@@ -1,0 +1,5 @@
+- id: binom-mean
+  topic: discrete
+  title: 二項分布の期待値
+  body: E[X] = np
+  tags: [期待値]

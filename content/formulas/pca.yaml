@@ -1,0 +1,30 @@
+- id: pca-eigen
+  topic: pca
+  title: 主成分と固有値問題
+  description: 主成分の係数は分散共分散行列の固有ベクトル、主成分の分散は固有値。
+  body: '\Sigma\boldsymbol a_k=\lambda_k\boldsymbol a_k,\quad z_k=\boldsymbol a_k^\top\boldsymbol x,\quad V[z_k]=\lambda_k'
+  derivation: '$\boldsymbol a^\top\Sigma\boldsymbol a$ を $\boldsymbol a^\top\boldsymbol a=1$ のもとで最大化（ラグランジュの未定乗数法）。'
+  tags: [主成分分析, 固有値, 次元削減]
+- id: pca-contribution
+  topic: pca
+  title: 寄与率と累積寄与率
+  body: '\frac{\lambda_k}{\sum_{j=1}^p\lambda_j},\qquad \frac{\sum_{j=1}^k\lambda_j}{\sum_{j=1}^p\lambda_j}'
+  pitfalls: '相関行列に基づく場合、分母 $\sum_j\lambda_j$ は変数の数 $p$ に等しい。'
+  tags: [主成分分析, 寄与率]
+- id: pca-loading
+  topic: pca
+  title: 主成分負荷量
+  description: 第 $k$ 主成分と変数 $x_j$ の相関係数。
+  body: 'r(z_k,x_j)=\frac{\sqrt{\lambda_k}\,a_{kj}}{\sqrt{\sigma_{jj}}}'
+  pitfalls: '相関行列に基づく場合は $\sigma_{jj}=1$ なので $\sqrt{\lambda_k}\,a_{kj}$。'
+  tags: [主成分分析, 負荷量, 相関係数]
+- id: pca-2x2-correlation
+  topic: pca
+  title: 2変数の相関行列の固有値・固有ベクトル
+  body: 'R=\begin{pmatrix}1&r\\r&1\end{pmatrix}:\quad \lambda=1\pm r,\quad \boldsymbol a=\tfrac{1}{\sqrt2}(1,\pm1)^\top'
+  tags: [主成分分析, 固有値, 相関係数]
+- id: trace-eigenvalues
+  topic: pca
+  title: 固有値の和と総分散
+  body: '\sum_{j=1}^p\lambda_j=\mathrm{tr}\,\Sigma=\sum_{j=1}^p\sigma_{jj},\qquad \prod_{j=1}^p\lambda_j=|\Sigma|'
+  tags: [固有値, 行列, 主成分分析]

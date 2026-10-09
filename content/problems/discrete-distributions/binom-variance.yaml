@@ -1,0 +1,14 @@
+topics: [discrete-distributions]
+formulas: [binom-mean-var]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある製品の不良率は {{p}} である。製品を {{n}} 個独立に検査したときの不良品の個数を $X$ とする。$X$ の分散 $V[X]$ を求めよ（小数第2位まで）。
+explanation: |
+  $X\sim B({{n}}, {{p}})$ なので $V[X]=np(1-p)={{n}}\times{{p}}\times(1-{{p}})={{answer}}$。
+params:
+  n: { min: 20, max: 200, step: 10 }
+  p: { min: 0.02, max: 0.3, step: 0.01 }
+answer: n * p * (1 - p)
+display: { digits: 2 }

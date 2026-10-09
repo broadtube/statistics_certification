@@ -1,0 +1,23 @@
+title: 負の二項分布
+kind: discrete
+interactive: true
+order: 5
+pmfOrPdf: |-
+  P(X=k)=\binom{k+r-1}{k}p^r(1-p)^k,\quad k=0,1,2,\dots
+mean: |-
+  \frac{r(1-p)}{p}
+variance: |-
+  \frac{r(1-p)}{p^2}
+mgf: |-
+  \left(\frac{p}{1-(1-p)e^t}\right)^r
+notes: |-
+  $r$ 回成功するまでの失敗回数の分布。分散が期待値より大きい（過分散）カウントデータのモデルにも使われる。
+paramsDoc:
+  - symbol: 'r'
+    meaning: '成功回数'
+    range: '$r = 1, 2, \dots$'
+  - symbol: 'p'
+    meaning: '成功確率'
+    range: '$0 < p \le 1$'
+relations: []
+diagramPosition: { x: 1, y: 2 }

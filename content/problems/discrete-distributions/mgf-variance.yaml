@@ -1,0 +1,26 @@
+topics: [discrete-distributions]
+formulas: [mgf-moments, poisson-mean-var]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  確率変数 $X$ の積率母関数が $M_X(t)=\exp\{2(e^t-1)\}$ で与えられるとき、$V[X]$ の値として正しいものを選べ。
+choices:
+  - id: a
+    text: '$2$'
+    correct: true
+  - id: b
+    text: '$4$'
+    correct: false
+  - id: c
+    text: '$6$'
+    correct: false
+  - id: d
+    text: '$e^2$'
+    correct: false
+  - id: e
+    text: '$\sqrt2$'
+    correct: false
+explanation: |
+  $K(t)=\log M_X(t)=2(e^t-1)$ とおくと $K'(t)=K''(t)=2e^t$ なので $E[X]=K'(0)=2$、$V[X]=K''(0)=2$。これは $\mathrm{Po}(2)$ の積率母関数である。
+  $M''(0)=E[X^2]=6$ を分散と取り違えないこと（$V[X]=6-2^2=2$）。

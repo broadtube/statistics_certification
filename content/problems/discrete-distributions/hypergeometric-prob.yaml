@@ -1,0 +1,16 @@
+topics: [discrete-distributions]
+formulas: [hypergeometric-var]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  10 本のくじのうち {{K}} 本が当たりである。ここから非復元で 3 本引くとき、当たりがちょうど 1 本である確率を求めよ（小数第4位まで）。
+explanation: |
+  当たりの本数 $X$ は超幾何分布 $\mathrm{HG}(10,{{K}},3)$ に従う。
+  $$
+  P(X=1)=\frac{\binom{ {{K}} }{1}\binom{10-{{K}}}{2}}{\binom{10}{3}}={{answer}}
+  $$
+params:
+  K: { min: 2, max: 7, step: 1 }
+answer: choose(K, 1) * choose(10 - K, 2) / choose(10, 3)
+display: { digits: 4 }

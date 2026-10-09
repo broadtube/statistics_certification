@@ -1,0 +1,27 @@
+title: t 分布
+kind: continuous
+interactive: true
+order: 16
+pmfOrPdf: |-
+  f(x)=\frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\sqrt{\nu\pi}\,\Gamma\left(\frac{\nu}{2}\right)}\left(1+\frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}}
+mean: |-
+  0\quad(\nu>1)
+variance: |-
+  \frac{\nu}{\nu-2}\quad(\nu>2)
+notes: |-
+  $Z\sim N(0,1)$ と $V\sim\chi^2_\nu$ が独立のとき $T=Z/\sqrt{V/\nu}$ が従う分布。積率母関数は存在しない（$\nu$ 次以上の積率が存在しない）。
+paramsDoc:
+  - symbol: '\nu'
+    meaning: '自由度'
+    range: '$\nu > 0$'
+relations:
+  - to: normal
+    kind: limit
+    label: 'ν→∞'
+  - to: f
+    kind: transform
+    label: 'T² ~ F(1, ν)'
+  - to: cauchy
+    kind: special-case
+    label: 'ν=1'
+diagramPosition: { x: 4, y: 2 }

@@ -1,0 +1,84 @@
+---
+import type { GetStaticPaths } from 'astro';
+import FormulaCard from '../../components/FormulaCard.astro';
+import ProblemList from '../../components/ProblemList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { REQUIRED_TOPIC_HEADINGS } from '../../../build/content/load';
+import { formulasOfTopic, problemsOfTopic } from '../../../build/site/queries';
+import { url } from '../../lib/url';
+import { getSite } from '../../site';
+
+export const getStaticPaths: GetStaticPaths = () => getSite().content.topics.map((t) => ({ params: { id: t.id } }));
+
+const site = getSite();
+const topic = site.content.topics.find((t) => t.id === Astro.params.id)!;
+const category = site.content.categories.find((c) => c.id === topic.category);
+const formulas = formulasOfTopic(site.content, topic.id);
+const problems = problemsOfTopic(site.content, topic.id);
+const section = (h: string) => topic.sections.find((s) => s.heading === h);
+const html = (md: string | undefined) => (md ? site.renderer.render(md, 'static') : '');
+const fixed = new Set<string>([...REQUIRED_TOPIC_HEADINGS, '主要公式', '(前文)']);
+const extras = topic.sections.filter((s) => !fixed.has(s.heading));
+const lead = section('(前文)');
+const dists = (topic.distributions ?? []).map((id) => site.content.distributions.find((d) => d.id === id)).filter((d) => d !== undefined);
+---
+<BaseLayout title={topic.title} description={topic.summary}>
+  <nav class="small muted" aria-label="パンくず"><a href={url('topics/')}>分野マップ</a> / {category?.title}</nav>
+  <h1>{topic.title}</h1>
+  <p class="muted">{topic.summary}</p>
+  <p class="row">
+    <a class="btn primary" href={url(`practice/?topic=${topic.id}`)}>この分野を演習する</a>
+    {formulas.length > 0 && <a class="btn" href={url(`flashcards/?topic=${topic.id}`)}>公式を暗記カードで確認</a>}
+  </p>
+  {lead && <div class="prose" set:html={html(lead.markdown)} />}
+  {topic.draft && <p class="alert info">この分野の要点は準備中です。公式カードと問題は利用できます。</p>}
+
+  {!topic.draft && (
+  <section aria-labelledby="sec-def">
+    <h2 id="sec-def">定義</h2>
+    <div class="prose" set:html={html(section('定義')?.markdown)} />
+  </section>
+  )}
+
+  <section aria-labelledby="sec-formulas">
+    <h2 id="sec-formulas">主要公式</h2>
+    {section('主要公式') && <div class="prose" set:html={html(section('主要公式')?.markdown)} />}
+    {formulas.length === 0 ? <p class="muted">この分野の公式カードは準備中です。</p> : (
+      <div class="grid formula-grid">{formulas.map((f) => <FormulaCard formula={f} />)}</div>
+    )}
+    {dists.length > 0 && (
+      <p class="row small">関連する分布: {dists.map((d) => <a class="badge" href={site.href.dist(d.id)}>{d.title}</a>)}</p>
+    )}
+  </section>
+
+  {section('導出の流れ') && (
+    <section aria-labelledby="sec-derivation">
+      <h2 id="sec-derivation">導出の流れ</h2>
+      <div class="prose" set:html={html(section('導出の流れ')?.markdown)} />
+    </section>
+  )}
+
+  {section('落とし穴') && (
+    <section aria-labelledby="sec-pitfalls">
+      <h2 id="sec-pitfalls">落とし穴</h2>
+      <div class="prose" set:html={html(section('落とし穴')?.markdown)} />
+    </section>
+  )}
+
+  {extras.map((s, i) => (
+    <section aria-labelledby={`sec-extra-${i}`}>
+      <h2 id={`sec-extra-${i}`}>{s.heading}</h2>
+      <div class="prose" set:html={html(s.markdown)} />
+    </section>
+  ))}
+
+  <section aria-labelledby="sec-problems">
+    <h2 id="sec-problems">関連問題 <span class="muted small">（{problems.length}問）</span></h2>
+    <ProblemList problems={problems} />
+  </section>
+</BaseLayout>
+
+<style>
+  .formula-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  @media (max-width: 400px) { .formula-grid { grid-template-columns: 1fr; } }
+</style>

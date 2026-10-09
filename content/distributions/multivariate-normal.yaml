@@ -1,0 +1,26 @@
+title: 多変量正規分布
+kind: continuous
+interactive: false
+order: 21
+pmfOrPdf: |-
+  f(\boldsymbol x)=\frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left\{-\frac12(\boldsymbol x-\boldsymbol\mu)^\top\Sigma^{-1}(\boldsymbol x-\boldsymbol\mu)\right\}
+mean: |-
+  \boldsymbol\mu
+variance: |-
+  \Sigma\ (\text{分散共分散行列})
+mgf: |-
+  \exp\left(\boldsymbol\mu^\top\boldsymbol t+\frac12\boldsymbol t^\top\Sigma\boldsymbol t\right)
+notes: |-
+  周辺分布・条件付き分布・線形変換 $A\boldsymbol X+\boldsymbol b$ はいずれも（多変量）正規分布。成分が無相関なら独立。$(\boldsymbol X-\boldsymbol\mu)^\top\Sigma^{-1}(\boldsymbol X-\boldsymbol\mu)\sim\chi^2_p$。
+paramsDoc:
+  - symbol: '\boldsymbol\mu'
+    meaning: '平均ベクトル'
+    range: '$\mathbb{R}^p$'
+  - symbol: '\Sigma'
+    meaning: '分散共分散行列'
+    range: '正定値対称行列'
+relations:
+  - to: normal
+    kind: special-case
+    label: '周辺分布・線形結合'
+diagramPosition: { x: 3, y: 0 }

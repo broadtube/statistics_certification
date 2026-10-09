@@ -1,0 +1,23 @@
+title: コーシー分布
+kind: continuous
+interactive: true
+order: 19
+pmfOrPdf: |-
+  f(x)=\frac{1}{\pi\gamma\left\{1+\left(\frac{x-x_0}{\gamma}\right)^2\right\}}
+cdf: |-
+  F(x)=\frac12+\frac1\pi\arctan\frac{x-x_0}{\gamma}
+mean: |-
+  \text{存在しない}
+variance: |-
+  \text{存在しない}
+notes: |-
+  期待値が存在しないため、大数の法則・中心極限定理が成り立たない。独立なコーシー分布の標本平均は元と同じコーシー分布に従う。
+paramsDoc:
+  - symbol: 'x_0'
+    meaning: '位置母数（中央値）'
+    range: '実数'
+  - symbol: '\gamma'
+    meaning: '尺度母数'
+    range: '$\gamma > 0$'
+relations: []
+diagramPosition: { x: 5, y: 2 }

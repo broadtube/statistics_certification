@@ -1,0 +1,20 @@
+topics: [bayes-conjugate]
+formulas: [beta-binomial-update]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある製品の不良率 $p$ の事前分布をベータ分布 $\mathrm{Be}({{a}},\ {{b}})$ とする。製品を {{n}} 個検査したところ不良品が {{x}} 個であった。二乗損失のもとでの $p$ のベイズ推定値（事後平均）を求めよ（小数第4位まで）。
+explanation: |
+  事後分布は $\mathrm{Be}(\alpha+x,\ \beta+n-x)=\mathrm{Be}({{a}}+{{x}},\ {{b}}+{{n}}-{{x}})$。二乗損失のベイズ推定量は事後平均なので
+  $$
+  \frac{\alpha+x}{\alpha+\beta+n}=\frac{ {{a}}+{{x}} }{ {{a}}+{{b}}+{{n}} }={{answer}}
+  $$
+params:
+  a: { min: 1, max: 5, step: 1 }
+  b: { min: 5, max: 30, step: 5 }
+  n: { min: 20, max: 100, step: 10 }
+  x: { min: 0, max: 15, step: 1 }
+constraints: ['x <= n']
+answer: (a + x) / (a + b + n)
+display: { digits: 4 }

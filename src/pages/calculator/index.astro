@@ -1,0 +1,10 @@
+---
+import Calculator from '../../islands/Calculator.tsx';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="分布表・確率計算機" description="正規・t・χ²・F 分布の確率と分位点を計算します">
+  <h1>分布表・確率計算機</h1>
+  <p class="muted">正規分布・t 分布・χ² 分布・F 分布について、値から確率を、確率から分位点（上側 α 点など）を計算します。</p>
+  <Calculator client:load />
+  <noscript><p class="alert warn">計算機には JavaScript が必要です。</p></noscript>
+</BaseLayout>

@@ -1,0 +1,31 @@
+- id: ar1-moments
+  topic: arma
+  title: AR(1) の分散と自己相関
+  body: 'X_t=\phi X_{t-1}+\varepsilon_t:\quad V[X_t]=\frac{\sigma^2}{1-\phi^2},\quad \rho_h=\phi^{|h|}'
+  conditions: '定常（$|\phi|<1$）であること。'
+  derivation: '定常性 $V[X_t]=V[X_{t-1}]$ と、$X_{t-h}$ を掛けて期待値をとる操作（$\gamma_h=\phi\gamma_{h-1}$）から導く。'
+  tags: [時系列, ARモデル, 自己相関, 分散]
+- id: ma1-acf
+  topic: arma
+  title: MA(1) の自己相関
+  body: 'X_t=\varepsilon_t+\theta\varepsilon_{t-1}:\quad \rho_1=\frac{\theta}{1+\theta^2},\quad \rho_h=0\ (h\ge2)'
+  pitfalls: '$X_t=\varepsilon_t-\theta\varepsilon_{t-1}$ と定義する流儀では符号が逆になる。$|\rho_1|\le1/2$。'
+  tags: [時系列, MAモデル, 自己相関]
+- id: yule-walker
+  topic: arma
+  title: ユール・ウォーカー方程式（AR(2)）
+  body: '\rho_h=\phi_1\rho_{h-1}+\phi_2\rho_{h-2}\ (h\ge1),\qquad \rho_1=\frac{\phi_1}{1-\phi_2}'
+  description: 自己相関から AR 係数を推定する（モーメント法）ときにも使う。
+  tags: [時系列, ARモデル, 自己相関, ユール・ウォーカー]
+- id: ar2-stationarity
+  topic: arma
+  title: AR(2) の定常条件
+  body: '\phi_1+\phi_2<1,\quad \phi_2-\phi_1<1,\quad |\phi_2|<1'
+  description: '特性方程式 $1-\phi_1z-\phi_2z^2=0$ の根がすべて単位円の外にある条件と同値。'
+  tags: [時系列, ARモデル, 定常性]
+- id: acf-pacf-pattern
+  topic: arma
+  title: ACF・PACF によるモデルの識別
+  body: '\text{AR}(p):\ \text{PACF がラグ}\ p\ \text{で切断},\qquad \text{MA}(q):\ \text{ACF がラグ}\ q\ \text{で切断}'
+  description: 'ARMA では ACF・PACF ともに減衰し、切断は見られない。'
+  tags: [時系列, 自己相関, 偏自己相関, モデル選択]

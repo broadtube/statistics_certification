@@ -1,0 +1,29 @@
+title: ガンマ分布
+kind: continuous
+interactive: true
+order: 13
+pmfOrPdf: |-
+  f(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x},\quad x>0
+mean: |-
+  \frac{\alpha}{\lambda}
+variance: |-
+  \frac{\alpha}{\lambda^2}
+mgf: |-
+  \left(\frac{\lambda}{\lambda-t}\right)^\alpha\quad (t<\lambda)
+notes: |-
+  ここでは比率母数 $\lambda$ で表す（平均 $\alpha/\lambda$）。尺度母数 $\theta=1/\lambda$ で表す流儀もあるので、問題文の定義を必ず確認する。形状母数が同じでない場合も含め、比率が等しい独立なガンマ分布の和は形状母数を足したガンマ分布に従う。
+paramsDoc:
+  - symbol: '\alpha'
+    meaning: '形状母数'
+    range: '$\alpha > 0$'
+  - symbol: '\lambda'
+    meaning: '比率母数（尺度母数の逆数）'
+    range: '$\lambda > 0$'
+relations:
+  - to: chisq
+    kind: special-case
+    label: 'α=k/2, λ=1/2'
+  - to: beta
+    kind: transform
+    label: 'X/(X+Y)'
+diagramPosition: { x: 2, y: 3 }

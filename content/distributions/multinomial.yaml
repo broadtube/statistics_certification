@@ -1,0 +1,24 @@
+title: 多項分布
+kind: discrete
+interactive: false
+order: 7
+pmfOrPdf: |-
+  P(X_1=x_1,\dots,X_k=x_k)=\frac{n!}{x_1!\cdots x_k!}p_1^{x_1}\cdots p_k^{x_k}
+mean: |-
+  E[X_i]=np_i
+variance: |-
+  V[X_i]=np_i(1-p_i),\ \mathrm{Cov}[X_i,X_j]=-np_ip_j\ (i\ne j)
+mgf: |-
+  \left(\textstyle\sum_{i=1}^k p_ie^{t_i}\right)^n
+paramsDoc:
+  - symbol: 'n'
+    meaning: '試行回数'
+    range: '$n = 1, 2, \dots$'
+  - symbol: 'p_i'
+    meaning: 'カテゴリ $i$ の確率'
+    range: '$p_i \ge 0,\ \sum_i p_i = 1$'
+relations:
+  - to: binomial
+    kind: special-case
+    label: 'k=2'
+diagramPosition: { x: 1, y: 0 }

@@ -1,0 +1,28 @@
+title: ワイブル分布
+kind: continuous
+interactive: true
+order: 20
+pmfOrPdf: |-
+  f(x)=\frac{k}{\lambda}\left(\frac{x}{\lambda}\right)^{k-1}e^{-(x/\lambda)^k},\quad x\ge0
+cdf: |-
+  F(x)=1-e^{-(x/\lambda)^k}
+mean: |-
+  \lambda\,\Gamma(1+1/k)
+variance: |-
+  \lambda^2\left\{\Gamma(1+2/k)-\Gamma(1+1/k)^2\right\}
+mgf: |-
+  \text{（閉じた形なし）}
+notes: |-
+  ハザード関数 $h(x)=\frac{k}{\lambda}(x/\lambda)^{k-1}$ は $k>1$ で増加、$k<1$ で減少、$k=1$ で一定（指数分布）。生存時間解析・信頼性工学で使われる。
+paramsDoc:
+  - symbol: 'k'
+    meaning: '形状母数'
+    range: '$k > 0$'
+  - symbol: '\lambda'
+    meaning: '尺度母数'
+    range: '$\lambda > 0$'
+relations:
+  - to: exponential
+    kind: special-case
+    label: 'k=1'
+diagramPosition: { x: 2, y: 4 }

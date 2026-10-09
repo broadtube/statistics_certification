@@ -1,0 +1,13 @@
+topics: [point-estimation-mle]
+formulas: [mle-definition]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  確率密度関数 $f(x;\lambda)=\lambda e^{-\lambda x}\ (x\ge0)$ の指数分布から大きさ $n$ の無作為標本を得たところ、標本平均は $\bar x={{xbar}}$ であった。$\lambda$ の最尤推定値を求めよ（小数第3位まで）。
+explanation: |
+  対数尤度は $\ell(\lambda)=n\log\lambda-\lambda\sum x_i$。$\ell'(\lambda)=\frac n\lambda-\sum x_i=0$ より $\hat\lambda=\frac{1}{\bar x}=\frac{1}{ {{xbar}} }={{answer}}$。
+params:
+  xbar: { min: 0.5, max: 5, step: 0.1 }
+answer: 1 / xbar
+display: { digits: 3 }

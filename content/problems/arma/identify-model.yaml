@@ -1,0 +1,26 @@
+topics: [arma]
+formulas: [acf-pacf-pattern]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  ある定常時系列の標本自己相関関数（ACF）はラグとともに減衰振動しながら $0$ に近づき、標本偏自己相関関数（PACF）はラグ1とラグ2で大きな値をとり、ラグ3以降はほぼ $0$ であった。当てはめるモデルとして最も適切なものを選べ。
+choices:
+  - id: a
+    text: 'AR(2)'
+    correct: true
+  - id: b
+    text: 'MA(2)'
+    correct: false
+  - id: c
+    text: 'AR(1)'
+    correct: false
+  - id: d
+    text: 'ARMA(1,1)'
+    correct: false
+  - id: e
+    text: 'ホワイトノイズ'
+    correct: false
+explanation: |
+  PACF がラグ $p$ より先で切断され、ACF が減衰するのは AR($p$) の特徴。ここでは PACF がラグ2で切断されているので AR(2)。
+  MA($q$) なら逆に ACF がラグ $q$ で切断され、ARMA なら両方とも減衰して切断は見られない。減衰振動は特性方程式が複素根をもつ AR(2) で典型的に現れる。

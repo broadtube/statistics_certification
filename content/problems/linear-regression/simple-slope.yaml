@@ -1,0 +1,20 @@
+topics: [linear-regression]
+formulas: [ols-simple]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  10 組のデータ $(x_i,y_i)$ について、$\bar x={{xbar}}$、$\bar y={{ybar}}$、$S_{xx}={{sxx}}$、$S_{xy}={{sxy}}$ であった。最小二乗法による回帰直線 $y=\hat\beta_0+\hat\beta_1x$ の切片 $\hat\beta_0$ を求めよ（小数第3位まで）。
+explanation: |
+  傾きは $\hat\beta_1=\frac{S_{xy}}{S_{xx}}=\frac{ {{sxy}} }{ {{sxx}} }={{slope}}$。
+  切片は $\hat\beta_0=\bar y-\hat\beta_1\bar x={{ybar}}-\hat\beta_1\times{{xbar}}={{answer}}$。
+params:
+  xbar: { min: 2, max: 8, step: 0.5 }
+  ybar: { min: 10, max: 30, step: 1 }
+  sxx: { min: 20, max: 60, step: 5 }
+  sxy: { min: -40, max: 60, step: 5 }
+constraints: ['sxy != 0']
+derived:
+  slope: sxy / sxx
+answer: ybar - (sxy / sxx) * xbar
+display: { digits: 3 }

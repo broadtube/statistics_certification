@@ -1,0 +1,27 @@
+---
+import Flashcards from '../../islands/Flashcards.tsx';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { topicsByCategory } from '../../../build/site/queries';
+import { getSite } from '../../site';
+
+const site = getSite();
+const { content } = site;
+const cards = content.formulas.map((f) => ({
+  id: f.id,
+  topic: f.topic,
+  title: f.title,
+  tex: f.body,
+  noteHtml: f.description ? site.renderer.render(f.description, 'template') : '',
+}));
+const withCards = new Set(content.formulas.map((f) => f.topic));
+const topics = topicsByCategory(content)
+  .flatMap((g) => g.topics)
+  .filter((t) => withCards.has(t.id))
+  .map((t) => ({ id: t.id, title: t.title }));
+---
+<BaseLayout title="暗記カード" description="公式をフラッシュカード形式で反復できます">
+  <h1>暗記カード</h1>
+  <p class="muted">公式名を見て公式を思い出し、裏返して確認します。「覚えた」「あいまい」の評価は学習記録に保存されます。</p>
+  <Flashcards client:load cards={cards} topics={topics} />
+  <noscript><p class="alert warn">暗記カードには JavaScript が必要です。</p></noscript>
+</BaseLayout>

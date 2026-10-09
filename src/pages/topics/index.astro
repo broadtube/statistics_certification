@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { countsByTopic, topicsByCategory } from '../../../build/site/queries';
+import { getSite } from '../../site';
+
+const site = getSite();
+const groups = topicsByCategory(site.content);
+const counts = countsByTopic(site.content);
+---
+<BaseLayout title="分野マップ" description="統計検定準1級の出題範囲を大分類ごとに一覧できます">
+  <h1>分野マップ</h1>
+  <p class="muted">準1級の出題範囲を大分類ごとにまとめています。分野を選ぶと要点ページへ移動します。</p>
+  {groups.map(({ category, topics }) => (
+    <section class="topic-group" aria-labelledby={`cat-${category.id}`}>
+      <h2 id={`cat-${category.id}`}>{category.title}</h2>
+      {category.description && <p class="muted small">{category.description}</p>}
+      {topics.length === 0 ? (
+        <p class="muted small">準備中の分野です。</p>
+      ) : (
+        <ul class="grid topic-cards">
+          {topics.map((t) => {
+            const c = counts.get(t.id) ?? { formulas: 0, problems: 0 };
+            return (
+              <li class="card topic-card">
+                <a class="topic-link" href={site.href.topic(t.id)}>{t.title}</a>
+                <p class="small muted">{t.summary}</p>
+                <p class="row small">
+                  <span class="badge">公式 {c.formulas}</span>
+                  <span class="badge">問題 {c.problems}</span>
+                  {t.draft && <span class="badge warn">要点は準備中</span>}
+                  <span data-topic-accuracy={t.id} hidden></span>
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </section>
+  ))}
+</BaseLayout>
+
+<script>
+  import { fillTopicAccuracy } from '../../lib/client/topic-accuracy';
+  void fillTopicAccuracy();
+</script>
+
+<style>
+  .topic-cards { list-style: none; padding: 0; margin: 0; }
+  .topic-card { display: flex; flex-direction: column; gap: 4px; }
+  .topic-card p { margin: 0; }
+  .topic-link { font-weight: 700; font-size: 1.05rem; text-decoration: none; }
+  .topic-link::after { content: ' →'; }
+</style>

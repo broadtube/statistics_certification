@@ -1,0 +1,24 @@
+---
+import Dashboard from '../islands/Dashboard.tsx';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { practiceProps } from '../lib/server/practice-props';
+import { url } from '../lib/url';
+
+const { topics, categories } = practiceProps();
+---
+<BaseLayout title="">
+  <div class="row dash-head">
+    <h1>ダッシュボード</h1>
+    <p class="row">
+      <a class="btn primary" href={url('practice/')}>演習する</a>
+      <a class="btn" href={url('review/')}>復習する</a>
+      <a class="btn" href={url('mock/')}>模試</a>
+    </p>
+  </div>
+  <Dashboard client:load topics={topics.map(({ id, title, category }) => ({ id, title, category }))} categories={categories} />
+</BaseLayout>
+
+<style>
+  .dash-head { justify-content: space-between; }
+  .dash-head p { margin: 0; }
+</style>

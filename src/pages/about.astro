@@ -1,0 +1,41 @@
+---
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../lib/url';
+import type { LicenseEntry } from '../../build/licenses/collect';
+
+const file = resolve('src/generated/licenses.json');
+const licenses: LicenseEntry[] = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : [];
+---
+<BaseLayout title="このサイトについて">
+  <h1>このサイトについて</h1>
+  <div class="prose">
+    <h2>非公式の学習アプリです</h2>
+    <p>本サイトは、統計検定準1級の受験勉強のために個人が作成した<strong>非公式</strong>の学習アプリです。統計検定を主催・運営する団体（一般財団法人 統計質保証推進協会、一般社団法人 日本統計学会 など）とは一切関係がなく、内容の正確性についてこれらの団体が保証するものではありません。試験の最新情報は必ず公式サイトで確認してください。</p>
+    <h2>問題の出典について</h2>
+    <p>収録している問題はすべてオリジナルです。過去問題の問題文・図表は転載していません。過去問題を参考にした類題には「YYYY年 問N 類題」のように年度と問番号のみを表示しています。</p>
+    <h2>学習記録の保存について</h2>
+    <p>解答履歴などの学習記録は、お使いのブラウザ内（localStorage）にのみ保存され、外部へ送信されることはありません。端末を移る場合は「<a href={url('settings/')}>学習記録の管理</a>」からエクスポート・インポートしてください。</p>
+    <h2>利用しているライブラリ</h2>
+    <p class="muted small">ブラウザ向けの配布物に含まれるライブラリとライセンスです。</p>
+    {licenses.length === 0 ? (
+      <p class="muted">（ライセンス一覧は <code>npm run licenses</code> で生成されます）</p>
+    ) : (
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>ライブラリ</th><th>バージョン</th><th>ライセンス</th></tr></thead>
+          <tbody>
+            {licenses.map((l) => (
+              <tr>
+                <td>{l.url ? <a href={l.url} rel="noopener">{l.name}</a> : l.name}</td>
+                <td>{l.version}</td>
+                <td>{l.license}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+  </div>
+</BaseLayout>

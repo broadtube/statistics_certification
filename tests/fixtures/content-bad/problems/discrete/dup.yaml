@@ -1,0 +1,10 @@
+topics: [ghost-topic]
+formulas: [binom-mean]
+difficulty: 1
+type: choice
+source: { kind: original }
+statement: x
+explanation: y
+choices:
+  - { id: a, text: A, correct: true }
+  - { id: b, text: B, correct: false }

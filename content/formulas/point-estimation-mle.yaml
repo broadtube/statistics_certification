@@ -1,0 +1,49 @@
+- id: mse-decomposition
+  topic: point-estimation-mle
+  title: 平均二乗誤差の分解
+  description: MSE は分散とバイアスの二乗の和。
+  body: '\mathrm{MSE}(T)=E[(T-\theta)^2]=V[T]+\left(E[T]-\theta\right)^2'
+  tags: [推定量, 平均二乗誤差, バイアス]
+- id: mle-definition
+  topic: point-estimation-mle
+  title: 最尤推定量
+  description: 対数尤度を最大にする母数の値。
+  body: '\hat\theta=\arg\max_\theta\ \ell(\theta),\quad \ell(\theta)=\sum_{i=1}^n\log f(x_i;\theta)'
+  derivation: スコア方程式 $\partial\ell/\partial\theta=0$ を解き、最大値であることを確認する。
+  pitfalls: 台が母数に依存する分布（一様分布 $U(0,\theta)$ など）では微分で求まらない。
+  tags: [最尤推定, 尤度]
+- id: fisher-information
+  topic: point-estimation-mle
+  title: フィッシャー情報量
+  description: スコアの分散。対数尤度の2階微分の期待値の符号を変えたものに等しい。
+  body: 'I(\theta)=E\left[\left(\frac{\partial\log f(X;\theta)}{\partial\theta}\right)^2\right]=-E\left[\frac{\partial^2\log f(X;\theta)}{\partial\theta^2}\right]'
+  conditions: 正則条件（台が母数に依存しない、微分と積分の交換ができる等）。
+  pitfalls: 'これは1観測あたりの情報量。大きさ $n$ の無作為標本全体では $nI(\theta)$。'
+  tags: [フィッシャー情報量, 最尤推定]
+- id: cramer-rao
+  topic: point-estimation-mle
+  title: クラメール・ラオの下限
+  description: 不偏推定量の分散の下限。
+  body: 'V[T]\ \ge\ \frac{1}{nI(\theta)}\qquad(E[T]=\theta)'
+  conditions: 正則条件を満たす分布からの無作為標本で、$T$ が不偏推定量であること。
+  tags: [クラメール・ラオ, 有効推定量, フィッシャー情報量]
+- id: mle-asymptotic-normality
+  topic: point-estimation-mle
+  title: 最尤推定量の漸近正規性
+  description: 標本サイズが大きいとき、最尤推定量は近似的に正規分布に従い、分散はクラメール・ラオの下限に一致する。
+  body: '\sqrt{n}\,(\hat\theta-\theta)\ \xrightarrow{d}\ N\!\left(0,\ I(\theta)^{-1}\right)'
+  derivation: スコア関数を $\hat\theta$ の周りでテイラー展開し、中心極限定理と大数の法則を使う。
+  tags: [最尤推定, 漸近正規性, 信頼区間]
+- id: mle-invariance
+  topic: point-estimation-mle
+  title: 最尤推定量の不変性
+  body: 'g(\theta)\ \text{の最尤推定量}\ =\ g(\hat\theta)'
+  pitfalls: 不偏性は保たれない（例：$1/\bar X$ は指数分布の $\lambda$ の不偏推定量ではない）。
+  tags: [最尤推定, 不変性]
+- id: unbiased-variance
+  topic: point-estimation-mle
+  title: 不偏分散
+  description: '$n-1$ で割ると母分散の不偏推定量になる。'
+  body: 'S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar X)^2,\quad E[S^2]=\sigma^2'
+  pitfalls: '正規分布の最尤推定量 $\hat\sigma^2$ は $n$ で割るので $E[\hat\sigma^2]=\frac{n-1}{n}\sigma^2$（下方バイアス）。'
+  tags: [不偏推定量, 分散]

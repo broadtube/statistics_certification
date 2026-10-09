@@ -1,0 +1,9 @@
+title: 二項分布
+kind: discrete
+interactive: false
+pmfOrPdf: P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}
+mean: np
+variance: np(1-p)
+paramsDoc:
+  - { symbol: n, meaning: 試行回数, range: 自然数 }
+diagramPosition: { x: 0, y: 0 }

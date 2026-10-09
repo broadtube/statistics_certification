@@ -1,0 +1,26 @@
+topics: [point-estimation-mle]
+formulas: [mle-definition, unbiased-variance]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  $X_1,\dots,X_n$ を正規分布 $N(\mu,\sigma^2)$（$\mu,\sigma^2$ はともに未知）からの無作為標本とする。$\sigma^2$ の最尤推定量 $\hat\sigma^2$ に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '$\hat\sigma^2=\frac1n\sum(X_i-\bar X)^2$ であり、$E[\hat\sigma^2]=\frac{n-1}{n}\sigma^2$ である。'
+    correct: true
+  - id: b
+    text: '$\hat\sigma^2=\frac{1}{n-1}\sum(X_i-\bar X)^2$ であり、不偏推定量である。'
+    correct: false
+  - id: c
+    text: '$\hat\sigma^2=\frac1n\sum(X_i-\bar X)^2$ であり、不偏推定量である。'
+    correct: false
+  - id: d
+    text: '$\hat\sigma^2=\frac1n\sum(X_i-\mu)^2$ である。'
+    correct: false
+  - id: e
+    text: '$\hat\sigma^2$ はクラメール・ラオの下限を達成する不偏推定量である。'
+    correct: false
+explanation: |
+  対数尤度 $\ell(\mu,\sigma^2)=-\frac n2\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum(x_i-\mu)^2$ を $\mu,\sigma^2$ で偏微分して $0$ とおくと、$\hat\mu=\bar x$、$\hat\sigma^2=\frac1n\sum(x_i-\bar x)^2$。
+  $\sum(X_i-\bar X)^2/\sigma^2\sim\chi^2_{n-1}$ より $E[\hat\sigma^2]=\frac{n-1}{n}\sigma^2$ で、不偏ではない（$\mu$ が未知なので $\mu$ を使った式にはならない）。

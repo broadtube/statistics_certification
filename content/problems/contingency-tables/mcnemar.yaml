@@ -1,0 +1,28 @@
+topics: [contingency-tables]
+formulas: [mcnemar]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある講習の前後で、同じ受講者 {{n}} 人に同じ問題を解かせた。結果は次のとおりであった。講習前後で正答率が変化したかを調べるマクネマー検定の統計量の値を求めよ（小数第3位まで）。
+
+  | | 講習後 正答 | 講習後 誤答 |
+  | --- | --- | --- |
+  | 講習前 正答 | {{a}} | {{b}} |
+  | 講習前 誤答 | {{c}} | {{d}} |
+explanation: |
+  対応のあるデータなので、不一致のセル $b={{b}}$、$c={{c}}$ だけを使う。
+  $$
+  \chi^2=\frac{(b-c)^2}{b+c}=\frac{({{b}}-{{c}})^2}{ {{b}}+{{c}} }={{answer}}
+  $$
+  一致したセル $a,d$ は統計量に影響しない。
+params:
+  a: { min: 20, max: 50, step: 1 }
+  b: { min: 2, max: 15, step: 1 }
+  c: { min: 5, max: 30, step: 1 }
+  d: { min: 5, max: 30, step: 1 }
+constraints: ['b != c']
+derived:
+  n: a + b + c + d
+answer: (b - c)^2 / (b + c)
+display: { digits: 3 }
