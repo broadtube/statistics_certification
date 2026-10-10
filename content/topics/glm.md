@@ -27,7 +27,7 @@ distributions: [binomial, poisson, chisq]
 2. **係数の解釈（ポアソン）**：$x_j$ が1増えると $\log\mu$ が $\beta_j$ 増えるので、平均（率）は $e^{\beta_j}$ 倍になる（**率比**）。
 3. **推定**：最尤法で推定する。正準リンクでは尤度方程式が $X^\top(\boldsymbol y-\boldsymbol\mu)=\boldsymbol 0$ という形になる。解は陽に書けないので、ニュートン・ラフソン法（フィッシャーのスコア法）で反復計算する。これは重み付き最小二乗の繰り返し（IRLS）と同じ。
 4. **ワルド検定**：$\hat\beta_j$ は漸近的に正規分布に従うので（[[formula:mle-asymptotic-normality]]）、$z=\hat\beta_j/\mathrm{SE}(\hat\beta_j)$ を標準正規分布で評価する。$\beta_j$ の95%信頼区間 $\hat\beta_j\pm1.96\,\mathrm{SE}$ を指数変換すると、オッズ比・率比の信頼区間になる。
-5. **尤度比検定（逸脱度の差）**：モデル M$_0$ が M$_1$ に入れ子で、パラメータ数の差が $q$ のとき、$D_0-D_1=2\{\ell_1-\ell_0\}$ は $H_0$ のもと漸近的に $\chi^2_q$ に従う（[[topic:likelihood-ratio]]）。
+5. **尤度比検定（逸脱度の差）**：モデル M$_0$ が M$_1$ に入れ子で、パラメータ数の差が $q$ のとき、$D_0-D_1=2\{\ell_1-\ell_0\}$ は $H_0$ のもと漸近的に $\chi^2(q)$ に従う（[[topic:likelihood-ratio]]）。
 6. **適合度**：二項（集計データ）やポアソン回帰では、逸脱度やピアソンの $\chi^2=\sum(y_i-\hat\mu_i)^2/V(\hat\mu_i)$ を自由度 $n-(p+1)$ の $\chi^2$ 分布と比べる。
 
 ## 落とし穴

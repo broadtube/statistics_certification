@@ -11,7 +11,7 @@ variance: |-
 mgf: |-
   \exp\left(\mu t+\frac{\sigma^2t^2}{2}\right)
 notes: |-
-  独立な正規確率変数の線形結合は正規分布に従う。標本平均 $\bar X$ と不偏分散 $S^2$ は独立で、$(n-1)S^2/\sigma^2\sim\chi^2_{n-1}$。
+  独立な正規確率変数の線形結合は正規分布に従う。標本平均 $\bar X$ と不偏分散 $S^2$ は独立で、$(n-1)S^2/\sigma^2\sim\chi^2(n-1)$。
 paramsDoc:
   - symbol: '\mu'
     meaning: '平均'

@@ -23,7 +23,7 @@
   topic: continuous-distributions
   title: 不偏分散とカイ二乗分布
   description: 正規母集団の不偏分散を母分散で基準化するとカイ二乗分布に従う。
-  body: '\frac{(n-1)S^2}{\sigma^2}=\frac{\sum_{i=1}^n(X_i-\bar X)^2}{\sigma^2}\sim\chi^2_{n-1}'
+  body: '\frac{(n-1)S^2}{\sigma^2}=\frac{\sum_{i=1}^n(X_i-\bar X)^2}{\sigma^2}\sim\chi^2(n-1)'
   conditions: '$X_1,\dots,X_n$ が独立に $N(\mu,\sigma^2)$ に従うこと。このとき $\bar X$ と $S^2$ は独立。'
   pitfalls: '$\mu$ を $\bar X$ で推定するので自由度が1つ減る（$\mu$ が既知で $\sum(X_i-\mu)^2$ を使えば自由度 $n$）。'
   tags: [カイ二乗分布, 不偏分散, 標本分布]
@@ -31,16 +31,16 @@
   topic: continuous-distributions
   title: t 分布の構成
   description: 標準正規変数を、独立なカイ二乗変数を自由度で割ったものの平方根で割る。
-  body: 'T=\frac{Z}{\sqrt{W/k}}\sim t_k,\qquad \frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}'
-  conditions: '$Z\sim N(0,1)$ と $W\sim\chi^2_k$ が独立。'
+  body: 'T=\frac{Z}{\sqrt{W/k}}\sim t(k),\qquad \frac{\bar X-\mu}{S/\sqrt n}\sim t(n-1)'
+  conditions: '$Z\sim N(0,1)$ と $W\sim\chi^2(k)$ が独立。'
   pitfalls: '$k\le1$ では平均が存在せず、$k\le2$ では分散が存在しない（$k>2$ で $V[T]=k/(k-2)$）。'
   tags: [t分布, 標本分布]
 - id: contdist-f-construction
   topic: continuous-distributions
   title: F 分布の構成と性質
   description: 独立な2つのカイ二乗変数をそれぞれの自由度で割った比。
-  body: 'F=\frac{W_1/m}{W_2/n}\sim F(m,n),\qquad \frac1F\sim F(n,m),\qquad T\sim t_k\Rightarrow T^2\sim F(1,k)'
-  conditions: '$W_1\sim\chi^2_m$ と $W_2\sim\chi^2_n$ が独立。'
+  body: 'F=\frac{W_1/m}{W_2/n}\sim F(m,n),\qquad \frac1F\sim F(n,m),\qquad T\sim t(k)\Rightarrow T^2\sim F(1,k)'
+  conditions: '$W_1\sim\chi^2(m)$ と $W_2\sim\chi^2(n)$ が独立。'
   tags: [F分布, t分布, 標本分布]
 - id: contdist-beta-moments
   topic: continuous-distributions

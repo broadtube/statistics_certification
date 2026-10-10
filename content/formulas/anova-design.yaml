@@ -8,7 +8,7 @@
 - id: anova-oneway-f
   topic: anova-design
   title: 一元配置分散分析の F 検定
-  body: 'F=\frac{S_A/(a-1)}{S_E/(N-a)}\ \sim\ F_{a-1,\,N-a}\quad(H_0:\alpha_1=\dots=\alpha_a=0)'
+  body: 'F=\frac{S_A/(a-1)}{S_E/(N-a)}\ \sim\ F(a-1,\,N-a)\quad(H_0:\alpha_1=\dots=\alpha_a=0)'
   conditions: 誤差が独立に同一の正規分布 $N(0,\sigma^2)$ に従う（等分散）。
   pitfalls: 'F 分布の右側（上側）だけで棄却する。2群なら $F=t^2$。'
   tags: [分散分析, F検定]

@@ -8,7 +8,7 @@ statement: |
 explanation: |
   $H_0$ のもとで $F$ は自由度 $(a-1,N-a)=({{a}}-1,\ {{nn}}-{{a}})$ の F 分布に従う。棄却域は右側だけなので
   $$
-  p=P(F_{a-1,N-a}\ge{{f}})={{answer}}
+  p=P(F(a-1,N-a)\ge{{f}})={{answer}}
   $$
   （メニューの「計算機」で確認できる）。
 params:

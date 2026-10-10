@@ -11,7 +11,7 @@ variance: |-
 mgf: |-
   \exp\left(\boldsymbol\mu^\top\boldsymbol t+\frac12\boldsymbol t^\top\Sigma\boldsymbol t\right)
 notes: |-
-  周辺分布・条件付き分布・線形変換 $A\boldsymbol X+\boldsymbol b$ はいずれも（多変量）正規分布。成分が無相関なら独立。$(\boldsymbol X-\boldsymbol\mu)^\top\Sigma^{-1}(\boldsymbol X-\boldsymbol\mu)\sim\chi^2_p$。
+  周辺分布・条件付き分布・線形変換 $A\boldsymbol X+\boldsymbol b$ はいずれも（多変量）正規分布。成分が無相関なら独立。$(\boldsymbol X-\boldsymbol\mu)^\top\Sigma^{-1}(\boldsymbol X-\boldsymbol\mu)\sim\chi^2(p)$。
 paramsDoc:
   - symbol: '\boldsymbol\mu'
     meaning: '平均ベクトル'

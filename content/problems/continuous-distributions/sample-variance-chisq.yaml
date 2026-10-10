@@ -6,9 +6,9 @@ source: { kind: original }
 statement: |
   正規分布 $N(\mu,\sigma^2)$ から大きさ $n={{n}}$ の無作為標本をとり、不偏分散 $S^2$ を計算する。$S^2$ が母分散の {{k}} 倍を超える確率 $P(S^2>{{k}}\sigma^2)$ を求めよ（小数第4位まで）。
 explanation: |
-  $\frac{(n-1)S^2}{\sigma^2}\sim\chi^2_{n-1}$ を使う。
+  $\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)$ を使う。
   $$
-  P(S^2>{{k}}\sigma^2)=P\left(\frac{(n-1)S^2}{\sigma^2}>({{n}}-1)\times{{k}}\right)=P\left(\chi^2_{n-1}>({{n}}-1)\times{{k}}\right)={{answer}}
+  P(S^2>{{k}}\sigma^2)=P\left(\frac{(n-1)S^2}{\sigma^2}>({{n}}-1)\times{{k}}\right)=P\left(\chi^2(n-1)>({{n}}-1)\times{{k}}\right)={{answer}}
   $$
   自由度は $n-1$。カイ二乗分布の上側確率はメニューの「計算機」で確認できる。
 params:

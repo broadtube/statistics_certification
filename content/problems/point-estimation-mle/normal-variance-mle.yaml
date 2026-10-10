@@ -23,4 +23,4 @@ choices:
     correct: false
 explanation: |
   対数尤度 $\ell(\mu,\sigma^2)=-\frac n2\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum(x_i-\mu)^2$ を $\mu,\sigma^2$ で偏微分して $0$ とおくと、$\hat\mu=\bar x$、$\hat\sigma^2=\frac1n\sum(x_i-\bar x)^2$。
-  $\sum(X_i-\bar X)^2/\sigma^2\sim\chi^2_{n-1}$ より $E[\hat\sigma^2]=\frac{n-1}{n}\sigma^2$ で、不偏ではない（$\mu$ が未知なので $\mu$ を使った式にはならない）。
+  $\sum(X_i-\bar X)^2/\sigma^2\sim\chi^2(n-1)$ より $E[\hat\sigma^2]=\frac{n-1}{n}\sigma^2$ で、不偏ではない（$\mu$ が未知なので $\mu$ を使った式にはならない）。

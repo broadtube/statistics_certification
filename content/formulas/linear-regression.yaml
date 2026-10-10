@@ -16,7 +16,7 @@
 - id: sigma2-unbiased
   topic: linear-regression
   title: 誤差分散の不偏推定量
-  body: '\hat\sigma^2=\frac{\mathrm{RSS}}{n-p-1},\qquad \frac{\mathrm{RSS}}{\sigma^2}\sim\chi^2_{n-p-1}'
+  body: '\hat\sigma^2=\frac{\mathrm{RSS}}{n-p-1},\qquad \frac{\mathrm{RSS}}{\sigma^2}\sim\chi^2(n-p-1)'
   variables:
     - { symbol: 'p', meaning: 切片を除く説明変数の数 }
   pitfalls: 分母は「標本サイズ − 推定したパラメータ数（切片を含む）」。
@@ -30,7 +30,7 @@
 - id: coef-t-test
   topic: linear-regression
   title: 回帰係数の t 検定
-  body: 't=\frac{\hat\beta_j}{\widehat{\mathrm{SE}}(\hat\beta_j)}\ \sim\ t_{n-p-1}\quad(H_0:\beta_j=0)'
+  body: 't=\frac{\hat\beta_j}{\widehat{\mathrm{SE}}(\hat\beta_j)}\ \sim\ t(n-p-1)\quad(H_0:\beta_j=0)'
   conditions: 誤差が独立に $N(0,\sigma^2)$ に従うこと。
   tags: [回帰, 検定, t分布]
 - id: regression-f-test

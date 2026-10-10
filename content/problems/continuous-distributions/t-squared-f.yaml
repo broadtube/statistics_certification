@@ -7,21 +7,21 @@ statement: |
   標本分布の関係について、次の記述のうち正しいものを選べ（$k,m,n$ は正の整数）。
 choices:
   - id: a
-    text: '$T\sim t_k$ ならば $T^2\sim F(1,k)$ である。'
+    text: '$T\sim t(k)$ ならば $T^2\sim F(1,k)$ である。'
     correct: true
   - id: b
-    text: '$T\sim t_k$ ならば $T^2\sim\chi^2_k$ である。'
+    text: '$T\sim t(k)$ ならば $T^2\sim\chi^2(k)$ である。'
     correct: false
   - id: c
     text: '$F\sim F(m,n)$ ならば $1/F\sim F(m,n)$ である。'
     correct: false
   - id: d
-    text: '$Z_1,Z_2\overset{\text{i.i.d.}}{\sim}N(0,1)$ ならば $Z_1/Z_2\sim t_2$ である。'
+    text: '$Z_1,Z_2\overset{\text{i.i.d.}}{\sim}N(0,1)$ ならば $Z_1/Z_2\sim t(2)$ である。'
     correct: false
   - id: e
-    text: '$t_k$ 分布の分散は自由度 $k\ge1$ のとき常に $1$ である。'
+    text: '$t(k)$ 分布の分散は自由度 $k\ge1$ のとき常に $1$ である。'
     correct: false
 explanation: |
-  $T=Z/\sqrt{W/k}$ と書くと $T^2=\frac{Z^2/1}{W/k}$ で、$Z^2\sim\chi^2_1$ と $W\sim\chi^2_k$ は独立なので $F(1,k)$ に従う（a が正しい）。
-  $1/F$ は分子と分母が入れ替わるので $F(n,m)$（c は誤り）。$Z_1/Z_2$ は（$Z_1$ が対称なので）$Z_1/\sqrt{Z_2^2/1}$ と同じ分布で $t_1$、すなわちコーシー分布（d は誤り）。
-  $t_k$ の分散は $k>2$ のとき $\frac{k}{k-2}>1$ で、$k\le2$ では存在しない（e は誤り）。
+  $T=Z/\sqrt{W/k}$ と書くと $T^2=\frac{Z^2/1}{W/k}$ で、$Z^2\sim\chi^2(1)$ と $W\sim\chi^2(k)$ は独立なので $F(1,k)$ に従う（a が正しい）。
+  $1/F$ は分子と分母が入れ替わるので $F(n,m)$（c は誤り）。$Z_1/Z_2$ は（$Z_1$ が対称なので）$Z_1/\sqrt{Z_2^2/1}$ と同じ分布で $t(1)$、すなわちコーシー分布（d は誤り）。
+  $t(k)$ の分散は $k>2$ のとき $\frac{k}{k-2}>1$ で、$k\le2$ では存在しない（e は誤り）。

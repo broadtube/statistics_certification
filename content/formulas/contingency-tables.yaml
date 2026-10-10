@@ -25,6 +25,6 @@
 - id: mcnemar
   topic: contingency-tables
   title: マクネマー検定
-  body: '\chi^2=\frac{(b-c)^2}{b+c}\ \sim\ \chi^2_1'
+  body: '\chi^2=\frac{(b-c)^2}{b+c}\ \sim\ \chi^2(1)'
   description: 対応のある2×2表で、不一致のセル $b,c$ だけを使う。
   tags: [分割表, 検定, 対応のあるデータ]

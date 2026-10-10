@@ -27,7 +27,7 @@
 - id: glm-deviance-test
   topic: glm
   title: 逸脱度の差による検定
-  body: 'D_0-D_1=2(\ell_1-\ell_0)\ \xrightarrow{d}\ \chi^2_q\quad(H_0:\ \text{小さいモデル M}_0\ \text{が正しい})'
+  body: 'D_0-D_1=2(\ell_1-\ell_0)\ \xrightarrow{d}\ \chi^2(q)\quad(H_0:\ \text{小さいモデル M}_0\ \text{が正しい})'
   conditions: 'M$_0$ が M$_1$ の入れ子で、$q$ はパラメータ数の差。'
   tags: [GLM, 尤度比検定, 逸脱度]
 - id: glm-wald-ci

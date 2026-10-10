@@ -28,7 +28,7 @@
   topic: stationarity
   title: リュン・ボックス統計量
   description: 複数ラグの自己相関がすべて $0$ という帰無仮説（かばん検定）の検定統計量。
-  body: 'Q=n(n+2)\sum_{k=1}^{m}\frac{r_k^2}{n-k}\ \overset{\cdot}{\sim}\ \chi^2_m'
+  body: 'Q=n(n+2)\sum_{k=1}^{m}\frac{r_k^2}{n-k}\ \overset{\cdot}{\sim}\ \chi^2(m)'
   conditions: 'ARMA($p,q$) モデルの残差に適用するときは自由度を $m-p-q$ とする。'
   tags: [かばん検定, 自己相関, カイ二乗分布]
 - id: sample-mean-variance-stationary

@@ -8,7 +8,7 @@ statement: |
 explanation: |
   逸脱度の差 $D_0-D_1={{d0}}-{{d1}}$ は、$H_0$ のもとで漸近的に自由度 $q={{q}}$ の $\chi^2$ 分布に従う。
   $$
-  p=P\left(\chi^2_{ {{q}} }\ge {{d0}}-{{d1}}\right)={{answer}}
+  p=P\left(\chi^2({{q}})\ge {{d0}}-{{d1}}\right)={{answer}}
   $$
 params:
   q: { min: 1, max: 4, step: 1 }

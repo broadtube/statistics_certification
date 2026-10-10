@@ -9,7 +9,7 @@ mean: |-
 variance: |-
   \frac{\nu}{\nu-2}\quad(\nu>2)
 notes: |-
-  $Z\sim N(0,1)$ と $V\sim\chi^2_\nu$ が独立のとき $T=Z/\sqrt{V/\nu}$ が従う分布。積率母関数は存在しない（$\nu$ 次以上の積率が存在しない）。
+  $Z\sim N(0,1)$ と $V\sim\chi^2(\nu)$ が独立のとき $T=Z/\sqrt{V/\nu}$ が従う分布。積率母関数は存在しない（$\nu$ 次以上の積率が存在しない）。
 paramsDoc:
   - symbol: '\nu'
     meaning: '自由度'
