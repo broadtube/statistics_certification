@@ -58,6 +58,8 @@ function PracticeInner({ mode, topics, categories }: Props) {
   const start = useCallback(
     async (request: PracticeRequest | { kind: 'review' }) => {
       setView({ kind: 'loading' });
+      // 問題索引の取得と並行して KaTeX の読み込みを始める（最初の問題の表示を早める）
+      void loadKatex().catch(() => undefined);
       try {
         const idx = await loadProblemIndex();
         setIndex(idx);

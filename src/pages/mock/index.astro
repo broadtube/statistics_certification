@@ -1,11 +1,13 @@
 ---
 import MockExam from '../../islands/MockExam.tsx';
+import ProblemPreload from '../../components/ProblemPreload.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getSite } from '../../site';
 
 const categories = getSite().content.categories.map((c) => ({ id: c.id, title: c.title, mockWeight: c.mockWeight }));
 ---
 <BaseLayout title="模試" description="制限時間付きで本番に近い形式の通し演習ができます">
+  <ProblemPreload slot="head" island="MockExam" />
   <h1>模試</h1>
   <MockExam client:load categories={categories} />
   <noscript><p class="alert warn">模試には JavaScript が必要です。</p></noscript>
