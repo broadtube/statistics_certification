@@ -1,0 +1,26 @@
+topics: [clustering]
+formulas: [cluster-lance-williams, cluster-ward-increase]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  階層的クラスタリングのクラスター間距離（併合方法）に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '最短距離法（単連結法）は、個体が鎖状につながった細長いクラスターを作りやすい。'
+    correct: true
+  - id: b
+    text: '最長距離法（完全連結法）は、2つのクラスターに属する個体間の距離のうち最小のものをクラスター間距離とする。'
+    correct: false
+  - id: c
+    text: '重心法では、併合の距離が必ず単調に増加するので、デンドログラムに逆転は生じない。'
+    correct: false
+  - id: d
+    text: 'ウォード法は、併合後のクラスター内の最大距離が最小になるペアから併合する。'
+    correct: false
+  - id: e
+    text: '同じ距離行列からは、どの併合方法を使っても同じデンドログラムが得られる。'
+    correct: false
+explanation: |
+  最短距離法は最も近い個体間の距離で併合するため、近い個体が次々とつながる連鎖効果が起きやすい。最長距離法は最も遠い個体間の距離を使う。
+  重心法やメディアン法では併合距離が単調にならず、デンドログラムの逆転が起こりうる。ウォード法はクラスター内平方和の増加量 $\frac{n_An_B}{n_A+n_B}\|\bar{\boldsymbol x}_A-\bar{\boldsymbol x}_B\|^2$ が最小のペアを併合する。併合方法が違えば一般にデンドログラムも異なる。

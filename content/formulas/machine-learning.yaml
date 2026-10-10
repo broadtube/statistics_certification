@@ -1,0 +1,37 @@
+- id: ml-bias-variance
+  topic: machine-learning
+  title: バイアス・バリアンス分解
+  description: 2乗損失での予測誤差の期待値は、ノイズ・バイアスの2乗・分散の和になる。
+  body: 'E\left[\{y-\hat f(\boldsymbol x_0)\}^2\right]=\sigma^2+\left\{E[\hat f(\boldsymbol x_0)]-f(\boldsymbol x_0)\right\}^2+V[\hat f(\boldsymbol x_0)]'
+  conditions: '$y=f(\boldsymbol x_0)+\varepsilon$、$E[\varepsilon]=0$、$V[\varepsilon]=\sigma^2$、$\varepsilon$ は $\hat f$ と独立。'
+  tags: [機械学習, 汎化誤差, バイアス, 分散]
+- id: ml-ridge-lasso
+  topic: machine-learning
+  title: リッジ回帰とラッソ
+  body: '\hat{\boldsymbol\beta}_{\mathrm{ridge}}=(X^\top X+\lambda I)^{-1}X^\top\boldsymbol y,\qquad \hat{\boldsymbol\beta}_{\mathrm{lasso}}=\arg\min_{\boldsymbol\beta}\left\{\|\boldsymbol y-X\boldsymbol\beta\|^2+\lambda\|\boldsymbol\beta\|_1\right\}'
+  pitfalls: リッジは係数を縮小するが0にはしない。ラッソは一部の係数をちょうど0にする。
+  tags: [機械学習, 正則化, リッジ回帰, ラッソ]
+- id: ml-impurity
+  topic: machine-learning
+  title: 決定木の不純度（ジニ係数・エントロピー）
+  body: 'G=1-\sum_{k}p_k^2,\qquad H=-\sum_k p_k\log p_k'
+  description: '$p_k$ はノード内でクラス $k$ が占める割合。分割は、子ノードの不純度を個体数で重み付けした平均が最も小さくなるように選ぶ。'
+  tags: [機械学習, 決定木, ジニ係数, エントロピー]
+- id: ml-svm-margin
+  topic: machine-learning
+  title: SVM のマージン最大化
+  body: '\min_{\boldsymbol w,b}\ \frac12\|\boldsymbol w\|^2\quad\text{s.t.}\quad y_i(\boldsymbol w^\top\boldsymbol x_i+b)\ge1,\qquad \text{マージン}=\frac{2}{\|\boldsymbol w\|}'
+  pitfalls: 解はサポートベクターだけで決まる。ソフトマージンでは罰則 $C\sum_i\xi_i$ を加え、$C$ が大きいほど誤分類を許さない。
+  tags: [機械学習, サポートベクターマシン, マージン]
+- id: ml-ensemble-variance
+  topic: machine-learning
+  title: 相関のある予測の平均の分散
+  description: バギングやランダムフォレストで、木の数を増やしても減らせない分散がある。
+  body: 'V\left[\frac1B\sum_{b=1}^B\hat f_b\right]=\rho\sigma^2+\frac{1-\rho}{B}\sigma^2'
+  conditions: '各 $\hat f_b$ の分散が $\sigma^2$、どの2つの相関も $\rho$。'
+  tags: [機械学習, バギング, ランダムフォレスト, アンサンブル]
+- id: ml-precision-recall
+  topic: machine-learning
+  title: 適合率・再現率・F 値
+  body: '\text{適合率}=\frac{TP}{TP+FP},\quad \text{再現率}=\frac{TP}{TP+FN},\quad F=\frac{2\cdot\text{適合率}\cdot\text{再現率}}{\text{適合率}+\text{再現率}}'
+  tags: [機械学習, 分類, 評価指標]

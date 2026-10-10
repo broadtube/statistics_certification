@@ -1,0 +1,25 @@
+topics: [causal-inference]
+formulas: [propensity-score-theorem, causal-ate-definition]
+difficulty: 1
+type: choice
+source: { kind: original }
+statement: |
+  因果推論に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 処置を無作為に割り当てた実験では、処置群と対照群の結果の平均差は平均処置効果の不偏推定量になる。
+    correct: true
+  - id: b
+    text: 傾向スコアを用いれば、観測されていない交絡因子による偏りも取り除ける。
+    correct: false
+  - id: c
+    text: 同じ個体について $Y(1)$ と $Y(0)$ の両方を観測できるので、個体ごとの因果効果を直接計算できる。
+    correct: false
+  - id: d
+    text: 2変数の相関係数が統計的に有意であれば、一方が他方の原因であるといえる。
+    correct: false
+explanation: |
+  無作為化により $\{Y(1),Y(0)\}\perp Z$ となるので、群間の平均差は $E[Y(1)]-E[Y(0)]$ の不偏推定量になる（a が正しい）。
+  b：傾向スコアは観測された共変量から作るので、未観測の交絡は調整できない。
+  c：観測できるのは $Y(1)$、$Y(0)$ のどちらか一方だけ（因果推論の根本問題）。
+  d：相関は交絡や逆の因果でも生じる。

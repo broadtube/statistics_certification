@@ -1,0 +1,20 @@
+topics: [machine-learning]
+formulas: [ml-ensemble-variance]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ランダムフォレストで、個々の木の予測値の分散が $\sigma^2={{s2}}$、どの2本の木の予測値の相関も $\rho={{rho}}$ であるとする。木を $B={{B}}$ 本使って予測値を平均したときの分散を求めよ（小数第3位まで）。
+explanation: |
+  $$
+  V\left[\frac1B\sum_b\hat f_b\right]=\frac{1}{B^2}\left\{B\sigma^2+B(B-1)\rho\sigma^2\right\}=\rho\sigma^2+\frac{1-\rho}{B}\sigma^2={{rho}}\times{{s2}}+\frac{1-{{rho}}}{ {{B}} }\times{{s2}}={{answer}}
+  $$
+  $B\to\infty$ としても分散は $\rho\sigma^2={{floor}}$ までしか下がらない。ランダムフォレストが分割に使う変数を無作為に絞るのは、$\rho$ を小さくするためである。
+params:
+  s2: { min: 1, max: 4, step: 0.5 }
+  rho: { min: 0.1, max: 0.6, step: 0.1 }
+  B: { min: 10, max: 100, step: 10 }
+derived:
+  floor: rho * s2
+answer: rho * s2 + (1 - rho) / B * s2
+display: { digits: 3 }

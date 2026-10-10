@@ -1,0 +1,29 @@
+topics: [multivariate-transform]
+formulas: [mvt-mvn-linear-transform]
+difficulty: 3
+type: choice
+source: { kind: original }
+statement: |
+  $X\sim N(0,1)$ とし、$X$ と独立に $P(S=1)=P(S=-1)=\frac12$ となる確率変数 $S$ をとって $Y=SX$ とおく。次の記述のうち正しいものを選べ。
+choices:
+  - id: a
+    text: '$Y$ は $N(0,1)$ に従い、$\mathrm{Cov}(X,Y)=0$ であるが、$X$ と $Y$ は独立ではない。'
+    correct: true
+  - id: b
+    text: '$X$ と $Y$ はともに正規分布に従い無相関なので、独立である。'
+    correct: false
+  - id: c
+    text: '$(X,Y)$ は2変量正規分布に従う。'
+    correct: false
+  - id: d
+    text: '$X+Y$ は正規分布 $N(0,2)$ に従う。'
+    correct: false
+  - id: e
+    text: '$Y$ は正規分布に従わない。'
+    correct: false
+explanation: |
+  $X$ の分布は原点対称なので $Y=SX$ も $N(0,1)$ に従う（e は誤り）。$\mathrm{Cov}(X,Y)=E[S]E[X^2]=0$。
+  しかし $|Y|=|X|$ なので独立ではない（b は誤り）。
+  $X+Y=(1+S)X$ は確率 $\frac12$ で $0$ となる（点 $0$ に確率の塊をもつ）ので正規分布ではない（d は誤り）。
+  2変量正規分布なら線形結合 $X+Y$ は正規分布に従うはずなので、$(X,Y)$ は2変量正規分布ではない（c は誤り）。
+  「無相関なら独立」は同時分布が多変量正規分布のときに限る。

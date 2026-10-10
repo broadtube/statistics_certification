@@ -1,0 +1,26 @@
+topics: [unit-root-arima]
+formulas: [random-walk-moments]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  互いに独立な2つのランダムウォーク $X_t$、$Y_t$ について、$Y_t=a+bX_t+u_t$ を最小二乗法で推定した。この回帰に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '$b=0$ が真であるにもかかわらず、通常の $t$ 検定で $b$ が有意と判定されやすい。'
+    correct: true
+  - id: b
+    text: '標本サイズを大きくすれば、通常の $t$ 検定の有意水準は名目どおりに近づく。'
+    correct: false
+  - id: c
+    text: '決定係数は標本サイズとともに $0$ に収束する。'
+    correct: false
+  - id: d
+    text: '残差の系列相関はほとんどなく、ダービン・ワトソン比は $2$ に近くなる。'
+    correct: false
+  - id: e
+    text: '両系列の差分 $\Delta Y_t$ を $\Delta X_t$ に回帰すると、見せかけの相関がさらに強まる。'
+    correct: false
+explanation: |
+  無関係な $I(1)$ 系列どうしの回帰は **見せかけの回帰** になる。$H_0:b=0$ が真でも $t$ 値は $n$ とともに発散し、$t$ 検定は過度に有意になる。決定係数も $0$ に収束せず、残差は強い正の自己相関をもつ（ダービン・ワトソン比が $0$ に近い）。
+  差分をとると両系列はホワイトノイズになり、通常の回帰の推測が妥当になる。

@@ -1,0 +1,14 @@
+topics: [regression-diagnostics]
+formulas: [durbin-watson]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  時系列データに回帰を当てはめたところ、残差の1次の標本自己相関係数が $\hat\rho_1={{rho}}$ であった。ダービン・ワトソン統計量 $d$ の近似値を $d\approx2(1-\hat\rho_1)$ で求めよ（小数第2位まで）。
+explanation: |
+  $d\approx2(1-\hat\rho_1)=2(1-({{rho}}))={{answer}}$。
+  $d$ が $2$ より小さいほど正の自己相関、$2$ より大きいほど負の自己相関を示唆する。
+params:
+  rho: { min: -0.6, max: 0.8, step: 0.05 }
+answer: 2 * (1 - rho)
+display: { digits: 2 }

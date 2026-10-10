@@ -1,0 +1,18 @@
+topics: [nonparametric]
+formulas: [spearman-rank-correlation]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  {{n}} 人の受験者について、2人の審査員がつけた順位（同順位なし）の差 $d_i$ を求めたところ、$\sum d_i^2={{sd2}}$ であった。スピアマンの順位相関係数を求めよ（小数第3位まで）。
+explanation: |
+  $$
+  r_s=1-\frac{6\sum d_i^2}{n(n^2-1)}=1-\frac{6\times{{sd2}}}{ {{n}}\times({{n}}^2-1)}={{answer}}
+  $$
+  2人の順位が完全に一致すれば $\sum d_i^2=0$ で $r_s=1$、完全に逆なら $r_s=-1$ になる。
+params:
+  n: { min: 6, max: 15, step: 1 }
+  sd2: { min: 4, max: 400, step: 2 }
+constraints: ['sd2 <= n * (n^2 - 1) / 3 - 2']
+answer: 1 - 6 * sd2 / (n * (n^2 - 1))
+display: { digits: 3 }

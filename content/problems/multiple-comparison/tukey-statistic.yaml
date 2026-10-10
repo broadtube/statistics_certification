@@ -1,0 +1,18 @@
+topics: [multiple-comparison]
+formulas: [tukey-hsd]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  各群 $n={{n}}$ 個の一元配置で、誤差の平均平方は $\mathrm{MS}_E={{mse}}$ であった。2つの群の標本平均の差が $|\bar y_i-\bar y_j|={{d}}$ のとき、テューキー法で用いる統計量 $\dfrac{|\bar y_i-\bar y_j|}{\sqrt{\mathrm{MS}_E/n}}$ の値を求めよ（小数第3位まで）。
+explanation: |
+  $$
+  \frac{ {{d}} }{\sqrt{ {{mse}}/{{n}} }}={{answer}}
+  $$
+  この値がスチューデント化された範囲の上側 $\alpha$ 点 $q_{a,N-a}(\alpha)$ 以上なら、その対に差があると判断する。
+params:
+  n: { min: 4, max: 15, step: 1 }
+  mse: { min: 2, max: 20, step: 1 }
+  d: { min: 1, max: 8, step: 0.5 }
+answer: d / sqrt(mse / n)
+display: { digits: 3 }

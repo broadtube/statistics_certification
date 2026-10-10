@@ -1,0 +1,18 @@
+topics: [survival-analysis]
+formulas: [cox-proportional-hazards]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  年齢 $x$（歳）を共変量とする比例ハザードモデル $h(t\mid x)=h_0(t)\exp(\beta x)$ を当てはめたところ、$\hat\beta={{beta}}$ を得た。年齢が {{delta}} 歳高い人の、低い人に対するハザード比の推定値を求めよ（小数第3位まで）。
+explanation: |
+  ハザード比は
+  $$
+  \frac{h(t\mid x+\Delta)}{h(t\mid x)}=\frac{h_0(t)e^{\beta(x+\Delta)}}{h_0(t)e^{\beta x}}=e^{\beta\Delta}=e^{ {{beta}}\times{{delta}} }={{answer}}
+  $$
+  ベースラインハザード $h_0(t)$ は約分されるので、ハザード比は時刻 $t$ にも $x$ の値にも依らない。
+params:
+  beta: { min: 0.01, max: 0.08, step: 0.01 }
+  delta: { min: 5, max: 20, step: 5 }
+answer: exp(beta * delta)
+display: { digits: 3 }

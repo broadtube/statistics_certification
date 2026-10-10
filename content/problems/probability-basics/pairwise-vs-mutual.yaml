@@ -1,0 +1,27 @@
+topics: [probability-basics]
+formulas: [prob-independence-events]
+difficulty: 3
+type: choice
+source: { kind: original }
+statement: |
+  公正なコインを2回投げる。$A$＝「1回目が表」、$B$＝「2回目が表」、$C$＝「2回の結果が一致する」とする。次の記述のうち正しいものを選べ。
+choices:
+  - id: a
+    text: '$A,B,C$ はどの2つも独立だが、3つは相互に独立ではない。'
+    correct: true
+  - id: b
+    text: '$A,B,C$ は相互に独立である。'
+    correct: false
+  - id: c
+    text: '$A$ と $C$ は独立ではない。'
+    correct: false
+  - id: d
+    text: '$P(A\cap B\cap C)=\frac18$ である。'
+    correct: false
+  - id: e
+    text: '$P(C\mid A\cap B)=\frac12$ である。'
+    correct: false
+explanation: |
+  $P(A)=P(B)=P(C)=\frac12$。$A\cap C$＝「表表」なので $P(A\cap C)=\frac14=P(A)P(C)$。同様に $P(A\cap B)=P(B\cap C)=\frac14$ で、どの2つも独立。
+  一方 $A\cap B$ が起きれば必ず $C$ も起きるので $P(A\cap B\cap C)=\frac14\ne\frac18=P(A)P(B)P(C)$、$P(C\mid A\cap B)=1$。
+  よって対ごとに独立でも、相互に独立ではない。

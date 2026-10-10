@@ -1,0 +1,19 @@
+topics: [glm]
+formulas: [glm-deviance-test, glm-deviance]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ポアソン回帰で、説明変数 {{q}} 個を除いたモデル M$_0$ の逸脱度が $D_0={{d0}}$、それらを含むモデル M$_1$ の逸脱度が $D_1={{d1}}$ であった。「除いた {{q}} 個の係数がすべて0」という帰無仮説に対する尤度比検定の $p$ 値を求めよ（小数第4位まで）。
+explanation: |
+  逸脱度の差 $D_0-D_1={{d0}}-{{d1}}$ は、$H_0$ のもとで漸近的に自由度 $q={{q}}$ の $\chi^2$ 分布に従う。
+  $$
+  p=P\left(\chi^2_{ {{q}} }\ge {{d0}}-{{d1}}\right)={{answer}}
+  $$
+params:
+  q: { min: 1, max: 4, step: 1 }
+  d1: { min: 20, max: 60, step: 0.5 }
+  d0: { min: 22, max: 70, step: 0.5 }
+constraints: ['d0 - d1 >= 1', 'd0 - d1 <= 12']
+answer: 1 - pchisq(d0 - d1, q)
+display: { digits: 4 }

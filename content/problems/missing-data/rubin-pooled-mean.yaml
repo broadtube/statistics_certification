@@ -1,0 +1,26 @@
+topics: [missing-data]
+formulas: [rubin-rules-pooled-estimate, missing-info-fraction]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  多重代入法で $M=3$ 個の代入データを作り、母平均を推定したところ、推定値は {{q1}}、{{q2}}、{{q3}} であり、各推定値の分散推定値はいずれも {{u}} であった。ルービンのルールによる全分散 $T$ を求めよ（小数第4位まで）。
+explanation: |
+  統合した推定値は $\bar Q=\frac{ {{q1}}+{{q2}}+{{q3}} }{3}={{qbar}}$。
+  代入間分散は $B=\frac{1}{M-1}\sum_m(\hat Q_m-\bar Q)^2={{bvar}}$、代入内分散は $\bar U={{u}}$。
+  $$
+  T=\bar U+\left(1+\frac13\right)B={{answer}}
+  $$
+  このとき欠測による情報の割合は $\lambda=\frac{(1+1/3)B}{T}$ で評価できる。
+params:
+  q1: { min: 9.5, max: 10.5, step: 0.1 }
+  q2: { min: 9.5, max: 10.5, step: 0.1 }
+  q3: { min: 9.5, max: 10.5, step: 0.1 }
+  u: { min: 0.05, max: 0.3, step: 0.01 }
+derived:
+  qbar: (q1 + q2 + q3) / 3
+  bvar: ((q1 - qbar)^2 + (q2 - qbar)^2 + (q3 - qbar)^2) / 2
+constraints: ['bvar > 0.001']
+answer: u + (4 / 3) * bvar
+display: { digits: 4 }
+tolerance: { type: relative, value: 0.002 }

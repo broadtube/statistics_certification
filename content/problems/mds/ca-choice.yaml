@@ -1,0 +1,26 @@
+topics: [mds, contingency-tables]
+formulas: [ca-total-inertia]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  対応分析に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '行プロファイル間の距離としてカイ二乗距離を用い、全慣性はカイ二乗統計量を総度数で割ったものに等しい。'
+    correct: true
+  - id: b
+    text: '対応分析は、量的変数だけからなるデータ行列に適用する手法である。'
+    correct: false
+  - id: c
+    text: '$r$ 行 $c$ 列の分割表から得られる軸（次元）の数は最大で $r+c-1$ である。'
+    correct: false
+  - id: d
+    text: '行カテゴリーと列カテゴリーは別々に分析するので、同じ図に同時に布置することはできない。'
+    correct: false
+  - id: e
+    text: '行と列が独立なとき、全慣性は最大になる。'
+    correct: false
+explanation: |
+  対応分析は分割表（カテゴリカルデータ）の行と列を同じ空間に同時布置する手法で、行プロファイル間の違いをカイ二乗距離で測る。標準化残差を特異値分解し、特異値の2乗の和（全慣性）は $\chi^2/n$ に等しい。
+  次元数は最大 $\min(r,c)-1$。行と列が完全に独立なら $\chi^2=0$ で全慣性も0になる。

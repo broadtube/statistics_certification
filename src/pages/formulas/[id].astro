@@ -41,7 +41,7 @@ const md = (s: string | undefined) => (s ? site.renderer.render(s, 'static') : '
 
   <section>
     <h2>この公式を使う問題 <span class="muted small">（{problems.length}問）</span></h2>
-    <ProblemList problems={problems} />
+    <ProblemList problems={problems} emptyText="この公式を直接使う問題はありません。分野ページの問題で関連する内容を演習できます。" />
   </section>
 </BaseLayout>
 

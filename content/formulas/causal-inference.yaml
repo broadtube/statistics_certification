@@ -1,0 +1,36 @@
+- id: causal-ate-definition
+  topic: causal-inference
+  title: 平均処置効果（ATE）
+  description: 潜在結果の差の期待値。観測されるのはどちらか一方のみ。
+  body: '\tau=E[Y(1)-Y(0)],\qquad Y=ZY(1)+(1-Z)Y(0)'
+  tags: [潜在結果, 平均処置効果, 因果効果]
+- id: causal-selection-bias
+  topic: causal-inference
+  title: 単純比較の分解（選択バイアス）
+  description: 群間の平均差は、処置群での効果と選択バイアスに分解される。
+  body: 'E[Y\mid Z=1]-E[Y\mid Z=0]=\underbrace{E[Y(1)-Y(0)\mid Z=1]}_{\text{ATT}}+\underbrace{E[Y(0)\mid Z=1]-E[Y(0)\mid Z=0]}_{\text{選択バイアス}}'
+  pitfalls: 無作為化すれば選択バイアスは $0$ になり、ATT と ATE も一致する。
+  tags: [選択バイアス, 交絡, 無作為化]
+- id: causal-standardization
+  topic: causal-inference
+  title: 層別による調整（標準化）
+  description: 条件付き独立性のもとで、層ごとの平均を共変量の周辺分布で重み付けする。
+  body: 'E[Y(z)]=\sum_x E[Y\mid Z=z,X=x]\,P(X=x)'
+  conditions: '$\{Y(1),Y(0)\}\perp Z\mid X$、かつ各層で $0<P(Z=1\mid X=x)<1$。'
+  pitfalls: '重みは処置群内の共変量分布ではなく、母集団全体の $P(X=x)$。'
+  tags: [交絡調整, 層別, バックドア調整]
+- id: propensity-score-theorem
+  topic: causal-inference
+  title: 傾向スコアの性質
+  description: 共変量で条件付き独立なら、傾向スコアで条件付けても独立。
+  body: 'e(X)=P(Z=1\mid X),\qquad \{Y(1),Y(0)\}\perp Z\mid X\ \Rightarrow\ \{Y(1),Y(0)\}\perp Z\mid e(X)'
+  pitfalls: 調整できるのは観測された交絡因子のみ。
+  tags: [傾向スコア, 交絡調整]
+- id: ipw-ate-estimator
+  topic: causal-inference
+  title: 逆確率重み付け（IPW）推定量
+  description: 処置を受ける確率の逆数で重み付けして潜在結果の平均を推定する。
+  body: '\hat\tau_{IPW}=\frac1n\sum_{i=1}^n\left\{\frac{Z_iY_i}{e(X_i)}-\frac{(1-Z_i)Y_i}{1-e(X_i)}\right\}'
+  derivation: '$E\left[\frac{ZY}{e(X)}\right]=E\left[\frac{E[Z\mid X]E[Y(1)\mid X]}{e(X)}\right]=E[Y(1)]$（条件付き独立性を使う）。'
+  pitfalls: '$e(X)$ が 0 や 1 に近いと重みが極端になり分散が大きくなる。'
+  tags: [傾向スコア, 逆確率重み付け, 平均処置効果]

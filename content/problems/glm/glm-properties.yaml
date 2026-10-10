@@ -1,0 +1,29 @@
+topics: [glm]
+formulas: [glm-components, poisson-regression-model, glm-deviance]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  一般化線形モデルに関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 'ポアソン回帰でデータの分散が平均より大きい（過分散）と、係数の標準誤差が過小評価され、検定が有意になりやすい。'
+    correct: true
+  - id: b
+    text: 'ロジスティック回帰の係数 $\beta_1$ は、$x$ が1増えたときの成功確率の増加量を表す。'
+    correct: false
+  - id: c
+    text: '二項分布の正準リンク関数は対数関数 $g(\mu)=\log\mu$ である。'
+    correct: false
+  - id: d
+    text: 'GLM の最尤推定値は、一般に正規方程式を解くことで陽に求められる。'
+    correct: false
+  - id: e
+    text: '0/1 の個票データにロジスティック回帰を当てはめたときの逸脱度は、自由度 $n-(p+1)$ の $\chi^2$ 分布と比べて適合度を検定できる。'
+    correct: false
+explanation: |
+  (a) ポアソン分布は平均＝分散を仮定するので、過分散があると分散を過小に見積もる。正しい。
+  (b) $\beta_1$ は対数オッズの増加量（$e^{\beta_1}$ がオッズ比）。確率の変化量は $\beta_1\pi(1-\pi)$ で $x$ によって変わる。
+  (c) 二項分布の正準リンクはロジット。対数はポアソン分布の正準リンク。
+  (d) 尤度方程式は非線形で、ニュートン・ラフソン法（IRLS）による反復計算が必要（正規分布＋恒等リンクの場合を除く）。
+  (e) 0/1 データの逸脱度は $\chi^2$ 近似が成り立たず、適合度検定には使えない。

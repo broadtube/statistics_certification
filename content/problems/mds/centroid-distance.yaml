@@ -1,0 +1,21 @@
+topics: [mds]
+formulas: [mds-double-centering]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  3つの対象の間の距離が $d_{12}={{d12}}$、$d_{13}={{d13}}$、$d_{23}={{d23}}$ である。古典的多次元尺度法で距離の2乗の行列を二重中心化した行列 $B=-\frac12JD^{(2)}J$ の $(1,1)$ 成分 $b_{11}$ を求めよ（小数第3位まで）。
+explanation: |
+  $b_{11}=-\frac12\left(d_{11}^2-2\bar d_{1\cdot}^{\,2}+\bar d_{\cdot\cdot}^{\,2}\right)$ で、$d_{11}=0$、
+  $\bar d_{1\cdot}^{\,2}=\frac{0+d_{12}^2+d_{13}^2}{3}$、$\bar d_{\cdot\cdot}^{\,2}=\frac{2(d_{12}^2+d_{13}^2+d_{23}^2)}{9}$。整理すると
+  $$
+  b_{11}=\frac{2d_{12}^2+2d_{13}^2-d_{23}^2}{9}=\frac{2\times{{d12}}^2+2\times{{d13}}^2-{{d23}}^2}{9}={{answer}}
+  $$
+  これは対象1の点と3点の重心との距離の2乗に等しい。
+params:
+  d12: { min: 3, max: 6, step: 1 }
+  d13: { min: 3, max: 6, step: 1 }
+  d23: { min: 2, max: 6, step: 1 }
+constraints: ['d23 < d12 + d13', 'd12 < d13 + d23', 'd13 < d12 + d23']
+answer: (2 * d12^2 + 2 * d13^2 - d23^2) / 9
+display: { digits: 3 }

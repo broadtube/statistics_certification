@@ -1,0 +1,22 @@
+topics: [state-space]
+formulas: [kalman-gain-local-level, kalman-filter-update]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ローカルレベルモデルで、観測ノイズの分散が $\sigma_\varepsilon^2={{se2}}$ である。時点 $t$ の水準の一期先予測が $a_{t|t-1}={{a}}$、その分散が $P_{t|t-1}={{p}}$ のとき、観測値 $y_t={{y}}$ を得た。フィルタ化推定値 $a_{t|t}$ を求めよ（小数第3位まで）。
+explanation: |
+  カルマンゲインは $K_t=\frac{P_{t|t-1}}{P_{t|t-1}+\sigma_\varepsilon^2}=\frac{ {{p}} }{ {{p}}+{{se2}} }={{k}}$。予測誤差 $v_t={{y}}-{{a}}$ を使って
+  $$
+  a_{t|t}=a_{t|t-1}+K_tv_t={{a}}+{{k}}\times({{y}}-{{a}})={{answer}}
+  $$
+params:
+  se2: { min: 0.5, max: 4, step: 0.5 }
+  p: { min: 0.5, max: 4, step: 0.5 }
+  a: { min: 8, max: 12, step: 0.5 }
+  y: { min: 8, max: 14, step: 0.5 }
+derived:
+  k: p / (p + se2)
+constraints: ['y != a']
+answer: a + p / (p + se2) * (y - a)
+display: { digits: 3 }

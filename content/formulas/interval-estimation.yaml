@@ -1,0 +1,46 @@
+- id: ci-mean-known-variance
+  topic: interval-estimation
+  title: 母平均の信頼区間（分散既知）
+  description: 正規母集団で分散が既知のとき、標準化した標本平均をピボット量にする。
+  body: '\bar X\pm z_{\alpha/2}\,\frac{\sigma}{\sqrt n}'
+  variables:
+    - { symbol: 'z_{\alpha/2}', meaning: '標準正規分布の上側 $100\alpha/2\%$ 点（95%なら $1.96$）' }
+  conditions: 正規母集団（または大標本で中心極限定理が使える場合の近似）。
+  tags: [信頼区間, 母平均, 正規分布]
+- id: ci-mean-t
+  topic: interval-estimation
+  title: 母平均の信頼区間（分散未知）
+  description: 分散を不偏分散で置き換えると、ピボット量は自由度 $n-1$ の t 分布に従う。
+  body: '\bar X\pm t_{\alpha/2}(n-1)\,\frac{S}{\sqrt n},\qquad S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar X)^2'
+  derivation: '$\frac{\bar X-\mu}{S/\sqrt n}=\frac{Z}{\sqrt{U/(n-1)}}$（$Z\sim N(0,1)$、$U=(n-1)S^2/\sigma^2\sim\chi^2(n-1)$、互いに独立）なので $t(n-1)$ に従う。'
+  pitfalls: 自由度は $n$ ではなく $n-1$。
+  tags: [信頼区間, 母平均, t分布]
+- id: ci-variance-chisq
+  topic: interval-estimation
+  title: 母分散の信頼区間
+  body: '\frac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)}\ \le\ \sigma^2\ \le\ \frac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)}'
+  variables:
+    - { symbol: '\chi^2_{\alpha}(m)', meaning: '自由度 $m$ のカイ二乗分布の上側 $100\alpha\%$ 点' }
+  conditions: 正規母集団。正規性からのずれに弱い。
+  pitfalls: 上側 $\alpha/2$ 点（大きい値）で割った方が下限。区間は $S^2$ に関して非対称。
+  tags: [信頼区間, 母分散, カイ二乗分布]
+- id: ci-diff-means-pooled
+  topic: interval-estimation
+  title: 2標本の平均の差の信頼区間（等分散）
+  body: '\bar X-\bar Y\pm t_{\alpha/2}(m+n-2)\,S_p\sqrt{\frac1m+\frac1n},\qquad S_p^2=\frac{(m-1)S_1^2+(n-1)S_2^2}{m+n-2}'
+  conditions: 2つの独立な正規母集団で、分散が等しい（未知）こと。等分散が疑わしいときはウェルチの方法を使う。
+  tags: [信頼区間, 2標本, t分布]
+- id: ci-proportion-wald
+  topic: interval-estimation
+  title: 母比率の信頼区間（ワルド型）
+  body: '\hat p\pm z_{\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}{n}}'
+  conditions: '$n$ が十分大きく、$n\hat p$・$n(1-\hat p)$ がともにある程度大きいこと。'
+  pitfalls: '$\hat p$ が $0$ や $1$ に近いと被覆確率が名目の値を下回る。'
+  tags: [信頼区間, 母比率, 正規近似]
+- id: ci-sample-size-mean
+  topic: interval-estimation
+  title: 平均の推定に必要な標本サイズ
+  description: 信頼区間の半幅を $E$ 以下にするための条件。
+  body: 'n\ \ge\ \left(\frac{z_{\alpha/2}\,\sigma}{E}\right)^2'
+  pitfalls: 右辺を超える最小の整数に切り上げる。半幅を半分にするには $n$ は4倍必要。
+  tags: [信頼区間, 標本サイズ]

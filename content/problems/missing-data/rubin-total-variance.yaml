@@ -1,0 +1,18 @@
+topics: [missing-data]
+formulas: [rubin-rules-pooled-estimate]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  多重代入法で $M={{M}}$ 個の代入データを作り、ある回帰係数を推定した。各代入データでの分散推定値の平均は $\bar U={{u}}$、推定値の代入間分散は $B={{b}}$ であった。ルービンのルールによる全分散 $T$ を求めよ（小数第4位まで）。
+explanation: |
+  $$
+  T=\bar U+\left(1+\frac1M\right)B={{u}}+\left(1+\frac{1}{ {{M}} }\right)\times{{b}}={{answer}}
+  $$
+  代入内分散 $\bar U$ に、代入による不確実性 $B$ を（代入回数が有限であることの補正 $1+1/M$ を付けて）加える。
+params:
+  M: { min: 3, max: 20, step: 1 }
+  u: { min: 0.01, max: 0.2, step: 0.01 }
+  b: { min: 0.002, max: 0.05, step: 0.002 }
+answer: u + (1 + 1 / M) * b
+display: { digits: 4 }

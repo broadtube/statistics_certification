@@ -1,0 +1,20 @@
+topics: [stationarity]
+formulas: [ljung-box-statistic, sample-autocorrelation]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  長さ $n={{n}}$ の時系列の標本自己相関が $r_1={{r1}}$、$r_2={{r2}}$、$r_3={{r3}}$ であった。ラグ3までのリュン・ボックス統計量 $Q$ を求めよ（小数第3位まで）。
+explanation: |
+  $$
+  Q=n(n+2)\sum_{k=1}^{3}\frac{r_k^2}{n-k}={{n}}\cdot({{n}}+2)\left(\frac{ ({{r1}})^2}{ {{n}}-1}+\frac{ ({{r2}})^2}{ {{n}}-2}+\frac{ ({{r3}})^2}{ {{n}}-3}\right)={{answer}}
+  $$
+  ホワイトノイズの帰無仮説のもとで $Q$ は近似的に自由度3のカイ二乗分布に従い、5%点は $\chi^2_{3}(0.05)\approx7.815$。
+params:
+  n: { min: 50, max: 200, step: 10 }
+  r1: { min: -0.3, max: 0.3, step: 0.05 }
+  r2: { min: -0.2, max: 0.2, step: 0.05 }
+  r3: { min: -0.2, max: 0.2, step: 0.05 }
+constraints: ['r1 != 0']
+answer: n * (n + 2) * (r1^2 / (n - 1) + r2^2 / (n - 2) + r3^2 / (n - 3))
+display: { digits: 3 }

@@ -1,0 +1,22 @@
+topics: [multivariate-transform]
+formulas: [mvt-convolution]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  $X,Y$ は互いに独立に、平均 {{m}} の指数分布に従う。$U=X+Y$ について $P(U\le{{u}})$ を求めよ（小数第4位まで）。
+explanation: |
+  率は $\lambda=1/{{m}}$。たたみ込みにより $U$ の密度は
+  $$
+  f_U(u)=\int_0^u\lambda e^{-\lambda x}\,\lambda e^{-\lambda(u-x)}\,dx=\lambda^2ue^{-\lambda u}\quad(u\ge0)
+  $$
+  （ガンマ分布 $\mathrm{Ga}(2,\lambda)$）。これを積分すると
+  $$
+  P(U\le u)=1-e^{-\lambda u}(1+\lambda u)
+  $$
+  $\lambda u={{u}}/{{m}}$ を代入して ${{answer}}$。
+params:
+  m: { min: 1, max: 5, step: 1 }
+  u: { min: 1, max: 10, step: 1 }
+answer: 1 - exp(-u / m) * (1 + u / m)
+display: { digits: 4 }

@@ -1,0 +1,19 @@
+topics: [stationarity]
+formulas: [sample-mean-variance-stationary]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  MA(1) 過程 $X_t=\varepsilon_t+{{theta}}\,\varepsilon_{t-1}$（$\varepsilon_t$ は平均 $0$・分散 $1$ のホワイトノイズ）から長さ $n={{n}}$ の観測を得る。標本平均 $\bar X$ の分散を求めよ（小数第4位まで）。
+explanation: |
+  自己共分散は $\gamma(0)=1+\theta^2$、$\gamma(\pm1)=\theta$、$|h|\ge2$ で $0$。よって
+  $$
+  V[\bar X]=\frac1n\left\{\gamma(0)+2\left(1-\frac1n\right)\gamma(1)\right\}=\frac{1}{ {{n}} }\left\{1+({{theta}})^2+2\left(1-\frac{1}{ {{n}} }\right)({{theta}})\right\}={{answer}}
+  $$
+  $\theta>0$ なら独立な場合の $\gamma(0)/n$ より大きく、$\theta<0$ なら小さくなる。
+params:
+  theta: { min: -0.8, max: 0.8, step: 0.1 }
+  n: { min: 10, max: 50, step: 5 }
+constraints: ['abs(theta) > 0.05']
+answer: (1 + theta^2 + 2 * (1 - 1 / n) * theta) / n
+display: { digits: 4 }

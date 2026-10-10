@@ -1,0 +1,20 @@
+topics: [em-algorithm]
+formulas: [em-mixture-responsibility]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2成分の正規混合分布 $\pi N(\mu_1,1)+(1-\pi)N(\mu_2,1)$ の EM アルゴリズムで、現在のパラメータが $\pi={{p}}$、$\mu_1={{m1}}$、$\mu_2={{m2}}$ である。観測値 $x={{x}}$ が成分1に属する負担率 $\gamma$ を求めよ（小数第4位まで）。
+explanation: |
+  分散が等しいので正規密度の定数部分は約分され
+  $$
+  \gamma=\frac{\pi e^{-(x-\mu_1)^2/2}}{\pi e^{-(x-\mu_1)^2/2}+(1-\pi)e^{-(x-\mu_2)^2/2}}
+  =\frac{ {{p}}\,e^{-({{x}}-{{m1}})^2/2}}{ {{p}}\,e^{-({{x}}-{{m1}})^2/2}+(1-{{p}})\,e^{-({{x}}-{{m2}})^2/2}}={{answer}}
+  $$
+params:
+  p: { min: 0.2, max: 0.8, step: 0.1 }
+  m1: { min: -1, max: 1, step: 0.5 }
+  m2: { min: 2, max: 4, step: 0.5 }
+  x: { min: 0, max: 3, step: 0.5 }
+answer: p * exp(-(x - m1)^2 / 2) / (p * exp(-(x - m1)^2 / 2) + (1 - p) * exp(-(x - m2)^2 / 2))
+display: { digits: 4 }

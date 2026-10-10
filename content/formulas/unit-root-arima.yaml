@@ -1,0 +1,44 @@
+- id: random-walk-moments
+  topic: unit-root-arima
+  title: ランダムウォークのモーメント
+  description: '$X_t=\delta+X_{t-1}+\varepsilon_t,\ X_0=0$ の平均・分散・共分散。'
+  body: 'E[X_t]=\delta t,\quad V[X_t]=t\sigma^2,\quad \mathrm{Cov}(X_s,X_t)=\min(s,t)\,\sigma^2'
+  derivation: '$X_t=\delta t+\sum_{s=1}^t\varepsilon_s$ と書き直す。'
+  pitfalls: 分散が時点とともに増えるので弱定常ではない。
+  tags: [ランダムウォーク, 単位根, 非定常]
+- id: random-walk-correlation
+  topic: unit-root-arima
+  title: ランダムウォークの時点間の相関
+  body: '\mathrm{Corr}(X_t,X_{t+h})=\sqrt{\frac{t}{t+h}}'
+  pitfalls: 相関はラグ $h$ だけでなく時点 $t$ にも依存する。$t$ が大きいと $1$ に近く、標本 ACF がゆっくり減衰する原因になる。
+  tags: [ランダムウォーク, 自己相関]
+- id: arima-definition
+  topic: unit-root-arima
+  title: ARIMA モデル
+  description: '$d$ 回差分が ARMA($p,q$) に従うモデル。'
+  body: '\phi(B)(1-B)^dX_t=\theta(B)\varepsilon_t'
+  variables:
+    - { symbol: 'B', meaning: 'ラグ作用素（$BX_t=X_{t-1}$）' }
+    - { symbol: 'd', meaning: 差分の階数 }
+  tags: [ARIMA, 差分, 和分過程]
+- id: dickey-fuller-regression
+  topic: unit-root-arima
+  title: ディッキー・フラー検定の回帰式
+  description: 帰無仮説 $\gamma=0$（単位根）を $t$ 統計量で検定する。
+  body: '\Delta X_t=\alpha+\gamma X_{t-1}+\sum_{i=1}^{k}\beta_i\Delta X_{t-i}+\varepsilon_t,\qquad H_0:\gamma=0,\ H_1:\gamma<0'
+  conditions: ラグ項を含めると拡張 DF（ADF）検定。定数項・トレンド項の有無で臨界値が異なる。
+  pitfalls: 帰無仮説のもとで $t$ 統計量は $t$ 分布に従わない（ディッキー・フラー分布を使う）。
+  tags: [単位根検定, ADF検定]
+- id: random-walk-forecast
+  topic: unit-root-arima
+  title: ランダムウォークの予測と予測誤差分散
+  body: '\hat X_{n+h}=X_n+h\delta,\qquad V[X_{n+h}-\hat X_{n+h}]=h\sigma^2'
+  pitfalls: 予測区間の幅は $\sqrt h$ に比例して広がり続ける。
+  tags: [予測, ランダムウォーク]
+- id: overdifferencing-acf
+  topic: unit-root-arima
+  title: 過剰差分した系列の自己相関
+  description: 定常な AR(1) を差分すると、ラグ1に負の自己相関が生じる。
+  body: 'X_t=\phi X_{t-1}+\varepsilon_t\ \Rightarrow\ \rho_{\Delta X}(1)=-\frac{1-\phi}{2}'
+  derivation: '$\gamma_{\Delta}(0)=2(\gamma_0-\gamma_1)$、$\gamma_{\Delta}(1)=2\gamma_1-\gamma_0-\gamma_2$ に $\gamma_h=\phi^h\gamma_0$ を代入する。'
+  tags: [差分, 自己相関, 過剰差分]

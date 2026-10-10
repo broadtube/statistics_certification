@@ -1,0 +1,26 @@
+topics: [stationarity]
+formulas: [weak-stationarity-definition]
+difficulty: 1
+type: choice
+source: { kind: original }
+statement: |
+  $\varepsilon_t$ を平均 $0$・分散 $\sigma^2>0$ のホワイトノイズとする。次の系列のうち、弱定常であるものを選べ。
+choices:
+  - id: a
+    text: '$X_t=\varepsilon_t+0.5\,\varepsilon_{t-1}$'
+    correct: true
+  - id: b
+    text: '$X_t=X_{t-1}+\varepsilon_t,\ X_0=0$（ランダムウォーク）'
+    correct: false
+  - id: c
+    text: '$X_t=2+0.3t+\varepsilon_t$'
+    correct: false
+  - id: d
+    text: '$X_t=t\,\varepsilon_t$'
+    correct: false
+  - id: e
+    text: '$X_t=(-1)^t+\varepsilon_t$'
+    correct: false
+explanation: |
+  (a) は MA(1) で、平均 $0$、$\gamma(0)=1.25\sigma^2$、$\gamma(\pm1)=0.5\sigma^2$、それ以外 $0$ と時点によらないので弱定常。
+  (b) は $V[X_t]=t\sigma^2$、(d) は $V[X_t]=t^2\sigma^2$ で分散が時点に依存する。(c) と (e) は平均がそれぞれ $2+0.3t$、$(-1)^t$ と時点に依存する。

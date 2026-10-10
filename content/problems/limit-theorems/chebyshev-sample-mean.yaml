@@ -1,0 +1,20 @@
+topics: [limit-theorems]
+formulas: [lt-chebyshev-inequality, lt-weak-law]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  平均 $\mu$、分散 {{v}} の母集団から大きさ $n={{n}}$ の無作為標本をとる。チェビシェフの不等式を用いると、$P(|\bar X-\mu|<{{eps}})$ は少なくともいくら以上と言えるか。その下限を求めよ（小数第3位まで）。
+explanation: |
+  $V[\bar X]=\sigma^2/n={{v}}/{{n}}$。チェビシェフの不等式より
+  $$
+  P(|\bar X-\mu|\ge\varepsilon)\le\frac{\sigma^2}{n\varepsilon^2}=\frac{ {{v}} }{ {{n}}\times{{eps}}^2 }
+  $$
+  よって $P(|\bar X-\mu|<{{eps}})\ge1-\frac{\sigma^2}{n\varepsilon^2}={{answer}}$。母集団分布の形によらず成り立つ。
+params:
+  v: { min: 1, max: 9, step: 1 }
+  n: { min: 50, max: 400, step: 50 }
+  eps: { min: 0.2, max: 1, step: 0.1 }
+constraints: ['v / (n * eps^2) < 0.9']
+answer: 1 - v / (n * eps^2)
+display: { digits: 3 }

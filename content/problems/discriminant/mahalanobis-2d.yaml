@@ -1,0 +1,20 @@
+topics: [discriminant]
+formulas: [lda-mahalanobis-distance]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2変数の群の平均が $\boldsymbol\mu$、分散共分散行列が $\Sigma=\begin{pmatrix}1&{{r}}\\{{r}}&1\end{pmatrix}$ である。$\boldsymbol x-\boldsymbol\mu=({{d1}},\ {{d2}})^\top$ のとき、$\boldsymbol x$ の $\boldsymbol\mu$ からのマハラノビス平方距離 $D^2$ を求めよ（小数第3位まで）。
+explanation: |
+  $\Sigma^{-1}=\dfrac{1}{1-r^2}\begin{pmatrix}1&-r\\-r&1\end{pmatrix}$ なので、$\boldsymbol d=\boldsymbol x-\boldsymbol\mu$ として
+  $$
+  D^2=\boldsymbol d^\top\Sigma^{-1}\boldsymbol d=\frac{d_1^2-2rd_1d_2+d_2^2}{1-r^2}=\frac{({{d1}})^2-2\times{{r}}\times({{d1}})\times({{d2}})+({{d2}})^2}{1-({{r}})^2}={{answer}}
+  $$
+  相関が正のとき、両方の変数が同じ向きにずれる点は（ユークリッド距離が同じでも）マハラノビス距離が小さくなる。
+params:
+  d1: { min: 0.5, max: 2, step: 0.5 }
+  d2: { min: -1.5, max: 2, step: 0.5 }
+  r: { min: 0.1, max: 0.8, step: 0.1 }
+constraints: ['d2 != 0']
+answer: (d1^2 - 2 * r * d1 * d2 + d2^2) / (1 - r^2)
+display: { digits: 3 }

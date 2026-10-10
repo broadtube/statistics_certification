@@ -1,0 +1,27 @@
+topics: [random-variables]
+formulas: [rv-covariance-definition]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  $X$ を標準正規分布 $N(0,1)$ に従う確率変数とし、$Y=X^2$ とおく。次の記述のうち正しいものを選べ。
+choices:
+  - id: a
+    text: '$\mathrm{Cov}(X,Y)=0$ であるが、$X$ と $Y$ は独立ではない。'
+    correct: true
+  - id: b
+    text: '$\mathrm{Cov}(X,Y)=0$ なので、$X$ と $Y$ は独立である。'
+    correct: false
+  - id: c
+    text: '$Y$ は $X$ の関数なので、相関係数は $1$ である。'
+    correct: false
+  - id: d
+    text: '$\mathrm{Cov}(X,Y)=E[Y]=1$ である。'
+    correct: false
+  - id: e
+    text: '$V[X+Y]=V[X]+V[Y]$ は成り立たない。'
+    correct: false
+explanation: |
+  $\mathrm{Cov}(X,Y)=E[X^3]-E[X]E[X^2]=0-0=0$（標準正規分布は原点対称なので奇数次のモーメントは $0$）。
+  しかし $P(Y>1\mid |X|>1)=1\ne P(Y>1)$ のように、$X$ の値で $Y$ の分布が変わるので独立ではない。
+  相関係数は直線的な関係の強さしか測らないので $0$。共分散が $0$ なので $V[X+Y]=V[X]+V[Y]=1+2=3$ は成り立つ（e は誤り）。

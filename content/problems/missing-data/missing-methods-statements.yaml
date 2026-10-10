@@ -1,0 +1,29 @@
+topics: [missing-data]
+formulas: [missing-ignorability, rubin-rules-pooled-estimate]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  欠測データの解析に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 観測されたデータを詳しく調べれば、欠測メカニズムが MAR か MNAR かを判定できる。
+    correct: false
+  - id: b
+    text: 欠測が MAR であれば、完全ケース分析（リストワイズ削除）による推定には常に偏りがない。
+    correct: false
+  - id: c
+    text: 回帰代入で1回だけ欠測値を埋めたデータを通常どおり解析すると、標準誤差は適切に評価される。
+    correct: false
+  - id: d
+    text: MAR で、欠測メカニズムの母数とデータ分布の母数が分離可能なら、観測データの尤度に基づく最尤推定は欠測メカニズムをモデル化せずに行える。
+    correct: true
+  - id: e
+    text: 多重代入法の全分散は、代入内分散の平均と代入間分散の単純な和 $\bar U+B$ である。
+    correct: false
+explanation: |
+  d は無視可能性の条件そのもので正しい。
+  a：欠測値自体は観測されないので、MAR と MNAR は観測データからは区別できない。
+  b：完全ケース分析に偏りがないと一般に言えるのは MCAR のとき。MAR では偏りうる。
+  c：単一代入は代入の不確実性を無視するので、標準誤差を過小評価する。
+  e：全分散は $T=\bar U+(1+1/M)B$。

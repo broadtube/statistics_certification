@@ -1,0 +1,26 @@
+topics: [mds]
+formulas: [mds-double-centering, mds-coordinates, mds-kruskal-stress]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  多次元尺度法に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '非類似度がデータ行列から計算したユークリッド距離であれば、二重中心化した行列は半正定値であり、古典的 MDS の座標は（回転・反転を除いて）主成分得点と一致する。'
+    correct: true
+  - id: b
+    text: '古典的 MDS は、非類似度の大小関係（順序）だけを用いて布置を求める方法である。'
+    correct: false
+  - id: c
+    text: 'どのような非類似度を与えても、二重中心化した行列の固有値が負になることはない。'
+    correct: false
+  - id: d
+    text: 'クラスカルのストレスは、値が大きいほど布置の当てはまりが良いことを表す。'
+    correct: false
+  - id: e
+    text: '得られた布置を回転すると点間の距離が変わるので、布置は一意に定まる。'
+    correct: false
+explanation: |
+  ユークリッド距離なら $B=-\frac12JD^{(2)}J$ は中心化データの積和行列 $XX^\top$ に等しく半正定値で、その固有値分解は主成分分析と同じ座標を与える。ユークリッド距離として実現できない非類似度では負の固有値が出ることがある。
+  順序だけを使うのは非計量 MDS。ストレスは小さいほど当てはまりが良い。回転・反転しても点間の距離は変わらないので、布置はその分だけ不定である。

@@ -5,14 +5,16 @@ import { getSite } from '../site';
 
 interface Props {
   problems: ProblemSource[];
+  /** 問題が無いときの表示 */
+  emptyText?: string;
 }
-const { problems } = Astro.props;
+const { problems, emptyText = 'この分野の問題は準備中です。' } = Astro.props;
 const site = getSite();
 const stars = (d: number) => '★'.repeat(d) + '☆'.repeat(3 - d);
 const sourceLabel = (p: ProblemSource) => (p.source.kind === 'original' ? 'オリジナル' : `${p.source.exam} ${p.source.question} 類題`);
 ---
 {problems.length === 0 ? (
-  <p class="muted">この分野の問題は準備中です。</p>
+  <p class="muted">{emptyText}</p>
 ) : (
   <ol class="problem-list">
     {problems.map((p) => (

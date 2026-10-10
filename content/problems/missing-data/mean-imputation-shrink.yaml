@@ -1,0 +1,20 @@
+topics: [missing-data]
+formulas: [mean-imputation-variance]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $n={{n}}$ の標本のうち {{m}} 個の値が観測され、残りは欠測した。観測値の標本分散（$m$ で割る形）は {{s2}} であった。欠測値をすべて観測値の平均で埋めた（平均値代入）後、$n$ 個のデータで $n$ で割る形の標本分散を計算するといくらになるか（小数第3位まで）。
+explanation: |
+  代入した $n-m$ 個は平均 $\bar y_{\text{obs}}$ に等しく偏差が $0$ なので、偏差平方和は観測値の分 $m\times{{s2}}$ のままである。
+  $$
+  \frac{m\times{{s2}}}{n}=\frac{ {{m}}\times{{s2}} }{ {{n}} }={{answer}}
+  $$
+  このように平均値代入は分散を過小評価する。
+params:
+  n: { min: 50, max: 200, step: 10 }
+  m: { min: 30, max: 180, step: 5 }
+  s2: { min: 2, max: 20, step: 0.5 }
+constraints: ['m < n', 'm >= 0.5 * n']
+answer: m * s2 / n
+display: { digits: 3 }

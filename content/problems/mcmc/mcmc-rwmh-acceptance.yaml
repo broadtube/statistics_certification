@@ -1,0 +1,20 @@
+topics: [mcmc]
+formulas: [metropolis-hastings-acceptance]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  標準正規分布 $N(0,1)$ を目標分布とし、対称な提案分布をもつランダムウォーク・メトロポリス法を実行している。現在値が $x={{x}}$、候補が $y={{y}}$ のとき、候補の採択確率を求めよ（小数第4位まで）。
+explanation: |
+  提案分布が対称なので $\alpha=\min\{1,\pi(y)/\pi(x)\}$。正規化定数は約分されて
+  $$
+  \frac{\pi(y)}{\pi(x)}=\exp\left(-\frac{y^2-x^2}{2}\right)=\exp\left(-\frac{({{y}})^2-({{x}})^2}{2}\right)={{answer}}
+  $$
+  $|y|>|x|$ なのでこの値は $1$ より小さく、これが採択確率になる。
+params:
+  x: { min: 0.2, max: 1.5, step: 0.1 }
+  d: { min: 0.2, max: 1, step: 0.2 }
+derived:
+  y: x + d
+answer: exp(-((x + d)^2 - x^2) / 2)
+display: { digits: 4 }

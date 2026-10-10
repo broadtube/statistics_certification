@@ -1,0 +1,33 @@
+- id: lda-mahalanobis-distance
+  topic: discriminant
+  title: マハラノビス距離
+  description: 分散共分散行列で標準化した距離。変数間の相関と尺度の違いを考慮する。
+  body: 'D^2(\boldsymbol x,\boldsymbol\mu)=(\boldsymbol x-\boldsymbol\mu)^\top\Sigma^{-1}(\boldsymbol x-\boldsymbol\mu)'
+  pitfalls: 正則な線形変換（単位の変更など）に対して不変。1変数なら $\{(x-\mu)/\sigma\}^2$。
+  tags: [判別分析, マハラノビス距離]
+- id: lda-fisher-direction
+  topic: discriminant
+  title: フィッシャーの線形判別関数の係数
+  description: 群間の差と群内の分散の比を最大にする射影方向。
+  body: '\boldsymbol a\ \propto\ \Sigma^{-1}(\boldsymbol\mu_1-\boldsymbol\mu_2)=\arg\max_{\boldsymbol a}\frac{\{\boldsymbol a^\top(\boldsymbol\mu_1-\boldsymbol\mu_2)\}^2}{\boldsymbol a^\top\Sigma\boldsymbol a}'
+  tags: [判別分析, 線形判別]
+- id: lda-linear-rule
+  topic: discriminant
+  title: 線形判別のルール（等分散正規分布）
+  description: 共分散行列が等しい2つの多変量正規分布の群に対するベイズ判別。
+  body: '(\boldsymbol\mu_1-\boldsymbol\mu_2)^\top\Sigma^{-1}\left(\boldsymbol x-\frac{\boldsymbol\mu_1+\boldsymbol\mu_2}{2}\right)>\log\frac{\pi_2}{\pi_1}\ \Rightarrow\ \text{群1}'
+  derivation: '$\log\{\pi_1f_1(\boldsymbol x)\}>\log\{\pi_2f_2(\boldsymbol x)\}$ を整理すると、2次の項が打ち消し合い線形になる。'
+  pitfalls: 共分散行列が群で異なると2次の項が残り、2次判別になる。
+  tags: [判別分析, ベイズ判別, 線形判別]
+- id: lda-misclassification-rate
+  topic: discriminant
+  title: 線形判別の誤判別確率
+  description: 等分散正規分布・事前確率が等しい場合の、各群の誤判別確率。
+  body: 'P(\text{誤判別})=\Phi\left(-\frac{\Delta}{2}\right),\qquad \Delta^2=(\boldsymbol\mu_1-\boldsymbol\mu_2)^\top\Sigma^{-1}(\boldsymbol\mu_1-\boldsymbol\mu_2)'
+  tags: [判別分析, 誤判別率, 正規分布]
+- id: qda-discriminant-score
+  topic: discriminant
+  title: 2次判別の判別得点
+  description: 群ごとに共分散行列が異なる正規分布のときのベイズ判別。得点が最大の群に判別する。
+  body: '\delta_k(\boldsymbol x)=-\frac12\log|\Sigma_k|-\frac12(\boldsymbol x-\boldsymbol\mu_k)^\top\Sigma_k^{-1}(\boldsymbol x-\boldsymbol\mu_k)+\log\pi_k'
+  tags: [判別分析, 2次判別]

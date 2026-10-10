@@ -1,0 +1,19 @@
+topics: [machine-learning]
+formulas: [ml-precision-recall]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある分類器をテストデータに適用したところ、真陽性 $TP={{tp}}$、偽陽性 $FP={{fp}}$、偽陰性 $FN={{fn}}$ であった。F 値（適合率と再現率の調和平均）を求めよ（小数第3位まで）。
+explanation: |
+  適合率 $=\frac{TP}{TP+FP}=\frac{ {{tp}} }{ {{tp}}+{{fp}} }$、再現率 $=\frac{TP}{TP+FN}=\frac{ {{tp}} }{ {{tp}}+{{fn}} }$。調和平均を整理すると
+  $$
+  F=\frac{2TP}{2TP+FP+FN}=\frac{2\times{{tp}}}{2\times{{tp}}+{{fp}}+{{fn}}}={{answer}}
+  $$
+  真陰性の数は F 値に影響しない。
+params:
+  tp: { min: 20, max: 80, step: 5 }
+  fp: { min: 5, max: 40, step: 5 }
+  fn: { min: 5, max: 40, step: 5 }
+answer: 2 * tp / (2 * tp + fp + fn)
+display: { digits: 3 }

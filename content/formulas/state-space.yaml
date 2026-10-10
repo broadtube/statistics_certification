@@ -1,0 +1,45 @@
+- id: state-space-linear-gaussian
+  topic: state-space
+  title: 線形ガウス状態空間モデル
+  body: 'y_t=Z\alpha_t+\varepsilon_t,\ \ \varepsilon_t\sim N(0,H);\qquad \alpha_{t+1}=T\alpha_t+\eta_t,\ \ \eta_t\sim N(0,Q)'
+  variables:
+    - { symbol: '\alpha_t', meaning: 観測できない状態 }
+    - { symbol: 'y_t', meaning: 観測値 }
+  tags: [状態空間モデル]
+- id: local-level-model
+  topic: state-space
+  title: ローカルレベルモデル
+  description: ランダムウォークする水準に観測ノイズが乗ったモデル。
+  body: 'y_t=\mu_t+\varepsilon_t,\ \ \varepsilon_t\sim N(0,\sigma_\varepsilon^2);\qquad \mu_{t+1}=\mu_t+\eta_t,\ \ \eta_t\sim N(0,\sigma_\eta^2)'
+  pitfalls: '$\Delta y_t$ は MA(1) になり、ARIMA(0,1,1) と同じ自己相関構造をもつ。'
+  tags: [状態空間モデル, ローカルレベル]
+- id: kalman-gain-local-level
+  topic: state-space
+  title: カルマンゲイン（ローカルレベルモデル）
+  body: 'K_t=\frac{P_{t|t-1}}{P_{t|t-1}+\sigma_\varepsilon^2}'
+  pitfalls: 線形ガウスモデルでは観測値に依存せず、事前に計算できる。
+  tags: [カルマンフィルタ, カルマンゲイン]
+- id: kalman-filter-update
+  topic: state-space
+  title: カルマンフィルタの更新式
+  description: 一期先予測を予測誤差の $K_t$ 倍だけ修正する。
+  body: 'v_t=y_t-a_{t|t-1},\quad a_{t|t}=a_{t|t-1}+K_tv_t,\quad P_{t|t}=(1-K_t)P_{t|t-1}'
+  derivation: '$(\mu_t,y_t)$ の同時正規分布から、$y_t$ を与えたときの $\mu_t$ の条件付き分布を求める。'
+  tags: [カルマンフィルタ, フィルタリング]
+- id: kalman-prediction-local-level
+  topic: state-space
+  title: カルマンフィルタの予測式（ローカルレベルモデル）
+  body: 'a_{t+1|t}=a_{t|t},\qquad P_{t+1|t}=P_{t|t}+\sigma_\eta^2'
+  tags: [カルマンフィルタ, 予測]
+- id: kalman-steady-state
+  topic: state-space
+  title: ローカルレベルモデルの定常カルマンゲイン
+  body: '\frac{P}{\sigma_\varepsilon^2}=\frac{q+\sqrt{q^2+4q}}{2},\quad K=\frac{P}{P+\sigma_\varepsilon^2},\quad q=\frac{\sigma_\eta^2}{\sigma_\varepsilon^2}'
+  derivation: '$P=\frac{P\sigma_\varepsilon^2}{P+\sigma_\varepsilon^2}+\sigma_\eta^2$ を $P>0$ について解く。'
+  pitfalls: 定常状態のフィルタは平滑化係数 $K$ の指数平滑化と一致する。
+  tags: [カルマンフィルタ, 指数平滑化]
+- id: state-space-prediction-error-loglik
+  topic: state-space
+  title: 予測誤差分解による対数尤度
+  body: '\log L=-\frac12\sum_{t=1}^{n}\left(\log 2\pi F_t+\frac{v_t^2}{F_t}\right),\qquad F_t=P_{t|t-1}+\sigma_\varepsilon^2'
+  tags: [状態空間モデル, 最尤推定]

@@ -1,0 +1,19 @@
+topics: [sampling]
+formulas: [srs-mean-variance-fpc]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $N={{N}}$ の母集団から $n={{n}}$ 個を単純無作為非復元抽出したところ、標本の不偏分散は $s^2={{s2}}$ であった。標本平均 $\bar y$ の標準誤差の推定値を求めよ（小数第4位まで）。
+explanation: |
+  非復元抽出なので有限母集団修正を掛ける。
+  $$
+  \widehat{\mathrm{SE}}[\bar y]=\sqrt{\left(1-\frac nN\right)\frac{s^2}{n} }=\sqrt{\left(1-\frac{ {{n}} }{ {{N}} }\right)\frac{ {{s2}} }{ {{n}} } }={{answer}}
+  $$
+params:
+  N: { min: 200, max: 1000, step: 100 }
+  n: { min: 20, max: 150, step: 10 }
+  s2: { min: 4, max: 50, step: 2 }
+constraints: ['n < N / 2']
+answer: sqrt((1 - n / N) * s2 / n)
+display: { digits: 4 }

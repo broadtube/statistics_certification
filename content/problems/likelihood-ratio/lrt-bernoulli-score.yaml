@@ -1,0 +1,25 @@
+topics: [likelihood-ratio]
+formulas: [lrt-score-statistic]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  成功確率 $p$ のベルヌーイ試行を $n={{n}}$ 回行ったところ、成功は {{x}} 回であった。$H_0:p={{p0}}$ のスコア検定統計量 $S=\dfrac{U(p_0)^2}{nI(p_0)}$ の値を求めよ（小数第3位まで）。
+explanation: |
+  対数尤度 $\ell(p)=x\log p+(n-x)\log(1-p)$ より、スコアは
+  $$
+  U(p_0)=\frac{x}{p_0}-\frac{n-x}{1-p_0}=\frac{n(\hat p-p_0)}{p_0(1-p_0)}
+  $$
+  $nI(p_0)=\frac{n}{p_0(1-p_0)}$ なので
+  $$
+  S=\frac{(\hat p-p_0)^2}{p_0(1-p_0)/n}={{answer}}
+  $$
+  これは比率の z 検定統計量の2乗に一致する。
+params:
+  n: { min: 50, max: 200, step: 10 }
+  x: { min: 10, max: 150, step: 1 }
+  p0: { min: 0.3, max: 0.6, step: 0.1 }
+constraints: ['x / n >= 0.15', 'x / n <= 0.85', 'abs(x / n - p0) >= 0.03', 'abs(x / n - p0) <= 0.12']
+answer: (x / n - p0)^2 / (p0 * (1 - p0) / n)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.005 }

@@ -1,0 +1,21 @@
+topics: [glm]
+formulas: [poisson-regression-model, glm-wald-ci]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  事故件数をポアソン回帰（観測期間をオフセットとする）でモデル化し、ある対策の有無を表すダミー変数の係数が $\hat\beta={{b}}$、その標準誤差が $\mathrm{SE}(\hat\beta)={{se}}$ と推定された。率比 $e^{\beta}$ の95%信頼区間（ワルド型）の **上限** を求めよ（小数第3位まで）。
+explanation: |
+  $\beta$ の95%信頼区間は $\hat\beta\pm1.96\,\mathrm{SE}={{b}}\pm1.96\times{{se}}$。指数変換すると率比の区間になり、上限は
+  $$
+  \exp({{b}}+1.96\times{{se}})={{answer}}
+  $$
+  下限は $\exp({{b}}-1.96\times{{se}})={{lower}}$。区間は点推定値 $e^{\hat\beta}={{rr}}$ について左右対称ではない。
+params:
+  b: { min: -1, max: -0.1, step: 0.05 }
+  se: { min: 0.1, max: 0.4, step: 0.05 }
+derived:
+  lower: exp(b - qnorm(0.975) * se)
+  rr: exp(b)
+answer: exp(b + qnorm(0.975) * se)
+display: { digits: 3 }

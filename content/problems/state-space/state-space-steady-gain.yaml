@@ -1,0 +1,19 @@
+topics: [state-space]
+formulas: [kalman-steady-state]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  ローカルレベルモデルで信号対雑音比が $q=\sigma_\eta^2/\sigma_\varepsilon^2={{q}}$ であるとき、カルマンフィルタが定常状態に達したときのカルマンゲイン $K$ を求めよ（小数第3位まで）。
+explanation: |
+  定常状態の予測分散 $P$ は $P=\frac{P\sigma_\varepsilon^2}{P+\sigma_\varepsilon^2}+\sigma_\eta^2$ を満たす。$x=P/\sigma_\varepsilon^2$ とおくと $x^2-qx-q=0$ なので
+  $$
+  x=\frac{q+\sqrt{q^2+4q}}{2}={{x}},\qquad K=\frac{x}{x+1}={{answer}}
+  $$
+  定常状態のフィルタは平滑化係数 $K$ の指数平滑化に一致する。
+params:
+  q: { min: 0.1, max: 3, step: 0.1 }
+derived:
+  x: (q + sqrt(q^2 + 4 * q)) / 2
+answer: ((q + sqrt(q^2 + 4 * q)) / 2) / ((q + sqrt(q^2 + 4 * q)) / 2 + 1)
+display: { digits: 3 }

@@ -1,0 +1,22 @@
+topics: [sampling]
+formulas: [neyman-allocation]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2つの層からなる母集団（層1：$N_1={{N1}}$、標準偏差 $S_1={{S1}}$／層2：$N_2={{N2}}$、標準偏差 $S_2={{S2}}$）から、合計 $n={{n}}$ 個を層化抽出する。ネイマン配分による層1の標本サイズ $n_1$ を求めよ（小数第1位まで、丸める前の値）。
+explanation: |
+  ネイマン配分は $n_h\propto N_hS_h$。
+  $$
+  n_1=n\cdot\frac{N_1S_1}{N_1S_1+N_2S_2}={{n}}\times\frac{ {{N1}}\times{{S1}} }{ {{N1}}\times{{S1}}+{{N2}}\times{{S2}} }={{answer}}
+  $$
+  ばらつきの大きい層ほど多く配分される（比例配分なら $n_1=nN_1/N$）。
+params:
+  N1: { min: 1000, max: 5000, step: 500 }
+  N2: { min: 1000, max: 5000, step: 500 }
+  S1: { min: 2, max: 10, step: 1 }
+  S2: { min: 2, max: 10, step: 1 }
+  n: { min: 100, max: 400, step: 50 }
+constraints: ['S1 != S2']
+answer: n * N1 * S1 / (N1 * S1 + N2 * S2)
+display: { digits: 1 }

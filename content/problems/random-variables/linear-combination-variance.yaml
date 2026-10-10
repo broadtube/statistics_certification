@@ -1,0 +1,22 @@
+topics: [random-variables]
+formulas: [rv-variance-linear-combination]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  確率変数 $X,Y$ の分散が $V[X]={{vx}}$、$V[Y]={{vy}}$、相関係数が $\rho={{rho}}$ である。$W={{a}}X-{{b}}Y$ の分散を求めよ（小数第2位まで）。
+explanation: |
+  $\mathrm{Cov}(X,Y)=\rho\sqrt{V[X]V[Y]}={{rho}}\sqrt{ {{vx}}\times{{vy}} }$。線形結合の分散の公式より
+  $$
+  V[W]={{a}}^2\times{{vx}}+{{b}}^2\times{{vy}}-2\times{{a}}\times{{b}}\,\mathrm{Cov}(X,Y)={{answer}}
+  $$
+  係数が $-{{b}}$ なので、共分散の項の符号は負になる。
+params:
+  vx: { min: 1, max: 9, step: 1 }
+  vy: { min: 1, max: 9, step: 1 }
+  rho: { min: -0.8, max: 0.8, step: 0.1 }
+  a: { min: 1, max: 3, step: 1 }
+  b: { min: 1, max: 3, step: 1 }
+constraints: ['rho != 0']
+answer: a^2 * vx + b^2 * vy - 2 * a * b * rho * sqrt(vx * vy)
+display: { digits: 2 }

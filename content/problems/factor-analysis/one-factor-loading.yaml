@@ -1,0 +1,24 @@
+topics: [factor-analysis]
+formulas: [fa-one-factor-correlation, fa-communality]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  標準化した3変数 $x_1,x_2,x_3$ の相関係数が $r_{12}={{r12}}$、$r_{13}={{r13}}$、$r_{23}={{r23}}$ であった。1因子モデルが成り立つとき、$x_1$ の共通性 $h_1^2=\lambda_1^2$ を求めよ（小数第2位まで）。
+explanation: |
+  1因子モデル $x_j=\lambda_jf+\varepsilon_j$（$V[f]=1$）では、$i\ne j$ について $r_{ij}=\lambda_i\lambda_j$。よって
+  $$
+  \frac{r_{12}\,r_{13}}{r_{23}}=\frac{\lambda_1\lambda_2\cdot\lambda_1\lambda_3}{\lambda_2\lambda_3}=\lambda_1^2
+  $$
+  したがって $h_1^2=\frac{ {{r12}}\times{{r13}} }{ {{r23}} }={{answer}}$。独自分散は $1-h_1^2$ となる。
+params:
+  l1: { min: 0.4, max: 0.9, step: 0.1 }
+  l2: { min: 0.4, max: 0.9, step: 0.1 }
+  l3: { min: 0.4, max: 0.9, step: 0.1 }
+derived:
+  r12: l1 * l2
+  r13: l1 * l3
+  r23: l2 * l3
+answer: l1^2
+display: { digits: 2 }
+tolerance: { type: absolute, value: 0.005 }

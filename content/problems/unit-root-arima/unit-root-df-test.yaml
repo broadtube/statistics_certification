@@ -1,0 +1,26 @@
+topics: [unit-root-arima]
+formulas: [dickey-fuller-regression]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  回帰式 $\Delta X_t=\alpha+\gamma X_{t-1}+\varepsilon_t$ に基づくディッキー・フラー検定に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '帰無仮説は $\gamma=0$（単位根あり）であり、$\hat\gamma$ の $t$ 統計量を $t$ 分布ではなくディッキー・フラー分布の臨界値と比較する。'
+    correct: true
+  - id: b
+    text: '帰無仮説は「系列は定常である」であり、棄却されれば単位根があると判断する。'
+    correct: false
+  - id: c
+    text: '帰無仮説のもとで $\hat\gamma$ の $t$ 統計量は自由度 $n-2$ の $t$ 分布に従うので、通常の $t$ 検定の臨界値を使えばよい。'
+    correct: false
+  - id: d
+    text: '帰無仮説が棄却されなければ、系列に単位根があることが統計的に証明されたことになる。'
+    correct: false
+  - id: e
+    text: '定数項 $\alpha$ を含めるかどうかで臨界値は変わらない。'
+    correct: false
+explanation: |
+  DF 検定は $H_0:\gamma=0$（$\phi=1$、単位根）対 $H_1:\gamma<0$（定常）の片側検定。$H_0$ のもとで $X_{t-1}$ が非定常なので、$t$ 統計量は $t$ 分布に従わず、左に偏ったディッキー・フラー分布に従う（定数項ありの5%点はおよそ $-2.86$）。
+  (b) は KPSS 検定の帰無仮説の向き。(d) 棄却できないことは帰無仮説の証明ではない。(e) 定数項・トレンド項の有無で臨界値は異なる。

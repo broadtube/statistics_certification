@@ -1,0 +1,29 @@
+topics: [sampling]
+formulas: [srs-mean-variance-fpc, stratified-mean-variance]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  標本調査の抽出法に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 層化抽出は、層内が均質で層間の差が大きいほど、単純無作為抽出に比べて推定の精度が高くなる。
+    correct: true
+  - id: b
+    text: 集落抽出は、集落内の個体どうしが似通っているほど推定の精度が高くなる。
+    correct: false
+  - id: c
+    text: 単純無作為抽出で同じ精度を得るには、母集団の大きさ $N$ が10倍になれば標本サイズもおよそ10倍必要になる。
+    correct: false
+  - id: d
+    text: 有限母集団修正 $1-n/N$ は復元抽出のときに掛ける補正である。
+    correct: false
+  - id: e
+    text: 総標本サイズが一定のとき、層化推定量の分散を最小にするのは常に比例配分である。
+    correct: false
+explanation: |
+  層化推定量の分散は層内分散だけで決まるので、層内が均質なほど精度が上がる（a が正しい）。
+  b：集落内が似通っている（級内相関が正）と、集落を丸ごと調べても情報が増えにくく精度は下がる。
+  c：$V[\bar y]=(1-n/N)S^2/n$ で、$N$ が大きければ $1-n/N\approx1$ となり、必要な $n$ はほとんど $N$ に依存しない。
+  d：有限母集団修正は非復元抽出のときの補正。
+  e：分散を最小にするのはネイマン配分 $n_h\propto N_hS_h$。比例配分と一致するのは層の標準偏差が等しいときだけ。

@@ -1,0 +1,24 @@
+topics: [machine-learning]
+formulas: [ml-impurity]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  陽性 50 件・陰性 50 件からなる決定木のノードを、ある分割で左右に分けたところ、左の子ノードは陽性 {{a1}} 件・陰性 {{b1}} 件、右の子ノードは陽性 {{a2}} 件・陰性 {{b2}} 件になった。ジニ係数で測った不純度の減少量（親ノードのジニ係数から、子ノードのジニ係数を件数で重み付けした平均を引いた値）を求めよ（小数第4位まで）。
+explanation: |
+  2クラスのジニ係数は $1-p^2-(1-p)^2=2p(1-p)$。親ノードは $p=0.5$ で $0.5$。
+  左は $G_L=2\cdot\frac{ {{a1}} }{ {{nL}} }\cdot\frac{ {{b1}} }{ {{nL}} }={{gL}}$、右は $G_R=2\cdot\frac{ {{a2}} }{ {{nR}} }\cdot\frac{ {{b2}} }{ {{nR}} }={{gR}}$。
+  減少量は $0.5-\left(\frac{ {{nL}} }{100}G_L+\frac{ {{nR}} }{100}G_R\right)={{answer}}$。この値が最大になる分割が選ばれる。
+params:
+  a1: { min: 10, max: 45, step: 5 }
+  b1: { min: 5, max: 40, step: 5 }
+derived:
+  a2: 50 - a1
+  b2: 50 - b1
+  nL: a1 + b1
+  nR: 100 - a1 - b1
+  gL: 2 * a1 * b1 / (a1 + b1)^2
+  gR: 2 * (50 - a1) * (50 - b1) / (100 - a1 - b1)^2
+constraints: ['a1 != b1']
+answer: 0.5 - ((a1 + b1) / 100 * (2 * a1 * b1 / (a1 + b1)^2) + (100 - a1 - b1) / 100 * (2 * (50 - a1) * (50 - b1) / (100 - a1 - b1)^2))
+display: { digits: 4 }

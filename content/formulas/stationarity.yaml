@@ -1,0 +1,39 @@
+- id: weak-stationarity-definition
+  topic: stationarity
+  title: 弱定常性
+  description: 平均が一定で、自己共分散がラグだけに依存する。
+  body: 'E[X_t]=\mu,\qquad \mathrm{Cov}(X_t,X_{t+h})=\gamma(h)\quad(\text{すべての }t)'
+  pitfalls: 強定常でも2次モーメントが存在しなければ弱定常ではない。正規過程では弱定常と強定常は同値。
+  tags: [定常性, 自己共分散]
+- id: stationary-acf
+  topic: stationarity
+  title: 自己相関関数
+  description: 自己共分散をラグ0の値（分散）で割ったもの。
+  body: '\rho(h)=\frac{\gamma(h)}{\gamma(0)},\qquad \gamma(-h)=\gamma(h),\quad |\rho(h)|\le1'
+  tags: [自己相関, 定常性]
+- id: sample-autocorrelation
+  topic: stationarity
+  title: 標本自己相関
+  body: 'r_h=\frac{\sum_{t=1}^{n-h}(x_t-\bar x)(x_{t+h}-\bar x)}{\sum_{t=1}^{n}(x_t-\bar x)^2}'
+  pitfalls: 分母はラグによらず $n$ 項の和。ホワイトノイズのもとで $r_h$ は近似的に $N(0,1/n)$ に従い、$\pm1.96/\sqrt n$ が95%の目安。
+  tags: [自己相関, 標本]
+- id: pacf-lag2
+  topic: stationarity
+  title: ラグ2の偏自己相関
+  description: 中間の $X_{t+1}$ の影響を除いた $X_t$ と $X_{t+2}$ の相関。
+  body: '\phi_{11}=\rho(1),\qquad \phi_{22}=\frac{\rho(2)-\rho(1)^2}{1-\rho(1)^2}'
+  derivation: '$X_{t+2}$ を $X_{t+1},X_t$ に回帰する正規方程式（ユール・ウォーカー方程式）を解く。'
+  tags: [偏自己相関, 自己相関]
+- id: ljung-box-statistic
+  topic: stationarity
+  title: リュン・ボックス統計量
+  description: 複数ラグの自己相関がすべて $0$ という帰無仮説（かばん検定）の検定統計量。
+  body: 'Q=n(n+2)\sum_{k=1}^{m}\frac{r_k^2}{n-k}\ \overset{\cdot}{\sim}\ \chi^2_m'
+  conditions: 'ARMA($p,q$) モデルの残差に適用するときは自由度を $m-p-q$ とする。'
+  tags: [かばん検定, 自己相関, カイ二乗分布]
+- id: sample-mean-variance-stationary
+  topic: stationarity
+  title: 定常過程の標本平均の分散
+  body: 'V[\bar X]=\frac1n\sum_{|h|<n}\left(1-\frac{|h|}{n}\right)\gamma(h)'
+  pitfalls: 正の自己相関があると独立な場合の $\gamma(0)/n$ より大きくなる。
+  tags: [標本平均, 自己共分散]

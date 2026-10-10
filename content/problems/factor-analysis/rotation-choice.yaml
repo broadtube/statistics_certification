@@ -1,0 +1,26 @@
+topics: [factor-analysis]
+formulas: [fa-rotation-indeterminacy, fa-communality]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  因子分析における因子回転に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '直交回転を行っても、各変数の共通性と独自分散は変わらない。'
+    correct: true
+  - id: b
+    text: 'バリマックス回転は、因子間の相関を許す斜交回転である。'
+    correct: false
+  - id: c
+    text: '適切な回転を行うと、モデルの適合度（尤度）が改善する。'
+    correct: false
+  - id: d
+    text: 'プロマックス回転を行った後も、因子間の相関は0のままである。'
+    correct: false
+  - id: e
+    text: '因子負荷行列は、回転を考えなくても一意に定まる。'
+    correct: false
+explanation: |
+  直交行列 $T$ で $\Lambda^*=\Lambda T$ と回転すると $\Lambda^*\Lambda^{*\top}=\Lambda\Lambda^\top$ なので、$\Sigma=\Lambda\Lambda^\top+\Psi$ は変わらない。したがって共通性（$\Lambda\Lambda^\top$ の対角成分）、独自分散、尤度（適合度）はいずれも変わらない。逆に言えば、$\Lambda$ は回転を除いてしか定まらない。
+  バリマックス回転は直交回転、プロマックス回転は因子間の相関を許す斜交回転である。

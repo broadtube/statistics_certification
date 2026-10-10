@@ -1,0 +1,43 @@
+- id: rv-variance-shortcut
+  topic: random-variables
+  title: 分散の計算公式
+  description: 二乗の期待値から期待値の二乗を引く。
+  body: 'V[X]=E[(X-\mu)^2]=E[X^2]-(E[X])^2,\qquad V[aX+b]=a^2V[X]'
+  pitfalls: '定数 $b$ を足しても分散は変わらない。$a$ は二乗で効く。'
+  tags: [期待値, 分散]
+- id: rv-variance-linear-combination
+  topic: random-variables
+  title: 線形結合の分散
+  description: 2つの確率変数の線形結合の分散には共分散の項が入る。
+  body: 'V[aX+bY]=a^2V[X]+b^2V[Y]+2ab\,\mathrm{Cov}(X,Y),\qquad \mathrm{Cov}(X,Y)=\rho\sqrt{V[X]V[Y]}'
+  conditions: 独立または無相関なら共分散の項は $0$。
+  pitfalls: '差 $X-Y$ の分散は $V[X]+V[Y]-2\mathrm{Cov}(X,Y)$。'
+  tags: [分散, 共分散, 相関係数]
+- id: rv-covariance-definition
+  topic: random-variables
+  title: 共分散と相関係数
+  body: '\mathrm{Cov}(X,Y)=E[XY]-E[X]E[Y],\qquad \rho_{XY}=\frac{\mathrm{Cov}(X,Y)}{\sqrt{V[X]\,V[Y]}}\in[-1,1]'
+  derivation: 'コーシー・シュワルツの不等式 $(E[UV])^2\le E[U^2]E[V^2]$ を中心化した変数に適用すると $|\rho|\le1$。'
+  pitfalls: 無相関は独立を意味しない（$Y=X^2$、$X\sim N(0,1)$ など）。
+  tags: [共分散, 相関係数, 独立]
+- id: rv-mgf-independent-sum
+  topic: random-variables
+  title: 積率母関数と独立な和
+  description: 積率母関数を微分するとモーメントが得られ、独立な和の積率母関数は積になる。
+  body: 'M_X(t)=E[e^{tX}],\quad E[X^k]=M_X^{(k)}(0),\quad M_{X+Y}(t)=M_X(t)\,M_Y(t)\ \ (X,Y\ \text{独立})'
+  conditions: '$t=0$ の近傍で $M_X(t)$ が存在すること。存在すれば分布を一意に決める。'
+  tags: [積率母関数, 再生性]
+- id: rv-law-total-expectation
+  topic: random-variables
+  title: 繰り返し期待値の法則
+  description: 条件付き期待値の期待値は、もとの期待値に等しい。
+  body: 'E[X]=E\big[E[X\mid Y]\big]'
+  tags: [条件付き期待値]
+- id: rv-law-total-variance
+  topic: random-variables
+  title: 全分散の公式
+  description: 分散を「条件付き分散の平均」と「条件付き期待値の分散」に分解する。
+  body: 'V[X]=E\big[V[X\mid Y]\big]+V\big[E[X\mid Y]\big]'
+  derivation: '$V[X\mid Y]=E[X^2\mid Y]-(E[X\mid Y])^2$ の期待値をとり、$V[E[X\mid Y]]=E[(E[X\mid Y])^2]-(E[X])^2$ と足し合わせる。'
+  pitfalls: 'ランダムな個数の和 $S=\sum_{i=1}^N Y_i$ では $V[S]=E[N]V[Y]+V[N](E[Y])^2$。'
+  tags: [条件付き期待値, 分散, 複合分布]

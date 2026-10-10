@@ -1,0 +1,21 @@
+topics: [likelihood-ratio]
+formulas: [lrt-wald-statistic]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  成功確率 $p$ のベルヌーイ試行を $n={{n}}$ 回行ったところ、成功は {{x}} 回であった。$H_0:p={{p0}}$ のワルド検定統計量 $W=(\hat p-p_0)^2\,nI(\hat p)$ の値を求めよ（小数第3位まで）。
+explanation: |
+  ベルヌーイ分布のフィッシャー情報量は $I(p)=\frac{1}{p(1-p)}$。$\hat p=\frac{ {{x}} }{ {{n}} }$ を代入すると
+  $$
+  W=\frac{(\hat p-p_0)^2}{\hat p(1-\hat p)/n}={{answer}}
+  $$
+  分母（分散の推定）に $\hat p$ を使う点がスコア検定との違い。
+params:
+  n: { min: 50, max: 200, step: 10 }
+  x: { min: 10, max: 150, step: 1 }
+  p0: { min: 0.3, max: 0.6, step: 0.1 }
+constraints: ['x / n >= 0.15', 'x / n <= 0.85', 'abs(x / n - p0) >= 0.03', 'abs(x / n - p0) <= 0.12']
+answer: (x / n - p0)^2 / ((x / n) * (1 - x / n) / n)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.005 }

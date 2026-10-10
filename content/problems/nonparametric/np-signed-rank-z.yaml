@@ -1,0 +1,23 @@
+topics: [nonparametric]
+formulas: [wilcoxon-signed-rank-moments]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  対応のある {{n}} 組のデータについて、差の絶対値に順位をつけ（同順位・差 $0$ はなし）、正の差の順位の和を求めたところ $T^+={{t}}$ であった。ウィルコクソンの符号付き順位検定を正規近似で行うときの標準化統計量 $z$ の値を求めよ（小数第3位まで）。
+explanation: |
+  $H_0$ のもとで
+  $$
+  E[T^+]=\frac{n(n+1)}{4}=\frac{ {{n}}\times({{n}}+1) }{4},\qquad V[T^+]=\frac{n(n+1)(2n+1)}{24}=\frac{ {{n}}\times({{n}}+1)\times(2\times{{n}}+1) }{24}
+  $$
+  よって
+  $$
+  z=\frac{T^+-E[T^+]}{\sqrt{V[T^+]}}={{answer}}
+  $$
+params:
+  n: { min: 15, max: 40, step: 1 }
+  t: { min: 20, max: 600, step: 1 }
+constraints: ['abs(t - n * (n + 1) / 4) / sqrt(n * (n + 1) * (2 * n + 1) / 24) >= 0.5', 'abs(t - n * (n + 1) / 4) / sqrt(n * (n + 1) * (2 * n + 1) / 24) <= 3']
+answer: (t - n * (n + 1) / 4) / sqrt(n * (n + 1) * (2 * n + 1) / 24)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.005 }

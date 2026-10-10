@@ -1,0 +1,14 @@
+topics: [multiple-comparison]
+formulas: [bonferroni-correction]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  {{a}} 個の群のすべての対について2群の t 検定を行い、ボンフェローニ法でファミリーワイズ誤り率を $\alpha={{alpha}}$ 以下に抑えたい。個々の検定で用いる有意水準を求めよ（小数第5位まで）。
+explanation: |
+  対の数は $m=\binom{ {{a}} }{2}=\frac{ {{a}}\times({{a}}-1) }{2}$。ボンフェローニ法では各検定を有意水準 $\alpha/m={{answer}}$ で行う。
+params:
+  a: { min: 3, max: 8, step: 1 }
+  alpha: { min: 0.01, max: 0.1, step: 0.01 }
+answer: alpha / (a * (a - 1) / 2)
+display: { digits: 5 }

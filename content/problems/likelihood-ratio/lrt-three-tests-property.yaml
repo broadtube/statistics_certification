@@ -1,0 +1,26 @@
+topics: [likelihood-ratio]
+formulas: [lrt-wald-statistic, lrt-score-statistic, lrt-wilks-theorem]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  1母数 $\theta$ についての $H_0:\theta=\theta_0$ を検定する尤度比検定・ワルド検定・スコア検定に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 'スコア検定の統計量は、帰無仮説のもとでの値 $\theta_0$ における計算だけで求められ、最尤推定量 $\hat\theta$ を求める必要がない。'
+    correct: true
+  - id: b
+    text: 'ワルド検定の統計量は、$\theta$ を $\log\theta$ に変換して検定しても値が変わらない。'
+    correct: false
+  - id: c
+    text: '3つの検定統計量は、どのような分布・標本サイズでも常に同じ値になる。'
+    correct: false
+  - id: d
+    text: '尤度比検定統計量 $-2\log\Lambda$ は、帰無仮説のもとで自由度 $n-1$（$n$ は標本サイズ）のカイ二乗分布に近づく。'
+    correct: false
+  - id: e
+    text: 'ワルド検定では、帰無仮説のもとでの最尤推定量だけを使い、制約のないモデルを推定する必要がない。'
+    correct: false
+explanation: |
+  スコア検定は $U(\theta_0)$ と $I(\theta_0)$ だけを使うので、$H_0$ のもとでの推定だけで済む（a が正しい）。逆にワルド検定は制約のないモデルの $\hat\theta$ を使う（e は誤り）。
+  ワルド検定はパラメータ化に依存し、$\theta$ と $\log\theta$ では値が変わる（b は誤り）。3つは漸近的に同等だが一般に値は異なる（c は誤り）。1母数の $H_0:\theta=\theta_0$ では自由度は $1$（d は誤り）。

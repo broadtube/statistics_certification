@@ -1,0 +1,40 @@
+- id: hat-matrix-leverage
+  topic: regression-diagnostics
+  title: ハット行列とてこ比
+  description: ハット行列の対角要素がてこ比。総和は回帰係数の数に等しい。
+  body: 'H=X(X^\top X)^{-1}X^\top,\quad \hat{\boldsymbol y}=H\boldsymbol y,\quad \sum_{i=1}^n h_{ii}=\mathrm{tr}\,H=p+1'
+  pitfalls: '平均てこ比は $(p+1)/n$。その2〜3倍を超えると高てこ比の目安。'
+  tags: [回帰診断, てこ比, ハット行列]
+- id: leverage-simple-regression
+  topic: regression-diagnostics
+  title: 単回帰のてこ比
+  body: 'h_{ii}=\frac1n+\frac{(x_i-\bar x)^2}{\sum_{j=1}^n(x_j-\bar x)^2}'
+  description: 説明変数が平均から離れた観測ほどてこ比が大きい。
+  tags: [回帰診断, てこ比]
+- id: residual-variance-leverage
+  topic: regression-diagnostics
+  title: 残差の分散と標準化残差
+  body: 'V[e_i]=\sigma^2(1-h_{ii}),\qquad r_i=\frac{e_i}{\hat\sigma\sqrt{1-h_{ii}}}'
+  derivation: '$\boldsymbol e=(I-H)\boldsymbol y$ と $I-H$ の対称性・べき等性から $V[\boldsymbol e]=\sigma^2(I-H)$。'
+  tags: [回帰診断, 残差]
+- id: cooks-distance
+  topic: regression-diagnostics
+  title: クックの距離
+  description: 1つの観測を除いたときの回帰係数（当てはめ値）の変化の大きさ。
+  body: 'D_i=\frac{(\hat{\boldsymbol\beta}_{(i)}-\hat{\boldsymbol\beta})^\top X^\top X(\hat{\boldsymbol\beta}_{(i)}-\hat{\boldsymbol\beta})}{(p+1)\hat\sigma^2}=\frac{r_i^2}{p+1}\cdot\frac{h_{ii}}{1-h_{ii}}'
+  pitfalls: '$D_i>1$ や $D_i>4/n$ が目安。残差が小さくてもてこ比が高ければ大きくなりうる。'
+  tags: [回帰診断, クックの距離, 影響点]
+- id: vif-definition
+  topic: regression-diagnostics
+  title: 分散拡大要因（VIF）
+  body: '\mathrm{VIF}_j=\frac{1}{1-R_j^2},\qquad V[\hat\beta_j]=\frac{\sigma^2}{\sum_i(x_{ij}-\bar x_j)^2}\,\mathrm{VIF}_j'
+  conditions: '$R_j^2$ は $x_j$ を他の説明変数（と切片）で回帰したときの決定係数。'
+  pitfalls: 'VIF が10を超えると多重共線性の目安とされる。'
+  tags: [回帰診断, 多重共線性, VIF]
+- id: durbin-watson
+  topic: regression-diagnostics
+  title: ダービン・ワトソン統計量
+  description: 残差の1次の自己相関を調べる統計量。
+  body: 'd=\frac{\sum_{t=2}^n(e_t-e_{t-1})^2}{\sum_{t=1}^n e_t^2}\approx2(1-\hat\rho_1)'
+  pitfalls: '$d\approx2$ で自己相関なし、$0$ に近いと正の自己相関、$4$ に近いと負の自己相関。'
+  tags: [回帰診断, 自己相関]

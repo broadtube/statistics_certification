@@ -1,0 +1,37 @@
+- id: prob-inclusion-exclusion
+  topic: probability-basics
+  title: 加法定理（包除原理）
+  description: 和事象の確率は、それぞれの確率の和から重複部分を引いたもの。
+  body: 'P(A\cup B)=P(A)+P(B)-P(A\cap B)'
+  derivation: '$A\cup B=A\cup(B\cap A^c)$ と排反な和に分け、$P(B)=P(B\cap A)+P(B\cap A^c)$ を使う。'
+  pitfalls: '3事象では $P(A\cup B\cup C)=\sum P(A)-\sum P(A\cap B)+P(A\cap B\cap C)$ と、3つの積事象を足し戻す。'
+  tags: [確率の公理, 和事象]
+- id: prob-conditional-definition
+  topic: probability-basics
+  title: 条件付き確率と乗法定理
+  description: 事象 $B$ が起きたという条件のもとでの $A$ の確率。
+  body: 'P(A\mid B)=\frac{P(A\cap B)}{P(B)}\quad(P(B)>0),\qquad P(A\cap B)=P(B)\,P(A\mid B)'
+  pitfalls: '$P(A\mid B)$ と $P(B\mid A)$ は一般に異なる。'
+  tags: [条件付き確率]
+- id: prob-total-probability
+  topic: probability-basics
+  title: 全確率の公式
+  description: 標本空間を排反な事象に分割し、それぞれの条件付き確率の重み付き和として確率を求める。
+  body: 'P(A)=\sum_{j=1}^{k}P(B_j)\,P(A\mid B_j)\qquad(B_1,\dots,B_k\ \text{は}\ \Omega\ \text{の分割})'
+  tags: [条件付き確率, 全確率の公式]
+- id: prob-bayes-rule-events
+  topic: probability-basics
+  title: ベイズの定理（事象）
+  description: 結果 $A$ を観測したあとで、原因 $B_j$ の確率を更新する。
+  body: 'P(B_j\mid A)=\frac{P(B_j)\,P(A\mid B_j)}{\sum_{l=1}^{k}P(B_l)\,P(A\mid B_l)}'
+  derivation: '$P(B_j\cap A)=P(B_j)P(A\mid B_j)=P(A)P(B_j\mid A)$ と分母への全確率の公式から。'
+  pitfalls: 事前確率（有病率など）が小さいと、条件付き確率 $P(A\mid B_j)$ が大きくても事後確率は小さくなる。
+  tags: [ベイズの定理, 事前確率, 事後確率]
+- id: prob-independence-events
+  topic: probability-basics
+  title: 事象の独立
+  description: 一方が起きたかどうかが他方の確率に影響しないこと。
+  body: 'P(A\cap B)=P(A)\,P(B)\iff P(A\mid B)=P(A)\quad(P(B)>0)'
+  conditions: 3つ以上の事象の相互独立は、すべての部分集合について積の形が成り立つこと。
+  pitfalls: 正の確率をもつ排反な事象は独立ではない。対ごとに独立でも相互独立とは限らない。
+  tags: [独立, 排反]

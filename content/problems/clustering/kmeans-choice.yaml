@@ -1,0 +1,26 @@
+topics: [clustering]
+formulas: [kmeans-within-ss, cluster-ss-decomposition]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  k-means 法に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '割り当てと重心の更新を繰り返すとクラスター内平方和は増加しないが、収束先は初期値に依存する局所最適解でありうる。'
+    correct: true
+  - id: b
+    text: 'k-means 法は、クラスター内平方和を最小にする大域的最適解を必ず与える。'
+    correct: false
+  - id: c
+    text: 'クラスター数 $k$ を増やすと、達成できるクラスター内平方和の最小値は増加することがある。'
+    correct: false
+  - id: d
+    text: '変数の単位を変えても、k-means 法の結果は変わらない。'
+    correct: false
+  - id: e
+    text: 'k-means 法では、クラスター数をデータから自動的に決めるので事前に指定する必要はない。'
+    correct: false
+explanation: |
+  割り当ての段階（最も近い重心へ）でも重心の更新の段階（平均は平方和を最小にする）でも $W$ は増えないので単調に減少して収束するが、収束先は局所最適解で、初期値によって結果が変わる。複数の初期値で実行して $W$ 最小のものを選ぶのが普通。
+  $k$ を増やせば分け方の自由度が増えるので、最小の $W$ は増加しない（$k=n$ で0）。ユークリッド距離を使うので単位（尺度）の影響を受ける。$k$ は事前に指定し、エルボー法やシルエット係数などで選ぶ。

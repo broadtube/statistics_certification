@@ -1,0 +1,32 @@
+- id: mds-double-centering
+  topic: mds
+  title: 古典的 MDS の二重中心化
+  description: 距離の2乗の行列から、重心を原点とする座標の内積行列を作る。
+  body: 'B=-\frac12JD^{(2)}J,\qquad b_{ij}=-\frac12\left(d_{ij}^2-\bar d_{i\cdot}^{\,2}-\bar d_{\cdot j}^{\,2}+\bar d_{\cdot\cdot}^{\,2}\right)'
+  conditions: '$J=I_n-\frac1n\boldsymbol 1\boldsymbol 1^\top$、$D^{(2)}=(d_{ij}^2)$。'
+  tags: [多次元尺度法, 二重中心化]
+- id: mds-coordinates
+  topic: mds
+  title: 古典的 MDS の座標
+  body: 'B=V\Lambda V^\top\ \Longrightarrow\ X_k=V_k\Lambda_k^{1/2}'
+  pitfalls: 布置は回転・反転について不定。ユークリッド距離から作った $B$ なら主成分得点と一致する。
+  tags: [多次元尺度法, 固有値]
+- id: mds-fit-ratio
+  topic: mds
+  title: 古典的 MDS の当てはまりの目安
+  body: '\frac{\sum_{i=1}^k\lambda_i}{\sum_{i:\,\lambda_i>0}\lambda_i}'
+  pitfalls: 非類似度がユークリッド距離でないと負の固有値が出る。分母に $\sum|\lambda_i|$ を使う流儀もある。
+  tags: [多次元尺度法, 固有値, 寄与率]
+- id: mds-kruskal-stress
+  topic: mds
+  title: クラスカルのストレス
+  description: 非計量 MDS の当てはまりの悪さを測る量（小さいほど良い）。
+  body: '\mathrm{stress}=\sqrt{\frac{\sum_{i<j}(d_{ij}-\hat d_{ij})^2}{\sum_{i<j}d_{ij}^2}}'
+  conditions: '$d_{ij}$ は布置上の距離、$\hat d_{ij}$ は非類似度の順序を保つ単調回帰の当てはめ値。'
+  tags: [多次元尺度法, 非計量MDS, ストレス]
+- id: ca-total-inertia
+  topic: mds
+  title: 対応分析の全慣性
+  description: 標準化残差の特異値の2乗の和はカイ二乗統計量を総度数で割ったものに等しい。
+  body: '\sum_{k=1}^{K}\mu_k^2=\frac{\chi^2}{n},\qquad K=\min(r,c)-1'
+  tags: [対応分析, 分割表, カイ二乗]

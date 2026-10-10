@@ -1,0 +1,31 @@
+topics: [causal-inference]
+formulas: [ipw-ate-estimator, propensity-score-theorem]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  6 人のデータについて、傾向スコア $e(X)$（推定済み）、処置 $Z$、結果 $Y$ が次のとおりであった。
+  - 処置群（$Z=1$）：$(e,Y)=(0.2,\ {{y1}})$、$(0.5,\ {{y2}})$、$(0.8,\ {{y3}})$
+  - 対照群（$Z=0$）：$(e,Y)=(0.2,\ {{y4}})$、$(0.5,\ {{y5}})$、$(0.8,\ {{y6}})$
+
+  逆確率重み付け（IPW）による平均処置効果の推定値 $\hat\tau_{IPW}=\frac1n\sum_i\left\{\frac{Z_iY_i}{e_i}-\frac{(1-Z_i)Y_i}{1-e_i}\right\}$ を求めよ（小数第3位まで）。
+explanation: |
+  処置群の項は $\frac{ {{y1}} }{0.2}+\frac{ {{y2}} }{0.5}+\frac{ {{y3}} }{0.8}={{t1}}$。
+  対照群の項は $\frac{ {{y4}} }{0.8}+\frac{ {{y5}} }{0.5}+\frac{ {{y6}} }{0.2}={{t0}}$（重みは $1/(1-e)$）。
+  $$
+  \hat\tau_{IPW}=\frac{ {{t1}}-{{t0}} }{6}={{answer}}
+  $$
+  処置を受けにくい（$e$ が小さい）のに処置を受けた個体や、受けやすいのに受けなかった個体に大きな重みが付く。
+params:
+  y1: { min: 1, max: 5, step: 0.5 }
+  y2: { min: 1, max: 5, step: 0.5 }
+  y3: { min: 1, max: 5, step: 0.5 }
+  y4: { min: 1, max: 5, step: 0.5 }
+  y5: { min: 1, max: 5, step: 0.5 }
+  y6: { min: 1, max: 5, step: 0.5 }
+derived:
+  t1: y1 / 0.2 + y2 / 0.5 + y3 / 0.8
+  t0: y4 / 0.8 + y5 / 0.5 + y6 / 0.2
+answer: (t1 - t0) / 6
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.001 }

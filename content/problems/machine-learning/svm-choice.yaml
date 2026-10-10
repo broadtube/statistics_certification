@@ -1,0 +1,26 @@
+topics: [machine-learning]
+formulas: [ml-svm-margin]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  サポートベクターマシン（SVM）に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 'ハードマージン SVM の分離超平面はサポートベクターだけで決まり、それ以外の訓練データを取り除いても変わらない。'
+    correct: true
+  - id: b
+    text: 'マージンの幅は $\|\boldsymbol w\|$ に比例するので、$\|\boldsymbol w\|$ を最大化する。'
+    correct: false
+  - id: c
+    text: 'ソフトマージン SVM の罰則パラメータ $C$ を大きくするほど、誤分類を許容しやすくなりマージンは広くなる。'
+    correct: false
+  - id: d
+    text: 'カーネル法を使うには、特徴空間での各データの座標を明示的に計算する必要がある。'
+    correct: false
+  - id: e
+    text: 'SVM の出力 $\boldsymbol w^\top\boldsymbol x+b$ は、そのままクラスに属する事後確率として解釈できる。'
+    correct: false
+explanation: |
+  SVM は $y_i(\boldsymbol w^\top\boldsymbol x_i+b)\ge1$ のもとで $\frac12\|\boldsymbol w\|^2$ を最小化し、マージン $2/\|\boldsymbol w\|$ を最大にする。双対問題の解でラグランジュ乗数が正になるのはマージン上の点（サポートベクター）だけなので、超平面はそれらだけで決まる。
+  $C$ が大きいほど誤分類への罰則が強く、マージンは狭くなる。カーネルトリックは内積をカーネル関数で置き換えるので、特徴空間の座標を計算する必要はない。出力は確率ではない（確率が必要なら別途較正する）。

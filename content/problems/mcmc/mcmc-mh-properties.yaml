@@ -1,0 +1,26 @@
+topics: [mcmc]
+formulas: [metropolis-hastings-acceptance, mcmc-detailed-balance]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  メトロポリス・ヘイスティングス法に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '目標分布の正規化定数が未知でも、密度の比 $\pi(y)/\pi(x)$ が計算できれば実行できる。'
+    correct: true
+  - id: b
+    text: '採択率が $1$ に近いほど、常に効率のよい（自己相関の低い）連鎖が得られる。'
+    correct: false
+  - id: c
+    text: '候補が棄却されたときは、その時点の標本を記録せずに次の候補の生成へ進む。'
+    correct: false
+  - id: d
+    text: '詳細つり合い条件が成り立てば、初期値によらず最初の1ステップから目標分布に従う標本が得られる。'
+    correct: false
+  - id: e
+    text: 'ギブスサンプリングは、採択確率が常に $1/2$ のメトロポリス・ヘイスティングス法とみなせる。'
+    correct: false
+explanation: |
+  採択確率には $\pi(y)/\pi(x)$ の形でしか目標分布が現れないので、正規化定数は約分される（事後分布を「尤度 × 事前分布」のまま使える）。
+  (b) 提案の幅を極端に小さくすると採択率は $1$ に近いが、ほとんど動かず自己相関が高い。(c) 棄却時は現在値を再び記録する。(d) 詳細つり合いは $\pi$ が定常分布であることを保証するだけで、初期値の影響が消えるまでバーンインが必要。(e) ギブスサンプリングの採択確率は常に $1$。

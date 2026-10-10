@@ -1,0 +1,36 @@
+topics: [multiple-comparison]
+formulas: [bh-fdr, bonferroni-correction]
+difficulty: 3
+type: choice
+source: { kind: original }
+statement: |
+  10 個の帰無仮説の $p$ 値を小さい順に並べたところ
+  $$
+  0.001,\ 0.008,\ 0.012,\ 0.022,\ 0.024,\ 0.041,\ 0.20,\ 0.35,\ 0.62,\ 0.90
+  $$
+  であった。偽発見率を $\alpha=0.05$ に抑えるベンジャミーニ・ホッホバーグ法で棄却される仮説の個数はどれか。
+choices:
+  - id: a
+    text: '1 個'
+    correct: false
+  - id: b
+    text: '3 個'
+    correct: false
+  - id: c
+    text: '5 個'
+    correct: true
+  - id: d
+    text: '6 個'
+    correct: false
+  - id: e
+    text: '0 個'
+    correct: false
+explanation: |
+  閾値は $\frac{k}{10}\times0.05=0.005k$。各 $k$ で $p_{(k)}$ と比べると
+  - $k=1,2,3$：$0.001\le0.005$、$0.008\le0.010$、$0.012\le0.015$ で条件を満たす。
+  - $k=4$：$0.022>0.020$ で満たさない。
+  - $k=5$：$0.024\le0.025$ で満たす。
+  - $k\ge6$：$0.041>0.030$ など、以降は満たさない。
+
+  条件を満たす最大の $k$ は $k^*=5$ なので、小さい方から 5 個を棄却する。途中の $k=4$ で条件を満たさなくても、それより大きい $k$ で満たせばそこまで棄却する（ステップアップ法）。
+  $k=4$ で止めると 3 個（誤り）、ボンフェローニ法（閾値 $0.005$）なら 1 個となる。

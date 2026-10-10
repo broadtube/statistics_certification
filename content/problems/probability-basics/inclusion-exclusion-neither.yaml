@@ -1,0 +1,18 @@
+topics: [probability-basics]
+formulas: [prob-inclusion-exclusion]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある大学の学生のうち、統計学を履修している割合は {{a}}、経済学を履修している割合は {{b}}、両方を履修している割合は {{c}} である。無作為に選んだ学生がどちらも履修していない確率を求めよ（小数第2位まで）。
+explanation: |
+  統計学の履修を $A$、経済学の履修を $B$ とする。加法定理より
+  $P(A\cup B)=P(A)+P(B)-P(A\cap B)={{a}}+{{b}}-{{c}}$。
+  求める確率は余事象なので $P(A^c\cap B^c)=1-P(A\cup B)={{answer}}$。
+params:
+  a: { min: 0.2, max: 0.6, step: 0.05 }
+  b: { min: 0.2, max: 0.6, step: 0.05 }
+  c: { min: 0.05, max: 0.3, step: 0.05 }
+constraints: ['c < a', 'c < b', 'a + b - c < 0.95']
+answer: 1 - a - b + c
+display: { digits: 2 }

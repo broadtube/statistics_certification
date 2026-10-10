@@ -1,0 +1,16 @@
+topics: [probability-basics]
+formulas: [prob-independence-events]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  公正なサイコロを {{n}} 回投げるとき、6 の目が少なくとも1回出る確率を求めよ（小数第4位まで）。
+explanation: |
+  各回の試行は独立で、1回の試行で 6 が出ない確率は $\frac56$。余事象「1回も 6 が出ない」の確率は $\left(\frac56\right)^{ {{n}} }$ なので、
+  $$
+  P=1-\left(\frac56\right)^{ {{n}} }={{answer}}
+  $$
+params:
+  n: { min: 2, max: 12, step: 1 }
+answer: 1 - (5 / 6)^n
+display: { digits: 4 }

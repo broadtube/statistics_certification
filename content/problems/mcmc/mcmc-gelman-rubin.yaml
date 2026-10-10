@@ -1,0 +1,18 @@
+topics: [mcmc]
+formulas: [gelman-rubin-rhat]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  異なる初期値から長さ $n={{n}}$ の連鎖を複数走らせたところ、連鎖内分散の平均が $W={{w}}$、連鎖間分散（連鎖ごとの平均の分散の $n$ 倍）が $B={{b}}$ であった。ゲルマン・ルービンの $\hat R$ を求めよ（小数第3位まで）。
+explanation: |
+  $$
+  \hat R=\sqrt{\frac{\frac{n-1}{n}W+\frac1nB}{W}}=\sqrt{\frac{\frac{ {{n}}-1}{ {{n}} }\times{{w}}+\frac{ {{b}} }{ {{n}} }}{ {{w}} }}={{answer}}
+  $$
+  $1.1$ 以上なら連鎖どうしがまだ一致しておらず、より長く走らせる必要があると判断するのが目安。
+params:
+  n: { min: 500, max: 2000, step: 500 }
+  w: { min: 0.5, max: 2, step: 0.25 }
+  b: { min: 10, max: 400, step: 10 }
+answer: sqrt(((n - 1) / n * w + b / n) / w)
+display: { digits: 3 }

@@ -1,0 +1,18 @@
+topics: [random-variables]
+formulas: [rv-variance-shortcut]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  確率変数 $X$ の確率密度関数が $f(x)=({{k}}+1)x^{ {{k}} }\ (0\le x\le1)$、それ以外で $0$ であるとき、$X$ の分散を求めよ（小数第4位まで）。
+explanation: |
+  $E[X^m]=\int_0^1 x^m(k+1)x^k\,dx=\frac{k+1}{k+m+1}$ より
+  $E[X]=\frac{ {{k}}+1 }{ {{k}}+2 }$、$E[X^2]=\frac{ {{k}}+1 }{ {{k}}+3 }$。
+  $$
+  V[X]=E[X^2]-(E[X])^2=\frac{k+1}{(k+2)^2(k+3)}={{answer}}
+  $$
+  これはベータ分布 $\mathrm{Be}(k+1,1)$ である。
+params:
+  k: { min: 1, max: 8, step: 1 }
+answer: (k + 1) / (k + 3) - ((k + 1) / (k + 2))^2
+display: { digits: 4 }

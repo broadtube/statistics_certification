@@ -1,0 +1,18 @@
+topics: [continuous-distributions]
+formulas: [contdist-exponential-memoryless]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある電子部品の寿命（年）は平均 {{m}} 年の指数分布に従う。この部品が使用開始から {{s}} 年経過した時点で故障していなかったとき、さらに {{t}} 年以上故障しない確率を求めよ（小数第4位まで）。
+explanation: |
+  平均 {{m}} 年なので率は $\lambda=1/{{m}}$。指数分布の無記憶性より、経過時間 {{s}} 年は関係なく
+  $$
+  P(X>{{s}}+{{t}}\mid X>{{s}})=P(X>{{t}})=e^{-{{t}}/{{m}} }={{answer}}
+  $$
+params:
+  m: { min: 2, max: 10, step: 1 }
+  s: { min: 1, max: 5, step: 1 }
+  t: { min: 1, max: 6, step: 1 }
+answer: exp(-t / m)
+display: { digits: 4 }

@@ -1,0 +1,23 @@
+topics: [missing-data]
+formulas: [missing-mechanism-mcar-mar]
+difficulty: 1
+type: choice
+source: { kind: original }
+statement: |
+  ある調査で、年齢は全員について観測されており、所得の欠測確率は年齢によって異なるが、年齢を固定すれば所得の値そのものには依存しないとする。この所得の欠測メカニズムとして最も適切なものを選べ。
+choices:
+  - id: a
+    text: MCAR（完全にランダムな欠測）
+    correct: false
+  - id: b
+    text: MAR（ランダムな欠測）
+    correct: true
+  - id: c
+    text: MNAR（ランダムでない欠測）
+    correct: false
+  - id: d
+    text: 欠測が年齢に依存するので、いずれにも分類できない
+    correct: false
+explanation: |
+  欠測の確率が観測されている変数（年齢）だけに依存し、欠測している値（所得）には依存しないので MAR である。
+  欠測が年齢に依存する以上、データの値と無関係ではないので MCAR ではない。所得そのものに依存する場合が MNAR。

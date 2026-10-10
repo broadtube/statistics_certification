@@ -1,0 +1,17 @@
+topics: [bootstrap]
+formulas: [bootstrap-exclusion-probability]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $n={{n}}$ の標本から大きさ $n$ のブートストラップ標本を復元抽出で1つ作る。特定の観測値 $x_1$ がこのブートストラップ標本に1度も含まれない確率を求めよ（小数第4位まで）。
+explanation: |
+  1回の抽出で $x_1$ が選ばれない確率は $1-\frac1n$。$n$ 回の抽出は独立なので
+  $$
+  \left(1-\frac{1}{ {{n}} }\right)^{ {{n}} }={{answer}}
+  $$
+  $n\to\infty$ では $e^{-1}\approx0.3679$ に近づく。
+params:
+  n: { min: 5, max: 50, step: 5 }
+answer: (1 - 1 / n)^n
+display: { digits: 4 }

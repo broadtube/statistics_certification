@@ -1,0 +1,33 @@
+- id: mcmc-detailed-balance
+  topic: mcmc
+  title: 詳細つり合い条件
+  description: 成り立てば $\pi$ はマルコフ連鎖の定常分布になる。
+  body: '\pi(x)P(x,y)=\pi(y)P(y,x)\quad(\text{すべての }x,y)'
+  derivation: '両辺を $x$ について和（積分）すると $\sum_x\pi(x)P(x,y)=\pi(y)$。'
+  tags: [MCMC, マルコフ連鎖, 定常分布]
+- id: metropolis-hastings-acceptance
+  topic: mcmc
+  title: メトロポリス・ヘイスティングス法の採択確率
+  body: '\alpha(x,y)=\min\left\{1,\ \frac{\pi(y)\,q(x\mid y)}{\pi(x)\,q(y\mid x)}\right\}'
+  conditions: '提案分布が対称（$q(y\mid x)=q(x\mid y)$）なら $\min\{1,\pi(y)/\pi(x)\}$。'
+  pitfalls: 目標分布の正規化定数は不要。棄却したときは現在値を再び記録する。
+  tags: [MCMC, メトロポリス・ヘイスティングス法]
+- id: gibbs-sampling-step
+  topic: mcmc
+  title: ギブスサンプリング（2変数）
+  description: 完全条件付き分布から交互に生成する。採択確率が常に1の MH 法とみなせる。
+  body: 'x_1^{(t+1)}\sim\pi\left(x_1\mid x_2^{(t)}\right),\qquad x_2^{(t+1)}\sim\pi\left(x_2\mid x_1^{(t+1)}\right)'
+  tags: [MCMC, ギブスサンプリング]
+- id: mcmc-effective-sample-size
+  topic: mcmc
+  title: 有効標本サイズ
+  body: 'M_{\mathrm{eff}}=\frac{M}{1+2\sum_{k=1}^{\infty}\rho_k}\qquad\left(\rho_k=\rho^k\ \text{なら}\ M\frac{1-\rho}{1+\rho}\right)'
+  pitfalls: 自己相関が高いと、標本数 $M$ が多くても推定精度は低い。
+  tags: [MCMC, 有効標本サイズ, 自己相関]
+- id: gelman-rubin-rhat
+  topic: mcmc
+  title: ゲルマン・ルービンの収束診断統計量
+  description: '長さ $n$ の連鎖を複数走らせ、連鎖内分散 $W$ と連鎖間分散 $B$（連鎖平均の分散の $n$ 倍）を比べる。'
+  body: '\hat R=\sqrt{\frac{\frac{n-1}{n}W+\frac1nB}{W}}'
+  pitfalls: '$1$ に近い（目安 $1.1$ 未満）ことは収束の必要条件にすぎない。'
+  tags: [MCMC, 収束診断]

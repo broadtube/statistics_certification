@@ -1,0 +1,23 @@
+topics: [likelihood-ratio]
+formulas: [lrt-likelihood-ratio, lrt-wilks-theorem]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  確率密度関数 $f(x;\lambda)=\lambda e^{-\lambda x}\ (x\ge0)$ の指数分布から大きさ $n={{n}}$ の無作為標本を得たところ、標本平均は $\bar x={{xbar}}$ であった。$H_0:\lambda={{lambda0}}$ の尤度比検定統計量 $-2\log\Lambda$ の値を求めよ（小数第3位まで）。
+explanation: |
+  $\ell(\lambda)=n\log\lambda-\lambda n\bar x$、最尤推定値は $\hat\lambda=1/\bar x$ で $\ell(\hat\lambda)=-n\log\bar x-n$。よって
+  $$
+  -2\log\Lambda=2\{\ell(\hat\lambda)-\ell(\lambda_0)\}=2n\left\{\lambda_0\bar x-1-\log(\lambda_0\bar x)\right\}
+  $$
+  $\lambda_0\bar x={{u}}$ を代入して ${{answer}}$。$H_0$ のもとで近似的に $\chi^2(1)$ に従う。
+params:
+  n: { min: 10, max: 50, step: 5 }
+  xbar: { min: 0.5, max: 3, step: 0.1 }
+  lambda0: { min: 0.5, max: 2, step: 0.25 }
+derived:
+  u: lambda0 * xbar
+constraints: ['u >= 0.6', 'u <= 1.6', 'abs(u - 1) >= 0.1']
+answer: 2 * n * (lambda0 * xbar - 1 - log(lambda0 * xbar))
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.005 }

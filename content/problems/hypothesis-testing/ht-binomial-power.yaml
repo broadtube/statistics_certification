@@ -1,0 +1,20 @@
+topics: [hypothesis-testing]
+formulas: [test-error-types]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある治療の有効率 $p$ について、患者 {{n}} 人に治療を行い有効だった人数 $X$ をもとに $H_0:p=0.5$ 対 $H_1:p>0.5$ を検定する。棄却域を $X\ge{{c}}$ とするとき、真の有効率が $p={{p1}}$ である場合の第2種の過誤の確率 $\beta$ を求めよ（小数第4位まで）。
+explanation: |
+  第2種の過誤は、$H_1$ が正しいのに棄却域に入らないこと。真の分布 $X\sim\mathrm{Bin}({{n}},{{p1}})$ のもとで
+  $$
+  \beta=P(X\le{{c}}-1)=\sum_{x=0}^{ {{c}}-1}\binom{ {{n}} }{x}{{p1}}^x(1-{{p1}})^{ {{n}}-x}={{answer}}
+  $$
+  検出力は $1-\beta$。
+params:
+  n: { min: 10, max: 20, step: 1 }
+  c: { min: 7, max: 16, step: 1 }
+  p1: { min: 0.6, max: 0.85, step: 0.05 }
+constraints: ['c > n / 2 + 1', 'c <= n - 1', '1 - pbinom(c - 1, n, 0.5) < 0.1']
+answer: pbinom(c - 1, n, p1)
+display: { digits: 4 }

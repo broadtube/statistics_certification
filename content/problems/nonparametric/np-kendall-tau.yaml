@@ -1,0 +1,18 @@
+topics: [nonparametric]
+formulas: [kendall-tau]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  {{n}} 個の対象について2つの変数の順位（同順位なし）を比べたところ、全 $\binom{ {{n}} }{2}$ 組のうち、大小関係が一致する組が {{c}} 組あった。ケンドールの順位相関係数 $\tau$ を求めよ（小数第3位まで）。
+explanation: |
+  同順位がないので $C+D=\frac{n(n-1)}{2}$、すなわち $D=\frac{n(n-1)}{2}-C$。よって
+  $$
+  \tau=\frac{C-D}{n(n-1)/2}=\frac{2C}{n(n-1)/2}-1=\frac{2\times{{c}}}{ {{n}}\times({{n}}-1)/2 }-1={{answer}}
+  $$
+params:
+  n: { min: 6, max: 12, step: 1 }
+  c: { min: 2, max: 60, step: 1 }
+constraints: ['c < n * (n - 1) / 2', 'c != n * (n - 1) / 4']
+answer: (2 * c - n * (n - 1) / 2) / (n * (n - 1) / 2)
+display: { digits: 3 }

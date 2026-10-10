@@ -1,0 +1,39 @@
+- id: anova-oneway-ss
+  topic: anova-design
+  title: 一元配置の平方和の分解
+  body: 'S_T=\sum_{i,j}(y_{ij}-\bar y_{\cdot\cdot})^2=\underbrace{\sum_i n_i(\bar y_{i\cdot}-\bar y_{\cdot\cdot})^2}_{S_A}+\underbrace{\sum_{i,j}(y_{ij}-\bar y_{i\cdot})^2}_{S_E}'
+  description: '自由度は $N-1=(a-1)+(N-a)$。'
+  derivation: '交差項は各水準内で偏差の和が0になるため消える。'
+  tags: [分散分析, 平方和]
+- id: anova-oneway-f
+  topic: anova-design
+  title: 一元配置分散分析の F 検定
+  body: 'F=\frac{S_A/(a-1)}{S_E/(N-a)}\ \sim\ F_{a-1,\,N-a}\quad(H_0:\alpha_1=\dots=\alpha_a=0)'
+  conditions: 誤差が独立に同一の正規分布 $N(0,\sigma^2)$ に従う（等分散）。
+  pitfalls: 'F 分布の右側（上側）だけで棄却する。2群なら $F=t^2$。'
+  tags: [分散分析, F検定]
+- id: anova-expected-ms
+  topic: anova-design
+  title: 一元配置の平均平方の期待値
+  body: 'E\left[\frac{S_E}{N-a}\right]=\sigma^2,\qquad E\left[\frac{S_A}{a-1}\right]=\sigma^2+\frac{\sum_i n_i\alpha_i^2}{a-1}'
+  tags: [分散分析, 平均平方]
+- id: anova-twoway-df
+  topic: anova-design
+  title: 二元配置（繰り返しあり）の分解と自由度
+  body: 'S_T=S_A+S_B+S_{AB}+S_E,\quad abr-1=(a-1)+(b-1)+(a-1)(b-1)+ab(r-1)'
+  conditions: '各セル（水準の組合せ）で $r\ge2$ 回ずつ観測する釣り合い型。'
+  pitfalls: '$r=1$ では交互作用と誤差を分離できない。'
+  tags: [分散分析, 二元配置, 交互作用]
+- id: randomized-block-df
+  topic: anova-design
+  title: 乱塊法の自由度
+  description: 処理 $a$ 個・ブロック $b$ 個（各ブロック内で全処理を1回ずつ）の場合。
+  body: 'ab-1=\underbrace{(a-1)}_{\text{処理}}+\underbrace{(b-1)}_{\text{ブロック}}+\underbrace{(a-1)(b-1)}_{\text{誤差}}'
+  tags: [実験計画, 乱塊法, ブロック]
+- id: orthogonal-array-l8
+  topic: anova-design
+  title: 2水準直交表
+  description: '$L_{2^m}(2^{2^m-1})$ は $2^m$ 回の実験で最大 $2^m-1$ 個の自由度1の効果（主効果・交互作用）を割り付けられる。'
+  body: 'L_8(2^7):\ 8\ \text{回の実験},\ 7\ \text{列（各列の自由度}\ 1)'
+  pitfalls: '2水準因子どうしの交互作用は、特定の第3の列に現れる（交絡）。主効果と同じ列に割り付けない。'
+  tags: [実験計画, 直交表]

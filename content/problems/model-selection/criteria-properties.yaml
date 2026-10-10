@@ -1,0 +1,27 @@
+topics: [model-selection]
+formulas: [aic-definition, bic-definition, ridge-lasso]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  モデル選択の規準と正則化に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '標本サイズが $n\ge8$ のとき、BIC はパラメータ数への罰則が AIC より重く、AIC より小さいモデルを選びやすい。'
+    correct: true
+  - id: b
+    text: '決定係数 $R^2$ が最大のモデルを選べば、過学習を避けることができる。'
+    correct: false
+  - id: c
+    text: '目的変数を $y$ とするモデルと $\log y$ とするモデルは、AIC の値をそのまま比べて選んでよい。'
+    correct: false
+  - id: d
+    text: 'リッジ回帰では、罰則の強さ $\lambda$ を十分大きくすると一部の係数がちょうど0になり、変数選択ができる。'
+    correct: false
+  - id: e
+    text: 'AIC は標本サイズ $n\to\infty$ で真のモデルを確率1で選ぶ一致性をもつ。'
+    correct: false
+explanation: |
+  BIC の罰則は $k\log n$、AIC は $2k$。$\log n>2\iff n>e^2\approx7.39$ なので (a) が正しい。
+  (b) $R^2$ は変数を加えると減らないので、常に最大のモデルが選ばれ過学習を招く。(c) 尤度の尺度が異なるデータ（$y$ と $\log y$）では比較できない。
+  (d) 係数がちょうど0になるのはラッソ（$L_1$ 罰則）。リッジは0に近づけるだけ。(e) 一致性をもつのは BIC で、AIC はやや大きいモデルを選ぶ傾向が残る。

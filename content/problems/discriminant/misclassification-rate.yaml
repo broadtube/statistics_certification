@@ -1,0 +1,18 @@
+topics: [discriminant]
+formulas: [lda-misclassification-rate]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  共通の分散共分散行列をもつ2つの多変量正規分布の群があり、群間のマハラノビス距離は $\Delta={{delta}}$ である。事前確率が等しいとして線形判別（ベイズ判別）を行うとき、群1に属する個体を誤って群2と判別する確率を求めよ（小数第4位まで）。
+explanation: |
+  判別得点 $W=(\boldsymbol\mu_1-\boldsymbol\mu_2)^\top\Sigma^{-1}\{\boldsymbol x-(\boldsymbol\mu_1+\boldsymbol\mu_2)/2\}$ は、群1のもとで $N(\Delta^2/2,\ \Delta^2)$ に従う。$W<0$ のとき群2と判別するので、
+  $$
+  P(W<0)=\Phi\left(\frac{0-\Delta^2/2}{\Delta}\right)=\Phi\left(-\frac{\Delta}{2}\right)=\Phi(-{{half}})={{answer}}
+  $$
+params:
+  delta: { min: 0.5, max: 4, step: 0.25 }
+derived:
+  half: delta / 2
+answer: pnorm(-delta / 2)
+display: { digits: 4 }

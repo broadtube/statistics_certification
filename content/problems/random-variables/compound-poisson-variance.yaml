@@ -1,0 +1,19 @@
+topics: [random-variables]
+formulas: [rv-law-total-variance, rv-law-total-expectation]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  ある店の1日の来店者数 $N$ は平均 {{lambda}} のポアソン分布に従う。各来店者の購入額 $Y_1,Y_2,\dots$（千円）は互いに独立に平均 {{mu}}、標準偏差 {{s}} の同一分布に従い、$N$ とも独立である。1日の売上 $S=\sum_{i=1}^{N}Y_i$ の分散を求めよ（小数第1位まで）。
+explanation: |
+  $N=n$ を与えたとき $E[S\mid N]=N\mu$、$V[S\mid N]=Ns^2$。全分散の公式より
+  $$
+  V[S]=E[V[S\mid N]]+V[E[S\mid N]]=s^2E[N]+\mu^2V[N]
+  $$
+  ポアソン分布では $E[N]=V[N]=\lambda$ なので $V[S]=\lambda(s^2+\mu^2)={{lambda}}\times({{s}}^2+{{mu}}^2)={{answer}}$。
+params:
+  lambda: { min: 10, max: 60, step: 5 }
+  mu: { min: 1, max: 5, step: 0.5 }
+  s: { min: 0.5, max: 3, step: 0.5 }
+answer: lambda * (s^2 + mu^2)
+display: { digits: 1 }

@@ -1,0 +1,21 @@
+topics: [survival-analysis]
+formulas: [exponential-censored-mle]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある部品の寿命が指数分布に従うと仮定する。試験した部品のうち {{d}} 個は故障し、故障時刻の合計は {{a}} 時間であった。残りの {{k}} 個は試験終了まで故障せず、それらの観測時間の合計は {{b}} 時間であった（右側打ち切り）。故障率 $\lambda$ の最尤推定値を求めよ（小数第5位まで）。
+explanation: |
+  イベントの有無を $\delta_i$ とすると尤度は $\prod_i f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}=\lambda^{d}e^{-\lambda\sum t_i}$。
+  対数尤度 $d\log\lambda-\lambda\sum t_i$ を微分して $0$ とおくと
+  $$
+  \hat\lambda=\frac{d}{\sum t_i}=\frac{ {{d}} }{ {{a}}+{{b}} }={{answer}}
+  $$
+  分母には打ち切られた部品の観測時間も含める。
+params:
+  d: { min: 4, max: 15, step: 1 }
+  a: { min: 500, max: 3000, step: 100 }
+  k: { min: 2, max: 10, step: 1 }
+  b: { min: 1000, max: 6000, step: 500 }
+answer: d / (a + b)
+display: { digits: 5 }

@@ -1,0 +1,19 @@
+topics: [clustering]
+formulas: [cluster-lance-williams]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  1次元のデータで、クラスター $A=\{0,\ {{a}}\}$ とクラスター $B=\{ {{b}},\ {{b2}} \}$ がある。群平均法によるクラスター $A,B$ 間の距離（個体間の距離 $|x-y|$ の全ペアにわたる平均）を求めよ（小数第2位まで）。
+explanation: |
+  ペアは $2\times2=4$ 組で、距離は $|{{b}}-0|$、$|{{b2}}-0|$、$|{{b}}-{{a}}|$、$|{{b2}}-{{a}}|$。その平均は ${{answer}}$。
+  なお最短距離法では最小の ${{dmin}}$、最長距離法では最大の ${{b2}}$ がクラスター間距離になる。
+params:
+  a: { min: 1, max: 3, step: 1 }
+  b: { min: 5, max: 9, step: 1 }
+  c: { min: 1, max: 4, step: 1 }
+derived:
+  b2: b + c
+  dmin: b - a
+answer: (b + (b + c) + (b - a) + (b + c - a)) / 4
+display: { digits: 2 }

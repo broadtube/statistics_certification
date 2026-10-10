@@ -1,0 +1,42 @@
+- id: mvt-marginal-conditional
+  topic: multivariate-transform
+  title: 周辺密度と条件付き密度
+  description: 同時密度を他方の変数で積分すると周辺密度、周辺密度で割ると条件付き密度。
+  body: 'f_X(x)=\int_{-\infty}^{\infty}f(x,y)\,dy,\qquad f(y\mid x)=\frac{f(x,y)}{f_X(x)}'
+  conditions: '$f_X(x)>0$ となる $x$ で条件付き密度を定める。'
+  tags: [同時分布, 周辺分布, 条件付き分布]
+- id: mvt-univariate-transform
+  topic: multivariate-transform
+  title: 1変数の変数変換
+  description: 単調な変換では、逆関数の導関数の絶対値を掛ける。
+  body: 'Y=g(X)\ (g\ \text{単調})\ \Longrightarrow\ f_Y(y)=f_X\big(g^{-1}(y)\big)\left|\frac{d g^{-1}(y)}{dy}\right|'
+  pitfalls: '単調でない変換（$Y=X^2$ など）では、分布関数 $P(Y\le y)$ を経由するか、逆像の各枝の寄与を足す。'
+  tags: [変数変換]
+- id: mvt-jacobian-transform
+  topic: multivariate-transform
+  title: ヤコビアンによる変数変換
+  description: 1対1の変換で同時密度を求める。
+  body: 'f_{U,V}(u,v)=f_{X,Y}\big(x(u,v),y(u,v)\big)\left|\det\frac{\partial(x,y)}{\partial(u,v)}\right|'
+  conditions: '$(x,y)\mapsto(u,v)$ が1対1で微分可能なこと。'
+  pitfalls: 'ヤコビアンは逆変換 $x(u,v),y(u,v)$ から計算する。新しい変数の台も求め直す。'
+  tags: [変数変換, ヤコビアン, 同時分布]
+- id: mvt-convolution
+  topic: multivariate-transform
+  title: 独立な確率変数の和（たたみ込み）
+  body: 'f_{X+Y}(s)=\int_{-\infty}^{\infty}f_X(x)\,f_Y(s-x)\,dx\qquad(X,Y\ \text{独立})'
+  derivation: '$(U,V)=(X+Y,X)$ と変換してヤコビアン $1$ を掛け、$V$ について積分する。'
+  tags: [変数変換, 和の分布, たたみ込み]
+- id: mvt-mvn-linear-transform
+  topic: multivariate-transform
+  title: 多変量正規分布の線形変換
+  description: 多変量正規分布に従うベクトルの線形変換も多変量正規分布に従う。
+  body: '\boldsymbol X\sim N_p(\boldsymbol\mu,\Sigma)\ \Longrightarrow\ A\boldsymbol X+\boldsymbol b\sim N\left(A\boldsymbol\mu+\boldsymbol b,\ A\Sigma A^\top\right)'
+  pitfalls: '多変量正規分布では、成分どうしが無相関（$\Sigma$ の非対角成分が $0$）なら独立。'
+  tags: [多変量正規分布, 線形変換]
+- id: mvt-bivariate-normal-conditional
+  topic: multivariate-transform
+  title: 2変量正規分布の条件付き分布
+  description: 条件付き期待値は回帰直線、条件付き分散は一定。
+  body: 'Y\mid X=x\ \sim\ N\left(\mu_Y+\rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X),\ \ \sigma_Y^2(1-\rho^2)\right)'
+  derivation: '同時密度を $X$ の周辺密度で割り、$y$ について平方完成する。'
+  tags: [多変量正規分布, 条件付き分布, 回帰]

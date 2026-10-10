@@ -1,0 +1,23 @@
+topics: [bootstrap]
+formulas: [bootstrap-percentile-interval]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  推定値 $\hat\theta={{th}}$ に対し、$B=2000$ 個のブートストラップ推定値の2.5%点が ${{lo}}$、97.5%点が ${{hi}}$ であった。95%ベーシック（ピボット型）ブートストラップ信頼区間の **下限** を求めよ（小数第2位まで）。
+explanation: |
+  $\hat\theta-\theta$ の分布を $\hat\theta^*-\hat\theta$ の分布で近似すると、区間は
+  $$
+  \left[2\hat\theta-\hat\theta^*_{(0.975)},\ 2\hat\theta-\hat\theta^*_{(0.025)}\right]
+  $$
+  下限は $2\times{{th}}-{{hi}}={{answer}}$。パーセンタイル区間 $[{{lo}},{{hi}}]$ とは、ブートストラップ分布が非対称なときに異なる。
+params:
+  th: { min: 10, max: 20, step: 1 }
+  a: { min: 1, max: 3, step: 0.2 }
+  b: { min: 1, max: 4, step: 0.2 }
+derived:
+  lo: th - a
+  hi: th + b
+constraints: ['a != b']
+answer: th - b
+display: { digits: 2 }

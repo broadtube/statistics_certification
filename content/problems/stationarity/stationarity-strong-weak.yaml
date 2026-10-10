@@ -1,0 +1,26 @@
+topics: [stationarity]
+formulas: [weak-stationarity-definition, sample-autocorrelation]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  定常性と自己相関に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '正規過程（任意の有限個の時点の同時分布が多変量正規分布）では、弱定常であれば強定常でもある。'
+    correct: true
+  - id: b
+    text: '強定常な過程は必ず弱定常である。'
+    correct: false
+  - id: c
+    text: '弱定常な過程では、各時点の周辺分布は必ず同一である。'
+    correct: false
+  - id: d
+    text: 'ホワイトノイズの各時点の値は互いに独立である。'
+    correct: false
+  - id: e
+    text: 'すべてのラグで標本自己相関が $\pm1.96/\sqrt n$ の内側にあれば、系列が独立であると結論できる。'
+    correct: false
+explanation: |
+  正規過程の分布は平均と共分散で決まるので、それらが時点のずらしで不変（弱定常）なら同時分布も不変（強定常）になる。
+  (b) コーシー分布の i.i.d. 系列のように分散が存在しない強定常過程は弱定常ではない。(c) 弱定常は2次までのモーメントの条件なので、分布の形が時点で変わってもよい。(d) ホワイトノイズは無相関を要求するだけ。(e) 有意でないことは独立の証明にならず、線形の相関しか見ていない。

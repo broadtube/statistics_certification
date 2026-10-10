@@ -1,0 +1,21 @@
+topics: [state-space]
+formulas: [kalman-filter-update, kalman-prediction-local-level]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ローカルレベルモデルで $\sigma_\varepsilon^2={{se2}}$、$\sigma_\eta^2={{sn2}}$ とする。時点 $t$ の予測分散が $P_{t|t-1}={{p}}$ のとき、次の時点の予測分散 $P_{t+1|t}$ を求めよ（小数第3位まで）。
+explanation: |
+  $K_t=\frac{ {{p}} }{ {{p}}+{{se2}} }$、$P_{t|t}=(1-K_t)P_{t|t-1}=\frac{P_{t|t-1}\sigma_\varepsilon^2}{P_{t|t-1}+\sigma_\varepsilon^2}={{ptt}}$。状態方程式で $\eta_t$ が加わるので
+  $$
+  P_{t+1|t}=P_{t|t}+\sigma_\eta^2={{ptt}}+{{sn2}}={{answer}}
+  $$
+  この計算には観測値 $y_t$ が現れない（線形ガウスモデルでは分散は観測値に依存しない）。
+params:
+  se2: { min: 0.5, max: 4, step: 0.5 }
+  sn2: { min: 0.1, max: 2, step: 0.1 }
+  p: { min: 0.5, max: 5, step: 0.5 }
+derived:
+  ptt: p * se2 / (p + se2)
+answer: p * se2 / (p + se2) + sn2
+display: { digits: 3 }

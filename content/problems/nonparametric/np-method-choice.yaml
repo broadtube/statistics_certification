@@ -1,0 +1,25 @@
+topics: [nonparametric]
+formulas: [kruskal-wallis-h, sign-test-binomial, rank-sum-moments]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  ノンパラメトリック検定に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 'クラスカル・ウォリス検定は一元配置分散分析に対応する順位に基づく検定で、$k$ 群の比較では検定統計量が帰無仮説のもとで近似的に自由度 $k-1$ のカイ二乗分布に従う。'
+    correct: true
+  - id: b
+    text: '符号検定は、差の符号に加えて差の絶対値の大きさの情報も用いる。'
+    correct: false
+  - id: c
+    text: 'ウィルコクソンの順位和検定は、同じ個体を2回測定した対応のある2標本の比較に用いる。'
+    correct: false
+  - id: d
+    text: 'スピアマンの順位相関係数は、ピアソンの相関係数よりも外れ値の影響を強く受ける。'
+    correct: false
+  - id: e
+    text: '母集団が正規分布に従う場合でも、ノンパラメトリック検定は t 検定より常に検出力が高い。'
+    correct: false
+explanation: |
+  a は正しい。b：符号検定は符号だけを使い、大きさの情報も使うのはウィルコクソンの符号付き順位検定。c：対応のある2標本には符号付き順位検定を使い、順位和検定は独立2標本用。d：順位に変換するので外れ値の影響はむしろ受けにくい。e：正規分布が正しいときは t 検定の検出力の方がやや高い（順位和検定の漸近相対効率は約0.955）。

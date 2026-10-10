@@ -1,0 +1,21 @@
+topics: [model-selection]
+formulas: [aic-linear-regression, aic-definition]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $n={{n}}$ のデータで、正規線形回帰のモデル A（残差平方和 $\mathrm{RSS}_A={{rss1}}$）に説明変数を1つ加えたモデル B（$\mathrm{RSS}_B={{rss2}}$）を比較する。誤差分散も最尤推定するとき、AIC の差 $\mathrm{AIC}_B-\mathrm{AIC}_A$ を求めよ（小数第2位まで。対数は自然対数）。
+explanation: |
+  正規線形回帰では定数を除き $\mathrm{AIC}=n\log(\mathrm{RSS}/n)+2k$ である。モデル B はパラメータが1つ多いので
+  $$
+  \mathrm{AIC}_B-\mathrm{AIC}_A=n\log\frac{\mathrm{RSS}_B}{\mathrm{RSS}_A}+2={{n}}\log\frac{ {{rss2}} }{ {{rss1}} }+2={{answer}}
+  $$
+  負ならモデル B（変数を加えたモデル）が選ばれる。
+params:
+  n: { min: 30, max: 100, step: 10 }
+  rss1: { min: 100, max: 200, step: 10 }
+  ratio: { min: 0.9, max: 0.99, step: 0.01 }
+derived:
+  rss2: round(rss1 * ratio, 1)
+answer: n * log(rss2 / rss1) + 2
+display: { digits: 2 }

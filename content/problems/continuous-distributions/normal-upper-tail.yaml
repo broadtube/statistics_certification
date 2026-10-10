@@ -1,0 +1,22 @@
+topics: [continuous-distributions]
+formulas: [contdist-normal-standardize]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある試験の得点は平均 {{mu}}、標準偏差 {{sigma}} の正規分布に従うとする。無作為に選んだ受験者の得点が {{a}} 点以上である確率を求めよ（小数第4位まで）。
+explanation: |
+  標準化すると $z=\frac{ {{a}}-{{mu}} }{ {{sigma}} }={{z}}$。
+  $$
+  P(X\ge{{a}})=P\left(Z\ge{{z}}\right)=1-\Phi({{z}})={{answer}}
+  $$
+  （$\Phi$ は標準正規分布の分布関数。メニューの「計算機」で確認できる。）
+params:
+  mu: { min: 50, max: 70, step: 5 }
+  sigma: { min: 8, max: 16, step: 2 }
+  a: { min: 60, max: 90, step: 5 }
+derived:
+  z: (a - mu) / sigma
+constraints: ['a > mu']
+answer: 1 - pnorm((a - mu) / sigma)
+display: { digits: 4 }

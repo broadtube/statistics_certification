@@ -1,0 +1,26 @@
+topics: [tests-detail]
+formulas: [pearson-goodness-of-fit]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  1日あたりの来店者の苦情件数 200 日分を「0件、1件、2件、3件、4件、5件以上」の6カテゴリに集計し、ポアソン分布に従うかどうかを適合度検定で調べる。ポアソン分布の母数 $\lambda$ は未知なので、データから最尤推定して期待度数を求めた（期待度数はすべて5以上であった）。検定統計量が帰無仮説のもとで近似的に従う分布として正しいものを選べ。
+choices:
+  - id: a
+    text: '自由度4のカイ二乗分布'
+    correct: true
+  - id: b
+    text: '自由度5のカイ二乗分布'
+    correct: false
+  - id: c
+    text: '自由度6のカイ二乗分布'
+    correct: false
+  - id: d
+    text: '自由度199のカイ二乗分布'
+    correct: false
+  - id: e
+    text: '自由度 $(6-1)(2-1)=5$ の F 分布'
+    correct: false
+explanation: |
+  ピアソンの適合度検定の自由度は「カテゴリ数 $-1-$ 推定した母数の個数」。カテゴリ数は $6$、度数の合計が固定される制約で $1$、$\lambda$ を推定したので $1$ を引いて $6-1-1=4$。
+  $\lambda$ が既知（指定されている）なら自由度は $5$ になる。自由度は日数（標本サイズ）ではなくカテゴリ数で決まる。

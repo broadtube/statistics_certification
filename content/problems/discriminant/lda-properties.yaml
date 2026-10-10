@@ -1,0 +1,26 @@
+topics: [discriminant]
+formulas: [lda-linear-rule, lda-fisher-direction, lda-mahalanobis-distance]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  2群の判別分析に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '2群が共通の分散共分散行列をもつ多変量正規分布に従い、事前確率が等しいとき、フィッシャーの線形判別はベイズ判別（誤判別確率を最小にする判別）と一致する。'
+    correct: true
+  - id: b
+    text: '2群の分散共分散行列が異なる正規分布の場合も、ベイズ判別の境界は超平面になる。'
+    correct: false
+  - id: c
+    text: '判別規則を作った学習データでの誤判別率（見かけの誤判別率）は、新しいデータに対する誤判別率の不偏推定量である。'
+    correct: false
+  - id: d
+    text: 'マハラノビス距離は、変数の単位を変える（例：cm から m）と値が変わる。'
+    correct: false
+  - id: e
+    text: 'フィッシャーの線形判別関数の係数ベクトルは $\Sigma(\boldsymbol\mu_1-\boldsymbol\mu_2)$ に比例する。'
+    correct: false
+explanation: |
+  共分散が共通の正規分布では、$\log\{\pi_1f_1(\boldsymbol x)\}-\log\{\pi_2f_2(\boldsymbol x)\}$ が $\boldsymbol x$ の1次式になり、事前確率が等しければ境界はフィッシャーの線形判別と一致する。共分散が異なると2次の項が残り、境界は2次曲面になる（2次判別）。
+  見かけの誤判別率は楽観的（小さめ）になるので、交差検証などで評価する。マハラノビス距離は正則な線形変換に対して不変。係数ベクトルは $\Sigma^{-1}(\boldsymbol\mu_1-\boldsymbol\mu_2)$ に比例する。

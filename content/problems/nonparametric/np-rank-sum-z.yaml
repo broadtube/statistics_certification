@@ -1,0 +1,25 @@
+topics: [nonparametric]
+formulas: [rank-sum-moments]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  独立な2群 A（$m={{m}}$ 人）と B（$n={{n}}$ 人）の測定値を合わせて小さい順に順位をつけたところ（同順位なし）、A の順位の和は $W={{w}}$ であった。ウィルコクソンの順位和検定を正規近似で行うときの標準化統計量 $z$ の値を求めよ（小数第3位まで）。
+explanation: |
+  $H_0$（2群の分布が同じ）のもとで
+  $$
+  E[W]=\frac{m(m+n+1)}{2}=\frac{ {{m}}\times({{m}}+{{n}}+1) }{2},\qquad V[W]=\frac{mn(m+n+1)}{12}=\frac{ {{m}}\times{{n}}\times({{m}}+{{n}}+1) }{12}
+  $$
+  よって
+  $$
+  z=\frac{W-E[W]}{\sqrt{V[W]}}=\frac{ {{w}}-E[W] }{\sqrt{V[W]}}={{answer}}
+  $$
+  マン・ホイットニーの $U=W-m(m+1)/2$ を使っても同じ $z$ になる。
+params:
+  m: { min: 8, max: 20, step: 1 }
+  n: { min: 8, max: 20, step: 1 }
+  w: { min: 50, max: 400, step: 1 }
+constraints: ['w >= m * (m + 1) / 2 + 5', 'w <= m * (m + 1) / 2 + m * n - 5', 'abs(w - m * (m + n + 1) / 2) / sqrt(m * n * (m + n + 1) / 12) >= 0.5', 'abs(w - m * (m + n + 1) / 2) / sqrt(m * n * (m + n + 1) / 12) <= 3']
+answer: (w - m * (m + n + 1) / 2) / sqrt(m * n * (m + n + 1) / 12)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.005 }

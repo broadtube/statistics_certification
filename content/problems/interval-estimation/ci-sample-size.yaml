@@ -1,0 +1,21 @@
+topics: [interval-estimation]
+formulas: [ci-sample-size-mean]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  標準偏差 $\sigma={{sigma}}$ が既知の正規母集団について、母平均の95%信頼区間の半幅（$\bar x$ から上限までの長さ）を {{e}} 以下にしたい。必要な標本サイズの最小値を求めよ（$z_{0.025}=1.96$ を用いよ）。
+explanation: |
+  半幅は $1.96\,\sigma/\sqrt n$ なので、$1.96\,\sigma/\sqrt n\le E$ を $n$ について解くと
+  $$
+  n\ge\left(\frac{1.96\times{{sigma}}}{ {{e}} }\right)^2
+  $$
+  右辺は整数ではないので切り上げて、これを満たす最小の整数は $n={{answer}}$。
+params:
+  sigma: { min: 5, max: 30, step: 1 }
+  e: { min: 1, max: 5, step: 0.5 }
+derived:
+  raw: (1.96 * sigma / e)^2
+constraints: ['raw >= 10', 'raw - floor(raw) > 0.01']
+answer: ceil((1.96 * sigma / e)^2)
+display: { digits: 0 }

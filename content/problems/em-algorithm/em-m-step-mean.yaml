@@ -1,0 +1,19 @@
+topics: [em-algorithm]
+formulas: [em-mixture-m-step]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2成分正規混合分布の EM アルゴリズムで、3つの観測値 $x_1=1$、$x_2=2$、$x_3=4$ の成分1に対する負担率が E ステップでそれぞれ $\gamma_1={{g1}}$、$\gamma_2={{g2}}$、$\gamma_3={{g3}}$ と計算された。M ステップで更新される成分1の平均 $\mu_1$ を求めよ（小数第3位まで）。
+explanation: |
+  M ステップは負担率を重みとした重み付き平均になる。
+  $$
+  \mu_1=\frac{\sum_i\gamma_ix_i}{\sum_i\gamma_i}=\frac{ {{g1}}\times1+{{g2}}\times2+{{g3}}\times4}{ {{g1}}+{{g2}}+{{g3}} }={{answer}}
+  $$
+  混合比は $\pi=({{g1}}+{{g2}}+{{g3}})/3$ に更新される。
+params:
+  g1: { min: 0.5, max: 0.95, step: 0.05 }
+  g2: { min: 0.2, max: 0.8, step: 0.1 }
+  g3: { min: 0.05, max: 0.4, step: 0.05 }
+answer: (g1 * 1 + g2 * 2 + g3 * 4) / (g1 + g2 + g3)
+display: { digits: 3 }

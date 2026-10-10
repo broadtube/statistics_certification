@@ -1,0 +1,32 @@
+- id: kmeans-within-ss
+  topic: clustering
+  title: k-means 法の目的関数（クラスター内平方和）
+  body: 'W=\sum_{l=1}^k\sum_{i\in C_l}\|\boldsymbol x_i-\bar{\boldsymbol x}_l\|^2'
+  pitfalls: 反復で単調に減少するが、到達するのは初期値に依存する局所最適解。
+  tags: [クラスター分析, k-means, 平方和]
+- id: cluster-ss-decomposition
+  topic: clustering
+  title: 平方和の分解（クラスター内・クラスター間）
+  body: '\sum_{i=1}^n\|\boldsymbol x_i-\bar{\boldsymbol x}\|^2=\sum_{l}\sum_{i\in C_l}\|\boldsymbol x_i-\bar{\boldsymbol x}_l\|^2+\sum_{l}n_l\|\bar{\boldsymbol x}_l-\bar{\boldsymbol x}\|^2'
+  description: 全平方和は分け方によらないので、クラスター内平方和の最小化とクラスター間平方和の最大化は同じ。
+  tags: [クラスター分析, 平方和]
+- id: cluster-ward-increase
+  topic: clustering
+  title: ウォード法の併合コスト
+  description: 2つのクラスターを併合したときのクラスター内平方和の増加量。
+  body: '\Delta W(A,B)=\frac{n_An_B}{n_A+n_B}\|\bar{\boldsymbol x}_A-\bar{\boldsymbol x}_B\|^2'
+  tags: [クラスター分析, ウォード法, 階層的クラスタリング]
+- id: cluster-lance-williams
+  topic: clustering
+  title: ランス・ウィリアムズの更新式
+  description: 併合後のクラスター間距離を、併合前の距離から計算する一般式。
+  body: 'd(k,i\cup j)=\alpha_i d(k,i)+\alpha_j d(k,j)+\beta d(i,j)+\gamma\,|d(k,i)-d(k,j)|'
+  conditions: '最短距離法：$\alpha_i=\alpha_j=\tfrac12,\ \beta=0,\ \gamma=-\tfrac12$。最長距離法：$\gamma=+\tfrac12$。群平均法：$\alpha_i=\frac{n_i}{n_i+n_j},\ \beta=\gamma=0$。'
+  tags: [クラスター分析, 階層的クラスタリング, 最短距離法, 最長距離法]
+- id: cluster-silhouette
+  topic: clustering
+  title: シルエット係数
+  description: '$a(i)$ は個体 $i$ と同じクラスター内の平均距離、$b(i)$ は最も近い他のクラスターまでの平均距離。'
+  body: 's(i)=\frac{b(i)-a(i)}{\max\{a(i),\,b(i)\}}\in[-1,1]'
+  pitfalls: 1 に近いほど適切に分類され、負なら別のクラスターの方が近い。
+  tags: [クラスター分析, クラスター数, シルエット]

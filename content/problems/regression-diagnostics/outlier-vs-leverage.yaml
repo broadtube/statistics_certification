@@ -1,0 +1,27 @@
+topics: [regression-diagnostics]
+formulas: [hat-matrix-leverage, residual-variance-leverage, cooks-distance]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  最小二乗法による重回帰（切片を含み、回帰係数は $p+1$ 個、標本サイズ $n$）の回帰診断に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 'てこ比 $h_{ii}$ の大きい観測ほど、残差 $e_i$ の分散 $\sigma^2(1-h_{ii})$ は小さくなる。'
+    correct: true
+  - id: b
+    text: 'てこ比 $h_{ii}$ の総和は標本サイズ $n$ に等しい。'
+    correct: false
+  - id: c
+    text: '残差 $e_i$ の絶対値が小さい観測は、クックの距離も必ず小さい。'
+    correct: false
+  - id: d
+    text: 'てこ比は目的変数 $y_i$ の値が平均から離れているほど大きくなる。'
+    correct: false
+  - id: e
+    text: '生の残差 $e_1,\dots,e_n$ は互いに独立で、すべて分散 $\sigma^2$ をもつ。'
+    correct: false
+explanation: |
+  $\boldsymbol e=(I-H)\boldsymbol y$ より $V[\boldsymbol e]=\sigma^2(I-H)$ なので $V[e_i]=\sigma^2(1-h_{ii})$ で、(a) が正しい。
+  (b) $\sum h_{ii}=\mathrm{tr}H=p+1$。(c) てこ比が高い観測は回帰を引き寄せて残差が小さく見えるが、クックの距離 $D_i=\frac{r_i^2}{p+1}\frac{h_{ii}}{1-h_{ii}}$ は大きくなりうる。
+  (d) てこ比は説明変数（$X$）だけで決まり、$y$ には依存しない。(e) $I-H$ は対角行列ではないので残差は相関し、分散も観測ごとに異なる。

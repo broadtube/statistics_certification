@@ -1,0 +1,21 @@
+topics: [probability-basics]
+formulas: [prob-total-probability, prob-bayes-rule-events]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある部品は工場 A と工場 B で作られ、全体のうち工場 A 製の割合は {{w}} である。不良品の割合は工場 A 製で {{da}}、工場 B 製で {{db}} である。無作為に1個取り出したところ **良品** であった。この部品が工場 A 製である確率を求めよ（小数第4位まで）。
+explanation: |
+  良品である事象を $G$ とする。全確率の公式より
+  $P(G)={{w}}(1-{{da}})+(1-{{w}})(1-{{db}})$。ベイズの定理より
+  $$
+  P(A\mid G)=\frac{ {{w}}(1-{{da}}) }{ {{w}}(1-{{da}})+(1-{{w}})(1-{{db}}) }={{answer}}
+  $$
+  不良率の高い工場の製品であるほど、良品という情報で事後確率はわずかに下がる。
+params:
+  w: { min: 0.3, max: 0.7, step: 0.05 }
+  da: { min: 0.01, max: 0.1, step: 0.01 }
+  db: { min: 0.01, max: 0.1, step: 0.01 }
+constraints: ['da != db']
+answer: w * (1 - da) / (w * (1 - da) + (1 - w) * (1 - db))
+display: { digits: 4 }

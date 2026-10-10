@@ -1,0 +1,18 @@
+topics: [bootstrap]
+formulas: [bootstrap-exclusion-probability]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  互いに異なる値をもつ大きさ $n={{n}}$ の標本から、大きさ $n$ のブートストラップ標本を復元抽出で作る。観測値の並び順を区別しないとき、得られうる異なるブートストラップ標本は何通りあるか。
+explanation: |
+  $n$ 種類の値から重複を許して $n$ 個選ぶ組合せ（重複組合せ）なので
+  $$
+  \binom{2n-1}{n}=\binom{2\times{{n}}-1}{ {{n}} }={{answer}}
+  $$
+  通り。$n$ が大きくなると膨大な数になるため、実際には $B$ 回の無作為な再抽出で近似する。
+params:
+  n: { min: 3, max: 9, step: 1 }
+answer: choose(2 * n - 1, n)
+display: { digits: 0 }
+tolerance: { type: absolute, value: 0.5 }

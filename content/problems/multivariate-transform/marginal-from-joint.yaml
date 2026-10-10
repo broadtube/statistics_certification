@@ -1,0 +1,17 @@
+topics: [multivariate-transform]
+formulas: [mvt-marginal-conditional]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  $(X,Y)$ の同時密度が $f(x,y)=x+y\ (0\le x\le1,\ 0\le y\le1)$、それ以外で $0$ であるとき、$P(X\le{{a}})$ を求めよ（小数第4位まで）。
+explanation: |
+  周辺密度は $f_X(x)=\int_0^1(x+y)\,dy=x+\frac12\ (0\le x\le1)$。
+  $$
+  P(X\le a)=\int_0^a\left(x+\frac12\right)dx=\frac{a^2}{2}+\frac a2=\frac{ {{a}}^2 }{2}+\frac{ {{a}} }{2}={{answer}}
+  $$
+  なお $f(x,y)\ne f_X(x)f_Y(y)$ なので $X$ と $Y$ は独立ではない。
+params:
+  a: { min: 0.1, max: 0.9, step: 0.05 }
+answer: a^2 / 2 + a / 2
+display: { digits: 4 }

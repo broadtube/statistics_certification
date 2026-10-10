@@ -31,7 +31,7 @@ jobs:
         uses: actions/configure-pages@v6
       - name: Unit / integration tests
         run: npm test
-      - name: Build (content validation and variant generation run in prebuild)
+      - name: Build (content validation, math rendering check and variant generation run in prebuild)
         run: npm run build
         env:
           SITE_URL: ${{ steps.pages.outputs.origin }}

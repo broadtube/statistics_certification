@@ -1,0 +1,17 @@
+topics: [unit-root-arima]
+formulas: [overdifferencing-acf]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  定常な AR(1) 過程 $X_t={{phi}}X_{t-1}+\varepsilon_t$ に誤って差分をとった系列 $Y_t=X_t-X_{t-1}$ のラグ1の自己相関 $\rho_Y(1)$ を求めよ（小数第3位まで）。
+explanation: |
+  $X_t$ の自己共分散を $\gamma_h=\phi^{h}\gamma_0$ とすると
+  $$
+  \gamma_Y(0)=2(\gamma_0-\gamma_1)=2\gamma_0(1-\phi),\qquad \gamma_Y(1)=2\gamma_1-\gamma_0-\gamma_2=-\gamma_0(1-\phi)^2
+  $$
+  よって $\rho_Y(1)=-\frac{1-\phi}{2}=-\frac{1-({{phi}})}{2}={{answer}}$。差分によって負の自己相関が生じる（過剰差分）。
+params:
+  phi: { min: -0.8, max: 0.9, step: 0.1 }
+answer: -(1 - phi) / 2
+display: { digits: 3 }

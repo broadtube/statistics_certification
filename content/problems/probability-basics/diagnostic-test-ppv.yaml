@@ -1,0 +1,23 @@
+topics: [probability-basics]
+formulas: [prob-bayes-rule-events, prob-total-probability]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある病気の有病率は {{prev}} である。この病気の検査は、病気の人を陽性と判定する確率（感度）が {{sens}}、病気でない人を陰性と判定する確率（特異度）が {{spec}} である。無作為に選んだ人が陽性と判定されたとき、その人が実際に病気である確率を求めよ（小数第3位まで）。
+explanation: |
+  病気である事象を $D$ とする。全確率の公式より
+  $$
+  P(+)=P(D)P(+\mid D)+P(D^c)P(+\mid D^c)={{prev}}\times{{sens}}+(1-{{prev}})(1-{{spec}})
+  $$
+  ベイズの定理より
+  $$
+  P(D\mid +)=\frac{ {{prev}}\times{{sens}} }{ {{prev}}\times{{sens}}+(1-{{prev}})(1-{{spec}}) }={{answer}}
+  $$
+  感度・特異度が高くても、有病率が低いと陽性的中率は意外に小さい。
+params:
+  prev: { min: 0.01, max: 0.1, step: 0.01 }
+  sens: { min: 0.8, max: 0.99, step: 0.01 }
+  spec: { min: 0.85, max: 0.99, step: 0.01 }
+answer: prev * sens / (prev * sens + (1 - prev) * (1 - spec))
+display: { digits: 3 }

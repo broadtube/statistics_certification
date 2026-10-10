@@ -1,0 +1,26 @@
+topics: [likelihood-ratio]
+formulas: [lrt-wilks-theorem]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  独立な3群の観測値がそれぞれ $N(\mu_1,\sigma^2),\ N(\mu_2,\sigma^2),\ N(\mu_3,\sigma^2)$ に従う（$\sigma^2$ は共通で未知）。各群の標本サイズは30である。$H_0:\mu_1=\mu_2=\mu_3$ の尤度比検定について、$H_0$ のもとでの $-2\log\Lambda$ の漸近分布として正しいものを選べ。
+choices:
+  - id: a
+    text: '自由度2のカイ二乗分布'
+    correct: true
+  - id: b
+    text: '自由度3のカイ二乗分布'
+    correct: false
+  - id: c
+    text: '自由度4のカイ二乗分布'
+    correct: false
+  - id: d
+    text: '自由度1のカイ二乗分布'
+    correct: false
+  - id: e
+    text: '自由度87のカイ二乗分布'
+    correct: false
+explanation: |
+  全体のモデルの母数は $(\mu_1,\mu_2,\mu_3,\sigma^2)$ の4個、$H_0$ のもとでは $(\mu,\sigma^2)$ の2個。ウィルクスの定理より、自由度は差の $4-2=2$。
+  $\sigma^2$ は両方のモデルで推定されるので自由度に数えない。87（$=90-3$）は分散分析の残差の自由度で、ここでは関係しない。

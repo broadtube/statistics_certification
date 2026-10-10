@@ -1,0 +1,36 @@
+- id: test-error-types
+  topic: hypothesis-testing
+  title: 第1種・第2種の過誤と検出力
+  body: '\alpha=P(\text{棄却}\mid H_0),\qquad \beta=P(\text{非棄却}\mid H_1),\qquad \text{検出力}=1-\beta'
+  pitfalls: '$\beta$ は対立仮説のもとでの真の母数の値に依存する。標本サイズを固定すると $\alpha$ と $\beta$ はトレードオフ。'
+  tags: [検定, 過誤, 検出力]
+- id: p-value-definition
+  topic: hypothesis-testing
+  title: p値
+  description: 帰無仮説のもとで、観測値と同じかそれ以上に極端な値が出る確率。
+  body: 'p=P_{H_0}\left(T\ge t_{\mathrm{obs}}\right)\quad(\text{右片側}),\qquad p=P_{H_0}\left(|T|\ge|t_{\mathrm{obs}}|\right)\quad(\text{対称な両側})'
+  pitfalls: p値は $H_0$ が正しい確率ではない。効果の大きさも表さない。
+  tags: [検定, p値]
+- id: neyman-pearson-lemma
+  topic: hypothesis-testing
+  title: ネイマン・ピアソンの補題
+  description: 単純仮説どうしの検定では、尤度比が大きいときに棄却する検定が最強力。
+  body: '\frac{L(\theta_1)}{L(\theta_0)}>k\ \Longrightarrow\ H_0\ \text{を棄却}\qquad(P_{\theta_0}(\text{棄却})=\alpha)'
+  conditions: '$H_0:\theta=\theta_0$、$H_1:\theta=\theta_1$ がともに単純仮説。'
+  derivation: 任意のサイズ $\alpha$ 以下の棄却域 $R'$ と尤度比で決めた棄却域 $R$ について、$\int(\mathbf 1_R-\mathbf 1_{R'})(L_1-kL_0)\ge0$ を示す。
+  tags: [検定, 最強力検定, 尤度比]
+- id: power-z-one-sided
+  topic: hypothesis-testing
+  title: 片側 z 検定の検出力
+  body: '1-\beta=\Phi\left(\frac{(\mu_1-\mu_0)\sqrt n}{\sigma}-z_\alpha\right)'
+  variables:
+    - { symbol: '\Phi', meaning: '標準正規分布の分布関数' }
+    - { symbol: 'z_\alpha', meaning: '標準正規分布の上側 $100\alpha\%$ 点' }
+  conditions: '正規母集団・分散既知で $H_0:\mu=\mu_0$ 対 $H_1:\mu>\mu_0$ を有意水準 $\alpha$ で検定し、真の平均が $\mu_1$ のとき。'
+  tags: [検定, 検出力, 正規分布]
+- id: sample-size-power
+  topic: hypothesis-testing
+  title: 検出力を確保するための標本サイズ
+  body: 'n\ \ge\ \left(\frac{(z_\alpha+z_\beta)\,\sigma}{\mu_1-\mu_0}\right)^2'
+  conditions: 片側 z 検定（分散既知）。両側検定では $z_\alpha$ を $z_{\alpha/2}$ に置き換えた近似を使う。
+  tags: [検定, 検出力, 標本サイズ]

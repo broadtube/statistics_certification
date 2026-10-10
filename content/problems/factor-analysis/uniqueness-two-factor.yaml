@@ -1,0 +1,18 @@
+topics: [factor-analysis]
+formulas: [fa-communality]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  標準化した変数に2因子の直交因子モデルを当てはめたところ、ある変数 $x_j$ の因子負荷量は第1因子が {{a}}、第2因子が {{b}} であった。$x_j$ の独自分散を求めよ（小数第4位まで）。
+explanation: |
+  共通性は $h_j^2=\lambda_{j1}^2+\lambda_{j2}^2=({{a}})^2+({{b}})^2={{h2}}$。
+  標準化した変数の分散は1なので、独自分散は $\psi_j=1-h_j^2={{answer}}$。
+params:
+  a: { min: 0.3, max: 0.85, step: 0.05 }
+  b: { min: -0.4, max: 0.5, step: 0.05 }
+derived:
+  h2: a^2 + b^2
+constraints: ['a^2 + b^2 < 0.95', 'b != 0']
+answer: 1 - (a^2 + b^2)
+display: { digits: 4 }

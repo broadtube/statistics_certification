@@ -1,0 +1,26 @@
+topics: [state-space]
+formulas: [kalman-gain-local-level, kalman-filter-update]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  ローカルレベルモデルとカルマンフィルタに関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '予測分散 $P_{t|t-1}$ とカルマンゲイン $K_t$ は観測値 $y_1,y_2,\dots$ に依存せず、事前に計算できる。'
+    correct: true
+  - id: b
+    text: '状態の撹乱の分散 $\sigma_\eta^2$ が大きいほど、カルマンゲインは小さくなる。'
+    correct: false
+  - id: c
+    text: 'フィルタ化推定値 $a_{t|t}$ の計算には、時点 $t+1$ 以降の観測値も用いる。'
+    correct: false
+  - id: d
+    text: '平滑化推定値の分散は、同じ時点のフィルタ化推定値の分散以上になる。'
+    correct: false
+  - id: e
+    text: '観測ノイズの分散 $\sigma_\varepsilon^2$ が $0$ に近づくと、カルマンゲインは $0$ に近づく。'
+    correct: false
+explanation: |
+  $P_{t|t}=(1-K_t)P_{t|t-1}$、$P_{t+1|t}=P_{t|t}+\sigma_\eta^2$、$K_t=P_{t|t-1}/(P_{t|t-1}+\sigma_\varepsilon^2)$ のどれにも観測値は現れない。
+  (b) $\sigma_\eta^2$ が大きいと $P_{t|t-1}$ が大きくなり $K_t$ は $1$ に近づく。(c) フィルタは時点 $t$ までの観測値だけを使う（全期間を使うのは平滑化）。(d) 平滑化は情報が多いので分散はフィルタ化推定値の分散以下。(e) $\sigma_\varepsilon^2\to0$ では $K_t\to1$ となり、推定値は観測値そのものになる。

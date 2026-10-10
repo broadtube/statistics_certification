@@ -1,0 +1,40 @@
+- id: fa-covariance-structure
+  topic: factor-analysis
+  title: 因子分析モデルの共分散構造
+  description: 直交因子モデルでは、分散共分散行列が因子負荷による部分と独自分散に分かれる。
+  body: '\boldsymbol x=\boldsymbol\mu+\Lambda\boldsymbol f+\boldsymbol\varepsilon\ \Longrightarrow\ \Sigma=\Lambda\Lambda^\top+\Psi'
+  conditions: '$V[\boldsymbol f]=I_m$、$V[\boldsymbol\varepsilon]=\Psi$（対角行列）、$\boldsymbol f$ と $\boldsymbol\varepsilon$ は無相関。'
+  tags: [因子分析, 因子負荷, 共分散行列]
+- id: fa-communality
+  topic: factor-analysis
+  title: 共通性と独自分散
+  description: 変数の分散のうち、共通因子で説明される部分が共通性、残りが独自分散。
+  body: 'h_j^2=\sum_{k=1}^m\lambda_{jk}^2,\qquad \psi_j=\sigma_{jj}-h_j^2'
+  pitfalls: '標準化した変数（相関行列）では $\sigma_{jj}=1$ なので $\psi_j=1-h_j^2$。$\psi_j\le0$ となる推定値は不適解（ハイウッドケース）。'
+  tags: [因子分析, 共通性, 独自分散]
+- id: fa-one-factor-correlation
+  topic: factor-analysis
+  title: 1因子モデルの相関構造
+  description: 標準化変数の1因子モデルでは、相関係数は負荷量の積になる。
+  body: 'r_{ij}=\lambda_i\lambda_j\ (i\ne j),\qquad \lambda_1^2=\frac{r_{12}\,r_{13}}{r_{23}}'
+  tags: [因子分析, 相関係数, 因子負荷]
+- id: fa-rotation-indeterminacy
+  topic: factor-analysis
+  title: 因子回転の不定性
+  description: 因子負荷行列は直交行列による回転を除いてしか定まらない。
+  body: '(\Lambda T)(\Lambda T)^\top=\Lambda TT^\top\Lambda^\top=\Lambda\Lambda^\top\qquad(TT^\top=I_m)'
+  pitfalls: 直交回転では共通性・独自分散・適合度は変わらない。斜交回転（プロマックス等）では因子間相関が生じる。
+  tags: [因子分析, 因子回転, バリマックス]
+- id: fa-ml-test-df
+  topic: factor-analysis
+  title: 最尤因子分析の適合度検定の自由度
+  description: '「因子数 $m$ のモデルで十分」という仮説の尤度比検定（カイ二乗近似）の自由度。'
+  body: 'df=\frac{(p-m)^2-(p+m)}{2}'
+  derivation: '飽和モデルの母数 $p(p+1)/2$ から、因子モデルの母数 $pm+p$ を引き、回転の自由度 $m(m-1)/2$ を足し戻す。'
+  tags: [因子分析, 最尤法, 尤度比検定, 自由度]
+- id: fa-regression-score
+  topic: factor-analysis
+  title: 因子得点（回帰法）
+  body: '\hat{\boldsymbol f}=\Lambda^\top\Sigma^{-1}(\boldsymbol x-\boldsymbol\mu)'
+  pitfalls: 因子得点は観測値から一意に計算できる量ではなく推定値である（回帰法のほかバートレット法などがある）。
+  tags: [因子分析, 因子得点]

@@ -1,0 +1,27 @@
+topics: [limit-theorems]
+formulas: [lt-convergence-relations, lt-slutsky]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  確率変数列の収束について、次の記述のうち正しいものを選べ。
+choices:
+  - id: a
+    text: '定数 $c$ に分布収束する確率変数列は、$c$ に確率収束する。'
+    correct: true
+  - id: b
+    text: '分布収束する確率変数列は、必ず確率収束する。'
+    correct: false
+  - id: c
+    text: '確率収束する確率変数列は、必ず概収束する。'
+    correct: false
+  - id: d
+    text: '$X_n\xrightarrow{d}X$、$Y_n\xrightarrow{d}Y$ ならば、常に $X_n+Y_n\xrightarrow{d}X+Y$ である。'
+    correct: false
+  - id: e
+    text: 'コーシー分布に従う i.i.d. 列の標本平均は、中心極限定理により正規分布に分布収束する。'
+    correct: false
+explanation: |
+  概収束 ⇒ 確率収束 ⇒ 分布収束 の順に弱くなり、逆は一般に成り立たない（b・c は誤り）。ただし極限が定数のときは分布収束と確率収束が同値（a が正しい）。
+  和の分布収束は、一方が定数に確率収束する場合（スラツキーの定理）や独立な場合などに限られる（d は誤り。例：$X\sim N(0,1)$、$X_n=X$、$Y_n=-X$ は $Y_n\xrightarrow{d}X$ だが $X_n+Y_n=0$）。
+  コーシー分布は分散（平均も）をもたないので中心極限定理の仮定を満たさず、標本平均は常に同じコーシー分布に従う（e は誤り）。

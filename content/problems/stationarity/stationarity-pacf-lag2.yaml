@@ -1,0 +1,19 @@
+topics: [stationarity]
+formulas: [pacf-lag2]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  弱定常過程の自己相関が $\rho(1)={{rho1}}$、$\rho(2)={{rho2}}$ であるとき、ラグ2の偏自己相関 $\phi_{22}$ を求めよ（小数第3位まで）。
+explanation: |
+  $X_{t+2}$ を $X_{t+1},X_t$ に回帰したときの $X_t$ の係数を求めると
+  $$
+  \phi_{22}=\frac{\rho(2)-\rho(1)^2}{1-\rho(1)^2}=\frac{ {{rho2}}-({{rho1}})^2}{1-({{rho1}})^2}={{answer}}
+  $$
+  $\rho(2)=\rho(1)^2$ のとき（AR(1) の場合）に $\phi_{22}=0$ となる。
+params:
+  rho1: { min: 0.1, max: 0.8, step: 0.1 }
+  rho2: { min: 0, max: 0.7, step: 0.1 }
+constraints: ['rho2 > 2 * rho1^2 - 1', 'abs(rho2 - rho1^2) > 0.005']
+answer: (rho2 - rho1^2) / (1 - rho1^2)
+display: { digits: 3 }

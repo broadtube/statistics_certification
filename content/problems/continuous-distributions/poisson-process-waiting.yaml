@@ -1,0 +1,19 @@
+topics: [continuous-distributions]
+formulas: [contdist-gamma-sum]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  ある窓口には客が1時間あたり平均 {{lambda}} 人のポアソン過程に従って到着する。窓口が開いてから {{n}} 人目の客が到着するまでの時間を $T$（時間）とするとき、$P(T\le{{t}})$ を求めよ（小数第4位まで）。
+explanation: |
+  到着間隔は独立に $\mathrm{Ex}(\lambda)$ に従うので $T\sim\mathrm{Ga}({{n}},{{lambda}})$。
+  「$T\le t$」は「時刻 $t$ までの到着数 $N(t)$ が $n$ 人以上」と同じ事象で、$N(t)\sim\mathrm{Po}(\lambda t)$（$\lambda t={{lambda}}\times{{t}}$） だから
+  $$
+  P(T\le{{t}})=P(N({{t}})\ge{{n}})=1-\sum_{k=0}^{ {{n}}-1 }e^{-\lambda t}\frac{(\lambda t)^k}{k!}={{answer}}
+  $$
+params:
+  lambda: { min: 2, max: 10, step: 1 }
+  n: { min: 2, max: 6, step: 1 }
+  t: { min: 0.5, max: 2, step: 0.25 }
+answer: 1 - ppois(n - 1, lambda * t)
+display: { digits: 4 }

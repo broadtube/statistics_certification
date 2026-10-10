@@ -1,0 +1,33 @@
+- id: em-q-function
+  topic: em-algorithm
+  title: EM アルゴリズムの Q 関数
+  description: E ステップで計算し、M ステップで最大化する。
+  body: 'Q(\theta\mid\theta^{(t)})=E_{Z\mid x,\theta^{(t)}}\left[\log p(x,Z;\theta)\right],\qquad \theta^{(t+1)}=\arg\max_\theta Q(\theta\mid\theta^{(t)})'
+  pitfalls: 期待値をとるのは完全データの対数尤度。欠測値を条件付き期待値で補完することとは一般には異なる。
+  tags: [EMアルゴリズム, 潜在変数, 最尤推定]
+- id: em-monotonicity
+  topic: em-algorithm
+  title: EM アルゴリズムの単調性
+  body: '\ell(\theta^{(t+1)})\ \ge\ \ell(\theta^{(t)})'
+  derivation: '$\ell(\theta)=Q(\theta\mid\theta^{(t)})-H(\theta\mid\theta^{(t)})$ と分解し、ギブスの不等式 $H(\theta\mid\theta^{(t)})\le H(\theta^{(t)}\mid\theta^{(t)})$ を使う。'
+  pitfalls: 大域的最大値への収束は保証されない（局所最大値や鞍点に収束しうる）。
+  tags: [EMアルゴリズム, 対数尤度]
+- id: em-mixture-responsibility
+  topic: em-algorithm
+  title: 2成分混合分布の負担率（E ステップ）
+  body: '\gamma_i=\frac{\pi f_1(x_i)}{\pi f_1(x_i)+(1-\pi)f_2(x_i)}'
+  description: 観測 $x_i$ が成分1から生じた事後確率。
+  tags: [EMアルゴリズム, 混合分布, 負担率]
+- id: em-mixture-m-step
+  topic: em-algorithm
+  title: 正規混合分布の M ステップ
+  body: '\pi=\frac1n\sum_{i=1}^n\gamma_i,\quad \mu_1=\frac{\sum_i\gamma_ix_i}{\sum_i\gamma_i},\quad \sigma_1^2=\frac{\sum_i\gamma_i(x_i-\mu_1)^2}{\sum_i\gamma_i}'
+  pitfalls: 分散が $0$ に近づくと尤度が発散する（尤度は有界でない）。
+  tags: [EMアルゴリズム, 混合分布]
+- id: em-censored-exponential
+  topic: em-algorithm
+  title: 打ち切りのある指数分布の EM 更新式
+  description: '$r$ 個が観測値、$m$ 個が打ち切り、観測値と打ち切り時点の合計が $T$ のとき。'
+  body: '\lambda^{(t+1)}=\frac{r+m}{T+m/\lambda^{(t)}}\ \longrightarrow\ \hat\lambda=\frac{r}{T}'
+  derivation: '指数分布の無記憶性より $E[X\mid X>c]=c+1/\lambda$ を E ステップで使う。'
+  tags: [EMアルゴリズム, 打ち切り, 指数分布]

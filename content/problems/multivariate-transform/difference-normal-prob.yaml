@@ -1,0 +1,22 @@
+topics: [multivariate-transform]
+formulas: [mvt-mvn-linear-transform]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2つの製品の重さ $(X_1,X_2)$ は2変量正規分布に従い、$E[X_1]={{m1}}$、$E[X_2]={{m2}}$、$V[X_1]=V[X_2]={{v}}$、相関係数は $\rho={{rho}}$ である。$P(X_1>X_2)$ を求めよ（小数第4位まで）。
+explanation: |
+  $D=X_1-X_2=(1,-1)\boldsymbol X$ は正規分布に従い
+  $E[D]={{m1}}-{{m2}}$、$V[D]=V[X_1]+V[X_2]-2\rho\sqrt{V[X_1]V[X_2]}=2\times{{v}}\times(1-{{rho}})$。
+  $$
+  P(X_1>X_2)=P(D>0)=\Phi\left(\frac{E[D]}{\sqrt{V[D]}}\right)={{answer}}
+  $$
+  正の相関があると差の分散が小さくなり、平均の差が同じでも確率は 1 に近づく。
+params:
+  m1: { min: 100, max: 104, step: 1 }
+  m2: { min: 98, max: 101, step: 1 }
+  v: { min: 4, max: 16, step: 2 }
+  rho: { min: -0.5, max: 0.8, step: 0.1 }
+constraints: ['m1 > m2']
+answer: pnorm((m1 - m2) / sqrt(2 * v * (1 - rho)))
+display: { digits: 4 }

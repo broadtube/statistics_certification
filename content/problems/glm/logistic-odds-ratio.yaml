@@ -1,0 +1,18 @@
+topics: [glm]
+formulas: [logistic-regression-model]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある疾患の有無を年齢 $x$（歳）で説明するロジスティック回帰で、年齢の係数の推定値が $\hat\beta_1={{b1}}$ であった。年齢が {{k}} 歳高いときのオッズ比の推定値を求めよ（小数第3位まで）。
+explanation: |
+  年齢が $k$ 歳増えると対数オッズは $k\hat\beta_1$ 増えるので、オッズ比は
+  $$
+  \exp(k\hat\beta_1)=\exp({{k}}\times{{b1}})={{answer}}
+  $$
+  これは年齢の値（基準となる年齢）によらない。一方、確率の差は基準の年齢によって変わる。
+params:
+  b1: { min: 0.01, max: 0.1, step: 0.01 }
+  k: { min: 5, max: 20, step: 5 }
+answer: exp(k * b1)
+display: { digits: 3 }

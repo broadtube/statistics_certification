@@ -1,0 +1,19 @@
+topics: [em-algorithm]
+formulas: [em-censored-exponential, em-monotonicity]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  指数分布（率 $\lambda$）に従う寿命データのうち {{r}} 個は故障時間が観測され、{{m}} 個は打ち切られた。観測された故障時間と打ち切り時点の合計は $T={{tt}}$ である。EM アルゴリズム $\lambda^{(t+1)}=\frac{r+m}{T+m/\lambda^{(t)}}$ の収束先を求めよ（小数第4位まで）。
+explanation: |
+  収束先 $\lambda$ は $\lambda=\frac{r+m}{T+m/\lambda}$ を満たす。両辺に $T+m/\lambda$ を掛けると $\lambda T+m=r+m$ より
+  $$
+  \lambda=\frac rT=\frac{ {{r}} }{ {{tt}} }={{answer}}
+  $$
+  これは打ち切りを考慮した観測データの尤度 $\lambda^re^{-\lambda T}$ を直接最大化した最尤推定値と一致する。打ち切りの個数 $m$ には依存しない。
+params:
+  r: { min: 5, max: 20, step: 1 }
+  m: { min: 2, max: 10, step: 1 }
+  tt: { min: 50, max: 200, step: 10 }
+answer: r / tt
+display: { digits: 4 }

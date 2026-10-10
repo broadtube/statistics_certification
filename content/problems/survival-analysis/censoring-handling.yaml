@@ -1,0 +1,27 @@
+topics: [survival-analysis]
+formulas: [kaplan-meier-estimator]
+difficulty: 1
+type: choice
+source: { kind: original }
+statement: |
+  右側打ち切りを含む生存時間データの扱いとして正しいものを選べ。ただし、打ち切りは生存時間と独立（無情報）とする。
+choices:
+  - id: a
+    text: 打ち切られた個体は、打ち切り時刻まではリスク集合に含め、それ以降は除いてカプラン・マイヤー推定量を計算する。
+    correct: true
+  - id: b
+    text: 打ち切られた個体は情報をもたないので、解析から除外して計算する。
+    correct: false
+  - id: c
+    text: 打ち切り時刻をイベント（死亡）時刻とみなして計算すると、生存関数を偏りなく推定できる。
+    correct: false
+  - id: d
+    text: カプラン・マイヤー推定量は打ち切り時刻でも値が下がる。
+    correct: false
+  - id: e
+    text: 指数分布の故障率の最尤推定値は、イベント数をイベント例の観測時間の合計だけで割って求める。
+    correct: false
+explanation: |
+  打ち切り例は「少なくとも打ち切り時刻までは生存した」という情報をもつので、その時刻まではリスク集合に含める（a が正しい）。
+  除外する（b）と生存時間の長い個体を落としやすく、生存率を低く見積もる。イベント扱い（c）も生存率を過小評価する。
+  カプラン・マイヤー推定量が下がるのはイベント時刻だけ（d は誤り）。指数分布の $\hat\lambda=d/\sum t_i$ の分母は打ち切り例も含めた総観測時間（e は誤り）。

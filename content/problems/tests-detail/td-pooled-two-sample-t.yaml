@@ -1,0 +1,37 @@
+topics: [tests-detail]
+formulas: [two-sample-pooled-t]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2つの指導法 A・B の効果を比べるため、A で学んだ {{m}} 人と B で学んだ {{n}} 人に同じテストを行った。得点の標本平均と標本標準偏差（不偏分散の平方根）は次のとおりである。
+
+  | | 人数 | 平均 | 標準偏差 |
+  | --- | --- | --- | --- |
+  | A | {{m}} | {{xbar}} | {{s1}} |
+  | B | {{n}} | {{ybar}} | {{s2}} |
+
+  母分散が等しいと仮定して、$H_0:\mu_A=\mu_B$ の2標本 t 検定統計量の値を求めよ（小数第2位まで）。
+explanation: |
+  プールした分散は
+  $$
+  s_p^2=\frac{(m-1)s_1^2+(n-1)s_2^2}{m+n-2}=\frac{({{m}}-1)\times{{s1}}^2+({{n}}-1)\times{{s2}}^2 }{ {{m}}+{{n}}-2 }={{sp2}}
+  $$
+  検定統計量は
+  $$
+  t=\frac{\bar x-\bar y}{s_p\sqrt{1/m+1/n}}=\frac{ {{xbar}}-{{ybar}} }{\sqrt{ {{sp2}} }\sqrt{1/{{m}}+1/{{n}}}}={{answer}}
+  $$
+  $H_0$ のもとで自由度 $m+n-2$ の t 分布に従う。
+params:
+  m: { min: 10, max: 25, step: 1 }
+  n: { min: 10, max: 25, step: 1 }
+  xbar: { min: 62, max: 75, step: 1 }
+  ybar: { min: 60, max: 70, step: 1 }
+  s1: { min: 6, max: 14, step: 1 }
+  s2: { min: 6, max: 14, step: 1 }
+derived:
+  sp2: ((m - 1) * s1^2 + (n - 1) * s2^2) / (m + n - 2)
+constraints: ['xbar != ybar', 'abs(s1 - s2) <= 4']
+answer: (xbar - ybar) / (sqrt(((m - 1) * s1^2 + (n - 1) * s2^2) / (m + n - 2)) * sqrt(1 / m + 1 / n))
+display: { digits: 2 }
+tolerance: { type: absolute, value: 0.01 }

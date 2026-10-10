@@ -1,0 +1,26 @@
+topics: [causal-inference]
+formulas: [causal-standardization, causal-ate-definition]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  ある治療 $Z$（1：治療あり、0：なし）の効果を観察データで評価する。重症度 $X$（1：重症、0：軽症）が唯一の交絡因子で、$X$ を与えたもとで割り当ては無視できるとする。母集団での重症者の割合は $P(X=1)={{q}}$、結果 $Y$ の条件付き平均は次のとおりである。
+  - 重症：$E[Y\mid Z=1,X=1]={{a1}}$、$E[Y\mid Z=0,X=1]={{a0}}$
+  - 軽症：$E[Y\mid Z=1,X=0]={{b1}}$、$E[Y\mid Z=0,X=0]={{b0}}$
+
+  平均処置効果 $E[Y(1)-Y(0)]$ を求めよ（小数第2位まで）。
+explanation: |
+  条件付き独立性より $E[Y(z)]=\sum_x E[Y\mid Z=z,X=x]P(X=x)$。層ごとの効果を母集団全体の重症度分布で重み付けする。
+  $$
+  \tau={{q}}\times({{a1}}-{{a0}})+(1-{{q}})\times({{b1}}-{{b0}})={{answer}}
+  $$
+  処置群の重症度分布で重み付けすると、ATE ではなく処置群での効果（ATT）になる。
+params:
+  q: { min: 0.2, max: 0.6, step: 0.1 }
+  a1: { min: 40, max: 60, step: 1 }
+  a0: { min: 30, max: 50, step: 1 }
+  b1: { min: 70, max: 85, step: 1 }
+  b0: { min: 60, max: 80, step: 1 }
+constraints: ['a1 > a0', 'b1 > b0']
+answer: q * (a1 - a0) + (1 - q) * (b1 - b0)
+display: { digits: 2 }

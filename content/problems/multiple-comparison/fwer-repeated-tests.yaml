@@ -1,0 +1,18 @@
+topics: [multiple-comparison]
+formulas: [fwer-independent-tests]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  互いに独立な {{m}} 個の検定を、それぞれ有意水準 $\alpha={{alpha}}$ で行う。すべての帰無仮説が真であるとき、少なくとも1つを誤って棄却する確率（ファミリーワイズ誤り率）を求めよ（小数第3位まで）。
+explanation: |
+  1つも誤って棄却しない確率は $(1-\alpha)^m$ なので
+  $$
+  \mathrm{FWER}=1-(1-{{alpha}})^{ {{m}} }={{answer}}
+  $$
+  個々の有意水準よりかなり大きくなる。
+params:
+  m: { min: 2, max: 20, step: 1 }
+  alpha: { min: 0.01, max: 0.1, step: 0.01 }
+answer: 1 - (1 - alpha)^m
+display: { digits: 3 }

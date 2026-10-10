@@ -1,0 +1,23 @@
+topics: [clustering]
+formulas: [cluster-ward-increase]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2変数のデータに対してウォード法で階層的クラスタリングを行っている。クラスター $A$ は {{nA}} 個体で重心 $({{ax}},\ {{ay}})$、クラスター $B$ は {{nB}} 個体で重心 $({{bx}},\ {{by}})$ である。$A$ と $B$ を併合したときのクラスター内平方和の増加量を求めよ（小数第2位まで）。
+explanation: |
+  ウォード法の併合コストは
+  $$
+  \Delta W=\frac{n_An_B}{n_A+n_B}\|\bar{\boldsymbol x}_A-\bar{\boldsymbol x}_B\|^2=\frac{ {{nA}}\times{{nB}} }{ {{nA}}+{{nB}} }\left\{({{ax}}-{{bx}})^2+({{ay}}-{{by}})^2\right\}={{answer}}
+  $$
+  重心間の距離が同じでも、両方のクラスターが大きいほど増加量は大きくなる。
+params:
+  nA: { min: 2, max: 8, step: 1 }
+  nB: { min: 2, max: 8, step: 1 }
+  ax: { min: 0, max: 3, step: 1 }
+  ay: { min: 0, max: 3, step: 1 }
+  bx: { min: 2, max: 6, step: 1 }
+  by: { min: 1, max: 5, step: 1 }
+constraints: ['(ax - bx)^2 + (ay - by)^2 > 0']
+answer: nA * nB / (nA + nB) * ((ax - bx)^2 + (ay - by)^2)
+display: { digits: 2 }

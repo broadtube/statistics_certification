@@ -1,0 +1,16 @@
+topics: [stationarity]
+formulas: [sample-autocorrelation]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  長さ $n={{n}}$ の時系列がホワイトノイズであるとき、標本自己相関 $r_h$ に対する近似的な95%の判定限界 $c$（$|r_h|>c$ なら有意とみなす値）を求めよ（小数第3位まで）。
+explanation: |
+  ホワイトノイズのもとで $r_h$ は近似的に $N(0,1/n)$ に従うので
+  $$
+  c=\frac{1.96}{\sqrt n}=\frac{1.96}{\sqrt{ {{n}} }}={{answer}}
+  $$
+params:
+  n: { min: 50, max: 400, step: 25 }
+answer: 1.96 / sqrt(n)
+display: { digits: 3 }

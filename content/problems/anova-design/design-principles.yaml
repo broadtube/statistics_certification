@@ -1,0 +1,27 @@
+topics: [anova-design]
+formulas: [randomized-block-df, anova-twoway-df, orthogonal-array-l8]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  実験計画と分散分析に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '処理 4 個・ブロック 5 個の乱塊法（各ブロックで全処理を1回ずつ）では、誤差の自由度は 12 である。'
+    correct: true
+  - id: b
+    text: '繰り返しのない二元配置分散分析でも、交互作用の有無を F 検定で調べることができる。'
+    correct: false
+  - id: c
+    text: '無作為化の目的は、実験回数を減らして費用を節約することである。'
+    correct: false
+  - id: d
+    text: '一元配置分散分析の F 検定で有意となれば、すべての水準の組で母平均が異なると結論できる。'
+    correct: false
+  - id: e
+    text: '直交表 $L_8(2^7)$ を用いると、2水準の因子を最大 8 個まで割り付けられる。'
+    correct: false
+explanation: |
+  (a) 乱塊法は繰り返しのない二元配置と同じ形で、誤差の自由度は $(a-1)(b-1)=3\times4=12$。正しい。
+  (b) 繰り返しがないと交互作用と誤差を分離できない。(c) 無作為化は系統的な偏りを偶然誤差に変え、推測の妥当性を保証するためのもの。
+  (d) F 検定が示すのは「少なくとも1つの差がある」ことだけ。どこに差があるかは多重比較で調べる。(e) $L_8(2^7)$ は列が 7 本なので、割り付けられるのは最大 7 因子。

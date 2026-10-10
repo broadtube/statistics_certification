@@ -1,0 +1,26 @@
+topics: [machine-learning]
+formulas: [ml-bias-variance, ml-ridge-lasso]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  汎化誤差と正則化に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 'リッジ回帰の正則化パラメータ $\lambda$ を大きくすると、推定量の分散は小さくなる一方でバイアスは大きくなる。'
+    correct: true
+  - id: b
+    text: 'モデルを複雑にするほど、訓練誤差と汎化誤差はともに単調に減少する。'
+    correct: false
+  - id: c
+    text: 'ラッソ（$L_1$ 正則化）では係数がちょうど0になることはなく、すべての変数がモデルに残る。'
+    correct: false
+  - id: d
+    text: '$K$ 分割交差検証では、各回の検証用データもその回のモデルの学習に使う。'
+    correct: false
+  - id: e
+    text: '訓練誤差は汎化誤差の不偏推定量なので、モデル選択には訓練誤差を使えばよい。'
+    correct: false
+explanation: |
+  リッジ回帰 $\hat{\boldsymbol\beta}=(X^\top X+\lambda I)^{-1}X^\top\boldsymbol y$ は $\lambda$ が大きいほど係数を0に向けて縮小し、分散を減らす代わりにバイアスを生む（バイアス・バリアンスのトレードオフ）。
+  複雑なモデルほど訓練誤差は下がるが、汎化誤差は過学習によりある所から増加する。ラッソは一部の係数をちょうど0にする。交差検証では検証用データを学習に使わない。訓練誤差は汎化誤差を過小評価する。

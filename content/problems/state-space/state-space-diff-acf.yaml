@@ -1,0 +1,22 @@
+topics: [state-space]
+formulas: [local-level-model]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  ローカルレベルモデル $y_t=\mu_t+\varepsilon_t$、$\mu_{t+1}=\mu_t+\eta_t$ で $\sigma_\varepsilon^2={{se2}}$、$\sigma_\eta^2={{sn2}}$ とする。差分系列 $\Delta y_t=y_t-y_{t-1}$ のラグ1の自己相関を求めよ（小数第3位まで）。
+explanation: |
+  $\Delta y_t=\eta_{t-1}+\varepsilon_t-\varepsilon_{t-1}$ より
+  $$
+  V[\Delta y_t]=\sigma_\eta^2+2\sigma_\varepsilon^2,\qquad \mathrm{Cov}(\Delta y_t,\Delta y_{t-1})=-\sigma_\varepsilon^2
+  $$
+  ラグ2以降の自己共分散は $0$ なので $\Delta y_t$ は MA(1) で、
+  $$
+  \rho(1)=\frac{-\sigma_\varepsilon^2}{\sigma_\eta^2+2\sigma_\varepsilon^2}=\frac{-{{se2}}}{ {{sn2}}+2\times{{se2}} }={{answer}}
+  $$
+  （値は $-0.5$ 以上 $0$ 以下に限られる）。
+params:
+  se2: { min: 0.5, max: 3, step: 0.5 }
+  sn2: { min: 0.1, max: 3, step: 0.1 }
+answer: -se2 / (sn2 + 2 * se2)
+display: { digits: 3 }

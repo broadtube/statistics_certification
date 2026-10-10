@@ -1,0 +1,21 @@
+topics: [hypothesis-testing]
+formulas: [sample-size-power, power-z-one-sided]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  標準偏差 $\sigma={{sigma}}$ が既知の正規母集団について、$H_0:\mu=\mu_0$ 対 $H_1:\mu>\mu_0$ を有意水準5%の片側 z 検定で検定する。真の平均が $\mu_0+{{delta}}$ のときに検出力を0.9以上にするために必要な標本サイズの最小値を求めよ（$z_{0.05}=1.645$、$z_{0.10}=1.282$ を用いよ）。
+explanation: |
+  検出力は $\Phi\left(\frac{\delta\sqrt n}{\sigma}-z_{0.05}\right)$ なので、これが $0.9$ 以上となる条件は $\frac{\delta\sqrt n}{\sigma}-1.645\ge1.282$。よって
+  $$
+  n\ge\left(\frac{(1.645+1.282)\times{{sigma}}}{ {{delta}} }\right)^2
+  $$
+  右辺を切り上げて $n={{answer}}$。
+params:
+  sigma: { min: 5, max: 20, step: 1 }
+  delta: { min: 2, max: 8, step: 0.5 }
+derived:
+  raw: ((1.645 + 1.282) * sigma / delta)^2
+constraints: ['raw >= 8', 'raw <= 400', 'raw - floor(raw) > 0.01']
+answer: ceil(((1.645 + 1.282) * sigma / delta)^2)
+display: { digits: 0 }

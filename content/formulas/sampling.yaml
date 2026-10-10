@@ -1,0 +1,38 @@
+- id: srs-mean-variance-fpc
+  topic: sampling
+  title: 単純無作為非復元抽出での標本平均の分散
+  description: 有限母集団修正 $1-n/N$ が掛かる。
+  body: 'V[\bar y]=\left(1-\frac nN\right)\frac{S^2}{n},\qquad S^2=\frac{1}{N-1}\sum_{i=1}^N(y_i-\bar Y)^2'
+  conditions: 非復元の単純無作為抽出。
+  pitfalls: '母分散を $N$ で割る形 $\sigma^2$ で書くと $V[\bar y]=\frac{N-n}{N-1}\frac{\sigma^2}{n}$。'
+  tags: [標本調査, 有限母集団修正, 単純無作為抽出]
+- id: sampling-required-size
+  topic: sampling
+  title: 必要標本サイズ（有限母集団修正つき）
+  description: 誤差の限界 $d$ を信頼係数 95% で達成する標本サイズ。
+  body: 'n_0=\left(\frac{1.96\,S}{d}\right)^2,\qquad n=\frac{n_0}{1+n_0/N}'
+  derivation: '$1.96\sqrt{(1-n/N)S^2/n}=d$ を $n$ について解く。'
+  tags: [標本調査, 標本サイズ, 有限母集団修正]
+- id: stratified-mean-variance
+  topic: sampling
+  title: 層化抽出の推定量と分散
+  description: 層ごとの標本平均を層の大きさの比率で重み付けする。
+  body: '\bar y_{st}=\sum_{h=1}^H W_h\bar y_h,\qquad V[\bar y_{st}]=\sum_{h=1}^H W_h^2\left(1-\frac{n_h}{N_h}\right)\frac{S_h^2}{n_h}'
+  conditions: '$W_h=N_h/N$。各層から独立に単純無作為抽出。'
+  tags: [層化抽出, 分散]
+- id: neyman-allocation
+  topic: sampling
+  title: ネイマン配分
+  description: 総標本サイズ $n$ が一定のとき、層化推定量の分散を最小にする配分。
+  body: 'n_h=n\cdot\frac{N_hS_h}{\sum_{k=1}^H N_kS_k}'
+  derivation: 'ラグランジュの未定乗数法で $\sum_h W_h^2S_h^2/n_h$ を $\sum_h n_h=n$ のもとで最小化する。'
+  pitfalls: '比例配分 $n_h=nN_h/N$ は、層の標準偏差が等しいときにネイマン配分と一致する。'
+  tags: [層化抽出, 標本配分]
+- id: horvitz-thompson-total
+  topic: sampling
+  title: ホルビッツ・トンプソン推定量
+  description: 包含確率の逆数で重み付けした母集団総計の不偏推定量。
+  body: '\hat Y_{HT}=\sum_{i\in s}\frac{y_i}{\pi_i},\qquad E\left[\hat Y_{HT}\right]=\sum_{i=1}^N y_i'
+  derivation: '指示変数 $I_i$（$i$ が標本に入れば 1）を使うと $E[\hat Y_{HT}]=\sum_i y_iE[I_i]/\pi_i=\sum_i y_i$。'
+  conditions: すべての個体で $\pi_i>0$。
+  tags: [包含確率, 不偏推定量, 標本調査]

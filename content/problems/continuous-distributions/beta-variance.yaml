@@ -1,0 +1,18 @@
+topics: [continuous-distributions]
+formulas: [contdist-beta-moments]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  確率変数 $X$ がベータ分布 $\mathrm{Be}({{a}},{{b}})$ に従うとき、$X$ の分散を求めよ（小数第4位まで）。
+explanation: |
+  ベータ分布の分散の公式より
+  $$
+  V[X]=\frac{ab}{(a+b)^2(a+b+1)}=\frac{ {{a}}\times{{b}} }{ ({{a}}+{{b}})^2({{a}}+{{b}}+1) }={{answer}}
+  $$
+  平均は $\frac{a}{a+b}$。$a,b$ がともに大きいほど分散は小さくなる。
+params:
+  a: { min: 1, max: 8, step: 1 }
+  b: { min: 1, max: 8, step: 1 }
+answer: a * b / ((a + b)^2 * (a + b + 1))
+display: { digits: 4 }

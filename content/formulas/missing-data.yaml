@@ -1,0 +1,36 @@
+- id: missing-mechanism-mcar-mar
+  topic: missing-data
+  title: 欠測メカニズム（MCAR・MAR）
+  description: 欠測指示変数 $R$ が何に依存するかで分類する。
+  body: '\text{MCAR}:\ P(R\mid Y_{\text{obs}},Y_{\text{mis}})=P(R),\qquad\text{MAR}:\ P(R\mid Y_{\text{obs}},Y_{\text{mis}})=P(R\mid Y_{\text{obs}})'
+  pitfalls: どちらにも当てはまらない（欠測値自体に依存する）場合が MNAR。MAR と MNAR は観測データからは区別できない。
+  tags: [欠測データ, MCAR, MAR, MNAR]
+- id: missing-ignorability
+  topic: missing-data
+  title: 無視可能な欠測メカニズム
+  description: MAR かつ母数が分離可能なら、観測データの尤度だけで推論できる。
+  body: 'L(\theta,\phi)=f(Y_{\text{obs}};\theta)\,P(R\mid Y_{\text{obs}};\phi)\ \Rightarrow\ \hat\theta=\arg\max_\theta f(Y_{\text{obs}};\theta)'
+  derivation: '$\int f(Y_{\text{obs}},Y_{\text{mis}};\theta)P(R\mid Y_{\text{obs}};\phi)\,dY_{\text{mis}}$ で $P(R\mid Y_{\text{obs}};\phi)$ を積分の外に出す。'
+  conditions: MAR、かつ $\theta$ と $\phi$ の母数空間が分離可能。
+  tags: [欠測データ, 尤度, MAR]
+- id: rubin-rules-pooled-estimate
+  topic: missing-data
+  title: ルービンのルール（推定値と分散の統合）
+  description: 多重代入の推定値は平均し、分散は代入内分散と代入間分散を合わせる。
+  body: '\bar Q=\frac1M\sum_{m=1}^M\hat Q_m,\qquad T=\bar U+\left(1+\frac1M\right)B,\qquad B=\frac{1}{M-1}\sum_{m=1}^M(\hat Q_m-\bar Q)^2'
+  conditions: '$\bar U$ は各代入データでの分散推定値 $U_m$ の平均。'
+  pitfalls: '$B$ に掛かる係数は $1+1/M$（代入回数が有限であることの補正）。'
+  tags: [多重代入法, ルービンのルール, 分散]
+- id: missing-info-fraction
+  topic: missing-data
+  title: 欠測による情報の割合
+  description: 全分散のうち代入間のばらつきによる部分の割合。
+  body: '\lambda=\frac{\left(1+\frac1M\right)B}{T}'
+  tags: [多重代入法, 欠測データ]
+- id: mean-imputation-variance
+  topic: missing-data
+  title: 平均値代入による分散の過小評価
+  description: '$n$ 個中 $m$ 個が観測された変数を観測値の平均で埋めると、標本分散（$n$ で割る形）は観測値の分散の $m/n$ 倍に縮む。'
+  body: '\frac1n\sum_{i=1}^n(\tilde y_i-\bar y_{\text{obs}})^2=\frac{m}{n}\cdot\frac1m\sum_{i\in\text{obs}}(y_i-\bar y_{\text{obs}})^2'
+  derivation: 代入した $n-m$ 個は平均に一致するので偏差が $0$ になり、偏差平方和は観測値の分だけになる。
+  tags: [単一代入, 平均値代入, 分散]

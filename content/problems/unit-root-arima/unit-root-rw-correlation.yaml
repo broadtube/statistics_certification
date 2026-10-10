@@ -1,0 +1,17 @@
+topics: [unit-root-arima]
+formulas: [random-walk-correlation, random-walk-moments]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ランダムウォーク $X_t=X_{t-1}+\varepsilon_t$、$X_0=0$（$\varepsilon_t$ は分散 $\sigma^2$ のホワイトノイズ）について、$X_{ {{t}} }$ と $X_{ {{t}}+{{h}} }$ の相関係数を求めよ（小数第3位まで）。
+explanation: |
+  $V[X_t]=t\sigma^2$、$\mathrm{Cov}(X_t,X_{t+h})=\min(t,t+h)\sigma^2=t\sigma^2$ なので
+  $$
+  \mathrm{Corr}(X_t,X_{t+h})=\frac{t\sigma^2}{\sqrt{t\sigma^2\cdot(t+h)\sigma^2}}=\sqrt{\frac{ {{t}} }{ {{t}}+{{h}} }}={{answer}}
+  $$
+params:
+  t: { min: 5, max: 50, step: 5 }
+  h: { min: 1, max: 10, step: 1 }
+answer: sqrt(t / (t + h))
+display: { digits: 3 }

@@ -25,6 +25,7 @@ npm ci
 npm run dev          # 開発サーバー
 npm test             # 単体・統合テスト（Vitest）
 npm run validate     # コンテンツ検証（スキーマ・参照整合性・類題生成）
+npm run check:content  # 上の検証＋全テキストの数式描画（LaTeX の構文エラー）チェック
 npm run build        # 検証 → ライセンス一覧生成 → 静的ビルド（dist/）
 npm run test:e2e     # /stats-pre1/ 配下でビルドして E2E テスト（Playwright）
 ```

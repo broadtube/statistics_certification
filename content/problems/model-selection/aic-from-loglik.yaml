@@ -1,0 +1,18 @@
+topics: [model-selection]
+formulas: [aic-definition, bic-definition]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $n={{n}}$ のデータに、パラメータ数 $k={{k}}$ のモデルを最尤法で当てはめたところ、最大対数尤度は $\ell(\hat\theta)={{ll}}$ であった。このモデルの BIC を求めよ（小数第2位まで。対数は自然対数）。
+explanation: |
+  $\mathrm{BIC}=-2\ell(\hat\theta)+k\log n=-2\times({{ll}})+{{k}}\log{{n}}={{answer}}$。
+  なお AIC は $-2\ell(\hat\theta)+2k={{aic}}$ で、$n\ge8$ では BIC の罰則のほうが重い。
+params:
+  n: { min: 20, max: 200, step: 10 }
+  k: { min: 2, max: 8, step: 1 }
+  ll: { min: -300, max: -50, step: 5 }
+derived:
+  aic: -2 * ll + 2 * k
+answer: -2 * ll + k * log(n)
+display: { digits: 2 }

@@ -1,0 +1,44 @@
+- id: aic-definition
+  topic: model-selection
+  title: 赤池情報量規準（AIC）
+  description: 当てはまりの良さとパラメータ数の罰則の和。小さいほど良い。
+  body: '\mathrm{AIC}=-2\ell(\hat\theta)+2k'
+  variables:
+    - { symbol: '\ell(\hat\theta)', meaning: 最大対数尤度 }
+    - { symbol: 'k', meaning: 推定するパラメータの数 }
+  derivation: '最大対数尤度は期待平均対数尤度を平均的に $k$ だけ過大評価するので、その偏りを補正する。'
+  pitfalls: 同じデータ・同じ目的変数をもつモデルの間でのみ比較できる。
+  tags: [モデル選択, AIC, 情報量規準]
+- id: bic-definition
+  topic: model-selection
+  title: ベイズ情報量規準（BIC）
+  body: '\mathrm{BIC}=-2\ell(\hat\theta)+k\log n'
+  derivation: 周辺尤度のラプラス近似から得られる。
+  pitfalls: '$n\ge8$ では罰則が AIC より重く、より小さいモデルを選びやすい。'
+  tags: [モデル選択, BIC, 情報量規準]
+- id: aic-linear-regression
+  topic: model-selection
+  title: 正規線形回帰の AIC
+  description: 誤差分散も最尤推定したときの AIC（定数項を除く）。
+  body: '\mathrm{AIC}=n\log\frac{\mathrm{RSS}}{n}+2k\quad(+\,n\log2\pi+n)'
+  conditions: '$k$ は回帰係数の数に誤差分散の1を加えたもの。'
+  tags: [モデル選択, AIC, 線形回帰]
+- id: mallows-cp
+  topic: model-selection
+  title: マローズの Cp
+  body: 'C_p=\frac{\mathrm{RSS}_p}{\hat\sigma^2}-n+2(p+1)'
+  conditions: '$\hat\sigma^2$ は全変数を含むモデルの不偏分散。'
+  pitfalls: '偏りのないモデルでは $C_p\approx p+1$。'
+  tags: [モデル選択, 変数選択]
+- id: loocv-hat
+  topic: model-selection
+  title: 線形回帰の1つ抜き交差検証
+  description: てこ比を使うと再推定なしで計算できる。
+  body: '\mathrm{CV}=\frac1n\sum_{i=1}^n\left(y_i-\hat y_{(i)}\right)^2=\frac1n\sum_{i=1}^n\left(\frac{e_i}{1-h_{ii}}\right)^2'
+  tags: [モデル選択, 交差検証]
+- id: ridge-lasso
+  topic: model-selection
+  title: リッジ回帰とラッソ
+  body: '\hat{\boldsymbol\beta}_{\text{ridge}}=(X^\top X+\lambda I)^{-1}X^\top\boldsymbol y,\qquad \hat{\boldsymbol\beta}_{\text{lasso}}=\arg\min_{\boldsymbol\beta}\left\{\|\boldsymbol y-X\boldsymbol\beta\|^2+\lambda\sum_j|\beta_j|\right\}'
+  pitfalls: ラッソは係数をちょうど0にできるが、リッジは0にはならない。説明変数は標準化してから用いる。
+  tags: [モデル選択, 正則化, リッジ, ラッソ]

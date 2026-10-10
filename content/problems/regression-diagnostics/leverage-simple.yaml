@@ -1,0 +1,22 @@
+topics: [regression-diagnostics]
+formulas: [leverage-simple-regression, hat-matrix-leverage]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $n={{n}}$ のデータで単回帰 $y=\beta_0+\beta_1x+\varepsilon$ を当てはめる。説明変数の偏差平方和は $\sum_j(x_j-\bar x)^2={{sxx}}$ であり、ある観測 $i$ について $x_i-\bar x={{d}}$ である。この観測のてこ比 $h_{ii}$ を求めよ（小数第3位まで）。
+explanation: |
+  単回帰のてこ比は
+  $$
+  h_{ii}=\frac1n+\frac{(x_i-\bar x)^2}{\sum_j(x_j-\bar x)^2}=\frac{1}{ {{n}} }+\frac{ ({{d}})^2 }{ {{sxx}} }={{answer}}
+  $$
+  平均てこ比は $2/n={{avg}}$ なので、その何倍かを見ると高てこ比かどうかを判断できる。
+params:
+  n: { min: 20, max: 50, step: 5 }
+  sxx: { min: 40, max: 200, step: 10 }
+  d: { min: 1, max: 6, step: 0.5 }
+derived:
+  avg: 2 / n
+constraints: ['1 / n + d^2 / sxx < 0.9']
+answer: 1 / n + d^2 / sxx
+display: { digits: 3 }

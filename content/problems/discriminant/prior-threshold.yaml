@@ -1,0 +1,20 @@
+topics: [discriminant]
+formulas: [lda-linear-rule]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  1変数 $x$ について、群1は $N(0,\ \sigma^2)$、群2は $N({{mu2}},\ \sigma^2)$ に従い、$\sigma={{sigma}}$ とする。事前確率が $\pi_1={{p1}}$、$\pi_2=1-\pi_1$ のとき、ベイズ判別（$\pi_kf_k(x)$ が大きい群に判別）で「$x<c$ なら群1」となる境界 $c$ を求めよ（小数第3位まで）。
+explanation: |
+  $\pi_1f_1(c)=\pi_2f_2(c)$ の対数をとると
+  $$
+  \log\pi_1-\frac{c^2}{2\sigma^2}=\log\pi_2-\frac{(c-\mu_2)^2}{2\sigma^2}
+  $$
+  整理すると $c=\dfrac{\mu_2}{2}+\dfrac{\sigma^2}{\mu_2}\log\dfrac{\pi_1}{\pi_2}=\dfrac{ {{mu2}} }{2}+\dfrac{ {{sigma}}^2}{ {{mu2}} }\log\dfrac{ {{p1}} }{1-{{p1}}}={{answer}}$。
+  群1の事前確率が大きいほど、境界は群2の側に移り、群1と判別される範囲が広がる。
+params:
+  mu2: { min: 2, max: 6, step: 1 }
+  sigma: { min: 1, max: 2, step: 0.5 }
+  p1: { min: 0.6, max: 0.9, step: 0.1 }
+answer: mu2 / 2 + sigma^2 / mu2 * log(p1 / (1 - p1))
+display: { digits: 3 }

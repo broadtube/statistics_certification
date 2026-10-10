@@ -1,0 +1,25 @@
+topics: [sampling]
+formulas: [sampling-required-size]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $N={{N}}$ の母集団の平均を単純無作為非復元抽出で推定したい。母集団の標準偏差は $S={{S}}$ と見込まれる。信頼係数 95%（$z=1.96$）で誤差の限界を $d={{d}}$ 以下にするために必要な最小の標本サイズを、有限母集団修正を考慮して求めよ（整数）。
+explanation: |
+  復元抽出とみなした必要サイズは $n_0=\left(\frac{1.96S}{d}\right)^2=\left(\frac{1.96\times{{S}} }{ {{d}} }\right)^2$。
+  有限母集団修正を入れると
+  $$
+  n\ge\frac{n_0}{1+n_0/N}=\frac{n_0}{1+n_0/{{N}} }
+  $$
+  右辺（整数ではない）を切り上げて、これを満たす最小の整数は ${{answer}}$。
+params:
+  N: { min: 500, max: 5000, step: 500 }
+  S: { min: 5, max: 20, step: 1 }
+  d: { min: 1, max: 3, step: 0.5 }
+derived:
+  n0: (1.96 * S / d)^2
+  nraw: n0 / (1 + n0 / N)
+constraints: ['abs(nraw - round(nraw)) > 0.02']
+answer: ceil(nraw)
+display: { digits: 0 }
+tolerance: { type: absolute, value: 0.01 }

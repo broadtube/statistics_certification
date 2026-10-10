@@ -1,0 +1,29 @@
+topics: [hypothesis-testing]
+formulas: [neyman-pearson-lemma]
+difficulty: 3
+type: choice
+source: { kind: original }
+statement: |
+  $X_1,\dots,X_n$ を確率密度関数 $f(x;\lambda)=\lambda e^{-\lambda x}\ (x\ge0)$ の指数分布からの無作為標本とする。$H_0:\lambda=1$ 対 $H_1:\lambda=2$ の有意水準 $\alpha$ の最強力検定の棄却域の形として正しいものを選べ（$c$ は $\alpha$ から決まる定数）。
+choices:
+  - id: a
+    text: '$\sum_{i=1}^n X_i<c$'
+    correct: true
+  - id: b
+    text: '$\sum_{i=1}^n X_i>c$'
+    correct: false
+  - id: c
+    text: '$\left|\sum_{i=1}^n X_i-n\right|>c$'
+    correct: false
+  - id: d
+    text: '$\max_i X_i>c$'
+    correct: false
+  - id: e
+    text: '$\min_i X_i>c$'
+    correct: false
+explanation: |
+  ネイマン・ピアソンの補題より、尤度比が大きいときに棄却する検定が最強力。
+  $$
+  \frac{L(2)}{L(1)}=\frac{2^n e^{-2\sum x_i}}{e^{-\sum x_i}}=2^n e^{-\sum x_i}
+  $$
+  は $\sum x_i$ の減少関数なので、「尤度比 $>k$」は「$\sum x_i<c$」と同値。$\lambda$ が大きいほど平均 $1/\lambda$ が小さくなるので、直観とも合う。$H_0$ のもとで $2\sum X_i\sim\chi^2(2n)$ を使えば $c$ を決められる。

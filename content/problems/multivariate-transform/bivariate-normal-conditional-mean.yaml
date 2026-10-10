@@ -1,0 +1,22 @@
+topics: [multivariate-transform]
+formulas: [mvt-bivariate-normal-conditional]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある科目の中間試験の得点 $X$ と期末試験の得点 $Y$ は2変量正規分布に従い、$E[X]={{mx}}$、$E[Y]={{my}}$、標準偏差は $\sigma_X={{sx}}$、$\sigma_Y={{sy}}$、相関係数は $\rho={{rho}}$ である。中間試験が {{x}} 点だった学生の期末試験の得点の条件付き期待値 $E[Y\mid X={{x}}]$ を求めよ（小数第2位まで）。
+explanation: |
+  2変量正規分布の条件付き分布より
+  $$
+  E[Y\mid X=x]=\mu_Y+\rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X)={{my}}+{{rho}}\times\frac{ {{sy}} }{ {{sx}} }\times({{x}}-{{mx}})={{answer}}
+  $$
+  条件付き分散は $\sigma_Y^2(1-\rho^2)$ で、$x$ によらない。$|\rho|<1$ なので、条件付き期待値は平均の方向へ引き戻される（平均への回帰）。
+params:
+  mx: { min: 55, max: 65, step: 5 }
+  my: { min: 55, max: 65, step: 5 }
+  sx: { min: 8, max: 15, step: 1 }
+  sy: { min: 8, max: 15, step: 1 }
+  rho: { min: 0.3, max: 0.9, step: 0.1 }
+  x: { min: 70, max: 90, step: 5 }
+answer: my + rho * sy / sx * (x - mx)
+display: { digits: 2 }

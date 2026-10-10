@@ -1,0 +1,39 @@
+- id: glm-components
+  topic: glm
+  title: 一般化線形モデルの構成
+  body: 'Y_i\sim\text{指数型分布族},\quad g(\mu_i)=\eta_i=\boldsymbol x_i^\top\boldsymbol\beta,\quad \mu_i=E[Y_i]'
+  description: 確率分布・線形予測子・リンク関数の3要素。
+  pitfalls: '正規分布＋恒等リンクが通常の線形回帰。正準リンクは二項ならロジット、ポアソンなら対数。'
+  tags: [GLM, リンク関数]
+- id: logistic-regression-model
+  topic: glm
+  title: ロジスティック回帰
+  body: '\log\frac{\pi_i}{1-\pi_i}=\boldsymbol x_i^\top\boldsymbol\beta\iff \pi_i=\frac{1}{1+\exp(-\boldsymbol x_i^\top\boldsymbol\beta)}'
+  pitfalls: '$e^{\beta_j}$ はオッズ比。確率の変化量 $\partial\pi/\partial x_j=\beta_j\pi(1-\pi)$ は $x$ によって変わる。'
+  tags: [GLM, ロジスティック回帰, オッズ比]
+- id: poisson-regression-model
+  topic: glm
+  title: ポアソン回帰とオフセット
+  body: '\log\mu_i=\log t_i+\boldsymbol x_i^\top\boldsymbol\beta\qquad(\mu_i/t_i=\exp(\boldsymbol x_i^\top\boldsymbol\beta))'
+  description: '$e^{\beta_j}$ は率比。$\log t_i$ はオフセット（係数1に固定）。'
+  pitfalls: 過分散があると標準誤差が過小になる。
+  tags: [GLM, ポアソン回帰, オフセット]
+- id: glm-deviance
+  topic: glm
+  title: 逸脱度
+  body: 'D=2\{\ell_{\text{sat}}-\ell(\hat{\boldsymbol\beta})\},\qquad D_{\text{Poisson}}=2\sum_i\left\{y_i\log\frac{y_i}{\hat\mu_i}-(y_i-\hat\mu_i)\right\}'
+  pitfalls: '0/1 データの逸脱度そのものは適合度検定に使えない。'
+  tags: [GLM, 逸脱度]
+- id: glm-deviance-test
+  topic: glm
+  title: 逸脱度の差による検定
+  body: 'D_0-D_1=2(\ell_1-\ell_0)\ \xrightarrow{d}\ \chi^2_q\quad(H_0:\ \text{小さいモデル M}_0\ \text{が正しい})'
+  conditions: 'M$_0$ が M$_1$ の入れ子で、$q$ はパラメータ数の差。'
+  tags: [GLM, 尤度比検定, 逸脱度]
+- id: glm-wald-ci
+  topic: glm
+  title: オッズ比・率比の信頼区間
+  body: '\exp\left(\hat\beta_j\pm z_{\alpha/2}\,\mathrm{SE}(\hat\beta_j)\right)'
+  description: 係数のワルド型信頼区間を指数変換する。
+  pitfalls: 区間は $e^{\hat\beta_j}$ について左右対称にならない。
+  tags: [GLM, 信頼区間, オッズ比]

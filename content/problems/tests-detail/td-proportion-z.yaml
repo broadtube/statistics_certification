@@ -1,0 +1,20 @@
+topics: [tests-detail]
+formulas: [proportion-z-test]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある政策の支持率は従来 $p_0={{p0}}$ とされていた。{{n}} 人を無作為に選んで調査したところ {{x}} 人が支持と答えた。$H_0:p={{p0}}$ を正規近似で検定するときの検定統計量 $z$ の値を求めよ（小数第3位まで）。
+explanation: |
+  $\hat p=\frac{ {{x}} }{ {{n}} }$。分母には帰無仮説の値 $p_0$ を使って
+  $$
+  z=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}=\frac{ {{x}}/{{n}}-{{p0}} }{\sqrt{ {{p0}}(1-{{p0}})/{{n}} }}={{answer}}
+  $$
+params:
+  p0: { min: 0.3, max: 0.6, step: 0.05 }
+  n: { min: 200, max: 1000, step: 100 }
+  x: { min: 50, max: 650, step: 5 }
+constraints: ['abs(x / n - p0) <= 0.08', 'abs(x / n - p0) >= 0.01']
+answer: (x / n - p0) / sqrt(p0 * (1 - p0) / n)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.005 }

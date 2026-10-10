@@ -1,0 +1,20 @@
+topics: [mds]
+formulas: [mds-fit-ratio]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  古典的多次元尺度法で二重中心化した行列 $B$ の正の固有値が、大きい順に {{l1}}、{{l2}}、{{l3}}、{{l4}} であった（ほかの固有値は0）。2次元で布置するときの当てはまりの目安 $\dfrac{\lambda_1+\lambda_2}{\sum\lambda_i}$ を求めよ（小数第3位まで）。
+explanation: |
+  $$
+  \frac{\lambda_1+\lambda_2}{\lambda_1+\lambda_2+\lambda_3+\lambda_4}=\frac{ {{l1}}+{{l2}} }{ {{l1}}+{{l2}}+{{l3}}+{{l4}} }={{answer}}
+  $$
+  主成分分析の累積寄与率に相当する量である。
+params:
+  l1: { min: 5, max: 12, step: 1 }
+  l2: { min: 2, max: 5, step: 0.5 }
+  l3: { min: 0.5, max: 2, step: 0.5 }
+  l4: { min: 0.1, max: 0.4, step: 0.1 }
+constraints: ['l1 > l2', 'l2 > l3', 'l3 > l4']
+answer: (l1 + l2) / (l1 + l2 + l3 + l4)
+display: { digits: 3 }

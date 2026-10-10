@@ -1,0 +1,44 @@
+- id: survival-hazard-relation
+  topic: survival-analysis
+  title: ハザード関数と生存関数の関係
+  description: ハザードは密度を生存関数で割ったもの。累積ハザードから生存関数が求まる。
+  body: 'h(t)=\frac{f(t)}{S(t)}=-\frac{d}{dt}\log S(t),\qquad S(t)=\exp\left\{-\int_0^t h(u)\,du\right\}'
+  derivation: '$f(t)=-S''(t)$ を使い、$-\frac{d}{dt}\log S(t)$ を $0$ から $t$ まで積分する（$S(0)=1$）。'
+  tags: [生存関数, ハザード, 累積ハザード]
+- id: survival-weibull-hazard
+  topic: survival-analysis
+  title: ワイブル分布のハザード
+  description: 形状母数 $m$ によってハザードが増加・一定・減少する。
+  body: 'S(t)=\exp\left\{-\left(\frac t\eta\right)^m\right\},\qquad h(t)=\frac m\eta\left(\frac t\eta\right)^{m-1}'
+  pitfalls: '$m=1$ のとき指数分布（ハザード一定 $1/\eta$）。'
+  tags: [ワイブル分布, ハザード, 指数分布]
+- id: kaplan-meier-estimator
+  topic: survival-analysis
+  title: カプラン・マイヤー推定量
+  description: イベント時刻ごとの条件付き生存確率の積で生存関数を推定する。
+  body: '\hat S(t)=\prod_{j:\,t_j\le t}\left(1-\frac{d_j}{n_j}\right)'
+  conditions: '$n_j$ は時刻 $t_j$ の直前のリスク集合の大きさ、$d_j$ は $t_j$ のイベント数。打ち切りは無情報と仮定。'
+  pitfalls: 打ち切り時刻では値は下がらず、リスク集合のみが減る。
+  tags: [カプラン・マイヤー, 打ち切り, 生存関数]
+- id: greenwood-variance
+  topic: survival-analysis
+  title: グリーンウッドの公式
+  description: カプラン・マイヤー推定量の分散の推定。
+  body: '\widehat V\left[\hat S(t)\right]=\hat S(t)^2\sum_{j:\,t_j\le t}\frac{d_j}{n_j(n_j-d_j)}'
+  tags: [カプラン・マイヤー, 分散, 信頼区間]
+- id: exponential-censored-mle
+  topic: survival-analysis
+  title: 打ち切りデータでの指数分布の最尤推定
+  description: イベント数を総観測時間で割る。
+  body: '\hat\lambda=\frac{d}{\sum_{i=1}^n t_i}\qquad(d=\textstyle\sum_i\delta_i:\ \text{イベント数})'
+  derivation: '尤度 $\prod_i f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}=\lambda^{d}e^{-\lambda\sum t_i}$ を最大化する。'
+  pitfalls: 分母には打ち切り例の観測時間も含める。
+  tags: [指数分布, 最尤推定, 打ち切り]
+- id: cox-proportional-hazards
+  topic: survival-analysis
+  title: 比例ハザードモデル
+  description: 共変量はハザードを定数倍する。$e^{\beta}$ はハザード比。
+  body: 'h(t\mid\boldsymbol x)=h_0(t)\exp(\boldsymbol\beta^\top\boldsymbol x),\qquad\frac{h(t\mid\boldsymbol x_1)}{h(t\mid\boldsymbol x_2)}=\exp\{\boldsymbol\beta^\top(\boldsymbol x_1-\boldsymbol x_2)\}'
+  derivation: '$h_0(t)$ を含まない部分尤度 $\prod_j\frac{\exp(\boldsymbol\beta^\top\boldsymbol x_{(j)})}{\sum_{i\in R(t_j)}\exp(\boldsymbol\beta^\top\boldsymbol x_i)}$ を最大化して $\boldsymbol\beta$ を推定する。'
+  conditions: ハザード比が時間に依らない（比例ハザード性）。
+  tags: [コックス回帰, ハザード比, 部分尤度]

@@ -1,0 +1,21 @@
+topics: [anova-design]
+formulas: [anova-oneway-ss, anova-oneway-f]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  因子 A の {{a}} 水準について各水準 {{n}} 回ずつ観測し、一元配置分散分析を行った。総平方和が $S_T={{st}}$、水準間平方和が $S_A={{sa}}$ であるとき、F 統計量の値を求めよ（小数第3位まで）。
+explanation: |
+  総数は $N={{a}}\times{{n}}$。誤差平方和は $S_E=S_T-S_A={{st}}-{{sa}}$ で、自由度は水準間 $a-1$、誤差 $N-a$。
+  $$
+  F=\frac{S_A/(a-1)}{S_E/(N-a)}=\frac{ {{sa}}/({{a}}-1) }{ ({{st}}-{{sa}})/({{a}}\times{{n}}-{{a}}) }={{answer}}
+  $$
+  $H_0$ のもとで自由度 $(a-1,N-a)$ の F 分布に従う。
+params:
+  a: { min: 3, max: 6, step: 1 }
+  n: { min: 4, max: 10, step: 1 }
+  sa: { min: 10, max: 80, step: 5 }
+  st: { min: 80, max: 280, step: 10 }
+constraints: ['st - sa >= 50']
+answer: (sa / (a - 1)) / ((st - sa) / (a * n - a))
+display: { digits: 3 }

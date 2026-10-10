@@ -1,0 +1,22 @@
+topics: [anova-design]
+formulas: [anova-twoway-df]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  因子 A（{{a}} 水準）と因子 B（{{b}} 水準）のすべての組合せで、それぞれ {{r}} 回ずつ観測した。交互作用を含む二元配置分散分析を行うとき、誤差の自由度を求めよ。
+explanation: |
+  総自由度 $abr-1={{tot}}$ は、A：$a-1={{dfa}}$、B：$b-1={{dfb}}$、交互作用：$(a-1)(b-1)={{dfab}}$、誤差：$ab(r-1)$ に分解される。
+  よって誤差の自由度は $ab(r-1)={{a}}\times{{b}}\times({{r}}-1)={{answer}}$。
+params:
+  a: { min: 2, max: 5, step: 1 }
+  b: { min: 2, max: 4, step: 1 }
+  r: { min: 2, max: 5, step: 1 }
+derived:
+  tot: a * b * r - 1
+  dfa: a - 1
+  dfb: b - 1
+  dfab: (a - 1) * (b - 1)
+answer: a * b * (r - 1)
+display: { digits: 0 }
+tolerance: { type: absolute, value: 0.01 }

@@ -1,0 +1,21 @@
+topics: [causal-inference]
+formulas: [causal-selection-bias]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある研修の受講者（$Z=1$）と非受講者（$Z=0$）の翌年の売上の平均は、それぞれ $E[Y\mid Z=1]={{m1}}$、$E[Y\mid Z=0]={{m0}}$ であった。受講者における研修の平均効果（ATT）が $E[Y(1)-Y(0)\mid Z=1]={{att}}$ であるとき、単純な群間差に含まれる選択バイアス $E[Y(0)\mid Z=1]-E[Y(0)\mid Z=0]$ を求めよ。
+explanation: |
+  $$
+  E[Y\mid Z=1]-E[Y\mid Z=0]=\text{ATT}+\{E[Y(0)\mid Z=1]-E[Y(0)\mid Z=0]\}
+  $$
+  より、選択バイアスは $({{m1}}-{{m0}})-{{att}}={{answer}}$。
+  正の値なら、受講者はもともと（研修を受けなくても）売上が高い人に偏っていたことを意味する。
+params:
+  m1: { min: 110, max: 150, step: 1 }
+  m0: { min: 90, max: 110, step: 1 }
+  att: { min: 2, max: 15, step: 1 }
+constraints: ['m1 - m0 > att']
+answer: (m1 - m0) - att
+display: { digits: 0 }
+tolerance: { type: absolute, value: 0.01 }

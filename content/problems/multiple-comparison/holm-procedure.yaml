@@ -1,0 +1,32 @@
+topics: [multiple-comparison]
+formulas: [holm-method, bonferroni-correction]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  4 つの帰無仮説 $H_1,\dots,H_4$ の $p$ 値が
+  $p_1=0.035$、$p_2=0.004$、$p_3=0.013$、$p_4=0.028$ であった。ファミリーワイズ誤り率を $\alpha=0.05$ に抑えるホルム法で棄却される仮説はどれか。
+choices:
+  - id: a
+    text: '$H_2,H_3$ のみ'
+    correct: true
+  - id: b
+    text: '$H_2$ のみ'
+    correct: false
+  - id: c
+    text: '$H_2,H_3,H_4$ のみ'
+    correct: false
+  - id: d
+    text: '$H_1,H_2,H_3,H_4$ すべて'
+    correct: false
+  - id: e
+    text: '$H_1,H_2,H_3$ のみ'
+    correct: false
+explanation: |
+  $p$ 値を小さい順に並べると $0.004\,(H_2)$、$0.013\,(H_3)$、$0.028\,(H_4)$、$0.035\,(H_1)$。
+  - $k=1$：$0.004\le0.05/4=0.0125$ → $H_2$ を棄却。
+  - $k=2$：$0.013\le0.05/3\approx0.0167$ → $H_3$ を棄却。
+  - $k=3$：$0.028>0.05/2=0.025$ → ここで止める。
+
+  よって棄却されるのは $H_2,H_3$。$H_1$ は単独では $0.035\le0.05$ だが、手順が止まった後なので棄却しない。
+  ボンフェローニ法（閾値 $0.0125$）では $H_2$ しか棄却できず、ホルム法のほうが多く棄却できている。

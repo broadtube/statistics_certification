@@ -1,0 +1,18 @@
+topics: [anova-design]
+formulas: [anova-expected-ms]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  3 水準の一元配置モデル $y_{ij}=\mu+\alpha_i+\varepsilon_{ij}$（各水準 $n={{n}}$ 回、$\varepsilon_{ij}\sim N(0,\sigma^2)$、$\sigma^2={{s2}}$）で、水準効果が $\alpha_1={{al}}$、$\alpha_2=0$、$\alpha_3=-{{al}}$ であるとする。水準間平均平方 $S_A/(a-1)$ の期待値を求めよ（小数第2位まで）。
+explanation: |
+  $$
+  E\left[\frac{S_A}{a-1}\right]=\sigma^2+\frac{\sum_i n\alpha_i^2}{a-1}={{s2}}+\frac{ {{n}}\times(2\times{{al}}^2) }{2}={{answer}}
+  $$
+  $H_0$（全 $\alpha_i=0$）が偽なら分子の期待値が $\sigma^2$ より大きくなるので、F 検定は右片側で行う。
+params:
+  n: { min: 4, max: 12, step: 1 }
+  s2: { min: 1, max: 9, step: 0.5 }
+  al: { min: 0.5, max: 3, step: 0.5 }
+answer: s2 + n * (2 * al^2) / 2
+display: { digits: 2 }

@@ -1,0 +1,32 @@
+- id: fwer-independent-tests
+  topic: multiple-comparison
+  title: 独立な検定を繰り返したときの FWER
+  body: '\mathrm{FWER}=1-(1-\alpha)^m'
+  conditions: '$m$ 個の帰無仮説がすべて真で、検定が互いに独立。'
+  tags: [多重比較, FWER]
+- id: bonferroni-correction
+  topic: multiple-comparison
+  title: ボンフェローニ法
+  body: 'p_i\le\frac{\alpha}{m}\ \text{で}\ H_i\ \text{を棄却}\quad\Rightarrow\quad \mathrm{FWER}\le\sum_{i}P(A_i)\le\alpha'
+  pitfalls: 検定間の相関が強いほど保守的になる。
+  tags: [多重比較, ボンフェローニ, FWER]
+- id: holm-method
+  topic: multiple-comparison
+  title: ホルム法
+  description: 'p 値を小さい順に並べ、条件を満たす限り順に棄却する（ステップダウン法）。'
+  body: 'p_{(k)}\le\frac{\alpha}{m-k+1}\quad(k=1,2,\dots)\ \text{を満たす限り}\ H_{(k)}\ \text{を棄却}'
+  pitfalls: 初めて条件を満たさなかった時点で止め、以降の仮説はすべて棄却しない。
+  tags: [多重比較, ホルム, FWER]
+- id: tukey-hsd
+  topic: multiple-comparison
+  title: テューキー法
+  body: '\frac{|\bar y_i-\bar y_j|}{\sqrt{\mathrm{MS}_E/n}}\ \ge\ q_{a,\,N-a}(\alpha)\ \text{で群}\ i,j\ \text{に差あり}'
+  conditions: '一元配置で各群の大きさが等しい（$n$）。$q_{a,\nu}(\alpha)$ はスチューデント化された範囲の上側 $\alpha$ 点。'
+  tags: [多重比較, テューキー, 分散分析]
+- id: bh-fdr
+  topic: multiple-comparison
+  title: ベンジャミーニ・ホッホバーグ法
+  description: 偽発見率（FDR）を制御する方法。
+  body: 'k^*=\max\left\{k:\ p_{(k)}\le\frac{k}{m}\alpha\right\},\quad H_{(1)},\dots,H_{(k^*)}\ \text{を棄却}'
+  pitfalls: 'FDR $=E[V/\max(R,1)]$ の制御で、FWER の制御より弱い。'
+  tags: [多重比較, FDR, BH法]

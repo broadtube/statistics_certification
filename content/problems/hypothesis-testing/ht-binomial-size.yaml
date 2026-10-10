@@ -1,0 +1,21 @@
+topics: [hypothesis-testing]
+formulas: [test-error-types]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  表が出る確率 $p$ のコインを {{n}} 回投げ、表の回数 $X$ を数える。$H_0:p=0.5$ 対 $H_1:p>0.5$ を「$X\ge{{c}}$ なら $H_0$ を棄却する」という検定で行う。この検定の第1種の過誤の確率を求めよ（小数第4位まで）。
+explanation: |
+  第1種の過誤の確率は $H_0$ のもとで棄却域に入る確率で、$X\sim\mathrm{Bin}({{n}},0.5)$ より
+  $$
+  \alpha=P(X\ge{{c}})=\sum_{x={{c}}}^{ {{n}} }\binom{ {{n}} }{x}0.5^{ {{n}} }={{answer}}
+  $$
+  二項分布は離散なので、棄却の境界 $c$ を整数で動かしても $\alpha$ は飛び飛びの値しかとらない。
+params:
+  n: { min: 8, max: 20, step: 1 }
+  c: { min: 6, max: 18, step: 1 }
+derived:
+  size: 1 - pbinom(c - 1, n, 0.5)
+constraints: ['c > n / 2 + 1', 'c <= n', 'size > 0.002', 'size < 0.2']
+answer: 1 - pbinom(c - 1, n, 0.5)
+display: { digits: 4 }

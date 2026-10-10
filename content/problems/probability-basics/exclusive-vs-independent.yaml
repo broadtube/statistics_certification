@@ -1,0 +1,27 @@
+topics: [probability-basics]
+formulas: [prob-independence-events]
+difficulty: 1
+type: choice
+source: { kind: original }
+statement: |
+  事象 $A,B$ は $P(A)>0$、$P(B)>0$ を満たすとする。次の記述のうち正しいものを選べ。
+choices:
+  - id: a
+    text: '$A$ と $B$ が排反ならば、$A$ と $B$ は独立ではない。'
+    correct: true
+  - id: b
+    text: '$A$ と $B$ が排反ならば、$A$ と $B$ は独立である。'
+    correct: false
+  - id: c
+    text: '$A$ と $B$ が独立ならば、$A$ と $B$ は排反である。'
+    correct: false
+  - id: d
+    text: '$A$ と $B$ が独立ならば、$A$ と $B^c$ は独立とは限らない。'
+    correct: false
+  - id: e
+    text: '$A$ と $B$ が独立ならば、$P(A\cup B)=P(A)+P(B)$ が成り立つ。'
+    correct: false
+explanation: |
+  排反なら $P(A\cap B)=0$ だが、$P(A)P(B)>0$ なので $P(A\cap B)\ne P(A)P(B)$ となり独立ではない（a が正しく、b・c は誤り）。
+  独立なら $P(A\cap B^c)=P(A)-P(A)P(B)=P(A)P(B^c)$ なので $A$ と $B^c$ も独立（d は誤り）。
+  独立のとき $P(A\cup B)=P(A)+P(B)-P(A)P(B)$ で、$P(A)P(B)>0$ だから和には一致しない（e は誤り）。

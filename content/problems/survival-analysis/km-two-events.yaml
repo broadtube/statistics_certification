@@ -1,0 +1,23 @@
+topics: [survival-analysis]
+formulas: [kaplan-meier-estimator]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  {{n}} 人を追跡した。時刻 $t_1$ に {{d1}} 人が死亡し、$t_1$ と $t_2$ の間に {{c}} 人が打ち切りとなり、時刻 $t_2$ に {{d2}} 人が死亡した（$t_1<t_2$、それ以外にイベント・打ち切りはない）。カプラン・マイヤー推定量による $\hat S(t_2)$ を求めよ（小数第4位まで）。
+explanation: |
+  時刻 $t_1$ のリスク集合は $n_1={{n}}$、イベント数 $d_1={{d1}}$。
+  時刻 $t_2$ の直前のリスク集合は、死亡 {{d1}} 人と打ち切り {{c}} 人を除いた $n_2={{n2}}$ 人、イベント数 $d_2={{d2}}$。
+  $$
+  \hat S(t_2)=\left(1-\frac{ {{d1}} }{ {{n}} }\right)\left(1-\frac{ {{d2}} }{ {{n2}} }\right)={{answer}}
+  $$
+  打ち切られた {{c}} 人は $t_2$ のリスク集合から除くが、生存率を直接下げはしない。
+params:
+  n: { min: 20, max: 40, step: 1 }
+  d1: { min: 1, max: 4, step: 1 }
+  c: { min: 1, max: 5, step: 1 }
+  d2: { min: 1, max: 4, step: 1 }
+derived:
+  n2: n - d1 - c
+answer: (1 - d1 / n) * (1 - d2 / (n - d1 - c))
+display: { digits: 4 }

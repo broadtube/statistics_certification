@@ -1,0 +1,30 @@
+topics: [multivariate-transform]
+formulas: [mvt-jacobian-transform]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  $(X,Y)$ の同時密度を $f(x,y)$ とし、$U=X+Y$、$V=X-Y$ とおく。$(U,V)$ の同時密度 $g(u,v)$ として正しいものを選べ。
+choices:
+  - id: a
+    text: '$g(u,v)=\frac12 f\left(\frac{u+v}{2},\frac{u-v}{2}\right)$'
+    correct: true
+  - id: b
+    text: '$g(u,v)=2 f\left(\frac{u+v}{2},\frac{u-v}{2}\right)$'
+    correct: false
+  - id: c
+    text: '$g(u,v)=f\left(\frac{u+v}{2},\frac{u-v}{2}\right)$'
+    correct: false
+  - id: d
+    text: '$g(u,v)=\frac12 f(u+v,\,u-v)$'
+    correct: false
+  - id: e
+    text: '$g(u,v)=-\frac12 f\left(\frac{u+v}{2},\frac{u-v}{2}\right)$'
+    correct: false
+explanation: |
+  逆変換は $x=\frac{u+v}{2}$、$y=\frac{u-v}{2}$。そのヤコビアンは
+  $$
+  \det\begin{pmatrix}1/2&1/2\\1/2&-1/2\end{pmatrix}=-\frac14-\frac14=-\frac12
+  $$
+  なので、絶対値 $\frac12$ を掛けて $g(u,v)=\frac12f\left(\frac{u+v}2,\frac{u-v}2\right)$。
+  順変換のヤコビアン（絶対値 $2$）をそのまま掛ける（b）のは誤りで、絶対値をとらない（e）と密度が負になる。

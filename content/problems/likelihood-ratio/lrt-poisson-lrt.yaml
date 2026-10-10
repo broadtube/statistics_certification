@@ -1,0 +1,21 @@
+topics: [likelihood-ratio]
+formulas: [lrt-poisson-statistic, lrt-wilks-theorem]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  ある窓口に1時間あたりに来る客の数はポアソン分布 $\mathrm{Po}(\lambda)$ に従うとする。{{n}} 時間分の記録の平均は $\bar x={{xbar}}$ 人であった。$H_0:\lambda={{lambda0}}$ の尤度比検定統計量 $-2\log\Lambda$ の値を求めよ（小数第2位まで）。
+explanation: |
+  対数尤度は $\ell(\lambda)=n\bar x\log\lambda-n\lambda+\text{const}$、最尤推定値は $\hat\lambda=\bar x$。
+  $$
+  -2\log\Lambda=2\{\ell(\bar x)-\ell(\lambda_0)\}=2n\left\{\bar x\log\frac{\bar x}{\lambda_0}-(\bar x-\lambda_0)\right\}={{answer}}
+  $$
+  ウィルクスの定理より $H_0$ のもとで近似的に $\chi^2(1)$ に従うので、$3.841$ を超えれば有意水準5%で棄却する。
+params:
+  n: { min: 10, max: 40, step: 5 }
+  xbar: { min: 2, max: 8, step: 0.1 }
+  lambda0: { min: 3, max: 6, step: 0.5 }
+constraints: ['abs(xbar - lambda0) >= 0.3', 'abs(xbar - lambda0) <= 1.5']
+answer: 2 * n * (xbar * log(xbar / lambda0) - (xbar - lambda0))
+display: { digits: 2 }
+tolerance: { type: absolute, value: 0.02 }

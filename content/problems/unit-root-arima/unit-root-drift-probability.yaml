@@ -1,0 +1,18 @@
+topics: [unit-root-arima]
+formulas: [random-walk-moments]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ドリフト付きランダムウォーク $X_t={{delta}}+X_{t-1}+\varepsilon_t$、$X_0=0$（$\varepsilon_t$ は独立に $N(0,{{s}}^2)$ に従う）について、$P(X_{ {{t}} }>0)$ を求めよ（小数第4位まで）。
+explanation: |
+  $X_t=\delta t+\sum_{s=1}^t\varepsilon_s\sim N(\delta t,\ t\sigma^2)$。よって
+  $$
+  P(X_t>0)=\Phi\!\left(\frac{\delta t}{\sigma\sqrt t}\right)=\Phi\!\left(\frac{ {{delta}}\sqrt{ {{t}} } }{ {{s}} }\right)={{answer}}
+  $$
+params:
+  delta: { min: 0.1, max: 0.5, step: 0.1 }
+  s: { min: 1, max: 3, step: 0.5 }
+  t: { min: 4, max: 36, step: 4 }
+answer: pnorm(delta * sqrt(t) / s)
+display: { digits: 4 }

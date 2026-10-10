@@ -1,0 +1,19 @@
+topics: [nonparametric]
+formulas: [sign-test-binomial]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  新しい睡眠導入法の効果を調べるため、{{m}} 人について導入前後の寝つくまでの時間を測った。「導入後 − 導入前」の差は、{{z}} 人が $0$（変化なし）、{{k}} 人が正（長くなった）、残りが負（短くなった）であった。導入法によって時間が短くなる傾向があるか（差の中央値 $<0$）を符号検定で調べるとき、片側 $p$ 値を求めよ（小数第4位まで）。
+explanation: |
+  差が $0$ の {{z}} 人を除くと $n={{m}}-{{z}}$ 人。$H_0$（差の中央値 $=0$）のもとで正の個数 $B\sim\mathrm{Bin}(n,1/2)$。対立仮説は「短くなる」なので、正の個数が少ないほど $H_0$ に不利。
+  $$
+  p=P(B\le{{k}})=\sum_{b=0}^{ {{k}} }\binom{n}{b}\left(\frac12\right)^{n}={{answer}}
+  $$
+params:
+  m: { min: 12, max: 20, step: 1 }
+  z: { min: 0, max: 3, step: 1 }
+  k: { min: 1, max: 6, step: 1 }
+constraints: ['k < (m - z) / 2 - 1']
+answer: pbinom(k, m - z, 0.5)
+display: { digits: 4 }

@@ -1,0 +1,22 @@
+topics: [tests-detail]
+formulas: [welch-satterthwaite-df]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  独立な2標本について、標本サイズと不偏分散が $m={{m}},\ s_1^2={{v1}}$、$n={{n}},\ s_2^2={{v2}}$ であった。ウェルチの検定で用いる近似自由度（サタースウェイトの近似）$\nu$ を求めよ（小数第1位まで）。
+explanation: |
+  $a=s_1^2/m=\frac{ {{v1}} }{ {{m}} }$、$b=s_2^2/n=\frac{ {{v2}} }{ {{n}} }$ とおくと
+  $$
+  \nu=\frac{(a+b)^2}{\frac{a^2}{m-1}+\frac{b^2}{n-1}}={{answer}}
+  $$
+  $\min(m-1,n-1)\le\nu\le m+n-2$ の範囲に入ることを確認しておくとよい。
+params:
+  m: { min: 6, max: 20, step: 1 }
+  n: { min: 6, max: 20, step: 1 }
+  v1: { min: 2, max: 30, step: 1 }
+  v2: { min: 2, max: 30, step: 1 }
+constraints: ['v1 / v2 >= 2 or v2 / v1 >= 2']
+answer: (v1 / m + v2 / n)^2 / ((v1 / m)^2 / (m - 1) + (v2 / n)^2 / (n - 1))
+display: { digits: 1 }
+tolerance: { type: absolute, value: 0.15 }

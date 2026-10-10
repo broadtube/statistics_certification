@@ -1,0 +1,19 @@
+topics: [model-selection]
+formulas: [loocv-hat]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  最小二乗法による線形回帰で、ある観測の残差が $e_i={{e}}$、てこ比が $h_{ii}={{h}}$ であった。この観測を除いて推定したモデルによる予測誤差 $y_i-\hat y_{(i)}$ を求めよ（小数第3位まで）。
+explanation: |
+  線形回帰では1つ抜きの予測誤差（予測残差）が
+  $$
+  y_i-\hat y_{(i)}=\frac{e_i}{1-h_{ii}}=\frac{ {{e}} }{1-{{h}}}={{answer}}
+  $$
+  と書ける。これを2乗して平均したものが1つ抜き交差検証の値である。てこ比が大きいほど残差は大きく補正される。
+params:
+  e: { min: -3, max: 3, step: 0.25 }
+  h: { min: 0.05, max: 0.5, step: 0.05 }
+constraints: ['e != 0']
+answer: e / (1 - h)
+display: { digits: 3 }

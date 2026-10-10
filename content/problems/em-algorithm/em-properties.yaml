@@ -1,0 +1,26 @@
+topics: [em-algorithm]
+formulas: [em-monotonicity, em-q-function]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  EM アルゴリズムに関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '各反復で、観測データの対数尤度は減少しない。'
+    correct: true
+  - id: b
+    text: '初期値によらず、必ず対数尤度の大域的最大値に収束する。'
+    correct: false
+  - id: c
+    text: '最大値の近くでは2次収束し、ニュートン・ラフソン法より速く収束する。'
+    correct: false
+  - id: d
+    text: '推定量の標準誤差は、E ステップの計算から自動的に得られる。'
+    correct: false
+  - id: e
+    text: 'E ステップでは常に、欠測値をその条件付き期待値で置き換えた完全データを作ればよい。'
+    correct: false
+explanation: |
+  $\ell(\theta)=Q(\theta\mid\theta^{(t)})-H(\theta\mid\theta^{(t)})$ の分解と、$H$ が $\theta=\theta^{(t)}$ で最大になること（ギブスの不等式）から、$\ell(\theta^{(t+1)})\ge\ell(\theta^{(t)})$ が成り立つ。
+  (b) 局所最大値や鞍点に収束しうる。(c) 収束は1次で、欠測情報の割合が大きいほど遅い。(d) 標準誤差は観測データの情報量を別途求める必要がある。(e) 期待値をとるのは完全データの対数尤度であり、欠測値の補完と一致するのは対数尤度が十分統計量に線形な場合に限られる。

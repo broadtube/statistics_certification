@@ -1,0 +1,19 @@
+topics: [factor-analysis]
+formulas: [fa-ml-test-df]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  {{p}} 個の変数に最尤法で {{m}} 因子の因子分析モデルを当てはめ、「因子数 {{m}} のモデルで十分である」という仮説を尤度比検定で検定する。検定統計量が近似的に従うカイ二乗分布の自由度を求めよ。
+explanation: |
+  自由度は、制約のない分散共分散行列の母数 $p(p+1)/2$ から、因子モデルの母数（負荷量 $pm$ と独自分散 $p$ から回転の自由度 $m(m-1)/2$ を引いたもの）を引いたもので、
+  $$
+  df=\frac{(p-m)^2-(p+m)}{2}=\frac{({{p}}-{{m}})^2-({{p}}+{{m}})}{2}={{answer}}
+  $$
+params:
+  p: { min: 5, max: 12, step: 1 }
+  m: { min: 1, max: 4, step: 1 }
+constraints: ['(p - m)^2 - (p + m) > 0']
+answer: ((p - m)^2 - (p + m)) / 2
+display: { digits: 0 }
+tolerance: { type: absolute, value: 0.01 }

@@ -1,0 +1,41 @@
+- id: lrt-likelihood-ratio
+  topic: likelihood-ratio
+  title: 尤度比
+  description: 帰無仮説のもとでの最大尤度と全体での最大尤度の比。小さいほど帰無仮説に不利。
+  body: '\Lambda=\frac{\sup_{\theta\in\Theta_0}L(\theta)}{\sup_{\theta\in\Theta}L(\theta)},\qquad 0\le\Lambda\le1'
+  tags: [尤度比検定, 尤度]
+- id: lrt-wilks-theorem
+  topic: likelihood-ratio
+  title: ウィルクスの定理
+  description: 尤度比検定統計量の漸近分布。
+  body: '-2\log\Lambda=2\left\{\ell(\hat\theta)-\ell(\hat\theta_0)\right\}\ \xrightarrow{d}\ \chi^2(r),\qquad r=\dim\Theta-\dim\Theta_0'
+  conditions: 正則条件を満たし、帰無仮説が母数空間の内部にあること。
+  pitfalls: 自由度は帰無仮説で制約される母数の個数で、標本サイズではない。
+  tags: [尤度比検定, 漸近分布, カイ二乗分布]
+- id: lrt-wald-statistic
+  topic: likelihood-ratio
+  title: ワルド検定統計量
+  body: 'W=(\hat\theta-\theta_0)^2\,nI(\hat\theta)\ \approx\ \chi^2(1)'
+  description: 最尤推定量と帰無仮説の値の差を、推定量の標準誤差で測る。
+  pitfalls: パラメータ化（$\theta$ か $\log\theta$ か）によって値が変わる。
+  tags: [ワルド検定, 漸近分布, フィッシャー情報量]
+- id: lrt-score-statistic
+  topic: likelihood-ratio
+  title: スコア検定統計量
+  body: 'S=\frac{U(\theta_0)^2}{nI(\theta_0)}\ \approx\ \chi^2(1),\qquad U(\theta)=\frac{\partial\ell(\theta)}{\partial\theta}'
+  description: 帰無仮説の値でのスコアの大きさを測る。帰無仮説のもとでの推定だけで計算できる。
+  tags: [スコア検定, 漸近分布, フィッシャー情報量]
+- id: lrt-poisson-statistic
+  topic: likelihood-ratio
+  title: ポアソン分布の尤度比検定統計量
+  body: '-2\log\Lambda=2n\left\{\bar x\log\frac{\bar x}{\lambda_0}-(\bar x-\lambda_0)\right\}'
+  conditions: '$X_i\sim\mathrm{Po}(\lambda)$ の無作為標本で $H_0:\lambda=\lambda_0$。'
+  derivation: '$\ell(\lambda)=n\bar x\log\lambda-n\lambda+\text{const}$ に $\hat\lambda=\bar x$ と $\lambda_0$ を代入して差をとる。'
+  tags: [尤度比検定, ポアソン分布]
+- id: lrt-normal-mean-equivalence
+  topic: likelihood-ratio
+  title: 正規平均の尤度比検定と z 検定
+  body: '-2\log\Lambda=\frac{n(\bar x-\mu_0)^2}{\sigma^2}=z^2\ \sim\ \chi^2(1)'
+  conditions: '正規母集団・分散既知で $H_0:\mu=\mu_0$。'
+  pitfalls: この場合は近似ではなく正確に $\chi^2(1)$ に従い、ワルド・スコア検定とも一致する。
+  tags: [尤度比検定, 正規分布, z検定]

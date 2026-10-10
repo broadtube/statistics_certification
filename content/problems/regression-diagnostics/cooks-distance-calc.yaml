@@ -1,0 +1,19 @@
+topics: [regression-diagnostics]
+formulas: [cooks-distance, residual-variance-leverage]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  切片と説明変数 $p={{p}}$ 個の重回帰で、ある観測の標準化残差（内部スチューデント化残差）が $r_i={{r}}$、てこ比が $h_{ii}={{h}}$ であった。この観測のクックの距離 $D_i$ を求めよ（小数第3位まで）。
+explanation: |
+  回帰係数の数は $p+1$ なので
+  $$
+  D_i=\frac{r_i^2}{p+1}\cdot\frac{h_{ii}}{1-h_{ii}}=\frac{ ({{r}})^2 }{ {{p}}+1 }\cdot\frac{ {{h}} }{1-{{h}}}={{answer}}
+  $$
+  残差の大きさとてこ比の両方が効く。
+params:
+  p: { min: 1, max: 5, step: 1 }
+  r: { min: 0.5, max: 3.5, step: 0.25 }
+  h: { min: 0.05, max: 0.6, step: 0.05 }
+answer: r^2 / (p + 1) * h / (1 - h)
+display: { digits: 3 }

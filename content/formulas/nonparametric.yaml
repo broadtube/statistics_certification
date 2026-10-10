@@ -1,0 +1,46 @@
+- id: sign-test-binomial
+  topic: nonparametric
+  title: 符号検定
+  description: 差が正の個数は、帰無仮説のもとで成功確率 $1/2$ の二項分布に従う。
+  body: 'B=\#\{i: D_i>0\}\ \sim\ \mathrm{Bin}\left(n,\ \tfrac12\right)\quad(H_0:\text{差の中央値}=0)'
+  pitfalls: '差が $0$ の観測は除き、残りの個数を $n$ とする。'
+  tags: [ノンパラメトリック, 符号検定, 二項分布]
+- id: wilcoxon-signed-rank-moments
+  topic: nonparametric
+  title: 符号付き順位和の平均と分散
+  body: 'E[T^+]=\frac{n(n+1)}{4},\qquad V[T^+]=\frac{n(n+1)(2n+1)}{24}'
+  conditions: 差の分布が $0$ について対称（帰無仮説のもと）で、同順位がないこと。
+  derivation: '$T^+=\sum_k kI_k$、$I_k$ は独立に確率 $1/2$ で $1$ をとる。'
+  tags: [ノンパラメトリック, ウィルコクソン検定, 順位]
+- id: rank-sum-moments
+  topic: nonparametric
+  title: 順位和（マン・ホイットニー）の平均と分散
+  body: 'E[W]=\frac{m(m+n+1)}{2},\quad V[W]=\frac{mn(m+n+1)}{12},\quad U=W-\frac{m(m+1)}{2},\ E[U]=\frac{mn}{2}'
+  variables:
+    - { symbol: 'W', meaning: '大きさ $m$ の第1標本の、合併標本における順位の和' }
+  conditions: 帰無仮説（2群の分布が同じ）のもとで、同順位がないこと。
+  tags: [ノンパラメトリック, ウィルコクソン検定, マン・ホイットニー, 順位]
+- id: kruskal-wallis-h
+  topic: nonparametric
+  title: クラスカル・ウォリス検定
+  body: 'H=\frac{12}{N(N+1)}\sum_{j=1}^k\frac{R_j^2}{n_j}-3(N+1)\ \approx\ \chi^2(k-1)'
+  variables:
+    - { symbol: 'R_j', meaning: '第 $j$ 群の順位和（全 $N$ 個を合わせて順位づけ）' }
+  description: 一元配置分散分析に対応する順位に基づく検定。
+  tags: [ノンパラメトリック, クラスカル・ウォリス, 順位]
+- id: spearman-rank-correlation
+  topic: nonparametric
+  title: スピアマンの順位相関係数
+  body: 'r_s=1-\frac{6\sum_{i=1}^n d_i^2}{n(n^2-1)}'
+  variables:
+    - { symbol: 'd_i', meaning: '第 $i$ 個体の $x$ の順位と $y$ の順位の差' }
+  conditions: 同順位がないこと（あるときは順位どうしのピアソン相関係数を計算する）。
+  tags: [ノンパラメトリック, 順位相関, 相関]
+- id: kendall-tau
+  topic: nonparametric
+  title: ケンドールの順位相関係数
+  body: '\tau=\frac{C-D}{n(n-1)/2}'
+  variables:
+    - { symbol: 'C,\ D', meaning: '大小関係が一致する組の数と、逆転する組の数' }
+  conditions: '同順位がないこと（このとき $C+D=n(n-1)/2$）。'
+  tags: [ノンパラメトリック, 順位相関, 相関]

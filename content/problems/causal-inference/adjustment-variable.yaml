@@ -1,0 +1,25 @@
+topics: [causal-inference]
+formulas: [causal-standardization]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  運動習慣（処置 $Z$）が血圧（結果 $Y$）に与える影響を観察データで推定したい。次の変数のうち、因果効果を推定するために **調整すべき** ものとして最も適切なものを選べ。
+choices:
+  - id: a
+    text: 運動を始める前の年齢（年齢は運動習慣にも血圧にも影響する）
+    correct: true
+  - id: b
+    text: 運動を続けた結果として変化した体重（運動が体重を変え、体重が血圧に影響する）
+    correct: false
+  - id: c
+    text: 運動習慣と高血圧の両方が原因となって受診した健康相談の回数
+    correct: false
+  - id: d
+    text: 血圧の測定後に記録された降圧薬の処方の有無（血圧の値に基づいて処方が決まる）
+    correct: false
+explanation: |
+  処置より前に決まり、処置と結果の両方に影響する年齢は交絡因子であり、調整すべきである（a）。
+  b の体重は処置の結果として決まる中間変数で、調整すると体重を介した効果まで取り除いてしまう。
+  c は処置と結果の共通の結果（合流点）で、調整すると見かけの関連（選択バイアス）が生じる。
+  d は結果の後に決まる変数で、調整すべきではない。

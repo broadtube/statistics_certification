@@ -33,6 +33,12 @@ export function formatNumber(x: number, digits?: number): string {
   return /^-0(\.0+)?$/.test(s) ? s.slice(1) : s;
 }
 
+/** 中間値の表示。自由度や件数のように整数になる値は桁数指定に関わらず整数で表示する */
+export function formatDerived(x: number, digits?: number): string {
+  const r = Math.round(x);
+  return Math.abs(x - r) < 1e-9 ? formatNumber(r) : formatNumber(x, digits);
+}
+
 function decimalsOf(step: number): number {
   const s = String(step);
   if (s.includes('e-')) return Number(s.split('e-')[1]);
@@ -96,7 +102,7 @@ function instantiate(problem: ProblemSource, axes: readonly ParamAxis[], params:
   for (const [name, expr] of Object.entries(problem.derived ?? {})) {
     const v = evalNum(name, expr);
     scope[name] = v;
-    values[name] = formatNumber(v, digits);
+    values[name] = formatDerived(v, digits);
   }
 
   for (const c of problem.constraints ?? []) {

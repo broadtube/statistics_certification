@@ -1,0 +1,21 @@
+topics: [model-selection]
+formulas: [mallows-cp]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $n={{n}}$ のデータで、全説明変数を含むモデルから求めた誤差分散の不偏推定値は $\hat\sigma^2={{s2}}$ であった。説明変数 $p={{p}}$ 個のモデルの残差平方和が $\mathrm{RSS}_p={{rss}}$ のとき、マローズの $C_p$ を求めよ（小数第2位まで）。
+explanation: |
+  $$
+  C_p=\frac{\mathrm{RSS}_p}{\hat\sigma^2}-n+2(p+1)=\frac{ {{rss}} }{ {{s2}} }-{{n}}+2\times({{p}}+1)={{answer}}
+  $$
+  偏りの小さいモデルでは $C_p$ が係数の数 $p+1$ に近くなる。
+params:
+  n: { min: 30, max: 80, step: 10 }
+  p: { min: 1, max: 5, step: 1 }
+  s2: { min: 2, max: 6, step: 0.5 }
+  m: { min: 1, max: 1.5, step: 0.05 }
+derived:
+  rss: round(s2 * (n - p - 1) * m)
+answer: rss / s2 - n + 2 * (p + 1)
+display: { digits: 2 }

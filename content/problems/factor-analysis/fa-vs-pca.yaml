@@ -1,0 +1,26 @@
+topics: [factor-analysis, pca]
+formulas: [fa-covariance-structure, fa-regression-score]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  因子分析と主成分分析の違いに関する記述として最も適切なものを選べ。
+choices:
+  - id: a
+    text: '因子分析は、各変数の分散を共通因子による部分と独自因子による部分に分けるモデルを仮定し、変数間の共分散構造を説明しようとする。'
+    correct: true
+  - id: b
+    text: '主成分分析でも、変数ごとに独自因子（誤差項）を仮定して分散を分解する。'
+    correct: false
+  - id: c
+    text: '因子分析の因子得点は、主成分得点と同様に観測値の線形結合として一意に定まる。'
+    correct: false
+  - id: d
+    text: '因子分析の因子負荷行列は、主成分分析と同様に固有ベクトルとして符号を除き一意に定まり、回転の自由度はない。'
+    correct: false
+  - id: e
+    text: '主成分分析の第1主成分は、すべての変数の共通性が最大になるように決められる。'
+    correct: false
+explanation: |
+  因子分析は $\boldsymbol x=\boldsymbol\mu+\Lambda\boldsymbol f+\boldsymbol\varepsilon$、$\Sigma=\Lambda\Lambda^\top+\Psi$ という確率モデルで、変数間の相関を共通因子で説明する。主成分分析は誤差項のモデルを持たず、分散が最大になる線形結合で情報を要約する。
+  因子は観測されないので因子得点は推定値（回帰法など）であり、一意には定まらない。また因子負荷行列には回転の不定性がある。共通性は因子分析の概念で、主成分の定義には使われない。

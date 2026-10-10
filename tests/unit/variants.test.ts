@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ProblemSource } from '../../build/content/types';
-import { formatNumber, generateVariants } from '../../build/variants/generate';
+import { formatDerived, formatNumber, generateVariants } from '../../build/variants/generate';
 
 function problem(over: Partial<ProblemSource>): ProblemSource {
   return {
@@ -32,6 +32,18 @@ describe('数値の表示整形', () => {
   });
 });
 
+describe('中間値の表示整形', () => {
+  it('整数になる値は桁数指定に関わらず整数で表示する', () => {
+    expect(formatDerived(15, 3)).toBe('15');
+    expect(formatDerived(0.1 * 30, 2)).toBe('3');
+    expect(formatDerived(-0, 2)).toBe('0');
+  });
+  it('整数でない値は桁数指定に従う', () => {
+    expect(formatDerived(2.5, 3)).toBe('2.500');
+    expect(formatDerived(1 / 3)).toBe('0.333333');
+  });
+});
+
 describe('類題の事前生成', () => {
   const base = problem({
     statement: '$B({{n}}, {{p}})$ の期待値は？',
@@ -56,7 +68,7 @@ describe('類題の事前生成', () => {
       expect(v.values.p).toMatch(/^0\.\d$/);
       expect(v.answer).toBeCloseTo(n * p, 10);
       expect(v.values.answer).toBe((n * p).toFixed(1));
-      expect(v.values.v).toBe((n * p * (1 - p)).toFixed(1));
+      expect(v.values.v).toBe(formatDerived(n * p * (1 - p), 1));
     }
   });
 

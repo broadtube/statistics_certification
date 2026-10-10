@@ -1,0 +1,20 @@
+topics: [bootstrap]
+formulas: [bootstrap-bias-correction]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある推定値は $\hat\theta={{th}}$ であった。$B$ 個のブートストラップ標本から計算した推定値の平均が $\bar\theta^*={{tb}}$ のとき、ブートストラップでバイアス補正した推定値を求めよ（小数第2位まで）。
+explanation: |
+  バイアスの推定値は $\bar\theta^*-\hat\theta={{tb}}-{{th}}$。これを差し引いて
+  $$
+  2\hat\theta-\bar\theta^*=2\times{{th}}-{{tb}}={{answer}}
+  $$
+params:
+  th: { min: 5, max: 15, step: 0.5 }
+  dev: { min: -1, max: 1, step: 0.1 }
+derived:
+  tb: th + dev
+constraints: ['dev != 0']
+answer: th - dev
+display: { digits: 2 }

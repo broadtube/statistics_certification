@@ -1,0 +1,19 @@
+topics: [anova-design]
+formulas: [anova-oneway-f]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  {{a}} 群（総数 $N={{nn}}$）の一元配置分散分析で、F 統計量の値は $F={{f}}$ であった。帰無仮説「全群の母平均が等しい」に対する $p$ 値を求めよ（小数第4位まで）。
+explanation: |
+  $H_0$ のもとで $F$ は自由度 $(a-1,N-a)=({{a}}-1,\ {{nn}}-{{a}})$ の F 分布に従う。棄却域は右側だけなので
+  $$
+  p=P(F_{a-1,N-a}\ge{{f}})={{answer}}
+  $$
+  （メニューの「計算機」で確認できる）。
+params:
+  a: { min: 3, max: 5, step: 1 }
+  nn: { min: 15, max: 60, step: 1 }
+  f: { min: 1, max: 5, step: 0.1 }
+answer: 1 - pf(f, a - 1, nn - a)
+display: { digits: 4 }

@@ -1,0 +1,45 @@
+- id: lt-chebyshev-inequality
+  topic: limit-theorems
+  title: チェビシェフの不等式
+  description: 分布の形によらず、平均から離れる確率を分散で上から抑える。
+  body: 'P(|X-\mu|\ge k\sigma)\le\frac{1}{k^2},\qquad P(|X-\mu|\ge\varepsilon)\le\frac{\sigma^2}{\varepsilon^2}'
+  derivation: 'マルコフの不等式 $P(Y\ge a)\le E[Y]/a$（$Y\ge0$）を $Y=(X-\mu)^2$、$a=\varepsilon^2$ に適用する。'
+  pitfalls: 上界は粗い。正規分布なら $P(|Z|\ge2)\approx0.0455$ だが、不等式は $0.25$ しか保証しない。
+  tags: [不等式, 大数の法則]
+- id: lt-weak-law
+  topic: limit-theorems
+  title: 大数の弱法則
+  description: 標本平均は母平均に確率収束する。
+  body: 'P\left(|\bar X_n-\mu|\ge\varepsilon\right)\le\frac{\sigma^2}{n\varepsilon^2}\ \longrightarrow\ 0\qquad(n\to\infty)'
+  conditions: '$X_1,X_2,\dots$ が i.i.d. で平均 $\mu$ をもつこと（上の不等式による証明では分散 $\sigma^2$ の存在も使う）。'
+  tags: [大数の法則, 確率収束]
+- id: lt-central-limit-theorem
+  topic: limit-theorems
+  title: 中心極限定理
+  description: 標準化した標本平均は、母集団分布によらず標準正規分布に分布収束する。
+  body: '\frac{\sqrt n(\bar X_n-\mu)}{\sigma}=\frac{\sum_{i=1}^nX_i-n\mu}{\sqrt n\,\sigma}\ \xrightarrow{d}\ N(0,1)'
+  conditions: '$X_1,X_2,\dots$ が i.i.d. で、分散 $\sigma^2$ が有限であること。'
+  pitfalls: '二項分布など離散分布の近似では連続修正（$\pm0.5$）を使うと精度が上がる。'
+  tags: [中心極限定理, 分布収束, 正規近似]
+- id: lt-slutsky
+  topic: limit-theorems
+  title: スラツキーの定理
+  description: 分布収束する列に、定数に確率収束する列を足したり掛けたりしてよい。
+  body: 'X_n\xrightarrow{d}X,\ Y_n\xrightarrow{p}c\ \Longrightarrow\ X_n+Y_n\xrightarrow{d}X+c,\quad X_nY_n\xrightarrow{d}cX'
+  pitfalls: '$Y_n$ の極限は定数でなければならない。'
+  tags: [分布収束, 確率収束]
+- id: lt-delta-method
+  topic: limit-theorems
+  title: デルタ法
+  description: 漸近正規な推定量を滑らかな関数で変換したときの漸近分布。
+  body: '\sqrt n(T_n-\theta)\xrightarrow{d}N(0,\sigma^2)\ \Longrightarrow\ \sqrt n\big(g(T_n)-g(\theta)\big)\xrightarrow{d}N\big(0,\ g''(\theta)^2\sigma^2\big)'
+  conditions: '$g$ が $\theta$ で微分可能で $g''(\theta)\ne0$。'
+  derivation: '1次のテイラー展開 $g(T_n)\approx g(\theta)+g''(\theta)(T_n-\theta)$ とスラツキーの定理から。'
+  pitfalls: '対数オッズ $g(p)=\log\frac{p}{1-p}$ では $g''(p)=\frac{1}{p(1-p)}$ なので、$\hat p$ の対数オッズの漸近分散は $\frac{1}{np(1-p)}$。'
+  tags: [デルタ法, 漸近分布, 標準誤差]
+- id: lt-convergence-relations
+  topic: limit-theorems
+  title: 収束の強さの関係
+  body: '\text{概収束}\ \Longrightarrow\ \text{確率収束}\ \Longrightarrow\ \text{分布収束},\qquad X_n\xrightarrow{d}c\ (\text{定数})\iff X_n\xrightarrow{p}c'
+  pitfalls: 平均二乗収束も確率収束を導く。逆向きの矢印は一般に成り立たない。
+  tags: [確率収束, 分布収束, 概収束]

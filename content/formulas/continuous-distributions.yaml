@@ -1,0 +1,50 @@
+- id: contdist-normal-standardize
+  topic: continuous-distributions
+  title: 正規分布の標準化
+  description: 平均を引いて標準偏差で割ると標準正規分布に従う。
+  body: 'X\sim N(\mu,\sigma^2)\ \Longrightarrow\ Z=\frac{X-\mu}{\sigma}\sim N(0,1),\qquad P(X\le x)=\Phi\!\left(\frac{x-\mu}{\sigma}\right)'
+  pitfalls: '$N(\mu,\sigma^2)$ の第2引数は分散。標準化では標準偏差 $\sigma$ で割る。'
+  tags: [正規分布, 標準化]
+- id: contdist-exponential-memoryless
+  topic: continuous-distributions
+  title: 指数分布の無記憶性
+  description: すでに $s$ だけ待ったという情報は、残りの待ち時間の分布に影響しない。
+  body: 'P(X>s+t\mid X>s)=P(X>t)=e^{-\lambda t}\qquad(X\sim\mathrm{Ex}(\lambda))'
+  pitfalls: 連続分布で無記憶性をもつのは指数分布だけ。
+  tags: [指数分布, 無記憶性]
+- id: contdist-gamma-sum
+  topic: continuous-distributions
+  title: 指数分布の和とガンマ分布
+  description: 独立な指数分布の和はガンマ分布。ポアソン過程の $n$ 番目の到着時刻の分布。
+  body: 'X_i\overset{\text{i.i.d.}}{\sim}\mathrm{Ex}(\lambda)\ \Longrightarrow\ \sum_{i=1}^n X_i\sim\mathrm{Ga}(n,\lambda),\qquad P(T_n\le t)=1-\sum_{k=0}^{n-1}e^{-\lambda t}\frac{(\lambda t)^k}{k!}'
+  derivation: 積率母関数 $\lambda/(\lambda-t)$ の $n$ 乗がガンマ分布の積率母関数に一致する。
+  tags: [ガンマ分布, 指数分布, ポアソン過程]
+- id: contdist-chisq-sample-variance
+  topic: continuous-distributions
+  title: 不偏分散とカイ二乗分布
+  description: 正規母集団の不偏分散を母分散で基準化するとカイ二乗分布に従う。
+  body: '\frac{(n-1)S^2}{\sigma^2}=\frac{\sum_{i=1}^n(X_i-\bar X)^2}{\sigma^2}\sim\chi^2_{n-1}'
+  conditions: '$X_1,\dots,X_n$ が独立に $N(\mu,\sigma^2)$ に従うこと。このとき $\bar X$ と $S^2$ は独立。'
+  pitfalls: '$\mu$ を $\bar X$ で推定するので自由度が1つ減る（$\mu$ が既知で $\sum(X_i-\mu)^2$ を使えば自由度 $n$）。'
+  tags: [カイ二乗分布, 不偏分散, 標本分布]
+- id: contdist-t-construction
+  topic: continuous-distributions
+  title: t 分布の構成
+  description: 標準正規変数を、独立なカイ二乗変数を自由度で割ったものの平方根で割る。
+  body: 'T=\frac{Z}{\sqrt{W/k}}\sim t_k,\qquad \frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}'
+  conditions: '$Z\sim N(0,1)$ と $W\sim\chi^2_k$ が独立。'
+  pitfalls: '$k\le1$ では平均が存在せず、$k\le2$ では分散が存在しない（$k>2$ で $V[T]=k/(k-2)$）。'
+  tags: [t分布, 標本分布]
+- id: contdist-f-construction
+  topic: continuous-distributions
+  title: F 分布の構成と性質
+  description: 独立な2つのカイ二乗変数をそれぞれの自由度で割った比。
+  body: 'F=\frac{W_1/m}{W_2/n}\sim F(m,n),\qquad \frac1F\sim F(n,m),\qquad T\sim t_k\Rightarrow T^2\sim F(1,k)'
+  conditions: '$W_1\sim\chi^2_m$ と $W_2\sim\chi^2_n$ が独立。'
+  tags: [F分布, t分布, 標本分布]
+- id: contdist-beta-moments
+  topic: continuous-distributions
+  title: ベータ分布の平均と分散
+  body: 'X\sim\mathrm{Be}(a,b):\quad E[X]=\frac{a}{a+b},\qquad V[X]=\frac{ab}{(a+b)^2(a+b+1)}'
+  pitfalls: '$a=b=1$ は一様分布 $U(0,1)$。二項分布の成功確率に対する共役事前分布として使われる。'
+  tags: [ベータ分布]

@@ -1,0 +1,31 @@
+topics: [tests-detail]
+formulas: [pearson-goodness-of-fit]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある交配実験で、4つの表現型が理論上 $9:3:3:1$ の比で現れるとされている。実際に観察した個体数は次のとおりであった。
+
+  | 表現型 | I | II | III | IV |
+  | --- | --- | --- | --- | --- |
+  | 観測度数 | {{o1}} | {{o2}} | {{o3}} | {{o4}} |
+
+  理論比への適合度を調べるピアソンのカイ二乗統計量の値を求めよ（小数第2位まで）。
+explanation: |
+  総数 $n$ に理論比を掛けて、期待度数は $n\times\frac{9}{16},\ n\times\frac{3}{16},\ n\times\frac{3}{16},\ n\times\frac{1}{16}$、すなわち ${{e1}},\ {{e2}},\ {{e2}},\ {{e4}}$。
+  $$
+  \chi^2=\sum_{j=1}^4\frac{(O_j-E_j)^2}{E_j}={{answer}}
+  $$
+  比が完全に指定されていて推定した母数はないので、自由度は $4-1=3$（上側5%点は $7.815$）。
+params:
+  o1: { min: 80, max: 110, step: 1 }
+  o2: { min: 22, max: 42, step: 1 }
+  o3: { min: 22, max: 42, step: 1 }
+  o4: { min: 6, max: 16, step: 1 }
+derived:
+  e1: (o1 + o2 + o3 + o4) * 9 / 16
+  e2: (o1 + o2 + o3 + o4) * 3 / 16
+  e4: (o1 + o2 + o3 + o4) / 16
+answer: (o1 - e1)^2 / e1 + (o2 - e2)^2 / e2 + (o3 - e2)^2 / e2 + (o4 - e4)^2 / e4
+display: { digits: 2 }
+tolerance: { type: absolute, value: 0.02 }

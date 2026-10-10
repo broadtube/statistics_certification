@@ -1,0 +1,20 @@
+topics: [glm]
+formulas: [logistic-regression-model]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ロジスティック回帰 $\log\dfrac{\pi}{1-\pi}=\beta_0+\beta_1x$ を当てはめたところ、$\hat\beta_0={{b0}}$、$\hat\beta_1={{b1}}$ であった。$x={{x}}$ のときの成功確率 $\hat\pi$ を求めよ（小数第3位まで）。
+explanation: |
+  線形予測子は $\hat\eta={{b0}}+{{b1}}\times{{x}}={{eta}}$。ロジットの逆変換より
+  $$
+  \hat\pi=\frac{1}{1+\exp(-\hat\eta)}=\frac{1}{1+\exp(-({{eta}}))}={{answer}}
+  $$
+params:
+  b0: { min: -4, max: 1, step: 0.5 }
+  b1: { min: 0.1, max: 1.5, step: 0.1 }
+  x: { min: 0, max: 6, step: 1 }
+derived:
+  eta: b0 + b1 * x
+answer: 1 / (1 + exp(-(b0 + b1 * x)))
+display: { digits: 3 }

@@ -1,0 +1,21 @@
+topics: [bootstrap]
+formulas: [jackknife-bias]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $n={{n}}$ の標本から統計量 $\hat\theta={{th}}$ を得た。観測値を1つずつ除いて計算した $n$ 個の値 $\hat\theta_{(-i)}$ の平均は $\hat\theta_{(\cdot)}={{tdot}}$ であった。ジャックナイフによるバイアスの推定値を求めよ（小数第3位まで）。
+explanation: |
+  $$
+  \widehat{\mathrm{bias}}_{\mathrm{jack}}=(n-1)\left(\hat\theta_{(\cdot)}-\hat\theta\right)=({{n}}-1)\times({{tdot}}-{{th}})={{answer}}
+  $$
+  バイアス補正した推定値は $\hat\theta-\widehat{\mathrm{bias}}_{\mathrm{jack}}$。
+params:
+  n: { min: 10, max: 40, step: 5 }
+  th: { min: 2, max: 6, step: 0.5 }
+  dev: { min: -0.05, max: 0.05, step: 0.01 }
+derived:
+  tdot: th + dev
+constraints: ['abs(dev) > 0.001']
+answer: (n - 1) * dev
+display: { digits: 3 }

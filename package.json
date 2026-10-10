@@ -7,11 +7,12 @@
   "scripts": {
     "dev": "astro dev",
     "validate": "tsx build/cli/validate.ts",
+    "check:content": "tsx scripts/check-content.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "SITE_BASE=/stats-pre1/ npm run build && playwright test",
     "licenses": "tsx build/cli/licenses.ts",
-    "prebuild": "npm run validate && npm run licenses",
+    "prebuild": "npm run check:content && npm run licenses",
     "build": "astro build",
     "preview": "astro preview",
     "check": "tsc --noEmit -p .",
