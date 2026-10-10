@@ -5,30 +5,72 @@ import { readFile, readdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 /**
- * ビルド後、`<meta name="preload-modules" content="app katex">` を置いたページに、指定チャンクの
- * `<link rel="modulepreload">` を差し込む。アイランドの import の連鎖を待たずに取得を始めるため（要件15.5）。
- * チャンク名はハッシュ付きでビルド時にしか決まらないので、ここで解決する。
+ * ビルド時に描画済みの数式（KaTeX の HTML）が使う書体。クラス名から判定する。
+ * @type {[string, RegExp][]}
+ */
+const KATEX_FONTS = [
+  ['Main-Regular', /class="katex"/],
+  ['Math-Italic', /\bmathnormal\b/],
+  ['Math-BoldItalic', /\bboldsymbol\b/],
+  ['Main-Bold', /\bmathbf\b/],
+  ['Main-Italic', /\bmathit\b/],
+  ['AMS-Regular', /\b(amsrm|mathbb)\b/],
+  ['Caligraphic-Regular', /\bmathcal\b/],
+  ['Size1-Regular', /\bsize1\b/],
+  ['Size2-Regular', /\b(size2|large-op)\b/],
+  ['Size3-Regular', /\bsize3\b/],
+  ['Size4-Regular', /\bsize4\b/],
+];
+
+/**
+ * 数式のあるページで、先読みした KaTeX フォントがそろうまで本文を隠す（global.css の katex-fonts-pending）。
+ * 先読みの完了後、初回描画で使われたフォントの読み込み（document.fonts.ready）も待つ。最長 2 秒で打ち切る。
+ */
+const FONT_GATE = `<script>(()=>{const d=document.documentElement,c='katex-fonts-pending',show=()=>d.classList.remove(c);d.classList.add(c);setTimeout(show,2000);const w=[...document.querySelectorAll('link[rel=preload][as=font]')].map(l=>performance.getEntriesByName(l.href).length?0:new Promise(r=>{l.onload=l.onerror=r}));Promise.all(w).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>document.fonts.ready.then(show))))})()</script>`;
+
+/**
+ * ビルド後に各ページの head へ先読みを差し込む（要件15.5）。ファイル名はハッシュ付きでビルド時にしか
+ * 決まらないので、ここで解決する。
+ * - `<meta name="preload-modules" content="app katex">` を置いたページ: 指定チャンクの modulepreload。
+ *   アイランドの import の連鎖を待たずに取得を始める。
+ * - ビルド時に描画済みの数式があるページ: 使っている KaTeX フォントの preload。フォントの到着が
+ *   遅れて数式の寸法が変わり、本文がずれる（CLS）のを防ぐ。先読みだけでは初回描画との競争になるため、
+ *   フォントがそろうまで本文を隠すスクリプト（FONT_GATE）も置く。
  * @returns {import('astro').AstroIntegration}
  */
-function preloadModules() {
+function headPreloads() {
   return {
-    name: 'preload-modules',
+    name: 'head-preloads',
     hooks: {
       'astro:build:done': async ({ dir, pages }) => {
         const root = fileURLToPath(dir);
-        const chunks = (await readdir(`${root}_astro`)).filter((f) => f.endsWith('.js'));
+        const assets = await readdir(`${root}_astro`);
+        const assetUrl = (/** @type {string} */ prefix, /** @type {string} */ ext) => {
+          const file = assets.find((f) => f.startsWith(`${prefix}.`) && f.endsWith(ext));
+          if (!file) throw new Error(`head-preloads: 「${prefix}*${ext}」が見つかりません`);
+          return `${base.replace(/\/?$/, '/')}_astro/${file}`;
+        };
         const marker = /<meta name="preload-modules" content="([^"]*)"\s*\/?>/;
         for (const { pathname } of pages) {
           const file = `${root}${pathname}index.html`;
-          const html = await readFile(file, 'utf8').catch(() => null);
-          const m = html?.match(marker);
-          if (!html || !m) continue;
-          const links = (m[1] ?? '').split(/\s+/).filter(Boolean).map((name) => {
-            const chunk = chunks.find((f) => f.startsWith(`${name}.`));
-            if (!chunk) throw new Error(`preload-modules: チャンク「${name}」が見つかりません`);
-            return `<link rel="modulepreload" href="${base.replace(/\/?$/, '/')}_astro/${chunk}">`;
-          });
-          await writeFile(file, html.replace(marker, links.join('')));
+          let html = await readFile(file, 'utf8').catch(() => null);
+          if (!html) continue;
+          const original = html;
+          const m = html.match(marker);
+          if (m) {
+            const names = (m[1] ?? '').split(/\s+/).filter(Boolean);
+            html = html.replace(marker, names.map((n) => `<link rel="modulepreload" href="${assetUrl(n, '.js')}">`).join(''));
+          }
+          const body = html.slice(html.indexOf('<body'));
+          if (body.includes('class="katex"')) {
+            // 小さいフォントは CSS に埋め込まれていて（Vite の assetsInlineLimit）ファイルが無いので対象外
+            const fonts = KATEX_FONTS.filter(([name, re]) => re.test(body) && assets.some((f) => f.startsWith(`KaTeX_${name}.`) && f.endsWith('.woff2'))).map(
+              ([name]) => `<link rel="preload" href="${assetUrl(`KaTeX_${name}`, '.woff2')}" as="font" type="font/woff2" crossorigin="anonymous">`,
+            );
+            // CSS より先に取得を始めるよう head の先頭（charset の直後）に置く
+            if (fonts.length > 0) html = html.replace(/<meta charset="utf-8"\s*\/?>/, (m) => `${m}${fonts.join('')}${FONT_GATE}`);
+          }
+          if (html !== original) await writeFile(file, html);
         }
       },
     },
@@ -42,7 +84,7 @@ export default defineConfig({
   base,
   trailingSlash: 'always',
   output: 'static',
-  integrations: [preact(), preloadModules()],
+  integrations: [preact(), headPreloads()],
   vite: {
     build: {
       rollupOptions: {

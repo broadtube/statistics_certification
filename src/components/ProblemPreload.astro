@@ -1,7 +1,7 @@
 ---
 // 演習・復習・模試ページ用の先読み。問題索引と、問題文で多用する KaTeX フォントを
 // アイランドの起動を待たずに取得し始め、アイランド本体・共通チャンク・KaTeX 本体も先読みして（astro.config.mjs の
-// preloadModules がビルド後に modulepreload へ置き換える）、最初の問題が表示されるまでの待ちを減らす（要件15.5）。
+// headPreloads がビルド後に modulepreload へ置き換える）、最初の問題が表示されるまでの待ちを減らす（要件15.5）。
 import mainFont from 'katex/dist/fonts/KaTeX_Main-Regular.woff2?url';
 import mathFont from 'katex/dist/fonts/KaTeX_Math-Italic.woff2?url';
 import { url } from '../lib/url';

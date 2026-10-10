@@ -80,6 +80,8 @@ th { color: var(--text-muted); font-weight: 600; font-size: 0.9rem; }
 /* 長い数式のみ個別に横スクロール（要件15.1） */
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.2em 0; }
 .katex { font-size: 1.05em; }
+/* 数式のあるページは KaTeX フォントがそろうまで本文を隠し、フォント差し替えによるずれ（CLS）を防ぐ（astro.config.mjs の headPreloads） */
+html.katex-fonts-pending main { visibility: hidden; }
 .table-scroll { overflow-x: auto; }
 
 /* ---- レイアウト ---- */
