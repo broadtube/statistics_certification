@@ -1,0 +1,40 @@
+topics: [tests-detail]
+formulas: [welch-t-statistic, welch-satterthwaite-df]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  2つの工場 A・B で作られる製品の強度を比べるため、A から $m={{m}}$ 個、B から $n={{n}}$ 個を独立に抜き取って測定した。
+
+  | | 個数 | 平均 | 標準偏差 |
+  | --- | --- | --- | --- |
+  | A | {{m}} | {{xbar}} | {{s1}} |
+  | B | {{n}} | {{ybar}} | {{s2}} |
+
+  標準偏差は不偏分散の平方根である。母分散が等しいとは仮定せず、ウェルチの検定で $H_0:\mu_A=\mu_B$、$H_1:\mu_A\ne\mu_B$ を検定するときの両側 $p$ 値を求めよ（小数第3位まで）。
+explanation: |
+  $a=s_1^2/m={{a}}$、$b=s_2^2/n={{b}}$ とおく。検定統計量は
+  $$
+  t=\frac{\bar x-\bar y}{\sqrt{a+b}}=\frac{ {{xbar}}-{{ybar}} }{\sqrt{ {{a}}+{{b}} }}={{t}}
+  $$
+  サタースウェイトの近似自由度は
+  $$
+  \nu=\frac{(a+b)^2}{\frac{a^2}{m-1}+\frac{b^2}{n-1}}={{nu}}
+  $$
+  で、$t$ は $H_0$ のもとで近似的に $t(\nu)$ に従う。両側 $p$ 値は $2\{1-F_{t(\nu)}(|t|)\}={{answer}}$（自由度は整数でなくてよい。メニューの「計算機」で確認できる）。
+params:
+  m: { min: 8, max: 20, step: 1 }
+  n: { min: 8, max: 20, step: 1 }
+  xbar: { min: 50, max: 60, step: 0.5 }
+  ybar: { min: 48, max: 58, step: 0.5 }
+  s1: { min: 2, max: 10, step: 1 }
+  s2: { min: 2, max: 10, step: 1 }
+derived:
+  a: s1^2 / m
+  b: s2^2 / n
+  t: (xbar - ybar) / sqrt(s1^2 / m + s2^2 / n)
+  nu: (s1^2 / m + s2^2 / n)^2 / ((s1^2 / m)^2 / (m - 1) + (s2^2 / n)^2 / (n - 1))
+constraints: ['s1 / s2 >= 2 or s2 / s1 >= 2', 'abs(t) >= 1.2', 'abs(t) <= 3.5']
+answer: 2 * (1 - pt(abs(t), nu))
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.002 }

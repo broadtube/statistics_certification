@@ -1,0 +1,29 @@
+topics: [tests-detail]
+formulas: [fisher-z-transform]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  過去の調査では、2つの検査値の母相関係数は $\rho_0={{rho0}}$ とされていた。新しい集団から {{n}} 人を無作為に選んで2つの検査値を測ったところ、標本相関係数は $r={{r}}$ であった。2変量正規分布を仮定し、フィッシャーの z 変換を用いて $H_0:\rho={{rho0}}$ を検定するときの検定統計量（標準正規分布と比べる値）を求めよ（小数第3位まで）。
+explanation: |
+  $z=\tanh^{-1}r=\frac12\log\frac{1+r}{1-r}$ は近似的に $N\left(\tanh^{-1}\rho,\ \frac{1}{n-3}\right)$ に従う。
+  $$
+  \tanh^{-1}({{r}})={{zr}},\qquad \tanh^{-1}({{rho0}})={{z0}}
+  $$
+  なので
+  $$
+  Z=\bigl(\tanh^{-1}r-\tanh^{-1}\rho_0\bigr)\sqrt{n-3}=({{zr}}-{{z0}})\sqrt{ {{df}} }={{answer}}
+  $$
+  分散が $1/(n-3)$ であることに注意する。$\rho_0\ne0$ のときは無相関の t 検定は使えない。
+params:
+  n: { min: 30, max: 120, step: 5 }
+  rho0: { min: 0.3, max: 0.6, step: 0.1 }
+  r: { min: 0.1, max: 0.85, step: 0.01 }
+derived:
+  df: n - 3
+  zr: atanh(r)
+  z0: atanh(rho0)
+constraints: ['abs(r - rho0) >= 0.1', 'abs(atanh(r) - atanh(rho0)) * sqrt(n - 3) <= 3.5']
+answer: (atanh(r) - atanh(rho0)) * sqrt(n - 3)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.02 }

@@ -1,0 +1,24 @@
+topics: [tests-detail]
+formulas: [correlation-t-test]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2変量正規分布に従うとみなせるデータ $(x_i,y_i)$、$i=1,\dots,{{n}}$ から標本相関係数 $r={{r}}$ が得られた。$H_0:\rho=0$、$H_1:\rho\ne0$ の無相関の検定の両側 $p$ 値を求めよ（小数第3位まで）。
+explanation: |
+  検定統計量は
+  $$
+  t=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}=\frac{ {{r}}\sqrt{ {{df}} } }{\sqrt{1-{{r}}^2}}={{t}}
+  $$
+  で、$H_0$ のもとで自由度 $n-2={{df}}$ の t 分布に従う。両側 $p$ 値は $2\{1-F_{t({{df}})}(|t|)\}={{answer}}$。
+  標本相関係数がある程度大きくても、$n$ が小さいと有意にならないことがある。
+params:
+  n: { min: 10, max: 40, step: 1 }
+  r: { min: 0.15, max: 0.6, step: 0.01 }
+derived:
+  df: n - 2
+  t: r * sqrt(n - 2) / sqrt(1 - r^2)
+constraints: ['t >= 1.2', 't <= 3.5']
+answer: 2 * (1 - pt(r * sqrt(n - 2) / sqrt(1 - r^2), n - 2))
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.002 }

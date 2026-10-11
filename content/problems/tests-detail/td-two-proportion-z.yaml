@@ -1,0 +1,29 @@
+topics: [tests-detail]
+formulas: [two-proportion-z-test]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2種類の広告文 A・B のクリック率を比べる実験を行った。A を {{n1}} 人に表示したところ {{x1}} 人が、B を {{n2}} 人に表示したところ {{x2}} 人がクリックした。$H_0:p_A=p_B$ を正規近似で検定するときの検定統計量 $z$ の値を求めよ（小数第3位まで）。
+explanation: |
+  各群の比率は $\hat p_A={{x1}}/{{n1}}={{p1}}$、$\hat p_B={{x2}}/{{n2}}={{p2}}$。$H_0$ のもとでは共通の比率を2群を合わせて推定する：
+  $$
+  \hat p=\frac{ {{x1}}+{{x2}} }{ {{n1}}+{{n2}} }={{pp}}
+  $$
+  $$
+  z=\frac{\hat p_A-\hat p_B}{\sqrt{\hat p(1-\hat p)\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}={{answer}}
+  $$
+  分母にプールした比率を使う点が、差の信頼区間（各群の比率を別々に使う）との違いである。
+params:
+  n1: { min: 200, max: 600, step: 50 }
+  n2: { min: 200, max: 600, step: 50 }
+  x1: { min: 20, max: 120, step: 1 }
+  x2: { min: 20, max: 120, step: 1 }
+derived:
+  p1: x1 / n1
+  p2: x2 / n2
+  pp: (x1 + x2) / (n1 + n2)
+constraints: ['x1 / n1 >= 0.05', 'x2 / n2 >= 0.05', 'x1 / n1 <= 0.25', 'x2 / n2 <= 0.25', 'abs(x1 / n1 - x2 / n2) >= 0.01', 'abs(x1 / n1 - x2 / n2) <= 0.08']
+answer: (x1 / n1 - x2 / n2) / sqrt((x1 + x2) / (n1 + n2) * (1 - (x1 + x2) / (n1 + n2)) * (1 / n1 + 1 / n2))
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.01 }

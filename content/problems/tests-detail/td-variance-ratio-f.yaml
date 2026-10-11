@@ -1,0 +1,30 @@
+topics: [tests-detail]
+formulas: [variance-ratio-f-test]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  2台の測定器 A・B のばらつきを比べるため、同じ試料を A で $m={{m}}$ 回、B で $n={{n}}$ 回測定したところ、不偏分散はそれぞれ $s_1^2={{v1}}$、$s_2^2={{v2}}$ であった。測定値は正規分布に従うとして、$H_0:\sigma_A^2=\sigma_B^2$、$H_1:\sigma_A^2\ne\sigma_B^2$ を F 検定するときの両側 $p$ 値を求めよ（小数第3位まで）。
+explanation: |
+  $H_0$ のもとで $F=s_1^2/s_2^2$ は $F(m-1,n-1)=F({{df1}},{{df2}})$ に従う。
+  $$
+  F=\frac{ {{v1}} }{ {{v2}} }={{f}}
+  $$
+  $F>1$ なので上側の確率を2倍して
+  $$
+  p=2\,P\bigl(F({{df1}},{{df2}})\ge{{f}}\bigr)={{answer}}
+  $$
+  （両側検定では、上側・下側のうち $F$ の値がある側の確率を2倍する）。
+params:
+  m: { min: 8, max: 25, step: 1 }
+  n: { min: 8, max: 25, step: 1 }
+  v1: { min: 1.5, max: 6, step: 0.1 }
+  v2: { min: 0.5, max: 3, step: 0.1 }
+derived:
+  df1: m - 1
+  df2: n - 1
+  f: v1 / v2
+constraints: ['v1 / v2 >= 1.3', 'v1 / v2 <= 5']
+answer: 2 * (1 - pf(v1 / v2, m - 1, n - 1))
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.002 }

@@ -1,0 +1,30 @@
+topics: [interval-estimation, tests-detail]
+formulas: [ci-diff-means-welch, welch-satterthwaite-df]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  独立な2つの正規母集団から、大きさ $m={{m}}$ と $n={{n}}$ の標本を得た。不偏分散はそれぞれ $s_1^2={{v1}}$、$s_2^2={{v2}}$ である。母分散が等しいとは仮定せず、ウェルチの方法で母平均の差 $\mu_1-\mu_2$ の95%信頼区間を作るとき、区間の **幅**（上限 − 下限）を求めよ。サタースウェイトの近似自由度を $\nu$ として、$t_{0.025}(\nu)={{tq}}$ を用い、小数第3位まで答えよ。
+explanation: |
+  標準誤差は
+  $$
+  \sqrt{\frac{s_1^2}{m}+\frac{s_2^2}{n}}=\sqrt{\frac{ {{v1}} }{ {{m}} }+\frac{ {{v2}} }{ {{n}} }}={{se}}
+  $$
+  近似自由度は $\nu=\dfrac{(s_1^2/m+s_2^2/n)^2}{\frac{(s_1^2/m)^2}{m-1}+\frac{(s_2^2/n)^2}{n-1}}={{nu}}$ で、区間は $\bar x-\bar y\pm t_{0.025}(\nu)\times{{se}}$。幅は
+  $$
+  2\times{{tq}}\times{{se}}={{answer}}
+  $$
+  幅は標本平均の値によらない。
+params:
+  m: { min: 6, max: 20, step: 1 }
+  n: { min: 6, max: 20, step: 1 }
+  v1: { min: 2, max: 30, step: 1 }
+  v2: { min: 2, max: 30, step: 1 }
+derived:
+  se: sqrt(v1 / m + v2 / n)
+  nu: (v1 / m + v2 / n)^2 / ((v1 / m)^2 / (m - 1) + (v2 / n)^2 / (n - 1))
+  tq: round(qt(0.975, (v1 / m + v2 / n)^2 / ((v1 / m)^2 / (m - 1) + (v2 / n)^2 / (n - 1))), 3)
+constraints: ['v1 / v2 >= 2 or v2 / v1 >= 2']
+answer: 2 * tq * sqrt(v1 / m + v2 / n)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.005 }

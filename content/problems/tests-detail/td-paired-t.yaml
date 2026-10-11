@@ -1,0 +1,22 @@
+topics: [tests-detail]
+formulas: [paired-t-test]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある睡眠改善プログラムの効果を調べるため、{{n}} 人の参加者について参加前と参加後の入眠までの時間（分）を測定した。各参加者の「参加前 − 参加後」の差の平均は $\bar d={{dbar}}$、差の標準偏差（不偏分散の平方根）は $s_D={{sd}}$ であった。$H_0:\mu_D=0$ の対応のある t 検定の統計量の値を求めよ（小数第3位まで）。
+explanation: |
+  同じ人を2回測っているので、差 $D_i$ を1つの標本とみなして1標本の t 検定を行う。
+  $$
+  t=\frac{\bar d}{s_D/\sqrt n}=\frac{ {{dbar}} }{ {{sd}}/\sqrt{ {{n}} } }={{answer}}
+  $$
+  $H_0$ のもとで自由度 $n-1={{df}}$ の t 分布に従う（独立2標本とみなした自由度 $2n-2$ ではない）。
+params:
+  n: { min: 8, max: 25, step: 1 }
+  dbar: { min: 1, max: 8, step: 0.5 }
+  sd: { min: 4, max: 15, step: 0.5 }
+derived:
+  df: n - 1
+answer: dbar / (sd / sqrt(n))
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.005 }

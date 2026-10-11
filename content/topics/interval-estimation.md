@@ -26,9 +26,12 @@ distributions: [normal, t, chisq, f]
    $$
    大きい方のパーセント点で割ったものが **下限** になる。
 4. **2標本の平均の差**（等分散・分散未知）：プールした分散 $S_p^2=\frac{(m-1)S_1^2+(n-1)S_2^2}{m+n-2}$ を使い、$\bar X-\bar Y\pm t_{\alpha/2}(m+n-2)\,S_p\sqrt{\frac1m+\frac1n}$。
+   分散が等しいと仮定しないときは、ウェルチの方法 $\bar X-\bar Y\pm t_{\alpha/2}(\nu)\sqrt{S_1^2/m+S_2^2/n}$（$\nu$ はサタースウェイトの近似自由度）を使う。
 5. **分散比**：$\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}\sim F(m-1,n-1)$ から $\sigma_1^2/\sigma_2^2$ の区間が得られる。
 6. **母比率**（大標本）：中心極限定理より $\frac{\hat p-p}{\sqrt{p(1-p)/n}}\approx N(0,1)$。分母の $p$ を $\hat p$ で置き換えたワルド型区間 $\hat p\pm z_{\alpha/2}\sqrt{\hat p(1-\hat p)/n}$ がよく使われる。
+   2つの比率の差は $\hat p_1-\hat p_2\pm z_{\alpha/2}\sqrt{\hat p_1(1-\hat p_1)/n_1+\hat p_2(1-\hat p_2)/n_2}$（検定と違い、比率をプールしない）。
 7. **必要な標本サイズ**：平均の区間の半幅を $E$ 以下にしたいときは $z_{\alpha/2}\sigma/\sqrt n\le E$ から $n\ge\left(z_{\alpha/2}\sigma/E\right)^2$。半幅は $1/\sqrt n$ に比例するので、半幅を半分にするには標本サイズが4倍必要。
+8. **母相関係数**：フィッシャーの z 変換 $z=\tanh^{-1}r$ が近似的に $N\left(\tanh^{-1}\rho,\ \frac{1}{n-3}\right)$ に従うことを使い、$z\pm z_{\alpha/2}/\sqrt{n-3}$ の両端を $\tanh$ で戻す。
 
 ## 落とし穴
 

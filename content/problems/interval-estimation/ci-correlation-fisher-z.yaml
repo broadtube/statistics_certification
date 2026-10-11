@@ -1,0 +1,27 @@
+topics: [interval-estimation, tests-detail]
+formulas: [ci-correlation-fisher-z, fisher-z-transform]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  2変量正規分布に従うとみなせる {{n}} 組のデータから、標本相関係数 $r={{r}}$ が得られた。フィッシャーの z 変換を用いて母相関係数 $\rho$ の95%信頼区間を作るとき、その **上限** を求めよ。$z_{0.025}=1.96$ を用い、小数第3位まで答えよ。
+explanation: |
+  $z=\tanh^{-1}r=\frac12\log\frac{1+r}{1-r}={{zr}}$ は近似的に $N\left(\tanh^{-1}\rho,\ \frac{1}{n-3}\right)$ に従う。z 尺度での95%区間の上端は
+  $$
+  z+\frac{1.96}{\sqrt{n-3}}={{zr}}+\frac{1.96}{\sqrt{ {{df}} }}={{zu}}
+  $$
+  これを $\tanh$ で元の尺度に戻して
+  $$
+  \tanh({{zu}})=\frac{e^{2\times{{zu}}}-1}{e^{2\times{{zu}}}+1}={{answer}}
+  $$
+  区間は $r$ に関して対称にならない。
+params:
+  n: { min: 20, max: 100, step: 5 }
+  r: { min: 0.2, max: 0.8, step: 0.01 }
+derived:
+  df: n - 3
+  zr: atanh(r)
+  zu: atanh(r) + 1.96 / sqrt(n - 3)
+answer: tanh(atanh(r) + 1.96 / sqrt(n - 3))
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.003 }

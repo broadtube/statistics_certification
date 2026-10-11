@@ -44,3 +44,26 @@
   body: 'n\ \ge\ \left(\frac{z_{\alpha/2}\,\sigma}{E}\right)^2'
   pitfalls: 右辺を超える最小の整数に切り上げる。半幅を半分にするには $n$ は4倍必要。
   tags: [信頼区間, 標本サイズ]
+- id: ci-diff-means-welch
+  topic: interval-estimation
+  title: 2標本の平均の差の信頼区間（ウェルチ）
+  description: 分散が等しいと仮定しない場合の区間。自由度 $\nu$ は [[formula:welch-satterthwaite-df]] で求める。
+  body: '\bar X-\bar Y\pm t_{\alpha/2}(\nu)\sqrt{\frac{S_1^2}{m}+\frac{S_2^2}{n}}'
+  conditions: 2つの独立な正規母集団（分散は異なってもよい）。
+  pitfalls: '$\nu$ は一般に整数にならないので、パーセント点は計算機で求めるか、$\nu$ を切り捨てた自由度で（やや保守的に）代用する。'
+  tags: [信頼区間, 2標本, t分布, ウェルチ]
+- id: ci-diff-proportions
+  topic: interval-estimation
+  title: 2つの母比率の差の信頼区間（ワルド型）
+  body: '\hat p_1-\hat p_2\pm z_{\alpha/2}\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}'
+  conditions: 独立な2群で、各群の標本サイズが十分大きいこと。
+  pitfalls: '検定（[[formula:two-proportion-z-test]]）と違い、2群をプールした比率は使わない。'
+  tags: [信頼区間, 母比率, 2標本, 正規近似]
+- id: ci-correlation-fisher-z
+  topic: interval-estimation
+  title: 母相関係数の信頼区間（フィッシャーの z 変換）
+  description: '[[formula:fisher-z-transform]] で近似正規にしてから区間を作り、$\tanh$ で元の尺度に戻す。'
+  body: '\tanh\!\left(z-\frac{z_{\alpha/2}}{\sqrt{n-3}}\right)\ \le\ \rho\ \le\ \tanh\!\left(z+\frac{z_{\alpha/2}}{\sqrt{n-3}}\right),\qquad z=\tanh^{-1}r'
+  conditions: 2変量正規母集団で、$n$ がある程度大きいこと。
+  pitfalls: '$\tanh$ は非線形なので、区間は $r$ に関して対称にならない（$|r|$ が大きいほど $0$ 側に長く伸びる）。'
+  tags: [信頼区間, 相関係数, 正規近似, 変数変換]

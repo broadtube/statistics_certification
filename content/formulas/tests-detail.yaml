@@ -45,3 +45,45 @@
     - { symbol: 'q', meaning: '期待度数の計算のために推定した母数の個数' }
   pitfalls: 期待度数が小さいカテゴリ（目安5未満）は併合する。
   tags: [検定, 適合度, カイ二乗分布]
+- id: welch-t-statistic
+  topic: tests-detail
+  title: ウェルチの t 検定の統計量
+  description: 分散が等しいと仮定しない2標本の平均の比較。自由度は [[formula:welch-satterthwaite-df]] で近似する。
+  body: 'T=\frac{\bar X-\bar Y}{\sqrt{\frac{S_1^2}{m}+\frac{S_2^2}{n}}}\ \approx\ t(\nu)\quad(H_0:\mu_1=\mu_2)'
+  conditions: 独立な2つの正規母集団。分散は異なってもよい。
+  pitfalls: '分母はプールした分散を使わず、各群の不偏分散をそのまま使う。$\nu$ は整数とは限らない。'
+  tags: [検定, t検定, 2標本, ウェルチ]
+- id: paired-t-test
+  topic: tests-detail
+  title: 対応のある2標本の t 検定
+  description: ペアごとの差 $D_i=X_i-Y_i$ を1つの標本とみなして1標本の t 検定を行う。
+  body: 'T=\frac{\bar D}{S_D/\sqrt n}\ \sim\ t(n-1)\quad(H_0:\mu_D=0),\qquad S_D^2=\frac{1}{n-1}\sum_{i=1}^n(D_i-\bar D)^2'
+  conditions: 差 $D_i$ が独立に正規分布に従うこと。$n$ はペアの数。
+  pitfalls: '独立2標本の検定と違い、自由度は $2n-2$ ではなく $n-1$。$S_D$ は $X$・$Y$ の標準偏差からは求められない（共分散が必要）。'
+  tags: [検定, t検定, 2標本, 対応のあるデータ]
+- id: two-proportion-z-test
+  topic: tests-detail
+  title: 2つの母比率の差の検定
+  description: '$H_0:p_1=p_2$ のもとでは共通の比率を2群を合わせた比率で推定する。'
+  body: 'Z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}\ \approx\ N(0,1),\qquad \hat p=\frac{x_1+x_2}{n_1+n_2}'
+  conditions: 独立な2群で、各群の標本サイズが十分大きいこと。
+  pitfalls: '検定ではプールした $\hat p$ を分母に使い、差の信頼区間では各群の $\hat p_1,\hat p_2$ を別々に使う（[[formula:ci-diff-proportions]]）。'
+  tags: [検定, 母比率, 2標本, 正規近似]
+- id: correlation-t-test
+  topic: tests-detail
+  title: 無相関の検定
+  body: 'T=\frac{r\sqrt{n-2}}{\sqrt{1-r^2}}\ \sim\ t(n-2)\quad(H_0:\rho=0)'
+  variables:
+    - { symbol: 'r', meaning: '標本相関係数（$n$ 組の観測から計算）' }
+  conditions: '$(X,Y)$ が2変量正規分布に従うこと。'
+  derivation: '単回帰 $Y=\beta_0+\beta_1X+\varepsilon$ の傾きの t 検定（$H_0:\beta_1=0$）の統計量を $r$ で書き直したものと一致する。'
+  pitfalls: '$\rho=0$ 以外の値 $\rho_0$ の検定には使えない。その場合は [[formula:fisher-z-transform]] を使う。'
+  tags: [検定, 相関係数, t検定]
+- id: fisher-z-transform
+  topic: tests-detail
+  title: フィッシャーの z 変換
+  description: 標本相関係数を変換して、分散が $\rho$ によらない近似正規変数にする。
+  body: 'z=\tanh^{-1}r=\frac12\log\frac{1+r}{1-r}\ \approx\ N\!\left(\tanh^{-1}\rho,\ \frac{1}{n-3}\right)'
+  conditions: '$(X,Y)$ が2変量正規分布に従い、$n$ がある程度大きいこと。'
+  pitfalls: '分散は $1/n$ や $1/(n-2)$ ではなく $1/(n-3)$。$H_0:\rho=\rho_0$ の検定統計量は $(z-\tanh^{-1}\rho_0)\sqrt{n-3}$ で、信頼区間は z 尺度で作ってから $\tanh$ で逆変換する（[[formula:ci-correlation-fisher-z]]）。'
+  tags: [検定, 相関係数, 正規近似, 変数変換]
