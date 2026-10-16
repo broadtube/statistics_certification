@@ -1,0 +1,30 @@
+topics: [bayes-conjugate]
+formulas: [posterior-predictive-gamma-poisson, gamma-poisson-update]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  ある窓口への1日あたりの問い合わせ件数は、平均 $\theta$ のポアソン分布に従うとする。$\theta$ の事前分布をガンマ分布 $\mathrm{Ga}({{a}},\ {{l0}})$（形状 {{a}}、比率 {{l0}}）とし、{{n}} 日間観測したところ問い合わせは合計 {{s}} 件であった。翌日の問い合わせがちょうど {{k}} 件である事後予測確率を求めよ（小数第4位まで）。
+explanation: |
+  事後分布は $\mathrm{Ga}(\alpha',\lambda')=\mathrm{Ga}({{a}}+{{s}},\ {{l0}}+{{n}})=\mathrm{Ga}({{a2}},\ {{l2}})$。
+  ポアソン分布をこの事後分布で混合すると、負の二項分布になる。
+  $$
+  P(\tilde x=k\mid\boldsymbol x)=\frac{\Gamma(\alpha'+k)}{\Gamma(\alpha')\,k!}\left(\frac{\lambda'}{\lambda'+1}\right)^{\alpha'}\left(\frac{1}{\lambda'+1}\right)^{k}
+  $$
+  $k={{k}}$、$\alpha'={{a2}}$、$\lambda'={{l2}}$ を代入すると
+  $$
+  P(\tilde x={{k}}\mid\boldsymbol x)=\frac{\Gamma({{a2}}+{{k}})}{\Gamma({{a2}})\,{{k}}!}\left(\frac{ {{l2}} }{ {{l3}} }\right)^{ {{a2}} }\left(\frac{1}{ {{l3}} }\right)^{ {{k}} }={{answer}}
+  $$
+  （$\frac{\Gamma(\alpha'+k)}{\Gamma(\alpha')}=\alpha'(\alpha'+1)\cdots(\alpha'+k-1)$、$k=0$ のときは 1。）
+params:
+  a: { min: 1, max: 4, step: 1 }
+  l0: { min: 1, max: 3, step: 1 }
+  n: { min: 4, max: 10, step: 1 }
+  s: { min: 4, max: 30, step: 1 }
+  k: { min: 0, max: 3, step: 1 }
+derived:
+  a2: a + s
+  l2: l0 + n
+  l3: l0 + n + 1
+answer: gammafn(a2 + k) / (gammafn(a2) * gammafn(k + 1)) * (l2 / (l2 + 1))^a2 * (1 / (l2 + 1))^k
+display: { digits: 4 }

@@ -28,3 +28,25 @@
   title: 固有値の和と総分散
   body: '\sum_{j=1}^p\lambda_j=\mathrm{tr}\,\Sigma=\sum_{j=1}^p\sigma_{jj},\qquad \prod_{j=1}^p\lambda_j=|\Sigma|'
   tags: [固有値, 行列, 主成分分析]
+- id: cca-eigen
+  topic: pca
+  title: 正準相関分析と固有値問題
+  description: '2組の変数 $\boldsymbol x$（$p$ 次元）と $\boldsymbol y$（$q$ 次元）について、線形結合 $u=\boldsymbol a^\top\boldsymbol x$ と $v=\boldsymbol b^\top\boldsymbol y$ の相関が最大になるものを求める（関連手法）。'
+  body: '\Sigma_{11}^{-1}\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}\,\boldsymbol a=\rho^2\boldsymbol a,\qquad \rho_1=\max_{\boldsymbol a,\boldsymbol b}\ \mathrm{Corr}(\boldsymbol a^\top\boldsymbol x,\boldsymbol b^\top\boldsymbol y)'
+  conditions: '$\Sigma_{11}=V[\boldsymbol x]$、$\Sigma_{22}=V[\boldsymbol y]$、$\Sigma_{12}=\mathrm{Cov}[\boldsymbol x,\boldsymbol y]=\Sigma_{21}^\top$。$\Sigma_{11},\Sigma_{22}$ は正則。'
+  derivation: '$V[u]=V[v]=1$ のもとで $\mathrm{Cov}[u,v]=\boldsymbol a^\top\Sigma_{12}\boldsymbol b$ を最大化（ラグランジュの未定乗数法）し、$\boldsymbol b\propto\Sigma_{22}^{-1}\Sigma_{21}\boldsymbol a$ を代入する。'
+  pitfalls: '固有値は正準相関係数の **2乗**。正準相関は $\min(p,q)$ 個あり、変数の単位を変えても変わらない。'
+  tags: [正準相関分析, 固有値, 相関係数, 多変量解析]
+- id: cca-multiple-correlation
+  topic: pca
+  title: 片方が1変数のときの正準相関
+  description: '$y$ が1変数なら、第1正準相関係数は $y$ を $\boldsymbol x$ に回帰したときの重相関係数 $R$ に一致する。'
+  body: 'q=1:\ \rho_1^2=\boldsymbol r_{xy}^\top R_{xx}^{-1}\boldsymbol r_{xy}=R^2,\qquad p=2:\ R^2=\frac{r_{1}^2+r_{2}^2-2r_{1}r_{2}r_{12}}{1-r_{12}^2}'
+  conditions: '$r_j=\mathrm{Corr}(x_j,y)$、$r_{12}=\mathrm{Corr}(x_1,x_2)$、$R_{xx}$ は $\boldsymbol x$ の相関行列。'
+  tags: [正準相関分析, 重相関係数, 決定係数]
+- id: cca-symmetric-2x2
+  topic: pca
+  title: 2変数×2変数の正準相関（対称な場合）
+  body: '\begin{gathered}\mathrm{Corr}(x_1,x_2)=r,\ \mathrm{Corr}(y_1,y_2)=s,\ \mathrm{Corr}(x_i,y_i)=a,\ \mathrm{Corr}(x_i,y_j)=b\ (i\ne j)\\ \Rightarrow\ \text{正準相関}=\frac{|a+b|}{\sqrt{(1+r)(1+s)}},\ \frac{|a-b|}{\sqrt{(1-r)(1-s)}}\end{gathered}'
+  description: '対称性から正準変量の係数は $(1,1)$ と $(1,-1)$ の向きになり、和どうし・差どうしの相関が正準相関になる。大きい方が第1正準相関。'
+  tags: [正準相関分析, 相関係数, 固有値]

@@ -1,0 +1,33 @@
+topics: [sampling]
+formulas: [ratio-estimator, srs-mean-variance-fpc]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  大きさ $N={{N}}$ の母集団から単純無作為非復元抽出で $n={{n}}$ 個を選び、目的変数 $y$ と補助変数 $x$ を調べた。標本平均は $\bar y={{ybar}}$、$\bar x={{xbar}}$、標本標準偏差は $s_y={{sy}}$、$s_x={{sx}}$、標本共分散は $s_{xy}={{sxy}}$ であった（$x$ の母平均 $\bar X$ は既知）。比推定量 $\bar y_R=\frac{\bar y}{\bar x}\bar X$ の標準誤差の推定値を、近似分散の式を用いて求めよ（小数第3位まで）。
+explanation: |
+  $\hat R=\frac{ {{ybar}} }{ {{xbar}} }={{R}}$。$d_i=y_i-\hat Rx_i$ の分散の推定値は
+  $$
+  s_d^2=s_y^2-2\hat Rs_{xy}+\hat R^2s_x^2={{sy}}^2-2\times{{R}}\times{{sxy}}+{{R}}^2\times{{sx}}^2={{sd2}}
+  $$
+  よって
+  $$
+  \mathrm{SE}=\sqrt{\left(1-\frac{ {{n}} }{ {{N}} }\right)\frac{ {{sd2}} }{ {{n}} }}={{answer}}
+  $$
+  単純な標本平均の標準誤差 $\sqrt{(1-n/N)s_y^2/n}={{se0}}$ と比べると、比推定量のほうが精度が高い。
+params:
+  N: { min: 500, max: 2000, step: 500 }
+  n: { min: 20, max: 50, step: 10 }
+  xbar: { min: 20, max: 40, step: 10 }
+  R: { min: 1.1, max: 2.0, step: 0.1 }
+  sx: { min: 4, max: 10, step: 2 }
+  sy: { min: 8, max: 20, step: 2 }
+  sxy: { min: 20, max: 180, step: 5 }
+derived:
+  ybar: xbar * R
+  sd2: sy^2 - 2 * R * sxy + R^2 * sx^2
+  se0: sqrt((1 - n / N) * sy^2 / n)
+constraints: ['sxy / (sx * sy) >= 0.6', 'sxy / (sx * sy) <= 0.95', 'sd2 >= 0.1 * sy^2', 'sd2 < sy^2']
+answer: sqrt((1 - n / N) * sd2 / n)
+display: { digits: 3 }
+tolerance: { type: relative, value: 0.01 }

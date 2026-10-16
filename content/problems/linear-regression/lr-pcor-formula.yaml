@@ -1,0 +1,19 @@
+topics: [linear-regression]
+formulas: [partial-correlation]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  3つの変数 $x_1,x_2,x_3$ の相関係数が $r_{12}={{r12}}$、$r_{13}={{r13}}$、$r_{23}={{r23}}$ であった。$x_3$ の影響を除いた $x_1$ と $x_2$ の偏相関係数 $r_{12\cdot3}$ を求めよ（小数第3位まで）。
+explanation: |
+  $$
+  r_{12\cdot3}=\frac{r_{12}-r_{13}r_{23}}{\sqrt{(1-r_{13}^2)(1-r_{23}^2)}}=\frac{ {{r12}}-{{r13}}\times{{r23}} }{\sqrt{(1-{{r13}}^2)(1-{{r23}}^2)} }={{answer}}
+  $$
+  これは $x_1$ と $x_2$ をそれぞれ $x_3$ に回帰した残差どうしの相関係数に等しい。分子の $r_{13}r_{23}$ は、$x_3$ を通じた見かけの相関の分。
+params:
+  r12: { min: 0.1, max: 0.8, step: 0.05 }
+  r13: { min: 0.2, max: 0.8, step: 0.1 }
+  r23: { min: 0.2, max: 0.8, step: 0.1 }
+constraints: ['1 - r12^2 - r13^2 - r23^2 + 2 * r12 * r13 * r23 > 0.05']
+answer: (r12 - r13 * r23) / sqrt((1 - r13^2) * (1 - r23^2))
+display: { digits: 3 }

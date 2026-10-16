@@ -1,0 +1,31 @@
+topics: [machine-learning]
+formulas: [roc-rates]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  陽性 100 例・陰性 200 例のテストデータに、陽性か陰性かだけを出力する分類器を適用したところ、次の混同行列を得た。
+
+  | | 予測：陽性 | 予測：陰性 |
+  | --- | --- | --- |
+  | 実際：陽性 | {{tp}} | {{fn}} |
+  | 実際：陰性 | {{fp}} | {{tn}} |
+
+  この分類器の ROC 曲線を、点 $(0,0)$、（偽陽性率, 感度）の点、$(1,1)$ を結ぶ折れ線とみなしたとき、その下側の面積 AUC を求めよ（小数第3位まで）。
+explanation: |
+  感度（真陽性率）$=\frac{TP}{TP+FN}=\frac{ {{tp}} }{100}={{tpr}}$、偽陽性率 $=\frac{FP}{FP+TN}=\frac{ {{fp}} }{200}={{fpr}}$（特異度は $1-{{fpr}}$）。
+  折れ線の下の面積を、左の三角形と右の台形に分けて計算すると
+  $$
+  \mathrm{AUC}=\frac{\mathrm{FPR}\cdot\mathrm{TPR}}{2}+\frac{(1-\mathrm{FPR})(\mathrm{TPR}+1)}{2}=\frac{1+\mathrm{TPR}-\mathrm{FPR}}{2}=\frac{1+{{tpr}}-{{fpr}}}{2}={{answer}}
+  $$
+  すなわち、しきい値が1つしかない分類器の AUC は（感度 + 特異度）/ 2 に等しい。
+params:
+  tp: { min: 50, max: 95, step: 5 }
+  fp: { min: 6, max: 60, step: 6 }
+derived:
+  fn: 100 - tp
+  tn: 200 - fp
+  tpr: tp / 100
+  fpr: fp / 200
+answer: (1 + tp / 100 - fp / 200) / 2
+display: { digits: 3 }

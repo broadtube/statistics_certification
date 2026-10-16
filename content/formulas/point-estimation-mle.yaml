@@ -47,3 +47,29 @@
   body: 'S^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar X)^2,\quad E[S^2]=\sigma^2'
   pitfalls: '正規分布の最尤推定量 $\hat\sigma^2$ は $n$ で割るので $E[\hat\sigma^2]=\frac{n-1}{n}\sigma^2$（下方バイアス）。'
   tags: [不偏推定量, 分散]
+- id: method-of-moments
+  topic: point-estimation-mle
+  title: 積率法（モーメント法）
+  description: 母集団の積率を母数の式で表し、標本積率と等しいとおいて母数について解く。
+  body: 'E[X^k]=\mu_k(\theta)\ \ \text{を}\ \ \frac1n\sum_{i=1}^nX_i^k\ \ \text{で置き換えて}\ \ \mu_k(\tilde\theta)=\frac1n\sum_{i=1}^nX_i^k\quad(k=1,\dots,K)'
+  derivation: '母数が $K$ 個なら1次から $K$ 次までの積率（または平均と中心積率）の $K$ 本の方程式を連立させる。例：ガンマ分布 $\mathrm{Ga}(\alpha,\lambda)$ では $E[X]=\alpha/\lambda$、$V[X]=\alpha/\lambda^2$ より $\tilde\alpha=\bar X^2/\hat s^2$、$\tilde\lambda=\bar X/\hat s^2$（$\hat s^2=\frac1n\sum(X_i-\bar X)^2$）。'
+  pitfalls: '計算は簡単で一致推定量になることが多いが、一般に最尤推定量より効率が悪い。$U(0,\theta)$ の $\tilde\theta=2\bar X$ のように、観測値の最大値より小さくなるなど母数空間と矛盾する値をとることもある。'
+  tags: [積率法, 推定量, 一致性]
+- id: sufficiency-factorization
+  topic: point-estimation-mle
+  title: 十分統計量と因子分解定理
+  description: 同時密度（確率関数）が「統計量と母数を含む部分」と「母数を含まない部分」の積に分解できれば、その統計量は十分統計量。
+  body: 'f(x_1,\dots,x_n;\theta)=g\big(T(x_1,\dots,x_n);\theta\big)\,h(x_1,\dots,x_n)\iff T\ \text{は}\ \theta\ \text{の十分統計量}'
+  conditions: '十分統計量の定義は「$T$ を与えたときの標本の条件付き分布が $\theta$ によらない」こと。$h$ は $\theta$ を含まない非負の関数。'
+  derivation: '例：ポアソン分布では $\prod\frac{\lambda^{x_i}e^{-\lambda}}{x_i!}=\lambda^{\sum x_i}e^{-n\lambda}\cdot\frac{1}{\prod x_i!}$ より $\sum X_i$ が十分統計量。$U(0,\theta)$ では $\theta^{-n}\mathbf 1\{\max x_i\le\theta\}$ より $\max X_i$。'
+  pitfalls: '十分統計量の1対1の関数（$\sum X_i$ と $\bar X$ など）も十分統計量だが、任意の関数が十分とは限らない。'
+  tags: [十分統計量, 因子分解定理]
+- id: rao-blackwell
+  topic: point-estimation-mle
+  title: ラオ＝ブラックウェルの定理
+  description: 不偏推定量を十分統計量で条件付けて期待値をとると、不偏性を保ったまま分散が小さくなる（大きくならない）。
+  body: '\tilde T=E[T\mid S]\ \Longrightarrow\ E[\tilde T]=E[T],\qquad V[\tilde T]\le V[T]'
+  conditions: '$S$ は十分統計量（十分性により $E[T\mid S]$ が $\theta$ によらず、推定量として計算できる）。'
+  derivation: '全分散の公式 $V[T]=V\big[E[T\mid S]\big]+E\big[V[T\mid S]\big]$ の第2項が非負であることから従う。'
+  pitfalls: '$S$ が **完備** 十分統計量なら、$S$ の関数である不偏推定量は一意で一様最小分散不偏推定量（UMVUE）になる（レーマン・シェフェの定理）。'
+  tags: [十分統計量, ラオ・ブラックウェル, 不偏推定量, UMVUE]

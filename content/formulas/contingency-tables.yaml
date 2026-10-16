@@ -28,3 +28,17 @@
   body: '\chi^2=\frac{(b-c)^2}{b+c}\ \sim\ \chi^2(1)'
   description: 対応のある2×2表で、不一致のセル $b,c$ だけを使う。
   tags: [分割表, 検定, 対応のあるデータ]
+- id: fisher-exact-hypergeometric
+  topic: contingency-tables
+  title: フィッシャーの正確検定（超幾何分布）
+  body: 'P(A=a)=\frac{\binom{a+b}{a}\binom{c+d}{c}}{\binom{n}{a+c}},\qquad \max(0,\ n_{1\cdot}+n_{\cdot1}-n)\le a\le\min(n_{1\cdot},\ n_{\cdot1})'
+  description: '2×2表の周辺度数（行和 $n_{1\cdot}=a+b$、列和 $n_{\cdot1}=a+c$、総数 $n$）をすべて固定すると、独立の仮説のもとで左上のセル $A$ は超幾何分布に従う。'
+  conditions: 期待度数が小さくカイ二乗近似が使いにくいときに用いる。分布は未知の比率に依存しない。
+  tags: [分割表, フィッシャーの正確検定, 超幾何分布]
+- id: fisher-exact-one-sided-p
+  topic: contingency-tables
+  title: フィッシャーの正確検定の片側 p 値
+  body: 'p=P(A\ge a)=\sum_{k=a}^{\min(n_{1\cdot},\,n_{\cdot1})}\frac{\binom{n_{1\cdot}}{k}\binom{n-n_{1\cdot}}{n_{\cdot1}-k}}{\binom{n}{n_{\cdot1}}}'
+  description: '対立仮説「第1行で第1列の割合が高い」（オッズ比 $>1$）に対する片側 p 値。観測された表と、それより極端な表の確率を合計する。'
+  pitfalls: 'p 値は観測された表の確率 $P(A=a)$ だけではない。両側 p 値は「確率が観測表以下の表の確率の和」とするのが一般的で、片側の2倍とは限らない。'
+  tags: [分割表, フィッシャーの正確検定, p値]

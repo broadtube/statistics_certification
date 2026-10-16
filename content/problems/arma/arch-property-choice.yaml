@@ -1,0 +1,29 @@
+topics: [arma]
+formulas: [arch1-variance, garch11-variance]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  株価の日次収益率の誤差項 $\varepsilon_t=\sigma_tz_t$（$z_t$ は標準正規分布に従う i.i.d.）を ARCH(1) モデル $\sigma_t^2=\omega+\alpha\varepsilon_{t-1}^2$（$\omega>0$、$0<\alpha<1$）で表す。このモデルに関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '$\varepsilon_t$ どうしは無相関だが、$\varepsilon_t^2$ には正の自己相関があり、大きな変動の後に大きな変動が続きやすい（ボラティリティ・クラスタリング）。'
+    correct: true
+  - id: b
+    text: '$\varepsilon_t$ の無条件分散は $\omega/(1-\alpha^2)$ である。'
+    correct: false
+  - id: c
+    text: '$\varepsilon_{t-1}$ の値によらず、$\varepsilon_t$ の条件付き分散は一定である。'
+    correct: false
+  - id: d
+    text: '$z_t$ が正規分布に従うので、$\varepsilon_t$ の周辺分布も正規分布になる。'
+    correct: false
+  - id: e
+    text: 'GARCH(1,1) に拡張した場合、$\alpha+\beta>1$ であっても無条件分散は有限である。'
+    correct: false
+explanation: |
+  $E[\varepsilon_t\mid\mathcal F_{t-1}]=0$ なので $\varepsilon_t$ は系列相関をもたないが、$\varepsilon_t^2=\omega+\alpha\varepsilon_{t-1}^2+v_t$（$v_t=\varepsilon_t^2-\sigma_t^2$）と AR(1) 型に書け、$\varepsilon_t^2$ の自己相関は $\alpha^h>0$（4次モーメントが有限のとき）。これがボラティリティ・クラスタリングを表す（a が正しい）。
+  - b：$E[\varepsilon_t^2]=\omega+\alpha E[\varepsilon_{t-1}^2]$ から無条件分散は $\omega/(1-\alpha)$。$\omega/(1-\alpha^2)$ は AR(1) の分散 $\sigma^2/(1-\phi^2)$ と混同した形。
+  - c：条件付き分散 $\sigma_t^2=\omega+\alpha\varepsilon_{t-1}^2$ は直前のショックの大きさで変わる。
+  - d：条件付きには正規分布でも、分散が変動する正規分布の混合になるため周辺分布は裾が重く（尖度が $3$ より大きく）、正規分布ではない。
+  - e：GARCH(1,1) の無条件分散 $\omega/(1-\alpha-\beta)$ が有限になるには $\alpha+\beta<1$ が必要。

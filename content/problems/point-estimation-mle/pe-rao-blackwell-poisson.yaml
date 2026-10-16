@@ -1,0 +1,19 @@
+topics: [point-estimation-mle]
+formulas: [rao-blackwell, sufficiency-factorization]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  $X_1,\dots,X_n$ をポアソン分布 $\mathrm{Po}(\lambda)$ からの無作為標本とし、$\theta=P(X=0)=e^{-\lambda}$ を推定したい。$T=\mathbf 1\{X_1=0\}$ は $\theta$ の不偏推定量である。十分統計量 $S=\sum_{i=1}^nX_i$ で条件付けたラオ＝ブラックウェル化 $E[T\mid S]$ を計算し、$n={{n}}$、$S={{s}}$ のときの値を求めよ（小数第4位まで）。
+explanation: |
+  $S=s$ を与えたとき $(X_1,\dots,X_n)$ は試行回数 $s$、各確率 $1/n$ の多項分布に従う（$\lambda$ によらない＝$S$ は十分統計量）。したがって $X_1\mid S=s\sim\mathrm{Bin}(s,1/n)$ で
+  $$
+  E[T\mid S=s]=P(X_1=0\mid S=s)=\left(1-\frac1n\right)^s=\left(1-\frac{1}{ {{n}} }\right)^{ {{s}} }={{answer}}
+  $$
+  これは $\theta$ の不偏推定量で、$S$ は完備十分統計量なので一様最小分散不偏推定量（UMVUE）である（レーマン・シェフェの定理）。最尤推定値 $e^{-s/n}$ とはわずかに異なる。
+params:
+  n: { min: 5, max: 30, step: 1 }
+  s: { min: 5, max: 60, step: 1 }
+constraints: ['(1 - 1 / n)^s >= 0.02']
+answer: (1 - 1 / n)^s
+display: { digits: 4 }

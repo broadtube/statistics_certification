@@ -1,0 +1,28 @@
+topics: [linear-regression]
+formulas: [partial-correlation, partial-correlation-test]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  変数 $x_1,x_2,x_3$ について、$x_3$ の影響を除いた $x_1$ と $x_2$ の（標本）偏相関係数 $r_{12\cdot3}$ に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '$x_1$ を $x_3$ に単回帰した残差と、$x_2$ を $x_3$ に単回帰した残差の相関係数に等しい。'
+    correct: true
+  - id: b
+    text: '$x_1$ を $x_2,x_3$ に重回帰したときの決定係数の正の平方根に等しい。'
+    correct: false
+  - id: c
+    text: '$r_{12\cdot3}$ の符号は、常に $r_{12}$ の符号と一致する。'
+    correct: false
+  - id: d
+    text: '$|r_{12\cdot3}|\le|r_{12}|$ が常に成り立つ。'
+    correct: false
+  - id: e
+    text: '大きさ $n$ の多変量正規標本で $H_0:\rho_{12\cdot3}=0$ を検定する t 統計量は、自由度 $n-2$ の t 分布に従う。'
+    correct: false
+explanation: |
+  - a：偏相関係数の定義（解釈）そのもの。正しい。
+  - b：これは重相関係数。偏相関は $x_3$ で説明できる部分を両方から除いた後の相関。
+  - c・d：$r_{12\cdot3}=\frac{r_{12}-r_{13}r_{23}}{\sqrt{(1-r_{13}^2)(1-r_{23}^2)}}$ なので、例えば $r_{12}=0.3$、$r_{13}=r_{23}=0.7$ なら $r_{12\cdot3}=\frac{0.3-0.49}{0.51}\approx-0.373$ で符号が逆転し、絶対値も大きくなる。
+  - e：調整に1変数使うので自由度は $n-3$。

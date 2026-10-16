@@ -1,0 +1,36 @@
+topics: [bayes-conjugate]
+formulas: [bayes-factor]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  コインを {{n}} 回投げたところ、表が {{x}} 回出た。表の確率 $p$ について
+  $$
+  H_0:\ p=\frac12,\qquad H_1:\ p\sim U(0,1)\ (\text{一様分布})
+  $$
+  を比較する。ベイズファクター $B_{01}=\dfrac{p(x\mid H_0)}{p(x\mid H_1)}$ を求めよ（小数第3位まで）。
+explanation: |
+  $H_0$ のもとでの周辺尤度は二項確率そのもので
+  $$
+  p(x\mid H_0)=\binom{ {{n}} }{ {{x}} }\left(\frac12\right)^{ {{n}} }
+  $$
+  $H_1$ のもとでは $p$ について積分する。ベータ関数 $B(x+1,n-x+1)=\frac{x!\,(n-x)!}{(n+1)!}$ を使うと
+  $$
+  p(x\mid H_1)=\int_0^1\binom nx p^x(1-p)^{n-x}\,dp=\binom nx B(x+1,\ n-x+1)=\frac{1}{n+1}=\frac{1}{ {{n1}} }
+  $$
+  となり、$x$ によらない。したがって
+  $$
+  B_{01}=\binom{ {{n}} }{ {{x}} }\frac{ {{n1}} }{2^{ {{n}} }}=\frac{ {{comb}}\times{{n1}} }{ {{pow2}} }={{answer}}
+  $$
+  $B_{01}>1$ ならデータは $H_0$ を、$B_{01}<1$ なら $H_1$ を支持する。
+params:
+  n: { min: 10, max: 20, step: 1 }
+  x: { min: 1, max: 19, step: 1 }
+derived:
+  n1: n + 1
+  comb: choose(n, x)
+  pow2: 2^n
+constraints: ['x <= n', 'abs(x - n / 2) <= 4']
+answer: choose(n, x) * (n + 1) / 2^n
+display: { digits: 3 }
+tolerance: { type: relative, value: 0.01 }

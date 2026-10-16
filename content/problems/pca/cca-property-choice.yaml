@@ -1,0 +1,29 @@
+topics: [pca]
+formulas: [cca-eigen]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  $p$ 個の変数の組 $\boldsymbol x$ と $q$ 個の変数の組 $\boldsymbol y$（$p\le q$）に正準相関分析を適用する。正準相関分析に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '第1正準相関係数は、$\boldsymbol x$ の線形結合と $\boldsymbol y$ の線形結合の相関係数として取りうる値の最大値である。'
+    correct: true
+  - id: b
+    text: '第1正準相関係数は、$x_i$ と $y_j$ の個々の相関係数の絶対値の最大値に等しい。'
+    correct: false
+  - id: c
+    text: '正の正準相関係数は最大で $q$ 個（変数の多い方の数）得られる。'
+    correct: false
+  - id: d
+    text: '変数の単位を変える（例えば cm を m にする）と、正準相関係数の値も変わる。'
+    correct: false
+  - id: e
+    text: '$\boldsymbol x$ 側の第1正準変量と第2正準変量は、一般に相関をもつ。'
+    correct: false
+explanation: |
+  正準相関分析は、$u=\boldsymbol a^\top\boldsymbol x$ と $v=\boldsymbol b^\top\boldsymbol y$ の相関を最大にする係数を求める手法で、その最大値が第1正準相関係数（a が正しい）。固有値問題 $\Sigma_{11}^{-1}\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}\boldsymbol a=\rho^2\boldsymbol a$ の最大固有値の平方根として計算できる。
+  - b：個々の変数の組 $(x_i,y_j)$ も線形結合の特別な場合なので、第1正準相関係数は個々の相関の絶対値の最大値 **以上** で、一般には等しくない。
+  - c：固有値問題は $p\times p$ 行列で、$\mathrm{rank}\,\Sigma_{12}\le\min(p,q)=p$ なので正準相関は最大 $p$ 個。
+  - d：線形結合の係数が単位の変更を吸収するので、正準相関係数は各変数の尺度の変更に対して不変。
+  - e：第2正準変量は、第1正準変量と無相関という条件のもとで求める。

@@ -1,0 +1,22 @@
+topics: [multivariate-transform]
+formulas: [mvt-order-stat-uniform-beta, mvt-order-stat-kth-density]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  $U_1,\dots,U_{ {{n}} }$ を一様分布 $U(0,1)$ からの無作為標本とし、小さい方から {{k}} 番目の値を $U_{({{k}})}$ とする。$P\big(U_{({{k}})}\le{{u}}\big)$ を求めよ（小数第4位まで）。
+explanation: |
+  $U_{(k)}\le u$ ⇔「$u$ 以下の観測値が $k$ 個以上」。$u$ 以下の個数は $\mathrm{Bin}(n,u)$ に従うので
+  $$
+  P\big(U_{(k)}\le u\big)=\sum_{j=k}^{n}\binom nj u^j(1-u)^{n-j}=1-\sum_{j=0}^{k-1}\binom{ {{n}} }{j}{{u}}^j(1-{{u}})^{ {{n}}-j}={{answer}}
+  $$
+  これは $U_{(k)}\sim\mathrm{Be}(k,\ n-k+1)=\mathrm{Be}({{k}},\ {{b}})$ の分布関数の値でもある（密度 $\frac{n!}{(k-1)!(n-k)!}u^{k-1}(1-u)^{n-k}$ を積分しても同じ値になる）。
+params:
+  n: { min: 4, max: 12, step: 1 }
+  k: { min: 1, max: 10, step: 1 }
+  u: { min: 0.1, max: 0.9, step: 0.05 }
+constraints: ['k <= n', '1 - pbinom(k - 1, n, u) > 0.02', '1 - pbinom(k - 1, n, u) < 0.98']
+derived:
+  b: n - k + 1
+answer: 1 - pbinom(k - 1, n, u)
+display: { digits: 4 }

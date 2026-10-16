@@ -1,0 +1,29 @@
+topics: [multivariate-transform]
+formulas: [mvt-order-stat-max-min, mvt-order-stat-uniform-beta]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  $X_1,\dots,X_n$（$n\ge2$）は互いに独立に、分布関数 $F$・密度 $f$ の連続分布に従う。小さい順に並べた順序統計量を $X_{(1)}<\dots<X_{(n)}$ とする。正しいものを選べ。
+choices:
+  - id: a
+    text: '最小値 $X_{(1)}$ の分布関数は $1-\{1-F(x)\}^n$ である。'
+    correct: true
+  - id: b
+    text: '最小値 $X_{(1)}$ の分布関数は $F(x)^n$ である。'
+    correct: false
+  - id: c
+    text: '最大値 $X_{(n)}$ の密度は $f(x)^n$ である。'
+    correct: false
+  - id: d
+    text: '$F$ が $U(0,1)$ の分布関数のとき、$E\big[X_{(k)}\big]=\frac kn$ である。'
+    correct: false
+  - id: e
+    text: '$X_1,\dots,X_n$ が独立なので、$X_{(1)},\dots,X_{(n)}$ も互いに独立である。'
+    correct: false
+explanation: |
+  - a：$P(X_{(1)}>x)=P(\text{すべて}>x)=\{1-F(x)\}^n$ より正しい。
+  - b：$F(x)^n$ は最大値 $X_{(n)}$ の分布関数。
+  - c：最大値の密度は $F(x)^n$ を微分した $nF(x)^{n-1}f(x)$。$f(x)^n$ は積分しても $1$ にならない。
+  - d：$U_{(k)}\sim\mathrm{Be}(k,n-k+1)$ なので期待値は $\frac{k}{n+1}$。
+  - e：$X_{(1)}<X_{(2)}$ という大小関係の制約があるので独立ではない（例えば $X_{(1)}$ が大きければ $X_{(2)}$ も大きい）。

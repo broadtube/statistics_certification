@@ -1,0 +1,22 @@
+topics: [linear-regression]
+formulas: [partial-correlation-test]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  3変量正規分布からの大きさ $n={{n}}$ の標本で、$x_3$ の影響を除いた $x_1$ と $x_2$ の偏相関係数が $r_{12\cdot3}={{r}}$ であった。$H_0:\rho_{12\cdot3}=0$、$H_1:\rho_{12\cdot3}\ne0$ の両側検定の $p$ 値を求めよ（小数第4位まで）。
+explanation: |
+  検定統計量は
+  $$
+  t=\frac{r_{12\cdot3}\sqrt{n-3}}{\sqrt{1-r_{12\cdot3}^2}}=\frac{ {{r}}\sqrt{ {{df}} }}{\sqrt{1-{{r}}^2}}={{t}}
+  $$
+  で、$H_0$ のもと自由度 $n-3={{df}}$ の t 分布に従う（$x_3$ で調整した分、通常の相関の検定より自由度が1つ少ない）。
+  両側 $p$ 値は $2\{1-F_{t({{df}})}(|t|)\}={{answer}}$（メニューの「計算機」で確認できる）。
+params:
+  n: { min: 15, max: 60, step: 5 }
+  r: { min: 0.1, max: 0.6, step: 0.05 }
+derived:
+  df: n - 3
+  t: r * sqrt(n - 3) / sqrt(1 - r^2)
+answer: 2 * (1 - pt(r * sqrt(n - 3) / sqrt(1 - r^2), n - 3))
+display: { digits: 4 }

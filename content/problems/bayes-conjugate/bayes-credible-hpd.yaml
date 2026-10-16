@@ -1,0 +1,29 @@
+topics: [bayes-conjugate]
+formulas: [credible-interval-hpd]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  母数 $\theta$ の事後分布に基づく95%信用区間について、正しい記述を選べ。
+choices:
+  - id: a
+    text: '事後分布が単峰で左右対称なら、等裾信用区間と HPD 区間は一致する。'
+    correct: true
+  - id: b
+    text: 'HPD 区間は、同じ事後確率をもつ区間の中で常に最も長い。'
+    correct: false
+  - id: c
+    text: '事後分布が右に裾の長い分布のとき、HPD 区間は等裾信用区間より右側に位置する。'
+    correct: false
+  - id: d
+    text: 'HPD 区間は、事後分布が多峰であっても必ず1つの連続した区間になる。'
+    correct: false
+  - id: e
+    text: '頻度論の95%信頼区間も、得られた1つの区間に $\theta$ が含まれる確率が0.95であると解釈できる。'
+    correct: false
+explanation: |
+  HPD 区間は事後密度が一定値 $c$ 以上の範囲で、対称な単峰分布では中央に対称な区間になり、等裾区間と一致する（a が正しい）。
+  b：HPD 区間は同じ事後確率の区間の中で最も短い。
+  c：右に裾が長い分布では密度の高い最頻値側（左）に寄るので、HPD 区間は等裾区間より左側に位置する。
+  d：多峰の事後分布では、密度が $c$ 以上の部分が離れた複数の区間に分かれることがある。
+  e：信頼区間の「95%」は、同じ手順を繰り返したときに区間が真の値を含む割合を表す。得られた区間に $\theta$ が入る確率として解釈できるのはベイズの信用区間。

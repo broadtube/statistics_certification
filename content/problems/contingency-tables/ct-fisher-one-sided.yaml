@@ -1,0 +1,39 @@
+topics: [contingency-tables]
+formulas: [fisher-exact-one-sided-p, fisher-exact-hypergeometric]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  新しい学習法の効果を調べるため、次の2×2分割表を得た。
+
+  | | 合格 | 不合格 |
+  | --- | --- | --- |
+  | 新学習法 | {{a}} | {{b}} |
+  | 従来法 | {{c}} | {{d}} |
+
+  対立仮説を「新学習法のほうが合格しやすい」（オッズ比 $>1$）として、フィッシャーの正確検定の片側 p 値を求めよ（小数第4位まで）。
+explanation: |
+  周辺度数 $n_{1\cdot}={{r1}}$、$n_{2\cdot}={{r2}}$、$n_{\cdot1}={{c1}}$、$n={{n}}$ を固定すると、左上のセル $A$ は超幾何分布
+  $$
+  P(A=k)=\frac{\binom{ {{r1}} }{k}\binom{ {{r2}} }{ {{c1}}-k }}{\binom{ {{n}} }{ {{c1}} }}
+  $$
+  に従う。観測された表の確率は $P(A={{a}})={{pobs}}$。
+  $k$ がとりうる最大値は $\min({{r1}},\ {{c1}})={{kmax}}$ なので、片側 p 値は観測値以上の表の確率の和
+  $$
+  p=\sum_{k={{a}}}^{ {{kmax}} }P(A=k)={{answer}}
+  $$
+  （観測表の確率 {{pobs}} だけを p 値としてはいけない。）
+params:
+  a: { min: 4, max: 8, step: 1 }
+  b: { min: 0, max: 3, step: 1 }
+  c: { min: 1, max: 6, step: 1 }
+  d: { min: 3, max: 8, step: 1 }
+derived:
+  r1: a + b
+  r2: c + d
+  c1: a + c
+  n: a + b + c + d
+  kmax: min(a + b, a + c)
+  pobs: choose(a + b, a) * choose(c + d, c) / choose(a + b + c + d, a + c)
+answer: (choose(a + b, a) * choose(c + d, c) + choose(a + b, a + 1) * choose(c + d, c - 1) + choose(a + b, a + 2) * choose(c + d, c - 2) + choose(a + b, a + 3) * choose(c + d, c - 3)) / choose(a + b + c + d, a + c)
+display: { digits: 4 }

@@ -1,0 +1,53 @@
+topics: [survival-analysis]
+formulas: [logrank-statistic, logrank-expected-variance]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  2つの治療群 A・B の生存時間を比較する。死亡が起きた時刻は $t_1<t_2$ の2つだけで、各時刻の直前のリスク集合の大きさと死亡数は次のとおりである（群 A では $t_1$ と $t_2$ の間に {{cA}} 人が打ち切りとなった）。
+
+  | 時刻 | A のリスク集合 | A の死亡 | B のリスク集合 | B の死亡 |
+  | --- | --- | --- | --- | --- |
+  | $t_1$ | {{nA1}} | {{dA1}} | {{nB1}} | {{dB1}} |
+  | $t_2$ | {{nA2}} | {{dA2}} | {{nB2}} | {{dB2}} |
+
+  ログランク検定統計量 $\chi^2=\dfrac{(O_A-E_A)^2}{V}$ の値を求めよ（小数第3位まで）。
+explanation: |
+  各時刻で、全体のリスク集合 $n_j$、全死亡数 $d_j$、群 A のリスク集合 $n_{Aj}$ から
+  $$
+  E_{Aj}=d_j\frac{n_{Aj}}{n_j},\qquad V_j=\frac{d_j\,n_{Aj}(n_j-n_{Aj})(n_j-d_j)}{n_j^2(n_j-1)}
+  $$
+  - $t_1$：$n_1={{n1}}$、$d_1={{d1}}$ より $E_{A1}={{d1}}\times\frac{ {{nA1}} }{ {{n1}} }={{e1}}$、$V_1={{v1}}$
+  - $t_2$：$n_2={{n2}}$、$d_2={{d2}}$ より $E_{A2}={{d2}}\times\frac{ {{nA2}} }{ {{n2}} }={{e2}}$、$V_2={{v2}}$
+
+  合計すると $O_A={{oA}}$、$E_A={{eA}}$、$V={{v}}$ なので
+  $$
+  \chi^2=\frac{({{oA}}-{{eA}})^2}{ {{v}} }={{answer}}
+  $$
+  帰無仮説（2群の生存関数が等しい）のもとで近似的に $\chi^2(1)$ に従い、$\chi^2_{0.05}(1)=3.841$ と比べて判定する。
+params:
+  nA1: { min: 6, max: 10, step: 1 }
+  nB1: { min: 6, max: 10, step: 1 }
+  dA1: { min: 0, max: 2, step: 1 }
+  dB1: { min: 0, max: 2, step: 1 }
+  cA: { min: 1, max: 2, step: 1 }
+  dA2: { min: 0, max: 2, step: 1 }
+  dB2: { min: 0, max: 2, step: 1 }
+derived:
+  nA2: nA1 - dA1 - cA
+  nB2: nB1 - dB1
+  n1: nA1 + nB1
+  n2: nA1 - dA1 - cA + nB1 - dB1
+  d1: dA1 + dB1
+  d2: dA2 + dB2
+  e1: d1 * nA1 / n1
+  e2: d2 * nA2 / n2
+  v1: d1 * nA1 * (n1 - nA1) * (n1 - d1) / (n1^2 * (n1 - 1))
+  v2: d2 * nA2 * (n2 - nA2) * (n2 - d2) / (n2^2 * (n2 - 1))
+  oA: dA1 + dA2
+  eA: e1 + e2
+  v: v1 + v2
+constraints: ['d1 >= 1', 'd2 >= 1', 'abs(oA - eA) >= 0.5']
+answer: (oA - eA)^2 / v
+display: { digits: 3 }
+tolerance: { type: relative, value: 0.01 }

@@ -1,0 +1,23 @@
+topics: [multivariate-transform]
+formulas: [mvt-order-stat-max-min]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  {{n}} 人の受験者の得点が互いに独立に正規分布 $N({{mu}},\ 10^2)$ に従うとする。{{n}} 人の最高点が {{c}} 点以下である確率を求めよ（小数第4位まで）。
+explanation: |
+  最高点 $X_{(n)}$ が $c$ 以下 ⇔ 全員が $c$ 以下。独立性より
+  $$
+  P\big(X_{(n)}\le c\big)=\{P(X\le c)\}^n=\Phi\left(\frac{ {{c}}-{{mu}} }{10}\right)^{ {{n}} }={{answer}}
+  $$
+  1人が $c$ 以下である確率は $\Phi({{d}}/10)={{p1}}$ だが、全員がそうなる確率はこれを $n$ 乗するので小さくなる。
+params:
+  n: { min: 3, max: 10, step: 1 }
+  mu: { min: 40, max: 70, step: 5 }
+  d: { min: 5, max: 25, step: 5 }
+derived:
+  c: mu + d
+  p1: pnorm(d / 10)
+answer: pnorm(d / 10)^n
+display: { digits: 4 }
+tolerance: { type: absolute, value: 0.001 }

@@ -1,0 +1,23 @@
+topics: [pca, linear-regression]
+formulas: [cca-multiple-correlation, cca-eigen]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  変数の組 $\boldsymbol x=(x_1,x_2)^\top$ と 1 変数 $y$ について、相関係数が $\mathrm{Corr}(x_1,y)={{r1}}$、$\mathrm{Corr}(x_2,y)={{r2}}$、$\mathrm{Corr}(x_1,x_2)={{r12}}$ である。$\boldsymbol x$ と $y$ の正準相関係数を求めよ（小数第3位まで）。
+explanation: |
+  $y$ が1変数のとき $\Sigma_{22}$ はスカラーで、$\Sigma_{11}^{-1}\Sigma_{12}\Sigma_{22}^{-1}\Sigma_{21}$ の 0 でない固有値はただ1つ、$\boldsymbol r_{xy}^\top R_{xx}^{-1}\boldsymbol r_{xy}$ になる。これは $y$ を $x_1,x_2$ に回帰したときの決定係数 $R^2$ そのもので、正準相関係数は重相関係数に一致する。
+  $$
+  R^2=\frac{r_1^2+r_2^2-2r_1r_2r_{12}}{1-r_{12}^2}=\frac{({{r1}})^2+({{r2}})^2-2\times{{r1}}\times({{r2}})\times({{r12}})}{1-({{r12}})^2}={{R2}}
+  $$
+  よって正準相関係数は $\sqrt{R^2}={{answer}}$。
+params:
+  r1: { min: 0.2, max: 0.8, step: 0.1 }
+  r2: { min: -0.4, max: 0.7, step: 0.1 }
+  r12: { min: -0.5, max: 0.6, step: 0.1 }
+derived:
+  R2: (r1^2 + r2^2 - 2 * r1 * r2 * r12) / (1 - r12^2)
+constraints: ['1 - r1^2 - r2^2 - r12^2 + 2 * r1 * r2 * r12 > 0.05', 'R2 < 0.95', 'R2 > 0.1', 'r2 != 0', 'r12 != 0']
+answer: sqrt(R2)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.001 }

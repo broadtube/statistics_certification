@@ -36,3 +36,21 @@
   derivation: '指示変数 $I_i$（$i$ が標本に入れば 1）を使うと $E[\hat Y_{HT}]=\sum_i y_iE[I_i]/\pi_i=\sum_i y_i$。'
   conditions: すべての個体で $\pi_i>0$。
   tags: [包含確率, 不偏推定量, 標本調査]
+- id: ratio-estimator
+  topic: sampling
+  title: 比推定量とその近似分散
+  description: 母平均 $\bar X$ が既知の補助変数 $x$ を使って $y$ の母平均（母集団総計）を推定する。
+  body: '\hat R=\frac{\bar y}{\bar x},\quad \bar y_R=\hat R\,\bar X,\qquad V[\bar y_R]\approx\left(1-\frac nN\right)\frac{1}{n}\left(S_y^2-2RS_{xy}+R^2S_x^2\right)'
+  derivation: '$\bar y_R-\bar Y\approx\bar y-R\bar x$（$R=\bar Y/\bar X$）と線形化すると、$d_i=y_i-Rx_i$ の標本平均の分散になる。$S_d^2=S_y^2-2RS_{xy}+R^2S_x^2$。'
+  conditions: 単純無作為抽出で、標本サイズが十分大きいこと（近似分散）。
+  pitfalls: '比推定量は一般に不偏ではない（偏りは $O(1/n)$）。分散の推定では $R$ を $\hat R$ で、母分散・母共分散を標本の値で置き換える。'
+  tags: [標本調査, 比推定, 補助変数]
+- id: ratio-estimator-efficiency
+  topic: sampling
+  title: 比推定が有効な条件と回帰推定量
+  description: '比推定量は回帰推定量 $\bar y_{lr}=\bar y+b(\bar X-\bar x)$ で傾きを $b=\hat R$ とした（原点を通る直線の）場合にあたる。'
+  body: 'V[\bar y_R]<V[\bar y]\iff\rho>\frac12\cdot\frac{C_x}{C_y},\qquad V[\bar y_{lr}]\approx\left(1-\frac nN\right)\frac{S_y^2}{n}(1-\rho^2)'
+  derivation: '$S_y^2-2RS_{xy}+R^2S_x^2<S_y^2$ を $S_{xy}=\rho S_xS_y$、$C_x=S_x/\bar X$、$C_y=S_y/\bar Y$ で書き直す（$R>0$）。'
+  conditions: '$C_x,C_y$ は変動係数。比推定は $y$ が $x$ にほぼ比例する（原点を通る直線関係で、ばらつきが $x$ とともに増える）とき特に有効。'
+  pitfalls: '回帰推定量の近似分散は比推定量の近似分散以下。両者が一致するのは母集団の回帰直線が原点を通る（回帰係数 $B=S_{xy}/S_x^2$ が $R$ に等しい）とき。'
+  tags: [標本調査, 比推定, 回帰推定, 効率]

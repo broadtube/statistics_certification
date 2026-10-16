@@ -42,3 +42,18 @@
   derivation: '$h_0(t)$ を含まない部分尤度 $\prod_j\frac{\exp(\boldsymbol\beta^\top\boldsymbol x_{(j)})}{\sum_{i\in R(t_j)}\exp(\boldsymbol\beta^\top\boldsymbol x_i)}$ を最大化して $\boldsymbol\beta$ を推定する。'
   conditions: ハザード比が時間に依らない（比例ハザード性）。
   tags: [コックス回帰, ハザード比, 部分尤度]
+- id: logrank-expected-variance
+  topic: survival-analysis
+  title: ログランク検定の期待値と分散（各イベント時点）
+  description: '時点 $t_j$ のリスク集合の大きさ $n_j$（うち群1が $n_{1j}$）、全イベント数 $d_j$ とし、周辺度数を固定した2×2表の超幾何分布から群1のイベント数の期待値と分散を求める。'
+  body: 'E_{1j}=d_j\frac{n_{1j}}{n_j},\qquad V_{j}=\frac{d_j\,n_{1j}\,(n_j-n_{1j})\,(n_j-d_j)}{n_j^2\,(n_j-1)}'
+  pitfalls: '$d_j=1$ なら $V_j=\frac{n_{1j}}{n_j}\left(1-\frac{n_{1j}}{n_j}\right)$。打ち切り例はその時点までリスク集合に含める。'
+  tags: [ログランク検定, 生存時間, 超幾何分布]
+- id: logrank-statistic
+  topic: survival-analysis
+  title: ログランク検定統計量
+  description: 各イベント時点の観測数と期待数の差を時点にわたって合計し、分散で標準化する。
+  body: '\chi^2=\frac{(O_1-E_1)^2}{V}\ \sim\ \chi^2(1),\qquad O_1=\sum_j d_{1j},\ E_1=\sum_j E_{1j},\ V=\sum_j V_j'
+  conditions: '帰無仮説は「2群の生存関数（ハザード）が等しい」。近似は大標本で成り立つ。'
+  pitfalls: '比例ハザード性が成り立つとき検出力が高い。生存曲線が交差するときは差が打ち消されて検出力が落ちる。簡便式 $\sum_g\frac{(O_g-E_g)^2}{E_g}$ は上の統計量以下の値になる（保守的）。'
+  tags: [ログランク検定, 生存時間, カイ二乗分布]

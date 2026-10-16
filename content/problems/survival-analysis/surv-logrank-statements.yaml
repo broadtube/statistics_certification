@@ -1,0 +1,29 @@
+topics: [survival-analysis]
+formulas: [logrank-statistic, logrank-expected-variance]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  2群の生存時間を比較するログランク検定について、正しい記述を選べ。
+choices:
+  - id: a
+    text: '各イベント時刻で群とイベントの有無の2×2表を作り、周辺度数を固定したときの超幾何分布から群1の期待イベント数と分散を求め、それらを時刻にわたって合計する。'
+    correct: true
+  - id: b
+    text: '打ち切られた個体は、偏りを避けるために最初から解析対象から除外する。'
+    correct: false
+  - id: c
+    text: '2群の生存曲線が途中で交差する場合に、特に検出力が高い。'
+    correct: false
+  - id: d
+    text: 'あらかじめ決めた1つの時点での2群の生存率の差だけを比較する検定である。'
+    correct: false
+  - id: e
+    text: '2群の比較では、検定統計量は帰無仮説のもとで近似的に自由度2のカイ二乗分布に従う。'
+    correct: false
+explanation: |
+  ログランク検定は各イベント時刻の $O-E$ と超幾何分布の分散を合計して $\frac{(O_1-E_1)^2}{V}$ を作る（a が正しい）。
+  b：打ち切り例は打ち切り時刻までリスク集合に含める。除外すると生存率を偏って評価する。
+  c：比例ハザード性が成り立つとき検出力が高い。曲線が交差すると時刻ごとの $O-E$ の符号が変わって打ち消し合い、検出力が落ちる。
+  d：すべてのイベント時刻の情報を使う。
+  e：2群の比較では自由度は1（$k$ 群なら $k-1$）。

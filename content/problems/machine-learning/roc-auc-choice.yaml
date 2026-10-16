@@ -1,0 +1,29 @@
+topics: [machine-learning]
+formulas: [auc-pair-probability, roc-rates]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  2値分類のスコアにもとづく ROC 曲線と AUC に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: 'AUC が $0.5$ であることは、無作為に選んだ陽性と陰性のスコアの大小が五分五分であり、スコアが両者を区別する情報をもたないことを意味する。'
+    correct: true
+  - id: b
+    text: 'ROC 曲線は、横軸に適合率、縦軸に再現率をとって描く。'
+    correct: false
+  - id: c
+    text: 'AUC は、しきい値を $0.5$ としたときの正解率（accuracy）に等しい。'
+    correct: false
+  - id: d
+    text: 'スコアに単調増加な変換（例えば対数変換）を施すと、AUC の値は変わる。'
+    correct: false
+  - id: e
+    text: '陽性と陰性それぞれのスコアの分布が変わらなくても、テストデータに占める陽性の割合が変わると AUC は変わる。'
+    correct: false
+explanation: |
+  AUC は $P(S_+>S_-)$（同点は $1/2$ と数える）に等しく、$0.5$ はランダムな判定と同じ、$1$ は完全な分離を表す（a が正しい）。
+  - b：ROC 曲線は横軸に偽陽性率 $FP/(FP+TN)$、縦軸に感度（真陽性率）$TP/(TP+FN)$ をとる。適合率と再現率で描くのは PR 曲線。
+  - c：AUC はすべてのしきい値を通した指標で、特定のしきい値での正解率とは別物。
+  - d：AUC はスコアの順位だけで決まるので、単調増加変換では変わらない。
+  - e：感度と偽陽性率はそれぞれ陽性内・陰性内の割合なので、AUC は陽性の割合（クラスの不均衡）に依存しない。

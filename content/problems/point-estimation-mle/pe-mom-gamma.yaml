@@ -1,0 +1,25 @@
+topics: [point-estimation-mle]
+formulas: [method-of-moments]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  確率密度関数 $f(x;\alpha,\lambda)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\ (x>0)$ のガンマ分布から大きさ $n$ の無作為標本を得たところ、標本平均は $\bar x={{xbar}}$、$n$ で割った標本分散は $\hat s^2=\frac1n\sum(x_i-\bar x)^2={{v}}$ であった。積率法による形状母数 $\alpha$ の推定値を求めよ（小数第3位まで）。
+explanation: |
+  ガンマ分布の平均と分散は $E[X]=\alpha/\lambda$、$V[X]=\alpha/\lambda^2$。これらを $\bar x$、$\hat s^2$ と等しいとおくと
+  $$
+  \frac{\alpha}{\lambda}={{xbar}},\qquad \frac{\alpha}{\lambda^2}={{v}}
+  $$
+  1本目を2本目で割ると $\tilde\lambda=\bar x/\hat s^2$、これを1本目に戻して
+  $$
+  \tilde\alpha=\frac{\bar x^2}{\hat s^2}=\frac{ {{xbar}}^2}{ {{v}} }={{answer}}
+  $$
+  （比率母数は $\tilde\lambda=\frac{ {{xbar}} }{ {{v}} }={{lam}}$）。
+params:
+  xbar: { min: 1.5, max: 8, step: 0.5 }
+  v: { min: 1, max: 12, step: 0.5 }
+constraints: ['xbar^2 / v >= 0.5']
+derived:
+  lam: xbar / v
+answer: xbar^2 / v
+display: { digits: 3 }

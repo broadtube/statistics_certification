@@ -1,0 +1,29 @@
+topics: [sampling]
+formulas: [ratio-estimator, ratio-estimator-efficiency]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  補助変数 $x$（母平均 $\bar X$ は既知）を用いる比推定量 $\bar y_R=\frac{\bar y}{\bar x}\bar X$ に関する記述として正しいものを選べ。ただし単純無作為抽出とし、$C_x,C_y$ は $x,y$ の変動係数、$\rho$ は $x$ と $y$ の相関係数とする。
+choices:
+  - id: a
+    text: '大標本の近似では、$\rho>\frac12\cdot\frac{C_x}{C_y}$ のとき、比推定量の分散は単純な標本平均 $\bar y$ の分散より小さい。'
+    correct: true
+  - id: b
+    text: '比推定量は、どんな標本サイズでも $\bar Y$ の不偏推定量である。'
+    correct: false
+  - id: c
+    text: '$y$ と $x$ が原点を通らない直線関係にあるとき、比推定量の近似分散は回帰推定量の近似分散より小さい。'
+    correct: false
+  - id: d
+    text: '補助変数の母平均 $\bar X$ が未知でも、標本平均 $\bar x$ で置き換えれば比推定の効果は保たれる。'
+    correct: false
+  - id: e
+    text: '$x$ と $y$ の相関が強い負の値であるときに、比推定量は特に有効である。'
+    correct: false
+explanation: |
+  近似分散 $(1-f)\frac1n(S_y^2-2RS_{xy}+R^2S_x^2)$ が $(1-f)\frac{S_y^2}{n}$ より小さい条件を整理すると $\rho>\frac12\frac{C_x}{C_y}$（a が正しい）。
+  b：比推定量は比 $\bar y/\bar x$ を含むため一般に偏りがある（偏りは $O(1/n)$）。
+  c：回帰推定量の近似分散 $(1-f)\frac{S_y^2}{n}(1-\rho^2)$ は比推定量の近似分散以下で、等しくなるのは回帰直線が原点を通るとき。原点を通らなければ回帰推定量のほうが有効。
+  d：$\bar X$ を $\bar x$ で置き換えると $\bar y_R=\bar y$ となり、補助情報は使われない。
+  e：比推定が有効なのは正の相関が強いとき。負の相関では分散がかえって大きくなる。

@@ -1,0 +1,25 @@
+topics: [point-estimation-mle]
+formulas: [rao-blackwell, sufficiency-factorization]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  $X_1,\dots,X_n$ を一様分布 $U(0,\theta)$ からの無作為標本とする。不偏推定量 $T=2X_1$ を十分統計量 $M=\max_iX_i$ で条件付けると $E[T\mid M]=\frac{n+1}{n}M$ となる。$n={{n}}$、$\theta={{theta}}$ のとき、$\frac{n+1}{n}M$ の分散を求めよ（小数第4位まで）。
+explanation: |
+  $M$ の分布関数は $(m/\theta)^n$ なので $M/\theta\sim\mathrm{Be}(n,1)$。よって
+  $$
+  E[M]=\frac{n}{n+1}\theta,\qquad V[M]=\frac{n\theta^2}{(n+1)^2(n+2)}
+  $$
+  したがって
+  $$
+  V\left[\frac{n+1}{n}M\right]=\frac{(n+1)^2}{n^2}\cdot\frac{n\theta^2}{(n+1)^2(n+2)}=\frac{\theta^2}{n(n+2)}=\frac{ {{theta}}^2}{ {{n}}\times{{n2}} }={{answer}}
+  $$
+  元の $T=2X_1$ の分散 $4\cdot\theta^2/12=\theta^2/3={{vt}}$ より大幅に小さい（ラオ＝ブラックウェルの定理）。
+params:
+  n: { min: 3, max: 20, step: 1 }
+  theta: { min: 1, max: 10, step: 1 }
+derived:
+  n2: n + 2
+  vt: theta^2 / 3
+answer: theta^2 / (n * (n + 2))
+display: { digits: 4 }

@@ -1,0 +1,26 @@
+topics: [arma]
+formulas: [garch11-variance, arch1-variance]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  誤差項 $\varepsilon_t=\sigma_tz_t$（$z_t$ は平均 $0$・分散 $1$ の i.i.d.）が GARCH(1,1) モデル
+  $$
+  \sigma_t^2={{omega}}+{{alpha}}\,\varepsilon_{t-1}^2+{{beta}}\,\sigma_{t-1}^2
+  $$
+  に従い、定常であるとする。$\varepsilon_t$ の無条件分散 $V[\varepsilon_t]$ を求めよ（小数第3位まで）。
+explanation: |
+  $E[\varepsilon_t^2\mid\mathcal F_{t-1}]=\sigma_t^2$ なので $E[\varepsilon_t^2]=E[\sigma_t^2]$。定常性から $E[\varepsilon_t^2]=E[\varepsilon_{t-1}^2]=E[\sigma_{t-1}^2]=\bar\sigma^2$ とおくと
+  $$
+  \bar\sigma^2=\omega+\alpha\bar\sigma^2+\beta\bar\sigma^2\quad\Longrightarrow\quad \bar\sigma^2=\frac{\omega}{1-\alpha-\beta}=\frac{ {{omega}} }{1-{{alpha}}-{{beta}}}={{answer}}
+  $$
+  これが有限で正になる条件が $\alpha+\beta<1$（ここでは $\alpha+\beta={{persist}}$）。$\beta=0$ とおけば ARCH(1) の $\omega/(1-\alpha)$ になる。
+params:
+  omega: { min: 0.02, max: 0.2, step: 0.02 }
+  alpha: { min: 0.05, max: 0.25, step: 0.05 }
+  beta: { min: 0.6, max: 0.9, step: 0.05 }
+derived:
+  persist: alpha + beta
+constraints: ['alpha + beta < 0.97']
+answer: omega / (1 - alpha - beta)
+display: { digits: 3 }

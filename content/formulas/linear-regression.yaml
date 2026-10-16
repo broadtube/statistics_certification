@@ -46,3 +46,20 @@
   body: 'V[\tilde{\boldsymbol\beta}]-V[\hat{\boldsymbol\beta}]\ \succeq\ O\quad(\tilde{\boldsymbol\beta}\ \text{は任意の線形不偏推定量})'
   conditions: 誤差の期待値が $0$、等分散、無相関。正規性は不要。
   tags: [回帰, 最小二乗法, BLUE]
+- id: partial-correlation
+  topic: linear-regression
+  title: 偏相関係数
+  description: '第3の変数 $x_3$ の影響を除いた $x_1$ と $x_2$ の相関。'
+  body: 'r_{12\cdot3}=\frac{r_{12}-r_{13}\,r_{23}}{\sqrt{\left(1-r_{13}^2\right)\left(1-r_{23}^2\right)}}'
+  variables:
+    - { symbol: 'r_{ij}', meaning: '$x_i$ と $x_j$ の（標本）相関係数' }
+  derivation: '$x_1$ を $x_3$ に単回帰した残差と、$x_2$ を $x_3$ に単回帰した残差の相関係数を計算すると、この式になる。'
+  pitfalls: '$r_{12}$ と符号が逆になることも、$|r_{12}|$ より大きくなることもある（見かけの相関・抑制効果）。'
+  tags: [相関, 偏相関係数, 回帰]
+- id: partial-correlation-test
+  topic: linear-regression
+  title: 偏相関係数の無相関検定
+  body: 't=\frac{r_{12\cdot3}\sqrt{n-3}}{\sqrt{1-r_{12\cdot3}^2}}\ \sim\ t(n-3)\quad(H_0:\rho_{12\cdot3}=0)'
+  conditions: '$(x_1,x_2,x_3)$ が多変量正規分布に従う無作為標本。$q$ 個の変数で調整した偏相関なら自由度は $n-2-q$。'
+  pitfalls: '通常の相関係数の検定（自由度 $n-2$）より、調整した変数の数だけ自由度が減る。$x_1$ を $x_2,x_3$ に重回帰したときの $x_2$ の係数の t 検定と同じ統計量になる。'
+  tags: [相関, 偏相関係数, 検定, t分布]

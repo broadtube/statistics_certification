@@ -29,3 +29,25 @@
   body: '\text{AR}(p):\ \text{PACF がラグ}\ p\ \text{で切断},\qquad \text{MA}(q):\ \text{ACF がラグ}\ q\ \text{で切断}'
   description: 'ARMA では ACF・PACF ともに減衰し、切断は見られない。'
   tags: [時系列, 自己相関, 偏自己相関, モデル選択]
+- id: arch1-variance
+  topic: arma
+  title: ARCH(1) の条件付き分散と無条件分散
+  body: '\varepsilon_t=\sigma_tz_t,\quad \sigma_t^2=\omega+\alpha\varepsilon_{t-1}^2,\qquad V[\varepsilon_t]=\frac{\omega}{1-\alpha}'
+  conditions: '$z_t$ は平均 $0$・分散 $1$ の i.i.d.、$\omega>0$、$0\le\alpha<1$。'
+  derivation: '$E[\varepsilon_t^2]=E[\sigma_t^2]=\omega+\alpha E[\varepsilon_{t-1}^2]$ に定常性 $E[\varepsilon_t^2]=E[\varepsilon_{t-1}^2]$ を使う。'
+  pitfalls: '$\varepsilon_t$ 自体は無相関だが、$\varepsilon_t^2$ は $\varepsilon_t^2=\omega+\alpha\varepsilon_{t-1}^2+v_t$ と AR(1) 型になり、自己相関 $\alpha^h$ をもつ（4次モーメントが有限のとき）。'
+  tags: [時系列, ARCH, ボラティリティ, 分散]
+- id: garch11-variance
+  topic: arma
+  title: GARCH(1,1) の無条件分散と定常条件
+  body: '\sigma_t^2=\omega+\alpha\varepsilon_{t-1}^2+\beta\sigma_{t-1}^2,\qquad V[\varepsilon_t]=\frac{\omega}{1-\alpha-\beta}\quad(\alpha+\beta<1)'
+  conditions: '$\omega>0$、$\alpha,\beta\ge0$。$\alpha+\beta<1$ が（弱）定常で無条件分散が有限となる条件。'
+  description: '$\alpha+\beta$ はボラティリティの持続性を表し、$1$ に近いほどショックの影響が長く残る。$\varepsilon_t^2$ は AR 係数 $\alpha+\beta$ の ARMA(1,1) 型になる。'
+  tags: [時系列, GARCH, ボラティリティ, 定常性]
+- id: garch-forecast
+  topic: arma
+  title: GARCH(1,1) の条件付き分散の予測
+  body: '\sigma_{T+1}^2=\omega+\alpha\varepsilon_T^2+\beta\sigma_T^2,\qquad E[\sigma_{T+h}^2\mid\mathcal F_T]=\bar\sigma^2+(\alpha+\beta)^{h-1}(\sigma_{T+1}^2-\bar\sigma^2)'
+  conditions: '$\bar\sigma^2=\omega/(1-\alpha-\beta)$。$\sigma_{T+1}^2$ は時点 $T$ までの情報で確定する。'
+  derivation: '$E[\varepsilon_{t}^2\mid\mathcal F_{t-1}]=\sigma_{t}^2$ より $E[\sigma_{t+1}^2\mid\mathcal F_T]=\omega+(\alpha+\beta)E[\sigma_t^2\mid\mathcal F_T]$ を繰り返し使う。'
+  tags: [時系列, GARCH, 予測, ボラティリティ]

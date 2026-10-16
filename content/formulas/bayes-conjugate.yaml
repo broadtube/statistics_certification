@@ -28,3 +28,39 @@
   body: 'L=(\theta-a)^2\Rightarrow E[\theta\mid x],\qquad L=|\theta-a|\Rightarrow \text{事後中央値}'
   description: '0-1 損失（の極限）では事後分布の最頻値（MAP 推定量）。'
   tags: [ベイズ, 推定量, 損失関数]
+- id: bayes-factor
+  topic: bayes-conjugate
+  title: ベイズファクターと事後オッズ
+  body: 'B_{01}=\frac{p(x\mid H_0)}{p(x\mid H_1)},\qquad \frac{P(H_0\mid x)}{P(H_1\mid x)}=B_{01}\times\frac{P(H_0)}{P(H_1)}'
+  description: '事後オッズ ＝ ベイズファクター × 事前オッズ。$p(x\mid H_k)=\int f(x\mid\theta)\,\pi_k(\theta)\,d\theta$ は仮説 $H_k$ のもとでの周辺尤度。'
+  pitfalls: '$B_{10}=1/B_{01}$。複合仮説では仮説内の事前分布 $\pi_k(\theta)$ に依存し、非正則な事前分布では定数倍が定まらないので使えない。'
+  tags: [ベイズ, ベイズファクター, 仮説検定, 周辺尤度]
+- id: bayes-factor-simple-hypotheses
+  topic: bayes-conjugate
+  title: 単純仮説のベイズファクターと解釈の目安
+  body: 'H_0:\theta=\theta_0,\ H_1:\theta=\theta_1\ \Rightarrow\ B_{10}=\frac{f(x\mid\theta_1)}{f(x\mid\theta_0)}\ (\text{尤度比})'
+  description: '解釈の目安（ジェフリーズ）：$B_{10}$ が 1〜3 はほとんど言及に値しない、3〜10 は $H_1$ を支持する相当の根拠、10〜30 は強い根拠、30〜100 は非常に強い根拠、100 を超えると決定的。'
+  pitfalls: 'ベイズファクターは事前確率 $P(H_0),P(H_1)$ には依存しないが、事後確率そのものではない。事後確率を得るには事前オッズを掛ける。'
+  tags: [ベイズ, ベイズファクター, 尤度比]
+- id: posterior-predictive-conjugate
+  topic: bayes-conjugate
+  title: 事後予測分布（ベータ・二項、正規・正規）
+  body: 'P(\tilde x=1\mid x)=\frac{\alpha+x}{\alpha+\beta+n},\qquad \tilde x\mid\boldsymbol x\sim N\left(\mu_n,\ \sigma^2+\tau_n^2\right)'
+  description: '予測分布 $f(\tilde x\mid x)=\int f(\tilde x\mid\theta)\pi(\theta\mid x)\,d\theta$。正規・正規では観測の分散 $\sigma^2$ に母数の事後分散 $\tau_n^2$ が上乗せされる。'
+  derivation: 'ベータ・二項で次の $m$ 回中 $k$ 回成功する確率は $\binom mk\frac{B(\alpha''+k,\ \beta''+m-k)}{B(\alpha'',\beta'')}$（$\alpha''=\alpha+x$、$\beta''=\beta+n-x$）。'
+  tags: [ベイズ, 予測分布, ベータ分布, 正規分布]
+- id: posterior-predictive-gamma-poisson
+  topic: bayes-conjugate
+  title: ガンマ・ポアソンの事後予測分布（負の二項分布）
+  body: 'P(\tilde x=k\mid\boldsymbol x)=\frac{\Gamma(\alpha''+k)}{\Gamma(\alpha'')\,k!}\left(\frac{\lambda''}{\lambda''+1}\right)^{\alpha''}\left(\frac{1}{\lambda''+1}\right)^{k}'
+  description: '$\alpha''=\alpha+\sum x_i$、$\lambda''=\lambda_0+n$。成功確率 $\frac{\lambda''}{\lambda''+1}$、形状 $\alpha''$ の負の二項分布で、平均 $\frac{\alpha''}{\lambda''}$、分散 $\frac{\alpha''}{\lambda''}\left(1+\frac{1}{\lambda''}\right)$。'
+  derivation: '$\int_0^\infty\frac{e^{-\theta}\theta^k}{k!}\cdot\frac{\lambda''^{\alpha''}}{\Gamma(\alpha'')}\theta^{\alpha''-1}e^{-\lambda''\theta}\,d\theta$ をガンマ関数の積分で計算する。'
+  pitfalls: 予測分布の分散はポアソン分布（平均＝分散）より大きい（過分散）。$\theta$ の不確かさが上乗せされるため。
+  tags: [ベイズ, 予測分布, 負の二項分布, ポアソン分布]
+- id: credible-interval-hpd
+  topic: bayes-conjugate
+  title: 等裾信用区間と HPD 区間
+  body: '\text{等裾}:\ \left[\theta_{\alpha/2},\ \theta_{1-\alpha/2}\right],\qquad \text{HPD}:\ \{\theta:\pi(\theta\mid x)\ge c\},\ \ P(\theta\in C\mid x)=1-\alpha'
+  description: '$\theta_q$ は事後分布の下側 $q$ 点。HPD（最高事後密度）区間は、事後確率 $1-\alpha$ をもつ集合のうち最も短い。'
+  pitfalls: '事後分布が単峰で左右対称なら両者は一致する。右に裾が長いと HPD 区間は等裾区間より左（最頻値側）に寄る。多峰なら HPD は複数の区間の和になりうる。'
+  tags: [ベイズ, 信用区間, HPD]

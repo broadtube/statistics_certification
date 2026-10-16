@@ -1,0 +1,30 @@
+topics: [point-estimation-mle]
+formulas: [sufficiency-factorization]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  $X_1,\dots,X_n$ を無作為標本とする。十分統計量に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '正規分布 $N(\mu,1)$ のとき、$\sum_{i=1}^n X_i$ は $\mu$ の十分統計量である。'
+    correct: true
+  - id: b
+    text: '一様分布 $U(0,\theta)$ のとき、$\bar X$ は $\theta$ の十分統計量である。'
+    correct: false
+  - id: c
+    text: '指数分布のとき、$n\ge2$ でも $X_1$ だけで率母数 $\lambda$ の十分統計量になる。'
+    correct: false
+  - id: d
+    text: '十分統計量 $T$ の関数はどのようなものでも十分統計量である。'
+    correct: false
+  - id: e
+    text: '正規分布 $N(\mu,\sigma^2)$（$\mu,\sigma^2$ とも未知）のとき、$\bar X$ だけで $(\mu,\sigma^2)$ の十分統計量になる。'
+    correct: false
+explanation: |
+  因子分解定理を使う。
+  - a：$\prod\frac{1}{\sqrt{2\pi}}e^{-(x_i-\mu)^2/2}=\exp\left(\mu\sum x_i-\frac{n\mu^2}{2}\right)\cdot(2\pi)^{-n/2}e^{-\sum x_i^2/2}$ と分解でき、$\mu$ を含む部分は $\sum x_i$ だけを通じて標本に依存する。正しい。
+  - b：同時密度は $\theta^{-n}\mathbf 1\{\max_i x_i\le\theta\}$（各 $x_i\ge0$ のとき）で、十分統計量は $\max_i X_i$。$\bar X$ からは $\max_i X_i$ を復元できない。
+  - c：同時密度は $\lambda^ne^{-\lambda\sum x_i}$ で、十分統計量は $\sum X_i$。$X_1$ を与えても $X_2,\dots$ の条件付き分布は $\lambda$ に依存する。
+  - d：定数のように情報を失う関数は十分でない。十分統計量であることが保たれるのは1対1の関数など。
+  - e：同時密度は $\sum x_i$ と $\sum x_i^2$ の両方を通じて $(\mu,\sigma^2)$ に依存するので、$(\bar X,\ \sum(X_i-\bar X)^2)$ の組が必要。

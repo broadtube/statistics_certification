@@ -1,0 +1,30 @@
+topics: [bayes-conjugate]
+formulas: [posterior-predictive-conjugate, normal-normal-update]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  ある測定値は $N(\theta,\ {{sigma}}^2)$ に従う（分散は既知）。$\theta$ の事前分布を $N({{mu0}},\ {{tau0}}^2)$ とし、{{n}} 回の測定の平均が $\bar x={{xbar}}$ であった。次の1回の測定値 $\tilde x$ の事後予測分布に基づく95%予測区間（等裾）の上限を求めよ。ただし $z_{0.025}=1.96$ とする（小数第2位まで）。
+explanation: |
+  事後分布の精度と平均は
+  $$
+  \frac{1}{\tau_n^2}=\frac{1}{ {{tau0}}^2 }+\frac{ {{n}} }{ {{sigma}}^2 },\quad \tau_n^2={{taun2}},\qquad \mu_n=\tau_n^2\left(\frac{ {{mu0}} }{ {{tau0}}^2 }+\frac{ {{n}}\times{{xbar}} }{ {{sigma}}^2 }\right)={{mun}}
+  $$
+  $\tilde x=\theta+\varepsilon$（$\varepsilon\sim N(0,\sigma^2)$ は $\theta$ と独立）なので、予測分布は $N(\mu_n,\ \sigma^2+\tau_n^2)$。予測標準偏差は $\sqrt{ {{sigma}}^2+{{taun2}} }={{psd}}$。
+  $$
+  \mu_n+1.96\sqrt{\sigma^2+\tau_n^2}={{mun}}+1.96\times{{psd}}={{answer}}
+  $$
+  $\sigma^2$ だけを使う（母数を $\mu_n$ に固定する）と、$\theta$ の不確かさの分 $\tau_n^2$ を見落として区間が狭くなりすぎる。
+params:
+  sigma: { min: 4, max: 10, step: 2 }
+  mu0: { min: 50, max: 60, step: 5 }
+  tau0: { min: 2, max: 6, step: 2 }
+  n: { min: 4, max: 16, step: 4 }
+  xbar: { min: 52, max: 64, step: 2 }
+derived:
+  taun2: 1 / (1 / tau0^2 + n / sigma^2)
+  mun: taun2 * (mu0 / tau0^2 + n * xbar / sigma^2)
+  psd: sqrt(sigma^2 + taun2)
+answer: mun + 1.96 * psd
+display: { digits: 2 }
+tolerance: { type: absolute, value: 0.03 }

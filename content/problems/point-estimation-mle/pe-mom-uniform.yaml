@@ -1,0 +1,29 @@
+topics: [point-estimation-mle]
+formulas: [method-of-moments, mle-definition]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  $X_1,\dots,X_n$ を一様分布 $U(0,\theta)$（$\theta>0$ は未知）からの無作為標本とし、1次の積率から得られる積率推定量を $\tilde\theta=2\bar X$ とする。$\tilde\theta$ に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '$\tilde\theta$ は $\theta$ の不偏推定量で、その分散は $\frac{\theta^2}{3n}$ である。'
+    correct: true
+  - id: b
+    text: '$\tilde\theta$ は $\theta$ の最尤推定量 $\max_i X_i$ と常に一致する。'
+    correct: false
+  - id: c
+    text: '$\tilde\theta$ は常に $\max_i X_i$ 以上の値をとる。'
+    correct: false
+  - id: d
+    text: '$\tilde\theta$ の分散はクラメール・ラオの下限に一致するので、$\tilde\theta$ は有効推定量である。'
+    correct: false
+  - id: e
+    text: '$\tilde\theta$ は不偏推定量だが、一致推定量ではない。'
+    correct: false
+explanation: |
+  $E[X]=\theta/2$ を $\bar X$ と等しいとおいて $\tilde\theta=2\bar X$。$E[\tilde\theta]=2\cdot\theta/2=\theta$ で不偏、$V[X]=\theta^2/12$ より $V[\tilde\theta]=4\cdot\frac{\theta^2}{12n}=\frac{\theta^2}{3n}$（a が正しい）。
+  - b：最尤推定量は $\max_i X_i$ で、$2\bar X$ とは一般に異なる。
+  - c：例えば観測値が $1,1,10$ なら $2\bar x=8<10$ となり、観測値と矛盾する値をとりうる。
+  - d：台が $\theta$ に依存するので正則条件を満たさず、クラメール・ラオの下限は適用できない。実際、$\max_i X_i$ を補正した不偏推定量 $\frac{n+1}{n}\max_i X_i$ の分散は $\frac{\theta^2}{n(n+2)}$ で、$n\ge2$ なら $\tilde\theta$ より小さい。
+  - e：分散が $0$ に近づく不偏推定量なので一致推定量である（大数の法則からも $2\bar X\xrightarrow{p}\theta$）。

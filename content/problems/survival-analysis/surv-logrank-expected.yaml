@@ -1,0 +1,45 @@
+topics: [survival-analysis]
+formulas: [logrank-expected-variance]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  群 A（{{nA1}} 人）と群 B（{{nB1}} 人）を追跡し、時刻 $t_1<t_2<t_3$ にそれぞれ1人ずつ死亡した。打ち切りはなかった。各時刻の直前のリスク集合と死亡数は次のとおりである。
+
+  | 時刻 | A のリスク集合 | A の死亡 | B のリスク集合 | B の死亡 |
+  | --- | --- | --- | --- | --- |
+  | $t_1$ | {{nA1}} | {{dA1}} | {{nB1}} | {{dB1}} |
+  | $t_2$ | {{nA2}} | {{dA2}} | {{nB2}} | {{dB2}} |
+  | $t_3$ | {{nA3}} | {{dA3}} | {{nB3}} | {{dB3}} |
+
+  2群の生存関数が等しいという帰無仮説のもとで、ログランク検定に用いる群 A の期待死亡数 $E_A$ を求めよ（小数第3位まで）。
+explanation: |
+  各時刻の死亡数は $d_j=1$ なので、$E_{Aj}=d_j\frac{n_{Aj}}{n_j}=\frac{n_{Aj}}{n_{Aj}+n_{Bj}}$。
+  $$
+  E_A=\frac{ {{nA1}} }{ {{n1}} }+\frac{ {{nA2}} }{ {{n2}} }+\frac{ {{nA3}} }{ {{n3}} }={{e1}}+{{e2}}+{{e3}}={{answer}}
+  $$
+  観測死亡数は $O_A={{oA}}$ で、$O_A-E_A$ が正なら群 A のほうが死亡しやすい方向のずれを表す。
+params:
+  nA1: { min: 4, max: 8, step: 1 }
+  nB1: { min: 4, max: 8, step: 1 }
+  dA1: { min: 0, max: 1, step: 1 }
+  dA2: { min: 0, max: 1, step: 1 }
+  dA3: { min: 0, max: 1, step: 1 }
+derived:
+  dB1: 1 - dA1
+  dB2: 1 - dA2
+  dB3: 1 - dA3
+  nA2: nA1 - dA1
+  nB2: nB1 - dB1
+  nA3: nA1 - dA1 - dA2
+  nB3: nB1 - dB1 - dB2
+  n1: nA1 + nB1
+  n2: nA1 + nB1 - 1
+  n3: nA1 + nB1 - 2
+  e1: nA1 / (nA1 + nB1)
+  e2: (nA1 - dA1) / (nA1 + nB1 - 1)
+  e3: (nA1 - dA1 - dA2) / (nA1 + nB1 - 2)
+  oA: dA1 + dA2 + dA3
+answer: nA1 / (nA1 + nB1) + (nA1 - dA1) / (nA1 + nB1 - 1) + (nA1 - dA1 - dA2) / (nA1 + nB1 - 2)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.002 }

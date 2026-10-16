@@ -35,3 +35,16 @@
   title: 適合率・再現率・F 値
   body: '\text{適合率}=\frac{TP}{TP+FP},\quad \text{再現率}=\frac{TP}{TP+FN},\quad F=\frac{2\cdot\text{適合率}\cdot\text{再現率}}{\text{適合率}+\text{再現率}}'
   tags: [機械学習, 分類, 評価指標]
+- id: roc-rates
+  topic: machine-learning
+  title: 感度・特異度・偽陽性率
+  body: '\text{感度（TPR）}=\frac{TP}{TP+FN},\quad \text{特異度}=\frac{TN}{TN+FP},\quad \text{偽陽性率（FPR）}=\frac{FP}{FP+TN}=1-\text{特異度}'
+  description: 'しきい値を動かしたときの点（FPR, TPR）の軌跡が ROC 曲線。しきい値を下げるほど両方とも増え、曲線は $(0,0)$ から $(1,1)$ へ進む。'
+  tags: [機械学習, 分類, 評価指標, ROC曲線]
+- id: auc-pair-probability
+  topic: machine-learning
+  title: AUC の確率的解釈
+  body: '\mathrm{AUC}=P(S_{+}>S_{-})+\tfrac12P(S_{+}=S_{-})=\frac{1}{n_+n_-}\sum_{i\in+}\sum_{j\in-}\left\{I(s_i>s_j)+\tfrac12I(s_i=s_j)\right\}'
+  description: '無作為に選んだ陽性と陰性の組で、陽性のスコアの方が高い確率。マン・ホイットニーの $U$ 統計量を $n_+n_-$ で割ったものに等しい。'
+  pitfalls: '$\mathrm{AUC}=0.5$ はランダムな判定と同等、$1$ は完全な分離。スコアの単調変換や陽性の割合では変わらない。'
+  tags: [機械学習, 分類, 評価指標, AUC, ROC曲線]

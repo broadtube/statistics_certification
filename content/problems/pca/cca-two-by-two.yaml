@@ -1,0 +1,28 @@
+topics: [pca]
+formulas: [cca-symmetric-2x2, cca-eigen]
+difficulty: 3
+type: numeric
+source: { kind: original }
+statement: |
+  標準化された変数の組 $\boldsymbol x=(x_1,x_2)^\top$ と $\boldsymbol y=(y_1,y_2)^\top$ の相関係数が次のとおりである。
+  $$
+  \mathrm{Corr}(x_1,x_2)={{r}},\quad \mathrm{Corr}(y_1,y_2)={{s}},\quad \mathrm{Corr}(x_1,y_1)=\mathrm{Corr}(x_2,y_2)={{a}},\quad \mathrm{Corr}(x_1,y_2)=\mathrm{Corr}(x_2,y_1)={{b}}
+  $$
+  $\boldsymbol x$ と $\boldsymbol y$ の第1正準相関係数を求めよ（小数第3位まで）。
+explanation: |
+  相関行列を $R_{11}=\begin{pmatrix}1&r\\r&1\end{pmatrix}$、$R_{22}=\begin{pmatrix}1&s\\s&1\end{pmatrix}$、$R_{12}=\begin{pmatrix}a&b\\b&a\end{pmatrix}$ と書くと、どれも $(1,1)^\top$ と $(1,-1)^\top$ を固有ベクトルにもつ。したがって $R_{11}^{-1}R_{12}R_{22}^{-1}R_{21}$ の固有ベクトルもこの2つで、固有値（正準相関係数の2乗）は次のようになる。
+  - 和どうし $u=x_1+x_2$、$v=y_1+y_2$：$\mathrm{Corr}(u,v)=\frac{2(a+b)}{\sqrt{2(1+r)\cdot2(1+s)}}=\frac{a+b}{\sqrt{(1+r)(1+s)}}$ より $\frac{|{{a}}+({{b}})|}{\sqrt{(1+{{r}})(1+{{s}})}}={{c1}}$
+  - 差どうし $u=x_1-x_2$、$v=y_1-y_2$：$\frac{|a-b|}{\sqrt{(1-r)(1-s)}}=\frac{|{{a}}-({{b}})|}{\sqrt{(1-{{r}})(1-{{s}})}}={{c2}}$
+
+  大きい方が第1正準相関係数で、${{answer}}$。小さい方が第2正準相関係数である。個々の相関係数の最大値 $|a|$ より大きくなりうることに注意。
+params:
+  r: { min: 0.1, max: 0.6, step: 0.1 }
+  s: { min: 0.1, max: 0.6, step: 0.1 }
+  a: { min: 0.2, max: 0.6, step: 0.1 }
+  b: { min: -0.3, max: 0.4, step: 0.1 }
+derived:
+  c1: abs(a + b) / sqrt((1 + r) * (1 + s))
+  c2: abs(a - b) / sqrt((1 - r) * (1 - s))
+constraints: ['c1 < 0.95', 'c2 < 0.95', 'abs(c1 - c2) > 0.03', 'b != 0']
+answer: max(c1, c2)
+display: { digits: 3 }

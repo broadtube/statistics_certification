@@ -1,0 +1,34 @@
+topics: [bayes-conjugate]
+formulas: [bayes-factor, bayes-factor-simple-hypotheses]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある部品の合格率 $p$ について、2つの単純仮説
+  $$
+  H_0:\ p=0.5,\qquad H_1:\ p={{p1}}
+  $$
+  を考える。事前確率を $P(H_1)={{q}}$、$P(H_0)=1-{{q}}$ とする。部品を {{n}} 個検査したところ、合格は {{x}} 個であった。$H_1$ の事後確率 $P(H_1\mid x)$ を求めよ（小数第3位まで）。
+explanation: |
+  単純仮説どうしなので、ベイズファクターは尤度比になる（二項係数は打ち消し合う）。
+  $$
+  B_{10}=\frac{ {{p1}}^{ {{x}} }(1-{{p1}})^{ {{nx}} } }{ 0.5^{ {{n}} } }={{B10}}
+  $$
+  事前オッズは $\frac{ {{q}} }{ 1-{{q}} }$ なので、事後オッズ＝ベイズファクター×事前オッズより
+  $$
+  \frac{P(H_1\mid x)}{P(H_0\mid x)}={{B10}}\times\frac{ {{q}} }{ 1-{{q}} }={{post_odds}}
+  $$
+  よって $P(H_1\mid x)=\frac{ {{post_odds}} }{1+{{post_odds}}}={{answer}}$。
+params:
+  p1: { min: 0.6, max: 0.8, step: 0.1 }
+  q: { min: 0.3, max: 0.7, step: 0.1 }
+  n: { min: 10, max: 20, step: 2 }
+  x: { min: 5, max: 18, step: 1 }
+derived:
+  nx: n - x
+  B10: (p1 / 0.5)^x * ((1 - p1) / 0.5)^(n - x)
+  post_odds: B10 * q / (1 - q)
+constraints: ['x <= n', 'B10 > 0.2', 'B10 < 200']
+answer: post_odds / (1 + post_odds)
+display: { digits: 3 }
+tolerance: { type: absolute, value: 0.002 }

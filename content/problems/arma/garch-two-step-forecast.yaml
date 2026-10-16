@@ -1,0 +1,29 @@
+topics: [arma]
+formulas: [garch-forecast, garch11-variance]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  $\varepsilon_t=\sigma_tz_t$（$z_t$ は平均 $0$・分散 $1$ の i.i.d.）が GARCH(1,1) モデル $\sigma_t^2={{omega}}+{{alpha}}\,\varepsilon_{t-1}^2+{{beta}}\,\sigma_{t-1}^2$ に従っている。時点 $T$ で $\varepsilon_T={{e}}$、$\sigma_T^2={{v}}$ であったとき、時点 $T$ までの情報にもとづく2期先の条件付き分散の予測 $E[\sigma_{T+2}^2\mid\mathcal F_T]$ を求めよ（小数第4位まで）。
+explanation: |
+  1期先の条件付き分散は時点 $T$ の値だけで確定する。
+  $$
+  \sigma_{T+1}^2=\omega+\alpha\varepsilon_T^2+\beta\sigma_T^2={{omega}}+{{alpha}}\times({{e}})^2+{{beta}}\times{{v}}={{s1}}
+  $$
+  2期先は $\sigma_{T+2}^2=\omega+\alpha\varepsilon_{T+1}^2+\beta\sigma_{T+1}^2$ で、$E[\varepsilon_{T+1}^2\mid\mathcal F_T]=\sigma_{T+1}^2E[z_{T+1}^2]=\sigma_{T+1}^2$ だから
+  $$
+  E[\sigma_{T+2}^2\mid\mathcal F_T]=\omega+(\alpha+\beta)\sigma_{T+1}^2={{omega}}+{{persist}}\times{{s1}}={{answer}}
+  $$
+  予測は無条件分散 $\omega/(1-\alpha-\beta)$ に向かって $(\alpha+\beta)$ 倍ずつ近づいていく。
+params:
+  omega: { min: 0.05, max: 0.3, step: 0.05 }
+  alpha: { min: 0.05, max: 0.2, step: 0.05 }
+  beta: { min: 0.6, max: 0.85, step: 0.05 }
+  e: { min: -3, max: 3, step: 0.5 }
+  v: { min: 0.5, max: 3, step: 0.5 }
+derived:
+  s1: omega + alpha * e^2 + beta * v
+  persist: alpha + beta
+constraints: ['alpha + beta < 0.97', 'e != 0']
+answer: omega + (alpha + beta) * (omega + alpha * e^2 + beta * v)
+display: { digits: 4 }

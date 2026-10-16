@@ -1,0 +1,35 @@
+topics: [contingency-tables]
+formulas: [fisher-exact-hypergeometric]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  小規模な試験で、次の2×2分割表が得られた。
+
+  | | 改善 | 改善せず |
+  | --- | --- | --- |
+  | 新処置 | {{a}} | {{b}} |
+  | 従来処置 | {{c}} | {{d}} |
+
+  行和・列和をすべて固定したとき、処置と改善が独立であるという帰無仮説のもとで、この表（左上のセルがちょうど {{a}}）が得られる確率を求めよ（小数第4位まで）。
+explanation: |
+  周辺度数は 新処置 $n_{1\cdot}={{r1}}$、従来処置 $n_{2\cdot}={{r2}}$、改善 $n_{\cdot1}={{c1}}$、総数 $n={{n}}$。
+  周辺度数を固定すると、左上のセル $A$ は超幾何分布に従う（改善した {{c1}} 人を {{n}} 人の中から選んだとき、そのうち新処置の人数）。
+  $$
+  P(A={{a}})=\frac{\binom{ {{r1}} }{ {{a}} }\binom{ {{r2}} }{ {{c}} }}{\binom{ {{n}} }{ {{c1}} }}=\frac{ {{t1}}\times{{t2}} }{ {{t3}} }={{answer}}
+  $$
+params:
+  a: { min: 2, max: 7, step: 1 }
+  b: { min: 1, max: 4, step: 1 }
+  c: { min: 1, max: 4, step: 1 }
+  d: { min: 2, max: 7, step: 1 }
+derived:
+  r1: a + b
+  r2: c + d
+  c1: a + c
+  n: a + b + c + d
+  t1: choose(a + b, a)
+  t2: choose(c + d, c)
+  t3: choose(a + b + c + d, a + c)
+answer: choose(a + b, a) * choose(c + d, c) / choose(a + b + c + d, a + c)
+display: { digits: 4 }

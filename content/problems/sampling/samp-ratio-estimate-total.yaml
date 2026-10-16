@@ -1,0 +1,25 @@
+topics: [sampling]
+formulas: [ratio-estimator]
+difficulty: 1
+type: numeric
+source: { kind: original }
+statement: |
+  ある地域の {{N}} 店舗について、昨年の売上の合計は $X={{X}}$（万円）と分かっている。今年の売上の合計 $Y$ を推定するため、単純無作為抽出で {{n}} 店舗を調べたところ、標本での今年の売上の平均は $\bar y={{ybar}}$、同じ店舗の昨年の売上の平均は $\bar x={{xbar}}$ であった。比推定量による今年の売上の合計の推定値を求めよ（万円、小数第1位まで）。
+explanation: |
+  比推定量は、標本から比 $\hat R=\bar y/\bar x$ を求め、既知の総計 $X$ に掛ける。
+  $$
+  \hat Y_R=\frac{\bar y}{\bar x}X=\frac{ {{ybar}} }{ {{xbar}} }\times{{X}}={{answer}}
+  $$
+  単純な推定量 $N\bar y={{Nybar}}$ と比べ、今年と昨年の売上の相関が強いほど比推定量の精度は高い。
+params:
+  N: { min: 200, max: 500, step: 50 }
+  Xbar: { min: 40, max: 60, step: 2 }
+  n: { min: 20, max: 40, step: 5 }
+  xbar: { min: 38, max: 62, step: 2 }
+  g: { min: 0.95, max: 1.25, step: 0.05 }
+derived:
+  X: N * Xbar
+  ybar: round(xbar * g * 10) / 10
+  Nybar: N * round(xbar * g * 10) / 10
+answer: round(xbar * g * 10) / 10 / xbar * N * Xbar
+display: { digits: 1 }

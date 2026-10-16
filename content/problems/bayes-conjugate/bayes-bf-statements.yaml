@@ -1,0 +1,29 @@
+topics: [bayes-conjugate]
+formulas: [bayes-factor, bayes-factor-simple-hypotheses]
+difficulty: 2
+type: choice
+source: { kind: original }
+statement: |
+  仮説 $H_0$ に対する $H_1$ のベイズファクター $B_{10}=\dfrac{p(x\mid H_1)}{p(x\mid H_0)}$ に関する記述として正しいものを選べ。
+choices:
+  - id: a
+    text: '$H_0,H_1$ がともに単純仮説なら、$B_{10}$ は尤度比 $f(x\mid\theta_1)/f(x\mid\theta_0)$ に一致し、事前確率 $P(H_0),P(H_1)$ には依存しない。'
+    correct: true
+  - id: b
+    text: '$B_{10}=4$ であれば、事前確率によらず $P(H_1\mid x)=0.8$ である。'
+    correct: false
+  - id: c
+    text: '複合仮説の場合でも、$B_{10}$ は各仮説の中での $\theta$ の事前分布の選び方には依存しない。'
+    correct: false
+  - id: d
+    text: '各仮説の中の事前分布として非正則な一様分布を使っても、$B_{10}$ は一意に定まる。'
+    correct: false
+  - id: e
+    text: '事後オッズ $P(H_1\mid x)/P(H_0\mid x)$ は、ベイズファクターを事前オッズで割ったものである。'
+    correct: false
+explanation: |
+  単純仮説では周辺尤度が尤度そのものなので、$B_{10}$ は尤度比になり、事前確率は含まれない（a が正しい）。
+  b：事後オッズ＝$B_{10}$×事前オッズ。事前確率が等しいときに限り事後オッズは 4、$P(H_1\mid x)=0.8$ となる。
+  c：周辺尤度 $p(x\mid H_k)=\int f(x\mid\theta)\pi_k(\theta)\,d\theta$ は仮説内の事前分布 $\pi_k$ に依存する。
+  d：非正則な事前分布は任意の定数倍を含むので、周辺尤度の比が定まらない。
+  e：割るのではなく掛ける。

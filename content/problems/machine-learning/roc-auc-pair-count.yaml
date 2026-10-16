@@ -1,0 +1,33 @@
+topics: [machine-learning, nonparametric]
+formulas: [auc-pair-probability, roc-rates]
+difficulty: 2
+type: numeric
+source: { kind: original }
+statement: |
+  ある分類器が、陽性の3例に $ {{p1}},\ {{p2}},\ {{p3}} $、陰性の3例に $ {{n1}},\ {{n2}},\ {{n3}} $ というスコアを与えた（スコアが大きいほど陽性らしい）。この分類器の ROC 曲線の下側の面積 AUC を求めよ（小数第3位まで）。
+explanation: |
+  AUC は「無作為に選んだ陽性のスコアが、無作為に選んだ陰性のスコアより大きい確率」に等しい。陽性と陰性の組は $3\times3=9$ 通りあるので、陽性の方が大きい組を数える。
+  - 陽性 ${{p1}}$ より小さい陰性：{{k1}} 個
+  - 陽性 ${{p2}}$ より小さい陰性：{{k2}} 個
+  - 陽性 ${{p3}}$ より小さい陰性：{{k3}} 個
+
+  よって $\mathrm{AUC}=\frac{ {{cnt}} }{9}={{answer}}$。
+  しきい値をスコアの大きい順に下げながら（FPR, TPR）を描くと、陽性で上へ $1/3$、陰性で右へ $1/3$ 進む階段状の ROC 曲線になり、その下の面積を数えても同じ値になる。これはマン・ホイットニーの $U$ 統計量を $n_+n_-$ で割ったものでもある。
+params:
+  p1: { min: 0.3, max: 0.95, step: 0.05 }
+  p2: { min: 0.2, max: 0.9, step: 0.05 }
+  p3: { min: 0.1, max: 0.8, step: 0.05 }
+  n1: { min: 0.3, max: 0.9, step: 0.05 }
+  n2: { min: 0.1, max: 0.7, step: 0.05 }
+  n3: { min: 0.05, max: 0.5, step: 0.05 }
+derived:
+  k1: (sign(p1 - n1) + 1) / 2 + (sign(p1 - n2) + 1) / 2 + (sign(p1 - n3) + 1) / 2
+  k2: (sign(p2 - n1) + 1) / 2 + (sign(p2 - n2) + 1) / 2 + (sign(p2 - n3) + 1) / 2
+  k3: (sign(p3 - n1) + 1) / 2 + (sign(p3 - n2) + 1) / 2 + (sign(p3 - n3) + 1) / 2
+  cnt: k1 + k2 + k3
+constraints:
+  - 'p1 > p2 and p2 > p3 and n1 > n2 and n2 > n3'
+  - 'p1 != n1 and p1 != n2 and p1 != n3 and p2 != n1 and p2 != n2 and p2 != n3 and p3 != n1 and p3 != n2 and p3 != n3'
+  - 'cnt >= 4 and cnt <= 8'
+answer: cnt / 9
+display: { digits: 3 }

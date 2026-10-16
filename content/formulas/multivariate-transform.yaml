@@ -40,3 +40,26 @@
   body: 'Y\mid X=x\ \sim\ N\left(\mu_Y+\rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X),\ \ \sigma_Y^2(1-\rho^2)\right)'
   derivation: '同時密度を $X$ の周辺密度で割り、$y$ について平方完成する。'
   tags: [多変量正規分布, 条件付き分布, 回帰]
+- id: mvt-order-stat-max-min
+  topic: multivariate-transform
+  title: 最大値・最小値の分布
+  description: 独立同分布の標本の最大値・最小値の分布関数は、母集団の分布関数の累乗で表せる。
+  body: 'P\big(X_{(n)}\le x\big)=F(x)^n,\qquad P\big(X_{(1)}\le x\big)=1-\{1-F(x)\}^n'
+  conditions: '$X_1,\dots,X_n$ は独立に分布関数 $F$ に従う。'
+  derivation: '「最大値が $x$ 以下」⇔「すべてが $x$ 以下」、「最小値が $x$ より大きい」⇔「すべてが $x$ より大きい」と言い換え、独立性で積にする。密度はこれを微分して $nF(x)^{n-1}f(x)$、$n\{1-F(x)\}^{n-1}f(x)$。'
+  tags: [順序統計量, 最大値, 最小値]
+- id: mvt-order-stat-kth-density
+  topic: multivariate-transform
+  title: k 番目の順序統計量の密度
+  body: 'f_{(k)}(x)=\frac{n!}{(k-1)!\,(n-k)!}\,F(x)^{k-1}\{1-F(x)\}^{n-k}f(x)'
+  conditions: '$X_1,\dots,X_n$ は独立に密度 $f$・分布関数 $F$ の連続分布に従い、$X_{(1)}<\dots<X_{(n)}$ と並べる。'
+  derivation: '$x$ 付近の微小区間に1個、それより小さい側に $k-1$ 個、大きい側に $n-k$ 個が入る確率（多項分布）を数える。分布関数は $P(X_{(k)}\le x)=\sum_{j=k}^n\binom nj F(x)^j\{1-F(x)\}^{n-j}$（$x$ 以下の個数が $k$ 個以上）。'
+  tags: [順序統計量, 変数変換]
+- id: mvt-order-stat-uniform-beta
+  topic: multivariate-transform
+  title: 一様分布の順序統計量とベータ分布
+  description: '$U(0,1)$ からの標本の $k$ 番目の順序統計量はベータ分布に従う。'
+  body: 'U_{(k)}\sim\mathrm{Be}(k,\ n-k+1),\qquad E\big[U_{(k)}\big]=\frac{k}{n+1},\quad V\big[U_{(k)}\big]=\frac{k(n-k+1)}{(n+1)^2(n+2)}'
+  derivation: '[[formula:mvt-order-stat-kth-density]] に $F(u)=u$、$f(u)=1$ を代入すると $\mathrm{Be}(k,n-k+1)$ の密度になる。連続分布なら $F(X_{(k)})$ が一様分布の順序統計量になるので、一般の分布にも応用できる。'
+  pitfalls: '期待値は $k/n$ ではなく $k/(n+1)$。$n$ 個の点が $[0,1]$ を平均して等しい長さの $n+1$ 区間に分けると覚える。'
+  tags: [順序統計量, ベータ分布, 一様分布]
