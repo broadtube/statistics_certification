@@ -14,6 +14,6 @@ explanation: |
 params:
   rho: { min: 0.3, max: 0.9, step: 0.1 }
   x2: { min: -2, max: 2, step: 0.5 }
-constraints: ['x2 != 0']
+constraints: ['x2 != 0', 'pnorm(rho * x2 / sqrt(1 - rho^2)) >= 0.001']
 answer: pnorm(rho * x2 / sqrt(1 - rho^2))
 display: { digits: 4 }

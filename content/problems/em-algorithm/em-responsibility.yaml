@@ -16,5 +16,6 @@ params:
   m1: { min: -1, max: 1, step: 0.5 }
   m2: { min: 2, max: 4, step: 0.5 }
   x: { min: 0, max: 3, step: 0.5 }
+constraints: ['p * exp(-(x - m1)^2 / 2) / (p * exp(-(x - m1)^2 / 2) + (1 - p) * exp(-(x - m2)^2 / 2)) >= 0.001']
 answer: p * exp(-(x - m1)^2 / 2) / (p * exp(-(x - m1)^2 / 2) + (1 - p) * exp(-(x - m2)^2 / 2))
 display: { digits: 4 }

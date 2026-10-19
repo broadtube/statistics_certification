@@ -68,5 +68,6 @@ variants: 20                      # 生成する類題数（既定 20、上限 5
 
 - `{{名前}}` で `params`・`derived`・`answer`・`choice_<id>` の値を差し込める。数式中では `\frac{ {{a}} }{ {{b}} }` のように中括弧の内側に空白を入れる。
 - 式では四則演算・`sqrt`・`exp`・`log`・`abs`・`round`・`ceil` などと、統計関数 `pnorm` `qnorm` `pt` `qt` `pchisq` `qchisq` `pf` `qf` `dbinom` `pbinom` `dpois` `ppois` `choose` `gammafn` `betafn` が使える。
+- $p$ 値や確率のように小さくなりうる答えは、表示桁数で「0.000」や有効数字1桁にならないよう `constraints` で範囲を絞る（例: `'1 - pchisq(x, k) >= 0.01'`）。`npm run check:content` はこれもエラーにする。
 - ビルド時に類題を生成し、正答が計算できない・制約を満たせない・未定義の差し込み記号がある、といった誤りはビルドエラーになる。
 - 選択式は `choices` に `id`（a〜e）・`text`・`correct` を書き、正答はちょうど1つ。`value` に式を書くと `{{choice_a}}` で値を差し込める（値が重複するとエラー）。

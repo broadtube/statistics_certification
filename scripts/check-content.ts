@@ -1,5 +1,6 @@
 // コンテンツ検証に加え、ビルド時・実行時に描画される全テキスト（要点本文・公式カード・問題文・選択肢・解説）を
-// KaTeX で描画し、LaTeX の構文エラーや未解決リンクをビルド前に見つける。
+// KaTeX で描画し、LaTeX の構文エラーや未解決リンクをビルド前に見つける。あわせて、答えが小さすぎて
+// 「0.000」などと表示される類題がないかも確かめる。
 // 使い方: npx tsx scripts/check-content.ts [content ディレクトリ]
 import { resolve } from 'node:path';
 import { formatIssues, runValidation } from '../build/content/pipeline';
@@ -36,6 +37,15 @@ for (const p of content.problems) {
   // 類題の1件目の値を差し込んでから描画する（実行時と同じ状態）
   const v = generateVariants(p);
   const values = v.ok ? v.variants[0]?.values : undefined;
+  // 0 でない答えが「0.000」や有効数字1桁（「0.003」など）で表示される類題は、問題として成り立たないのでエラーにする
+  const digits = p.display?.digits;
+  if (v.ok && p.type === 'numeric' && digits !== undefined && digits > 0) {
+    const unit = 10 ** -digits;
+    const tiny = v.variants.filter((x) => x.answer !== null && x.answer !== 0 && Math.abs(x.answer) < 10 * unit);
+    if (tiny.length > 0) {
+      errors.push(`problem ${p.id}: 答えが小さすぎて有効数字が足りない類題が ${tiny.length} 件あります（例: ${tiny[0]?.values.answer}）。制約で除外してください`);
+    }
+  }
   const fill = (s: string) => (values ? fillPlaceholders(s, values) : s);
   check(`problem ${p.id}.statement`, () => renderer.render(fill(p.statement), 'static'));
   check(`problem ${p.id}.explanation`, () => renderer.render(fill(p.explanation), 'static'));

@@ -35,5 +35,6 @@ derived:
   n: a + b + c + d
   kmax: min(a + b, a + c)
   pobs: choose(a + b, a) * choose(c + d, c) / choose(a + b + c + d, a + c)
+constraints: ['(choose(a + b, a) * choose(c + d, c) + choose(a + b, a + 1) * choose(c + d, c - 1) + choose(a + b, a + 2) * choose(c + d, c - 2) + choose(a + b, a + 3) * choose(c + d, c - 3)) / choose(a + b + c + d, a + c) >= 0.001']
 answer: (choose(a + b, a) * choose(c + d, c) + choose(a + b, a + 1) * choose(c + d, c - 1) + choose(a + b, a + 2) * choose(c + d, c - 2) + choose(a + b, a + 3) * choose(c + d, c - 3)) / choose(a + b + c + d, a + c)
 display: { digits: 4 }

@@ -18,7 +18,7 @@ params:
 derived:
   df: n - 2
   t: r * sqrt(n - 2) / sqrt(1 - r^2)
-constraints: ['t >= 1.2', 't <= 3.5']
+constraints: ['t >= 1.2', 't <= 3.5', '2 * (1 - pt(r * sqrt(n - 2) / sqrt(1 - r^2), n - 2)) >= 0.01']
 answer: 2 * (1 - pt(r * sqrt(n - 2) / sqrt(1 - r^2), n - 2))
 display: { digits: 3 }
 tolerance: { type: absolute, value: 0.002 }

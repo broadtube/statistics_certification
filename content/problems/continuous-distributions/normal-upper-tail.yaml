@@ -17,6 +17,6 @@ params:
   a: { min: 60, max: 90, step: 5 }
 derived:
   z: (a - mu) / sigma
-constraints: ['a > mu']
+constraints: ['a > mu', '1 - pnorm((a - mu) / sigma) >= 0.001']
 answer: 1 - pnorm((a - mu) / sigma)
 display: { digits: 4 }

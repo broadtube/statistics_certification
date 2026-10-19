@@ -15,5 +15,6 @@ params:
 derived:
   df: n - 4
   t: b / se
+constraints: ['2 * (1 - pt(abs(b / se), n - 4)) >= 0.001']
 answer: 2 * (1 - pt(abs(b / se), n - 4))
 display: { digits: 4 }

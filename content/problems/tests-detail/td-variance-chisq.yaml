@@ -21,6 +21,7 @@ params:
 derived:
   df: n - 1
   chi: (n - 1) * v / v0
+constraints: ['1 - pchisq((n - 1) * v / v0, n - 1) >= 0.01']
 answer: 1 - pchisq((n - 1) * v / v0, n - 1)
 display: { digits: 3 }
 tolerance: { type: absolute, value: 0.002 }

@@ -34,7 +34,7 @@ derived:
   b: s2^2 / n
   t: (xbar - ybar) / sqrt(s1^2 / m + s2^2 / n)
   nu: (s1^2 / m + s2^2 / n)^2 / ((s1^2 / m)^2 / (m - 1) + (s2^2 / n)^2 / (n - 1))
-constraints: ['s1 / s2 >= 2 or s2 / s1 >= 2', 'abs(t) >= 1.2', 'abs(t) <= 3.5']
+constraints: ['s1 / s2 >= 2 or s2 / s1 >= 2', 'abs(t) >= 1.2', 'abs(t) <= 3.5', '2 * (1 - pt(abs(t), nu)) >= 0.01']
 answer: 2 * (1 - pt(abs(t), nu))
 display: { digits: 3 }
 tolerance: { type: absolute, value: 0.002 }

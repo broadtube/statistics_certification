@@ -18,5 +18,6 @@ params:
 derived:
   df: n - 3
   t: r * sqrt(n - 3) / sqrt(1 - r^2)
+constraints: ['2 * (1 - pt(r * sqrt(n - 3) / sqrt(1 - r^2), n - 3)) >= 0.001']
 answer: 2 * (1 - pt(r * sqrt(n - 3) / sqrt(1 - r^2), n - 3))
 display: { digits: 4 }
