@@ -77,4 +77,9 @@ describe('内部リンク', () => {
   it('解決できないリンクはエラーにする', () => {
     expect(() => r.render('[[topic:ghost]]', 'static')).toThrow(/ghost/);
   });
+  it('figures/ の画像を base 付きの公開URLへ解決する', () => {
+    const html = createRenderer(resolver, '/sp/').render('![係数の図](figures/x.svg)', 'template');
+    expect(html).toContain('src="/sp/figures/x.svg"');
+    expect(html).toContain('alt="係数の図"');
+  });
 });

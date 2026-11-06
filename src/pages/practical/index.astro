@@ -1,0 +1,14 @@
+---
+import ProblemList from '../../components/ProblemList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { url } from '../../lib/url';
+import { getSite } from '../../site';
+
+const problems = getSite().content.problems.filter((p) => p.practical);
+---
+<BaseLayout title="実践" description="本番に近い形式のオリジナル問題で、論点を知っていれば解ける問題に取り組めます">
+  <h1>実践</h1>
+  <p>本番に近い形式で作成したオリジナル問題です。実際の試験問題そのものではありません。学習記録と復習は、ほかの問題と共通です。</p>
+  {problems.length > 0 && <p><a class="btn primary" href={url(`practice/?problems=${problems.map((p) => p.id).join(',')}`)}>全 {problems.length} 問を続けて解く</a></p>}
+  <ProblemList problems={problems} emptyText="実践問題は準備中です。" />
+</BaseLayout>

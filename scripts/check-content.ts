@@ -2,8 +2,10 @@
 // KaTeX で描画し、LaTeX の構文エラーや未解決リンクをビルド前に見つける。あわせて、答えが小さすぎて
 // 「0.000」などと表示される類題がないかも確かめる。
 // 使い方: npx tsx scripts/check-content.ts [content ディレクトリ]
+import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { formatIssues, runValidation } from '../build/content/pipeline';
+import { FIGURE_RE } from '../build/content/render';
 import { buildSite } from '../build/site/site';
 import { generateVariants } from '../build/variants/generate';
 import { fillPlaceholders } from '../src/lib/template';
@@ -45,6 +47,9 @@ for (const p of content.problems) {
     if (tiny.length > 0) {
       errors.push(`problem ${p.id}: 答えが小さすぎて有効数字が足りない類題が ${tiny.length} 件あります（例: ${tiny[0]?.values.answer}）。制約で除外してください`);
     }
+  }
+  for (const m of `${p.statement}\n${p.explanation}`.matchAll(FIGURE_RE)) {
+    if (!existsSync(resolve('public', m[2] ?? ''))) errors.push(`problem ${p.id}: 図のファイルがありません（public/${m[2]}）`);
   }
   const fill = (s: string) => (values ? fillPlaceholders(s, values) : s);
   check(`problem ${p.id}.statement`, () => renderer.render(fill(p.statement), 'static'));

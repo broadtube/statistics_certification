@@ -80,6 +80,8 @@ export const problemSchema = z
     formulas: z.array(idSchema).default([]),
     difficulty: z.union([z.literal(1), z.literal(2), z.literal(3)]),
     type: z.enum(['choice', 'numeric']),
+    /** 実践問題（本番に近い形式のオリジナル問題）として「実践」ページに載せる */
+    practical: z.boolean().optional(),
     source: z.discriminatedUnion('kind', [
       z.object({ kind: z.literal('original') }),
       z.object({ kind: z.literal('reference'), exam: nonEmpty, question: nonEmpty }),

@@ -50,6 +50,7 @@ formulas: [r-squared]             # 解説に表示する関連公式
 difficulty: 2                     # 1〜3
 type: numeric                     # numeric | choice
 source: { kind: original }
+practical: true                   # 任意。本番に近い形式の問題を「実践」ページに載せる
 statement: |
   $n={{n}}$、$p={{p}}$ のとき …
 explanation: |
@@ -66,6 +67,8 @@ tolerance: { type: relative, value: 0.01 }   # 任意
 variants: 20                      # 生成する類題数（既定 20、上限 50）
 ```
 
+- `practical: true` の問題も過去問題の転載は禁止。論点だけを参考にし、設定・数値・選択肢は新しく作る。
+- 図は `public/figures/` に置き、問題文や解説に `![図の説明](figures/x.svg)` と書く。データから描く図は `scripts/generate-figures.mjs` に追加して生成する。
 - `{{名前}}` で `params`・`derived`・`answer`・`choice_<id>` の値を差し込める。数式中では `\frac{ {{a}} }{ {{b}} }` のように中括弧の内側に空白を入れる。
 - 式では四則演算・`sqrt`・`exp`・`log`・`abs`・`round`・`ceil` などと、統計関数 `pnorm` `qnorm` `pt` `qt` `pchisq` `qchisq` `pf` `qf` `dbinom` `pbinom` `dpois` `ppois` `choose` `gammafn` `betafn` が使える。
 - $p$ 値や確率のように小さくなりうる答えは、表示桁数で「0.000」や有効数字1桁にならないよう `constraints` で範囲を絞る（例: `'1 - pchisq(x, k) >= 0.01'`）。`npm run check:content` はこれもエラーにする。

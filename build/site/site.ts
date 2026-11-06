@@ -100,7 +100,7 @@ export function buildSite(contentDir: string, base: string): Site {
     if (kind !== 'topic' && kind !== 'formula' && kind !== 'dist') return undefined;
     const title = titles[kind].get(id);
     return title === undefined ? undefined : { href: href[kind](id), title };
-  });
+  }, base);
   const ref = {
     topic: (id: string): LinkRef => ({ id, title: titles.topic.get(id) ?? id, href: href.topic(id) }),
     formula: (id: string): LinkRef => ({ id, title: titles.formula.get(id) ?? id, href: href.formula(id) }),

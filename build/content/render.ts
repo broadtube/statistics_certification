@@ -8,6 +8,7 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 import { visit } from 'unist-util-visit';
+import { joinBase } from '../../src/lib/url';
 import { INTERNAL_LINK_RE } from './references';
 
 export type RenderMode = 'static' | 'template';
@@ -41,7 +42,10 @@ export interface ContentRenderer {
   resolveLinks(markdown: string): string;
 }
 
-export function createRenderer(resolve: LinkResolver): ContentRenderer {
+/** 本文で `![説明](figures/x.svg)` と書いた画像を、public/figures/ の公開URLへ解決する */
+export const FIGURE_RE = /(!\[[^\]]*\]\()(figures\/[^)\s]+)/g;
+
+export function createRenderer(resolve: LinkResolver, base = '/'): ContentRenderer {
   const staticProc = unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -69,7 +73,7 @@ export function createRenderer(resolve: LinkResolver): ContentRenderer {
   return {
     resolveLinks,
     render(markdown, mode) {
-      const md = resolveLinks(markdown);
+      const md = resolveLinks(markdown).replace(FIGURE_RE, (_m, open: string, path: string) => `${open}${joinBase(base, path)}`);
       const proc = mode === 'static' ? staticProc : templateProc;
       const file = proc.processSync(md);
       const katexErrors = file.messages.filter((m) => m.source === 'rehype-katex');

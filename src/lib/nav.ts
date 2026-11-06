@@ -10,6 +10,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { href: 'formulas/', label: '公式' },
   { href: 'distributions/', label: '分布' },
   { href: 'practice/', label: '演習' },
+  { href: 'practical/', label: '実践' },
   { href: 'review/', label: '復習' },
   { href: 'calculator/', label: '計算機' },
 ];
